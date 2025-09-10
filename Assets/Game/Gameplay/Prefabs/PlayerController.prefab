@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &213712122916606729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6940750611022271293}
+  m_Layer: 3
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6940750611022271293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213712122916606729}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5237317482402452050}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5212223590271132870
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +44,8 @@ GameObject:
   - component: {fileID: 7064953267972065153}
   - component: {fileID: 7299379270591168631}
   - component: {fileID: 5482039823722391062}
-  m_Layer: 0
+  - component: {fileID: -1477880225002385552}
+  m_Layer: 3
   m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +66,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1129417099205573412}
+  - {fileID: 6940750611022271293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &1618733865769910339
@@ -74,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  weaponHolder: {fileID: -1477880225002385552}
 --- !u!114 &7299379270591168631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +226,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-1477880225002385552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212223590271132870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f542b186f85ecfb4b96fe33e515f14ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultWeaponPrefab: {fileID: -4402754900311588960, guid: 71c54612a9be89040ab55cef9e8e7798, type: 3}
+  weaponParent: {fileID: 6940750611022271293}
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +252,7 @@ GameObject:
   - component: {fileID: 7610945271440555141}
   - component: {fileID: 3571886056824639804}
   - component: {fileID: 4516330386540395210}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
