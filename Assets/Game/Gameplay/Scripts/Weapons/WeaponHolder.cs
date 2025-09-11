@@ -22,6 +22,13 @@ public class WeaponHolder : MonoBehaviour
 
     public void EquipWeapon(WeaponBase weaponPrefab)
     {
+        // Si el arma es del mismo tipo, solo suma munición
+        if (currentWeapon != null && currentWeapon.GetType() == weaponPrefab.GetType() && !currentWeapon.IsDefault)
+        {
+            currentWeapon.AddAmmo(weaponPrefab.MaxAmmo);
+            return;
+        }
+
         if (currentWeapon != null)
         {
             Destroy(currentWeapon.gameObject);

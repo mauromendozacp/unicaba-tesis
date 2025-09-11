@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e99067f8e40a84d9a381402bcd64d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 15
   fireRate: 0.5
   maxAmmo: 10
   isDefault: 1

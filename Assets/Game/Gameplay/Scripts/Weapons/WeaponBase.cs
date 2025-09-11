@@ -8,7 +8,7 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
     [SerializeField] protected int maxAmmo = 10;
     [SerializeField] protected bool isDefault = false;
 
-    protected int currentAmmo;
+    [SerializeField] protected int currentAmmo; // Visible y editable en el inspector
     protected float lastFireTime;
 
     public virtual float Damage => damage;
@@ -28,6 +28,12 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
     public virtual void Reload(int ammo)
     {
         currentAmmo = Mathf.Clamp(currentAmmo + ammo, 0, maxAmmo);
+    }
+
+    // Suma munición sin superar el máximo
+    public virtual void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Clamp(currentAmmo + amount, 0, maxAmmo);
     }
 
     public virtual void OnPickup() { }

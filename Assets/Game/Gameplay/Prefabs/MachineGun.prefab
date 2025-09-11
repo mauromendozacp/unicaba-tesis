@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  fireRate: 0.1
-  maxAmmo: 20
+  fireRate: 0.05
+  maxAmmo: 200
   isDefault: 0
+  currentAmmo: 0
   projectilePool: {fileID: 5061561964523068716}
   muzzlePoint: {fileID: 4386165175058358930}
 --- !u!1 &3939557954115009905

@@ -27,6 +27,7 @@ public class Pistol : WeaponBase
             Projectile proj = projectilePool.Get();
             proj.transform.position = muzzlePoint.position;
             proj.transform.rotation = muzzlePoint.rotation;
+            proj.transform.SetParent(null); // Quita el padre para que no siga al jugador
             proj.SetDirection(muzzlePoint.forward);
             proj.SetPool(projectilePool);
         }
