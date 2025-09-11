@@ -37,7 +37,6 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Aquí puedes agregar lógica para dañar enemigos, etc.
         ReturnToPool();
     }
 

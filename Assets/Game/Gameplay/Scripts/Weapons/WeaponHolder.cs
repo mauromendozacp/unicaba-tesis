@@ -35,7 +35,6 @@ public class WeaponHolder : MonoBehaviour
         }
         if (weaponParent == null)
         {
-            // Intento de recuperación automática
             weaponParent = transform.Find("Hand");
             if (weaponParent == null)
             {
@@ -44,10 +43,7 @@ public class WeaponHolder : MonoBehaviour
             }
         }
 
-        // Instancia explícitamente en la posición/rotación de la mano
         currentWeapon = Instantiate(weaponPrefab, weaponParent.position, weaponParent.rotation, weaponParent);
-
-        // Normaliza offset local (asegura que quede alineada a la mano)
         currentWeapon.transform.localPosition = Vector3.zero;
         currentWeapon.transform.localRotation = Quaternion.identity;
         currentWeapon.OnPickup();

@@ -15,20 +15,15 @@ public class MachineGun : WeaponBase
 
         nextFireTime = Time.time + fireRate;
         currentAmmo--;
-        Debug.Log("MachineGun Fire! Ammo left: " + currentAmmo);
 
         if (projectilePool != null && muzzlePoint != null)
         {
             Projectile proj = projectilePool.Get();
             proj.transform.position = muzzlePoint.position;
             proj.transform.rotation = muzzlePoint.rotation;
-            proj.transform.SetParent(null); // Quita el padre para que no siga al jugador
+            proj.transform.SetParent(null);
             proj.SetDirection(muzzlePoint.forward);
             proj.SetPool(projectilePool);
-        }
-        else
-        {
-            Debug.LogWarning($"[MachineGun] Falta asignar projectilePool o muzzlePoint en {name}");
         }
     }
 }

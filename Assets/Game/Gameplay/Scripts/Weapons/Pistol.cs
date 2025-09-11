@@ -21,19 +21,14 @@ public class Pistol : WeaponBase
         if (Time.time < nextFireTime) return;
         nextFireTime = Time.time + fireRate;
 
-        Debug.Log("Pistol Fire!");
         if (projectilePool != null && muzzlePoint != null)
         {
             Projectile proj = projectilePool.Get();
             proj.transform.position = muzzlePoint.position;
             proj.transform.rotation = muzzlePoint.rotation;
-            proj.transform.SetParent(null); // Quita el padre para que no siga al jugador
+            proj.transform.SetParent(null);
             proj.SetDirection(muzzlePoint.forward);
             proj.SetPool(projectilePool);
-        }
-        else
-        {
-            Debug.LogWarning($"[Pistol] Falta asignar projectilePool o muzzlePoint en {name}");
         }
     }
 
