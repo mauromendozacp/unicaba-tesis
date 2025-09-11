@@ -14,8 +14,13 @@ public class Pistol : WeaponBase
         currentAmmo = -1;
     }
 
+    private float nextFireTime = 0f;
+
     public override void Fire()
     {
+        if (Time.time < nextFireTime) return;
+        nextFireTime = Time.time + fireRate;
+
         Debug.Log("Pistol Fire!");
         if (projectilePool != null && muzzlePoint != null)
         {

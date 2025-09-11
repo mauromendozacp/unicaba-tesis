@@ -2,23 +2,32 @@ using UnityEngine;
 
 public class MachineGun : WeaponBase
 {
-    protected override void Awake()
-    {
-        base.Awake();
-        isDefault = false;
-    }
+    [Header("Projectile Settings")]
+    [SerializeField] private ProjectilePool projectilePool;
+    [SerializeField] private Transform muzzlePoint;
+
+    private float nextFireTime = 0f;
 
     public override void Fire()
     {
-        if (currentAmmo > 0)
+        if (Time.time < nextFireTime) return;
+        if (currentAmmo <= 0) return;
+
+        nextFireTime = Time.time + fireRate;
+        currentAmmo--;
+        Debug.Log("MachineGun Fire! Ammo left: " + currentAmmo);
+
+        if (projectilePool != null && muzzlePoint != null)
         {
-            currentAmmo--;
-            Debug.Log("MachineGun Fire! Ammo left: " + currentAmmo);
-            // Aquí iría la lógica de instanciar el proyectil, efectos, etc.
+            Projectile proj = projectilePool.Get();
+            proj.transform.position = muzzlePoint.position;
+            proj.transform.rotation = muzzlePoint.rotation;
+            proj.SetDirection(muzzlePoint.forward);
+            proj.SetPool(projectilePool);
         }
         else
         {
-            Debug.Log("No ammo left!");
+            Debug.LogWarning($"[MachineGun] Falta asignar projectilePool o muzzlePoint en {name}");
         }
     }
 }

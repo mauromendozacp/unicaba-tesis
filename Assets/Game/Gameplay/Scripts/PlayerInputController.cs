@@ -49,9 +49,9 @@ public class PlayerInputController : MonoBehaviour
         return move;
     }
 
-    // Devuelve true si el botón de disparo fue presionado este frame
+    // Devuelve true mientras el botón de disparo esté presionado
     public bool GetInputFire()
     {
-        return fireAction != null && fireAction.WasPressedThisFrame();
+        return fireAction != null && fireAction.IsPressed();
     }
 }
