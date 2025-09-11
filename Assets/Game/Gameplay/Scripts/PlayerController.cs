@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [Header("General Settings")]
     [SerializeField] private float speed = 0f;
 
+    [Header("Weapon System")]
+    [SerializeField] private WeaponHolder weaponHolder;
+
     private PlayerInputController inputController = null;
     private CharacterController characterController = null;
 
@@ -16,11 +19,15 @@ public class PlayerController : MonoBehaviour
     {
         inputController = GetComponent<PlayerInputController>();
         characterController = GetComponent<CharacterController>();
+        // weaponHolder puede estar en el mismo GameObject o como hijo
+        if (weaponHolder == null)
+            weaponHolder = GetComponentInChildren<WeaponHolder>();
     }
 
     private void Update()
     {
         Move();
+        HandleFireInput();
     }
 
     private void Move()
@@ -37,5 +44,13 @@ public class PlayerController : MonoBehaviour
 
         velocity.y += Physics.gravity.y * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+    }
+
+    private void HandleFireInput()
+    {
+        if (inputController.GetInputFire())
+        {
+            weaponHolder?.CurrentWeapon?.Fire();
+        }
     }
 }
