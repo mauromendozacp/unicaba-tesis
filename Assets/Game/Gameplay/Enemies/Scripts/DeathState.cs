@@ -1,0 +1,34 @@
+// DeathState.cs
+using UnityEngine;
+using System.Collections;
+
+public class DeathState : IEnemyState
+{
+  private readonly EnemyPrototype enemy;
+  public EnemyState State { get; private set; }
+
+  public DeathState(EnemyPrototype enemy)
+  {
+    this.enemy = enemy;
+    State = EnemyState.Death;
+  }
+
+  public void Enter()
+  {
+    enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, enemy.transform.rotation.z);
+    enemy.GetComponent<Collider>().enabled = false;
+    enemy.StartCoroutine(DestroyEnemy());
+  }
+
+  public void Update() { }
+
+  public void Exit()
+  {
+  }
+
+  private IEnumerator DestroyEnemy()
+  {
+    yield return new WaitForSeconds(3f);
+    GameObject.Destroy(enemy.gameObject);
+  }
+}

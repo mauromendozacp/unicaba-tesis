@@ -45,9 +45,10 @@ GameObject:
   - component: {fileID: 7299379270591168631}
   - component: {fileID: 5482039823722391062}
   - component: {fileID: -1477880225002385552}
+  - component: {fileID: 5472234437480224036}
   m_Layer: 3
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,6 +241,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultWeaponPrefab: {fileID: -4402754900311588960, guid: 71c54612a9be89040ab55cef9e8e7798, type: 3}
   weaponParent: {fileID: 6940750611022271293}
+--- !u!114 &5472234437480224036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212223590271132870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4d0db3141d5414a9df742129b53058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invincibilityTime: 0.5
+  damagedMaterial: {fileID: 2100000, guid: 609ab27ec00ddff4db00528a99c31f71, type: 2}
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0
