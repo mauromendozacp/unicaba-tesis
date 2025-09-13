@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private ItemData[] slots = null;
+    private ItemData[] slots = new ItemData[3];
     private int selectedIndex = 0;
 
     public void Init(PlayerInputController inputController)
@@ -29,8 +29,8 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            slots[selectedIndex] = item;
             //falta implementar drop item
+            slots[selectedIndex] = item;
         }
     }
 

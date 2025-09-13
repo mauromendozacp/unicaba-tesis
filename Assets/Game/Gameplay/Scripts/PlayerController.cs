@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("General Settings")]
     [SerializeField] private float speed = 0f;
+    [SerializeField] private PlayerItemDetection itemDetection = null;
 
     [Header("Weapon System")]
     [SerializeField] private WeaponHolder weaponHolder;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         inventory.Init(inputController);
+
+        inputController.onEquipItem += EquipItem;
     }
 
     private void Update()
@@ -60,6 +63,16 @@ public class PlayerController : MonoBehaviour
         if (inputController.GetInputFire())
         {
             weaponHolder?.CurrentWeapon?.Fire();
+        }
+    }
+
+    private void EquipItem()
+    {
+        IEquipable itemEquipable = itemDetection.GetFirstItemDetection();
+        if (itemEquipable != null)
+        {
+            inventory.EquipItem(itemEquipable.GetItem());
+            itemEquipable.Equip();
         }
     }
 }

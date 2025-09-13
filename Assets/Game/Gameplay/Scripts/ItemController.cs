@@ -13,11 +13,22 @@ public class ItemController : MonoBehaviour
         pool = new ObjectPool<ItemWorld>(OnCreateItem, OnGetItem, OnReleaseItem, OnDestroyItem);
     }
 
+    private void Start()
+    {
+        ItemWorld[] items = FindObjectsByType<ItemWorld>(FindObjectsSortMode.None);
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].onRelease += ReleaseItem;
+        }
+    }
+
     public ItemWorld SpawnItem(ItemData data, Vector3 position, Quaternion rotation)
     {
         ItemWorld item = pool.Get();
         item.SetData(data);
         item.transform.SetPositionAndRotation(position, rotation);
+        item.onRelease += ReleaseItem;
         return item;
     }
 

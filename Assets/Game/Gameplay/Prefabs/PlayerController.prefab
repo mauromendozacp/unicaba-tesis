@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  itemDetection: {fileID: 3318913069838923435}
   weaponHolder: {fileID: -1477880225002385552}
 --- !u!114 &7299379270591168631
 MonoBehaviour:
@@ -269,7 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13585ce521c11834e96c85f40e3e1299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 7610945271440555141}
   - component: {fileID: 3571886056824639804}
   - component: {fileID: 4516330386540395210}
+  - component: {fileID: 3318913069838923435}
   m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
@@ -380,3 +381,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3318913069838923435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265605456867317631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090c78ed23d8e374497e4839651de899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemMask:
+    serializedVersion: 2
+    m_Bits: 256
