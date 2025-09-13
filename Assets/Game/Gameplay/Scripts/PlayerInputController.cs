@@ -10,6 +10,11 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 move = Vector2.zero;
     private InputAction fireAction = null;
 
+    public Action onEquipItem = null;
+    public Action onUseItem = null;
+    public Action onPreviousItem = null;
+    public Action onNextItem = null;
+
     private void Awake()
     {
         inputAsset = GetComponent<PlayerInput>().actions;
@@ -21,6 +26,10 @@ public class PlayerInputController : MonoBehaviour
     {
         playerMap.FindAction("Move").performed += OnMove;
         playerMap.FindAction("Move").canceled += OnStopMove;
+        playerMap.FindAction("EquipItem").started += OnEquipItem;
+        playerMap.FindAction("UseItem").started += OnUseItem;
+        playerMap.FindAction("Previous").started += OnPreviousItem;
+        playerMap.FindAction("Next").started += OnNextItem;
         playerMap.Enable();
     }
 
@@ -28,6 +37,10 @@ public class PlayerInputController : MonoBehaviour
     {
         playerMap.FindAction("Move").performed -= OnMove;
         playerMap.FindAction("Move").canceled -= OnStopMove;
+        playerMap.FindAction("EquipItem").started -= OnEquipItem;
+        playerMap.FindAction("UseItem").started -= OnUseItem;
+        playerMap.FindAction("Previous").started -= OnPreviousItem;
+        playerMap.FindAction("Next").started -= OnNextItem;
         playerMap.Disable();
     }
 
@@ -42,6 +55,26 @@ public class PlayerInputController : MonoBehaviour
     private void OnStopMove(InputAction.CallbackContext ctx)
     {
         move = Vector2.zero;
+    }
+
+    private void OnEquipItem(InputAction.CallbackContext ctx)
+    {
+        onEquipItem?.Invoke();
+    }
+
+    private void OnUseItem(InputAction.CallbackContext ctx)
+    {
+        onUseItem?.Invoke();
+    }
+
+    private void OnPreviousItem(InputAction.CallbackContext ctx)
+    {
+        onPreviousItem?.Invoke();
+    }
+
+    private void OnNextItem(InputAction.CallbackContext ctx)
+    {
+        onNextItem?.Invoke();
     }
 
     public Vector2 GetInputMove()

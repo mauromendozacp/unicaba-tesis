@@ -1,0 +1,58 @@
+using UnityEngine;
+using UnityEngine.Pool;
+
+public class ItemController : MonoBehaviour
+{
+    [SerializeField] private ItemData[] availableItems = null;
+    [SerializeField] private ItemWorld prefab = null;
+
+    private ObjectPool<ItemWorld> pool = null;
+
+    private void Awake()
+    {
+        pool = new ObjectPool<ItemWorld>(OnCreateItem, OnGetItem, OnReleaseItem, OnDestroyItem);
+    }
+
+    public ItemWorld SpawnItem(ItemData data, Vector3 position, Quaternion rotation)
+    {
+        ItemWorld item = pool.Get();
+        item.SetData(data);
+        item.transform.SetPositionAndRotation(position, rotation);
+        return item;
+    }
+
+    public ItemWorld SpawnRandomItem(Vector3 position, Quaternion rotation)
+    {
+        int randomIndex = Random.Range(0, availableItems.Length);
+        ItemData randomItem = availableItems[randomIndex];
+
+        return SpawnItem(randomItem, position, rotation);
+    }
+
+    public void ReleaseItem(ItemWorld item)
+    {
+        pool.Release(item);
+    }
+
+    private ItemWorld OnCreateItem()
+    {
+        ItemWorld itemWorld = Instantiate(prefab);
+
+        return itemWorld;
+    }
+
+    private void OnGetItem(ItemWorld item)
+    {
+        item.Get();
+    }
+
+    private void OnReleaseItem(ItemWorld item)
+    {
+        item.Release();
+    }
+
+    private void OnDestroyItem(ItemWorld item)
+    {
+        Destroy(item.gameObject);
+    }
+}
