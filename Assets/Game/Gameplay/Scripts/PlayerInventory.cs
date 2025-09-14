@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
     private ItemData[] slots = new ItemData[3];
     private int selectedIndex = 0;
+
+    public int SelectedIndex => selectedIndex;
 
     public void Init(PlayerInputController inputController)
     {

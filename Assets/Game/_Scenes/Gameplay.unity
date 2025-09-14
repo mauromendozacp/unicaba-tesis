@@ -753,7 +753,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnLocations: []
   targetGroup: {fileID: 815378926}
-  playerInputManager: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,8 +1419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706854e90f9cf2e4996a584f7b4b66f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayUI: {fileID: 0}
-  playerSpawn: {fileID: 0}
+  gameplayUI: {fileID: 2023444855}
+  playerSpawn: {fileID: 365923550}
 --- !u!4 &1103809651
 Transform:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputController inputController = null;
     private CharacterController characterController = null;
     private PlayerInventory inventory = null;
+    private PlayerUI playerUI = null;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -33,6 +34,11 @@ public class PlayerController : MonoBehaviour
         inventory.Init(inputController);
 
         inputController.onEquipItem += EquipItem;
+        inputController.onUseItem += UseItem;
+        inputController.onNextItem += ChangeSlot;
+        inputController.onPreviousItem += ChangeSlot;
+
+        playerUI?.ChangeSlot(inventory.SelectedIndex);
     }
 
     private void Update()
@@ -66,13 +72,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void UseItem()
+    {
+        playerUI.OnUseItem(inventory.SelectedIndex);
+    }
+
     private void EquipItem()
     {
         IEquipable itemEquipable = itemDetection.GetFirstItemDetection();
         if (itemEquipable != null)
         {
+            ItemData itemData = itemEquipable.GetItem();
             inventory.EquipItem(itemEquipable.GetItem());
+            playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
             itemEquipable.Equip();
         }
+    }
+
+    private void ChangeSlot()
+    {
+        playerUI.ChangeSlot(inventory.SelectedIndex);
+    }
+
+    public void SetPlayerUI(PlayerUI playerUI)
+    {
+        this.playerUI = playerUI;
     }
 }

@@ -28,4 +28,19 @@ public class PlayerUI : MonoBehaviour
     {
         currentAmmo.text = ammo.ToString(); 
     }
+
+    public void ChangeSlot(int index)
+    {
+        inventory.OnChangeItemSelected(index);
+    }
+
+    public void OnUseItem(int index)
+    {
+        inventory.OnItemConsume(index);
+    }
+
+    public void OnEquipItem(int index, ItemData item)
+    {
+        inventory.OnItemEquip(index, item);
+    }
 }
