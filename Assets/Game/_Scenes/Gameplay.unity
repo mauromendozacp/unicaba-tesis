@@ -1552,6 +1552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemWorld
       objectReference: {fileID: 0}
+    - target: {fileID: 4800167373160257259, guid: 84a507a5941982547b8fd575c47d6c91, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: c1d7d1a15dc64f74abf6e27386d27576, type: 2}
     - target: {fileID: 4931969759974888421, guid: 84a507a5941982547b8fd575c47d6c91, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5653868
