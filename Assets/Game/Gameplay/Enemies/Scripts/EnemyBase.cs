@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public enum EnemyState
 {
@@ -40,11 +41,18 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   public event Action<float, IDamageable> OnDamaged;
   public event Action<IDamageable> OnDeath;
 
+  private IObjectPool<GameObject> parentPool;
+
   protected virtual void Awake()
   {
     currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
     currentHealth = maxHealth;
     rb = GetComponent<Rigidbody>();
+  }
+
+  public void SetPool(IObjectPool<GameObject> pool)
+  {
+    parentPool = pool;
   }
 
   protected virtual void Update()
@@ -68,7 +76,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     if (currentHealth <= 0)
     {
       currentHealth = 0;
-      OnDeath?.Invoke(this);
     }
   }
 
@@ -92,6 +99,20 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
       rb.linearVelocity = Vector3.zero;
       rb.angularVelocity = Vector3.zero;
+    }
+  }
+
+  protected void Die()
+  {
+    OnDeath?.Invoke(this);
+    EnemyManager.Instance.OnEnemyKilled();
+    if (parentPool != null)
+    {
+      parentPool.Release(gameObject);
+    }
+    else
+    {
+      Destroy(gameObject);
     }
   }
 }

@@ -16,6 +16,12 @@ public class EnemyPrototype : EnemyBase
   [SerializeField] private Collider attackCollider;
   [SerializeField] private float attackDamage = 40f;
 
+  void OnEnable()
+  {
+    currentHealth = maxHealth;
+    ChangeState(new IdleState(this));
+    GetComponent<Collider>().enabled = true;
+  }
 
   protected override void Awake()
   {
@@ -108,5 +114,10 @@ public class EnemyPrototype : EnemyBase
     {
       GetComponent<Renderer>().material = originalMaterial;
     }
+  }
+
+  public void Die()
+  {
+    base.Die();
   }
 }

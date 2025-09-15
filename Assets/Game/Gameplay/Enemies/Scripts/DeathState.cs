@@ -17,7 +17,7 @@ public class DeathState : IEnemyState
   {
     enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, enemy.transform.rotation.z);
     enemy.GetComponent<Collider>().enabled = false;
-    enemy.StartCoroutine(DestroyEnemy());
+    enemy.StartCoroutine(DieCoroutine());
   }
 
   public void Update() { }
@@ -26,9 +26,11 @@ public class DeathState : IEnemyState
   {
   }
 
-  private IEnumerator DestroyEnemy()
+  private IEnumerator DieCoroutine()
   {
     yield return new WaitForSeconds(3f);
-    GameObject.Destroy(enemy.gameObject);
+    //GameObject.Destroy(enemy.gameObject);
+    enemy.Die();
   }
+
 }
