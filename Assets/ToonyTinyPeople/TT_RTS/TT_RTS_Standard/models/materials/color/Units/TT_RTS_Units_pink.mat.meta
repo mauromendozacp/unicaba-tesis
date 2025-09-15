@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 23fe6e6315af1c6458ea91a3b762eaa4
+timeCreated: 1544665338
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Units/TT_RTS_Units_pink.mat
+  uploadId: 578651

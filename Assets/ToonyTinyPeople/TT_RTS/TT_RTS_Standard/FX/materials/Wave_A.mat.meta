@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 067b2ec1d032ad643ad10f4adb93bea1
+timeCreated: 1542194820
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/materials/Wave_A.mat
+  uploadId: 578651

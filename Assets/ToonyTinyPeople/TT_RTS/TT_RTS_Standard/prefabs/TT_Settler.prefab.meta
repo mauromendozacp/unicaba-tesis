@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cc1d9ae112f9093468713bfc446711b2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Settler.prefab
+  uploadId: 578651

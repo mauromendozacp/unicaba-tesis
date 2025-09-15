@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e93eced9cc2d545428e4a4b45713048d
+timeCreated: 1544658916
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Crossbowman.prefab
+  uploadId: 578651

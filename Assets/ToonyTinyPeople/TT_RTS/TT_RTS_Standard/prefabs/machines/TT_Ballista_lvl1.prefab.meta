@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cb3ed0d4df3e22a40ad0d4304752a928
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/machines/TT_Ballista_lvl1.prefab
+  uploadId: 578651

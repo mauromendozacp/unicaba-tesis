@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b4a1d0e6439682a4e958fb7c874ccb8c
+timeCreated: 1544658903
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Heavy_Infantry.prefab
+  uploadId: 578651

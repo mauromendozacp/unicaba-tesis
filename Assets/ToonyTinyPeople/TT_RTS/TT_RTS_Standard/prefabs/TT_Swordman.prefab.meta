@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bcc60fdbd3a37b44cbc0cb99db483477
+timeCreated: 1544658912
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Swordman.prefab
+  uploadId: 578651

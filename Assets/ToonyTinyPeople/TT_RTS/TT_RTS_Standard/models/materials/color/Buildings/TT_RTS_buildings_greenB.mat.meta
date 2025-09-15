@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc6aebce1a6b863429a4dfc6238b994a
+timeCreated: 1544665340
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Buildings/TT_RTS_buildings_greenB.mat
+  uploadId: 578651

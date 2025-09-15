@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 064a7a50f8ff29f469fd01d87aa7ffe6
+timeCreated: 1542193888
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/materials/Glow_A.mat
+  uploadId: 578651

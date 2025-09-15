@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6652791f0d19f3b408a94277d330b59b
+timeCreated: 1544658932
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Scout.prefab
+  uploadId: 578651

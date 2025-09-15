@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 75925c365bd895145beefbc806717633
+timeCreated: 1544658924
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_HeavySwordman.prefab
+  uploadId: 578651

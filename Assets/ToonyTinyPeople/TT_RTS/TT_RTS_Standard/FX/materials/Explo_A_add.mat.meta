@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c800e0c68f41b4b4092664a0a3d45f01
+timeCreated: 1542192832
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/materials/Explo_A_add.mat
+  uploadId: 578651

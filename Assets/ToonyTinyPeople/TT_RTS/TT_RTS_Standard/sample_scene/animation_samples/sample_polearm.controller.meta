@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5aab6ade3511ca54b9d8e949eafbe77d
+timeCreated: 1544659363
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/sample_scene/animation_samples/sample_polearm.controller
+  uploadId: 578651

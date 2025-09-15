@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 54adf927cb20b8d4e880dc266a7eea38
+timeCreated: 1544665339
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Buildings/TT_RTS_buildings_yellow.mat
+  uploadId: 578651

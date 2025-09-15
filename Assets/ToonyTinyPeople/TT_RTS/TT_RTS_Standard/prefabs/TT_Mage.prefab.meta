@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1854a3b64b66724429ff0b04e0891fc1
+timeCreated: 1544658944
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Mage.prefab
+  uploadId: 578651

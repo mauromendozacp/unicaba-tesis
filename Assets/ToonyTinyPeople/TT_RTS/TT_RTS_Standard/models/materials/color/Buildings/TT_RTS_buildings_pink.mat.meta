@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9d0174ac4f9a2a8418640e7cc75bed39
+timeCreated: 1544665338
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Buildings/TT_RTS_buildings_pink.mat
+  uploadId: 578651

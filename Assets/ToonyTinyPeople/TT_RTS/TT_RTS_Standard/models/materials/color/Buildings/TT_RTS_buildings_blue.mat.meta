@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4a8b820c98c7b4540bab4e4f3d70d7fb
+timeCreated: 1544659905
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Buildings/TT_RTS_buildings_blue.mat
+  uploadId: 578651

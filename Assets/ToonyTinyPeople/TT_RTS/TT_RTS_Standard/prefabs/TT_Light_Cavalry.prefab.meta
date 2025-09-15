@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4e3c7da5fb6ce5a47a0a7dbc18b843c6
+timeCreated: 1547834142
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Light_Cavalry.prefab
+  uploadId: 578651

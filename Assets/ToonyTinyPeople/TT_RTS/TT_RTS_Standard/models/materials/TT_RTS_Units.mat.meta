@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dccf8e44ede71db42b49378af93c5fb7
+timeCreated: 1533003884
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/TT_RTS_Units.mat
+  uploadId: 578651

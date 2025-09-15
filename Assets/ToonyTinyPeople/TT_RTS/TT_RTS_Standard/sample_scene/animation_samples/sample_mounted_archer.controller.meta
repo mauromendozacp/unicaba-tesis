@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a42d22f21c52d9948a13c9e169661461
+timeCreated: 1547834983
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/sample_scene/animation_samples/sample_mounted_archer.controller
+  uploadId: 578651

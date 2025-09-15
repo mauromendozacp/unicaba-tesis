@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1840301e13d8eb34c83a2a124535cfd1
+timeCreated: 1544665336
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Buildings/TT_RTS_buildings_tan.mat
+  uploadId: 578651

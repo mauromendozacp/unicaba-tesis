@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 447e6463d0259d84c9d79fc226c47d32
+timeCreated: 1547834989
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/sample_scene/animation_samples/sample_cavalry_spear.controller
+  uploadId: 578651

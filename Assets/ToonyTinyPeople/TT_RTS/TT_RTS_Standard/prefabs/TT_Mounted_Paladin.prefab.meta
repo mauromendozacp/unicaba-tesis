@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3b5b8018d62c7fb43b2805cf19ffaff7
+timeCreated: 1547834177
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Mounted_Paladin.prefab
+  uploadId: 578651

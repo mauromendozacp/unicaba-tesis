@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 53eb1e18130e9be4387a785b482187e1
+timeCreated: 1544658895
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Peasant.prefab
+  uploadId: 578651

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 39164aad5a45b6e4fb8eec7201d8f0ad
+timeCreated: 1544658766
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/sample_scene/animation_samples/sample_infantry.controller
+  uploadId: 578651

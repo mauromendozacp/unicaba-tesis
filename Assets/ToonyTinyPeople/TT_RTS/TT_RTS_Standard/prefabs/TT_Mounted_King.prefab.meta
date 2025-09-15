@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a36479667d1b0f74bbd661b17c3f9476
+timeCreated: 1547834165
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Mounted_King.prefab
+  uploadId: 578651

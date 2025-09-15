@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c1f7cd26d86e36c44921a1c45d23513b
+timeCreated: 1542943646
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/FX_prefabs/FX_Building_burning.prefab
+  uploadId: 578651

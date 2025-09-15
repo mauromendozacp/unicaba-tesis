@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2d2512403e1ec3149916914c3e6331e9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/FX_prefabs/FX_machine_destroyed.prefab
+  uploadId: 578651

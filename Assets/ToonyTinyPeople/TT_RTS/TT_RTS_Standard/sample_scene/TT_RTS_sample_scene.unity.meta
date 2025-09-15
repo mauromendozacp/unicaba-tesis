@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b0726ebb49a5b894caadeb01cc596516
+timeCreated: 1544655551
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/sample_scene/TT_RTS_sample_scene.unity
+  uploadId: 578651

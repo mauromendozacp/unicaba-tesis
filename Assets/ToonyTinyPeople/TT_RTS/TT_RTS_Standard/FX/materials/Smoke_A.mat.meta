@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 385e7fcb100243148b3f0a4122c369a4
+timeCreated: 1542196257
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/materials/Smoke_A.mat
+  uploadId: 578651

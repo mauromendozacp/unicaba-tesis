@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0755a95e2e1b5f44e8226989fb76f2cf
+timeCreated: 1544658905
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Spearman.prefab
+  uploadId: 578651

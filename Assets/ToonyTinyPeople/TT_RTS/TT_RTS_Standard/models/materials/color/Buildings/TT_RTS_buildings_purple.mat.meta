@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f3fe8ac1080fe4c439720ce9e50b5df1
+timeCreated: 1544665337
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/models/materials/color/Buildings/TT_RTS_buildings_purple.mat
+  uploadId: 578651

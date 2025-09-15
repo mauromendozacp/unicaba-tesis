@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 76a2602d9d10f3d41bfdecbe0d04b2da
+timeCreated: 1544658769
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/sample_scene/animation_samples/sample_crossbow.controller
+  uploadId: 578651

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 892bd1c95e4ec2f43a7e0a49c68f27f1
+timeCreated: 1547834156
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Heavy_Cavalry.prefab
+  uploadId: 578651

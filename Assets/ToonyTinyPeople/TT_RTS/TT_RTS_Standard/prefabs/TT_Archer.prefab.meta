@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 04c79b5f6e9ebab48af48fdcf7b6d570
+timeCreated: 1544658908
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135258
+  packageName: Toony Tiny RTS Set
+  packageVersion: 1.4
+  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Archer.prefab
+  uploadId: 578651
