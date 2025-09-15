@@ -610,6 +610,7 @@ MonoBehaviour:
   idleMaterial: {fileID: 2100000, guid: e1a9edba81bf2c0478781fd2f9bdd225, type: 2}
   chaseMaterial: {fileID: 2100000, guid: 2f01972d3f2b9d64ebb1156273a7cc04, type: 2}
   attackMaterial: {fileID: 2100000, guid: 609ab27ec00ddff4db00528a99c31f71, type: 2}
+  damagedMaterial: {fileID: 2100000, guid: 609ab27ec00ddff4db00528a99c31f71, type: 2}
   attackCollider: {fileID: 6503089782551746891}
   attackDamage: 40
 --- !u!54 &2758226330837747789

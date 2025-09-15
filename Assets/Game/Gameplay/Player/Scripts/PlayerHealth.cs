@@ -1,7 +1,8 @@
 // PlayerHealth.cs
 using UnityEngine;
-using UnityEngine.InputSystem; // Necesario para el nuevo sistema de input
+using UnityEngine.InputSystem;
 using System.Collections;
+using System;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -10,6 +11,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
   [SerializeField] private Material damagedMaterial;
 
   private float currentHealth;
+  public float Health => currentHealth;
+
   private bool isInvincible = false;
   private Material originalMaterial;
   private Renderer playerRenderer;
@@ -17,6 +20,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
   private PlayerInput playerInput;
 
   public bool IsAlive => currentHealth > 0;
+
+  public event Action<float, IDamageable> OnDamaged;
+  public event Action<IDamageable> OnDeath;
 
   void Awake()
   {
@@ -33,6 +39,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     currentHealth -= damage;
     if (currentHealth < 0) currentHealth = 0;
+    OnDamaged?.Invoke(damage, this);
 
     StartCoroutine(DamageFeedbackCoroutine());
 
@@ -52,6 +59,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     // Simular que el personaje está acostado
     transform.rotation = Quaternion.Euler(90, transform.rotation.y, transform.rotation.z);
+    OnDeath?.Invoke(this);
   }
 
   private IEnumerator DamageFeedbackCoroutine()

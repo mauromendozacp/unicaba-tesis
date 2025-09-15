@@ -9,13 +9,18 @@ public class EnemyPrototype : EnemyBase
   [SerializeField] Material chaseMaterial;
   [SerializeField] Material attackMaterial;
 
+  [SerializeField] Material damagedMaterial;
+  Material originalMaterial;
+
   [Header("Attack Settings")]
   [SerializeField] private Collider attackCollider;
   [SerializeField] private float attackDamage = 40f;
 
+
   protected override void Awake()
   {
     base.Awake();
+    originalMaterial = GetComponentInChildren<Renderer>().material;
     ChangeState(new IdleState(this));
   }
 
@@ -45,8 +50,7 @@ public class EnemyPrototype : EnemyBase
 
   public override void TakeDamage(float damage)
   {
-    lastDamage = damage;
-    currentHealth -= damage;
+    base.TakeDamage(damage);
 
     if (currentHealth <= 0)
     {
@@ -95,6 +99,14 @@ public class EnemyPrototype : EnemyBase
             break;
         }
       }
+    }
+    if (currentState.State == EnemyState.Damaged)
+    {
+      GetComponent<Renderer>().material = damagedMaterial;
+    }
+    else
+    {
+      GetComponent<Renderer>().material = originalMaterial;
     }
   }
 }

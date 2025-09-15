@@ -17,6 +17,7 @@ public class DamagedState : IEnemyState
   public void Enter()
   {
     enemy.ApplyKnockbackForce();
+    enemy.ChangeMaterial();
     enemy.StartCoroutine(ReturnToPreviousState());
   }
 

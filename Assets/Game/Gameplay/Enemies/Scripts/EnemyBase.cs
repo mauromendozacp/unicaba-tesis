@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 
 public enum EnemyState
@@ -14,6 +14,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
   [SerializeField] protected float maxHealth = 30f;
   protected float currentHealth;
+  public float Health => currentHealth;
 
   [SerializeField] float moveSpeed = 4f;
   public float currentSpeed;
@@ -36,9 +37,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
   public bool IsAlive => currentHealth > 0;
 
+  public event Action<float, IDamageable> OnDamaged;
+  public event Action<IDamageable> OnDeath;
+
   protected virtual void Awake()
   {
-    currentSpeed = moveSpeed * Random.Range(0.75f, 1.0f);
+    currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
     currentHealth = maxHealth;
     rb = GetComponent<Rigidbody>();
   }
@@ -56,7 +60,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     currentState.Enter();
   }
 
-  public abstract void TakeDamage(float damage);
+  public virtual void TakeDamage(float damage)
+  {
+    OnDamaged?.Invoke(damage, this);
+    lastDamage = damage;
+    currentHealth -= damage;
+    if (currentHealth <= 0)
+    {
+      currentHealth = 0;
+      OnDeath?.Invoke(this);
+    }
+  }
 
   void OnCollisionEnter(Collision collision)
   {
