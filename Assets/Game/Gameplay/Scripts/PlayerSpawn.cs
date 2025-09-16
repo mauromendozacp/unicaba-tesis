@@ -10,12 +10,14 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] public CinemachineTargetGroup targetGroup = null;
 
     private Func<int, PlayerUI> onGetPlayerUI = null;
+    private Action onPause = null;
 
     private readonly List<PlayerInput> players = new List<PlayerInput>();
 
-    public void Init(Func<int, PlayerUI> onGetPlayerUI)
+    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause)
     {
         this.onGetPlayerUI = onGetPlayerUI;
+        this.onPause = onPause;
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
@@ -26,7 +28,7 @@ public class PlayerSpawn : MonoBehaviour
         if (playerUI != null)
         {
             PlayerController playerController = playerInput.GetComponent<PlayerController>();
-            playerController.SetPlayerUI(playerUI);
+            playerController.Init(playerUI, onPause);
         }
 
         players.Add(playerInput);

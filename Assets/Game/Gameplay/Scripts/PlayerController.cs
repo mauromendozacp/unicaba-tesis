@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInputController))]
@@ -14,15 +15,19 @@ public class PlayerController : MonoBehaviour
     private PlayerInputController inputController = null;
     private CharacterController characterController = null;
     private PlayerInventory inventory = null;
+    private PlayerHealth playerHealth = null;
     private PlayerUI playerUI = null;
 
     private Vector3 velocity = Vector3.zero;
+
+    private Action onPause = null;
 
     private void Awake()
     {
         inputController = GetComponent<PlayerInputController>();
         characterController = GetComponent<CharacterController>();
         inventory = GetComponent<PlayerInventory>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         // weaponHolder puede estar en el mismo GameObject o como hijo
         if (weaponHolder == null)
@@ -37,14 +42,23 @@ public class PlayerController : MonoBehaviour
         inputController.onUseItem += UseItem;
         inputController.onNextItem += ChangeSlot;
         inputController.onPreviousItem += ChangeSlot;
+        inputController.onPause += onPause;
 
         playerUI?.ChangeSlot(inventory.SelectedIndex);
+
+        playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
     }
 
     private void Update()
     {
         Move();
         HandleFireInput();
+    }
+
+    public void Init(PlayerUI playerUI, Action onPause)
+    {
+        this.playerUI = playerUI;
+        this.onPause = onPause;
     }
 
     private void Move()
@@ -92,10 +106,5 @@ public class PlayerController : MonoBehaviour
     private void ChangeSlot()
     {
         playerUI.ChangeSlot(inventory.SelectedIndex);
-    }
-
-    public void SetPlayerUI(PlayerUI playerUI)
-    {
-        this.playerUI = playerUI;
     }
 }

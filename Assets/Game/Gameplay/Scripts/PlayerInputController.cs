@@ -10,6 +10,7 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 move = Vector2.zero;
     private InputAction fireAction = null;
 
+    public Action onPause = null;
     public Action onEquipItem = null;
     public Action onUseItem = null;
     public Action onPreviousItem = null;
@@ -30,6 +31,7 @@ public class PlayerInputController : MonoBehaviour
         playerMap.FindAction("UseItem").started += OnUseItem;
         playerMap.FindAction("Previous").started += OnPreviousItem;
         playerMap.FindAction("Next").started += OnNextItem;
+        playerMap.FindAction("Pause").started += OnPause;
         playerMap.Enable();
     }
 
@@ -41,6 +43,7 @@ public class PlayerInputController : MonoBehaviour
         playerMap.FindAction("UseItem").started -= OnUseItem;
         playerMap.FindAction("Previous").started -= OnPreviousItem;
         playerMap.FindAction("Next").started -= OnNextItem;
+        playerMap.FindAction("Pause").started -= OnPause;
         playerMap.Disable();
     }
 
@@ -75,6 +78,11 @@ public class PlayerInputController : MonoBehaviour
     private void OnNextItem(InputAction.CallbackContext ctx)
     {
         onNextItem?.Invoke();
+    }
+
+    private void OnPause(InputAction.CallbackContext ctx)
+    {
+        onPause?.Invoke();
     }
 
     public Vector2 GetInputMove()
