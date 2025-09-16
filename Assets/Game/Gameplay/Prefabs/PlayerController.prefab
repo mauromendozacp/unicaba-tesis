@@ -224,6 +224,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e4831688-51d9-43c2-82cf-50d90fd98d4d
     m_ActionName: 'Player/EquipItem[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 829764cf-a670-47ec-afd3-4c553fdf9063
+    m_ActionName: 'Player/Interact[/Keyboard/z]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -241,8 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f542b186f85ecfb4b96fe33e515f14ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeaponPrefab: {fileID: -4402754900311588960, guid: 71c54612a9be89040ab55cef9e8e7798, type: 3}
+  defaultWeaponData: {fileID: 11400000, guid: 816c8970dbc0c3d4585b582ac0d59401, type: 2}
   weaponParent: {fileID: 6940750611022271293}
+  playerUI: {fileID: 3865117997295965762, guid: f56185e9e1054c8459d96f03ff7c7b89, type: 3}
 --- !u!114 &5472234437480224036
 MonoBehaviour:
   m_ObjectHideFlags: 0

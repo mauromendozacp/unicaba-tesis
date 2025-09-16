@@ -19,9 +19,11 @@ public class PlayerUI : MonoBehaviour
         playerImage.sprite = icon;
     }
 
-    public void OnChangeGun()
-    {
 
+    public void SetGunIcon(Sprite icon)
+    {
+        if (gunImage != null)
+            gunImage.sprite = icon;
     }
 
     public void OnUpdateAmmo(int ammo)

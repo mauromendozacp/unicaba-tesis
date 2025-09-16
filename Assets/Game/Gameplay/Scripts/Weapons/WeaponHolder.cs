@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
-    [Header("Weapon Prefabs")]
-    [SerializeField] private WeaponBase defaultWeaponPrefab;
+    [Header("Weapon Data")]
+    [SerializeField] private WeaponData defaultWeaponData;
     [SerializeField] private Transform weaponParent;
+
+    [Header("UI")]
+    [SerializeField] private PlayerUI playerUI;
 
     private WeaponBase currentWeapon;
 
@@ -15,17 +18,35 @@ public class WeaponHolder : MonoBehaviour
         EquipDefaultWeapon();
     }
 
-    public void EquipDefaultWeapon()
+    public void SetPlayerUI(PlayerUI ui)
     {
-        EquipWeapon(defaultWeaponPrefab);
+        playerUI = ui;
+        if (playerUI != null && currentWeapon != null)
+        {
+            playerUI.SetGunIcon(currentWeapon.Icon);
+            playerUI.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+        }
     }
 
-    public void EquipWeapon(WeaponBase weaponPrefab)
+    public void EquipDefaultWeapon()
     {
-        // Si el arma es del mismo tipo, solo suma munición
-        if (currentWeapon != null && currentWeapon.GetType() == weaponPrefab.GetType() && !currentWeapon.IsDefault)
+        if (defaultWeaponData != null)
         {
-            currentWeapon.AddAmmo(weaponPrefab.MaxAmmo);
+            GameObject weaponGO = Instantiate(defaultWeaponData.weaponPrefab);
+            var weapon = weaponGO.GetComponent<WeaponBase>();
+            weapon.Init(defaultWeaponData);
+            EquipWeapon(weapon);
+        }
+    }
+
+    public void EquipWeapon(WeaponBase weaponInstance)
+    {
+        if (currentWeapon != null && currentWeapon.GetType() == weaponInstance.GetType() && !currentWeapon.IsDefault)
+        {
+            currentWeapon.AddAmmo(weaponInstance.MaxAmmo);
+            Destroy(weaponInstance.gameObject);
+            playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+            playerUI?.SetGunIcon(currentWeapon.Icon);
             return;
         }
 
@@ -33,20 +54,14 @@ public class WeaponHolder : MonoBehaviour
         {
             Destroy(currentWeapon.gameObject);
         }
-        if (weaponParent == null)
-        {
-            weaponParent = transform.Find("Hand");
-            if (weaponParent == null)
-            {
-                Debug.LogError($"[WeaponHolder] No se asignó weaponParent en {name} y no se encontró un hijo 'Hand'.");
-                return;
-            }
-        }
 
-        currentWeapon = Instantiate(weaponPrefab, weaponParent.position, weaponParent.rotation, weaponParent);
+        currentWeapon = weaponInstance;
+        currentWeapon.transform.SetParent(weaponParent != null ? weaponParent : transform, false);
         currentWeapon.transform.localPosition = Vector3.zero;
         currentWeapon.transform.localRotation = Quaternion.identity;
         currentWeapon.OnPickup();
+        playerUI?.SetGunIcon(currentWeapon.Icon);
+        playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
     }
 
     public void DropWeapon()
@@ -55,6 +70,7 @@ public class WeaponHolder : MonoBehaviour
         {
             Destroy(currentWeapon.gameObject);
             EquipDefaultWeapon();
+            playerUI?.OnUpdateAmmo(currentWeapon != null ? currentWeapon.CurrentAmmo : 0);
         }
     }
 
@@ -65,16 +81,4 @@ public class WeaponHolder : MonoBehaviour
             DropWeapon();
         }
     }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        if (weaponParent != null)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(weaponParent.position, 0.05f);
-            UnityEditor.Handles.Label(weaponParent.position, "Weapon Parent");
-        }
-    }
-#endif
 }

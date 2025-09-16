@@ -2,14 +2,14 @@ using UnityEngine;
 
 public abstract class WeaponBase : MonoBehaviour, IWeapon
 {
-    [Header("Weapon Settings")]
-    [SerializeField] protected float damage = 10f;
-    [SerializeField] protected float fireRate = 0.5f;
-    [SerializeField] protected int maxAmmo = 10;
-    [SerializeField] protected bool isDefault = false;
-
-    [SerializeField] protected int currentAmmo;
+    protected float damage;
+    protected float fireRate;
+    protected int maxAmmo;
+    protected bool isDefault;
+    protected int currentAmmo;
     protected float lastFireTime;
+
+    protected WeaponData weaponData;
 
     public virtual float Damage => damage;
     public virtual float FireRate => fireRate;
@@ -17,10 +17,16 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
     public virtual int CurrentAmmo => currentAmmo;
     public virtual bool IsAmmoEmpty => maxAmmo > 0 && currentAmmo <= 0;
     public virtual bool IsDefault => isDefault;
+    public virtual Sprite Icon => weaponData != null ? weaponData.Icon : null;
 
-    protected virtual void Awake()
+    public virtual void Init(WeaponData data)
     {
-        currentAmmo = maxAmmo;
+        weaponData = data;
+        damage = data.damage;
+        fireRate = data.fireRate;
+        maxAmmo = data.maxAmmo;
+        currentAmmo = data.maxAmmo;
+        isDefault = data.isDefault;
     }
 
     public abstract void Fire();
@@ -38,3 +44,4 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
     public virtual void OnPickup() { }
     public virtual void OnDrop() { }
 }
+
