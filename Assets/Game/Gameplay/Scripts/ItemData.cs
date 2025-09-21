@@ -7,13 +7,15 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] private Sprite icon = null;
     [SerializeField] private Mesh mesh = null;
     [SerializeField] private Material material = null;
-    [SerializeField] private int amount = 0;
+    [SerializeField] private Vector3 positionOffset = Vector3.zero;
+    [SerializeField] private Vector3 rotation = Vector3.zero;
 
     public string ItemName => itemName;
     public Sprite Icon => icon;
     public Mesh Mesh => mesh;
     public Material Material => material;
-    public int Amount => amount;
+    public Vector3 PositionOffset => positionOffset;
+    public Vector3 Rotation => rotation;
 
     public abstract void Use(GameObject user);
 }

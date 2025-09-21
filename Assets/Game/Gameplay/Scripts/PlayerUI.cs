@@ -6,7 +6,7 @@ using TMPro;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private Image playerImage = null;
-
+    [SerializeField] private Image lifebar = null;
     [SerializeField] private Image gunImage = null;
     [SerializeField] private GameObject limitedAmmo = null;
     [SerializeField] private GameObject unlimitedAmmo = null;
@@ -22,6 +22,11 @@ public class PlayerUI : MonoBehaviour
     public void OnChangeGun()
     {
 
+    }
+
+    public void OnUpdateLife(float life, float maxLife)
+    {
+        lifebar.fillAmount = life / maxLife;
     }
 
     public void OnUpdateAmmo(int ammo)
