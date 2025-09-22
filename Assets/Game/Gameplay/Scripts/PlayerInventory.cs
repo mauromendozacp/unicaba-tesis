@@ -18,6 +18,7 @@ public class PlayerInventory : MonoBehaviour
     public void EquipItem(ItemData item)
     {
         int emptyItemIndex = -1;
+
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] == null)
