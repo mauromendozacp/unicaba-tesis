@@ -65,6 +65,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   {
 
     currentState?.Exit();
+    StopAllCoroutines();
     currentState = newState;
     currentState.Enter();
   }

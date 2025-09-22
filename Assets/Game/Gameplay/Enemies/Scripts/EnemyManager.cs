@@ -27,7 +27,8 @@ public class EnemyManager : MonoBehaviour
   public float maxSpawnRadius = 5f;
 
   private Dictionary<string, GameObject> enemyPrefabDict;
-  private IObjectPool<GameObject> enemyPool;
+  //private IObjectPool<GameObject> enemyPool;
+  private Dictionary<string, IObjectPool<GameObject>> enemyPoolDict;
   private int currentWaveIndex = 0;
   private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
@@ -53,6 +54,7 @@ public class EnemyManager : MonoBehaviour
         enemyPrefabDict[prefab.name] = prefab;
       }
     }
+    enemyPoolDict = new Dictionary<string, IObjectPool<GameObject>>();
   }
 
   void Start()
@@ -63,6 +65,7 @@ public class EnemyManager : MonoBehaviour
 
   void InitializePool()
   {
+    /*
     enemyPool = new ObjectPool<GameObject>(
         createFunc: CreatePooledItem,
         actionOnGet: OnTakeFromPool,
@@ -72,27 +75,59 @@ public class EnemyManager : MonoBehaviour
         defaultCapacity: 20,
         maxSize: poolMaxSize
     );
+    */
+    foreach (GameObject prefab in enemyPrefabs)
+    {
+      if (!enemyPoolDict.ContainsKey(prefab.name))
+      {
+        // Crea un pool para cada prefab de enemigo.
+        var pool = new ObjectPool<GameObject>(
+            createFunc: () => CreatePooledItem(prefab), // Se pasa el prefab a la función
+            actionOnGet: OnTakeFromPool,
+            actionOnRelease: OnReturnToPool,
+            actionOnDestroy: OnDestroyPoolObject,
+            collectionCheck: false,
+            defaultCapacity: 20,
+            maxSize: poolMaxSize
+        );
+        enemyPoolDict.Add(prefab.name, pool);
+      }
+    }
   }
 
-  private GameObject CreatePooledItem()
-  {
-    if (enemyPrefabs.Count == 0)
+  /*
+    private GameObject CreatePooledItem()
     {
-      Debug.LogError("No hay prefabs de enemigos en la lista general.");
-      return null;
-    }
+      if (enemyPrefabs.Count == 0)
+      {
+        Debug.LogError("No hay prefabs de enemigos en la lista general.");
+        return null;
+      }
 
-    GameObject prefabToInstantiate = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
+      GameObject prefabToInstantiate = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
+      GameObject enemy = Instantiate(prefabToInstantiate);
+
+      EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
+      if (enemyScript != null)
+      {
+        enemyScript.SetPool(enemyPool);
+      }
+      return enemy;
+    }
+  */
+
+  private GameObject CreatePooledItem(GameObject prefabToInstantiate)
+  {
     GameObject enemy = Instantiate(prefabToInstantiate);
 
     EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
     if (enemyScript != null)
     {
-      enemyScript.SetPool(enemyPool);
+      // Se modifica para que use el pool correspondiente al tipo de enemigo.
+      enemyScript.SetPool(enemyPoolDict[prefabToInstantiate.name]);
     }
     return enemy;
   }
-
   private void OnTakeFromPool(GameObject enemy)
   {
     enemy.SetActive(true);
@@ -143,6 +178,7 @@ public class EnemyManager : MonoBehaviour
 
     foreach (var enemySpawn in currentWave.enemiesInWave)
     {
+      /*
       for (int i = 0; i < enemySpawn.count; i++)
       {
         GameObject enemyToSpawn = enemyPool.Get();
@@ -152,6 +188,25 @@ public class EnemyManager : MonoBehaviour
           enemyToSpawn.transform.position = GetRandomSpawnPosition();
           enemyToSpawn.SetActive(true);
         }
+      }
+      */
+      string enemyPrefabName = enemySpawn.enemyPrefab.name;
+      if (enemyPoolDict.ContainsKey(enemyPrefabName))
+      {
+        var specificEnemyPool = enemyPoolDict[enemyPrefabName];
+        for (int i = 0; i < enemySpawn.count; i++)
+        {
+          GameObject enemyToSpawn = specificEnemyPool.Get();
+          if (enemyToSpawn != null)
+          {
+            enemyToSpawn.transform.position = GetRandomSpawnPosition();
+            enemyToSpawn.SetActive(true);
+          }
+        }
+      }
+      else
+      {
+        Debug.LogError($"Pool para el enemigo '{enemyPrefabName}' no encontrado. Asegúrate de que el prefab está en la lista general de prefabs del EnemyManager.");
       }
     }
 

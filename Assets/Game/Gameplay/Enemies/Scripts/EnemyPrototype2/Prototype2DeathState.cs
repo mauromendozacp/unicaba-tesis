@@ -15,8 +15,9 @@ public class Prototype2DeathState : IEnemyState
 
   public void Enter()
   {
+    Debug.Log("Prototype2DeathState: Enter()");
     enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, enemy.transform.rotation.z);
-    enemy.GetComponent<Collider>().enabled = false;
+    //enemy.GetComponent<Collider>().enabled = false;
     enemy.StartCoroutine(DieCoroutine());
   }
 
@@ -29,6 +30,7 @@ public class Prototype2DeathState : IEnemyState
   private IEnumerator DieCoroutine()
   {
     yield return new WaitForSeconds(3f);
+    Debug.Log("Prototype2DeathState: Calling enemy.Die()");
     enemy.Die();
   }
 }
