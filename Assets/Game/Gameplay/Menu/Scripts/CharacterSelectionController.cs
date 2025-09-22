@@ -13,9 +13,14 @@ public class CharacterSelectionController : MonoBehaviour
     public Action onBack = null;
     private Func<int> onGetPlayersCount = null;
 
+    public PlayerData[] PlayerDatas => playersData;
+    public SlotPlayer[] Slots => slots;
+
     public void Init(Action onStart, Action onBack, Func<int> onGetPlayersCount)
     {
         this.onStart = onStart;
+        this.onStart += ToggleOffInteractions;
+
         this.onBack = onBack;
         this.onGetPlayersCount = onGetPlayersCount;
 
@@ -58,5 +63,16 @@ public class CharacterSelectionController : MonoBehaviour
         }
 
         startBtn.interactable = allPlayersConfirm;
+    }
+
+    private void ToggleOffInteractions()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].ToggleConfirm(false);
+        }
+
+        startBtn.interactable = false;
+        backBtn.interactable = false;
     }
 }

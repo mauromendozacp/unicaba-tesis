@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         HandleFireInput();
     }
 
-    public void Init(PlayerUI playerUI, Action onPause)
+    public void Init(PlayerUI playerUI, PlayerData data, Action onPause)
     {
         this.playerUI = playerUI;
         this.onPause = onPause;
