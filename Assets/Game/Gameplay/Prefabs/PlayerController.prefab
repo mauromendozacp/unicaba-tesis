@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: -1477880225002385552}
   - component: {fileID: 5472234437480224036}
   - component: {fileID: 1200799538902002149}
+  - component: {fileID: 1395241334976182627}
   m_Layer: 3
   m_Name: PlayerController
   m_TagString: Player
@@ -224,6 +225,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e4831688-51d9-43c2-82cf-50d90fd98d4d
     m_ActionName: 'Player/EquipItem[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 271c6fef-fbeb-42cc-b399-e79f77ceec4e
+    m_ActionName: 'Player/Pause[/Keyboard/escape,/Keyboard/p]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 375fb133-aa2f-4a12-be3e-5745d797f58b
+    m_ActionName: 'Player/Accept[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b259c65-4190-42a3-8988-3079787ec412
+    m_ActionName: 'Player/Back[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -270,6 +283,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13585ce521c11834e96c85f40e3e1299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1395241334976182627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212223590271132870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1953264ea672f243903efb1097a410d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  stickDeadzone: 0.2
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0

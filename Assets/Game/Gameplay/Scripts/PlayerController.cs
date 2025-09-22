@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private PlayerUI playerUI = null;
 
     private Vector3 velocity = Vector3.zero;
-
     private Action onPause = null;
 
     private void Awake()
@@ -30,8 +29,7 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
 
         // weaponHolder puede estar en el mismo GameObject o como hijo
-        if (weaponHolder == null)
-            weaponHolder = GetComponentInChildren<WeaponHolder>();
+        if (weaponHolder == null) weaponHolder = GetComponentInChildren<WeaponHolder>();
     }
 
     private void Start()
@@ -45,7 +43,6 @@ public class PlayerController : MonoBehaviour
         inputController.onPause += onPause;
 
         playerUI?.ChangeSlot(inventory.SelectedIndex);
-
         playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
     }
 
@@ -64,8 +61,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         if (!characterController.enabled || !inputController.enabled) return;
-        Vector2 moveInput = inputController.GetInputMove();
 
+        Vector2 moveInput = inputController.GetInputMove();
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         characterController.Move(speed * Time.deltaTime * move);
 
