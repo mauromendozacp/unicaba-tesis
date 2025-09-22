@@ -47,7 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 9136665731692348206, guid: 1c8a2c55ccbcf0346aabad55a562ac71, type: 3}
-  waves: []
+  - {fileID: 3542624664555272393, guid: aa61a6b0c50728a4ba1464a89ade8069, type: 3}
+  waves:
+  - {fileID: 11400000, guid: c78efab314780304295540179c46f1fb, type: 2}
+  - {fileID: 11400000, guid: a5a3e1e29dcb8aa40ab5a9ddb19951d9, type: 2}
+  - {fileID: 11400000, guid: a0505ebd3cde89642b8507f7396d1789, type: 2}
   poolMaxSize: 20
   spawnCenters:
   - {fileID: 8852769364058859759}

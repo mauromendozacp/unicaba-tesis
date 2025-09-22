@@ -6,12 +6,10 @@ using System;
 
 public class EnemyManager : MonoBehaviour
 {
-  // === EVENTOS NATIVOS DE C# ===
   public event Action<int> OnWavesStart;   // Pasa el número total de oleadas
   public event Action OnWaveStart;
   public event Action OnWavesEnd;
 
-  // === Configuración en el Inspector ===
   [Header("General")]
   [Tooltip("Lista general de todos los prefabs de enemigos.")]
   public List<GameObject> enemyPrefabs;
@@ -28,17 +26,14 @@ public class EnemyManager : MonoBehaviour
   [Tooltip("El radio máximo desde un centro donde se puede instanciar un enemigo.")]
   public float maxSpawnRadius = 5f;
 
-  // === Variables Privadas ===
   private Dictionary<string, GameObject> enemyPrefabDict;
   private IObjectPool<GameObject> enemyPool;
   private int currentWaveIndex = 0;
   private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
 
-  // === Propiedad Pública ===
   public static EnemyManager Instance;
 
-  // --- Métodos de Ciclo de Vida ---
   private void Awake()
   {
     if (Instance == null)
@@ -66,7 +61,6 @@ public class EnemyManager : MonoBehaviour
     StartCoroutine(StartWaves());
   }
 
-  // --- Lógica del Manager ---
   void InitializePool()
   {
     enemyPool = new ObjectPool<GameObject>(
