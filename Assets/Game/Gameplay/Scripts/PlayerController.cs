@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
     {
         this.playerUI = playerUI;
         this.onPause = onPause;
+
+        weaponHolder?.SetPlayerUI(playerUI);
     }
 
     private void Move()
@@ -83,6 +85,10 @@ public class PlayerController : MonoBehaviour
         if (inputController.GetInputFire())
         {
             weaponHolder?.CurrentWeapon?.Fire();
+            if (weaponHolder?.CurrentWeapon != null)
+            {
+                playerUI?.OnUpdateAmmo(weaponHolder.CurrentWeapon.CurrentAmmo);
+            }
         }
     }
 
