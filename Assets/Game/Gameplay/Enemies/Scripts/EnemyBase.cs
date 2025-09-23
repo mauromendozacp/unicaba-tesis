@@ -7,6 +7,7 @@ public enum EnemyState
   Idle,
   Chase,
   Attack,
+  Retreat,
   Damaged,
   Death
 }
@@ -64,6 +65,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   {
 
     currentState?.Exit();
+    StopAllCoroutines();
     currentState = newState;
     currentState.Enter();
   }
@@ -104,10 +106,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
   protected void Die()
   {
-    OnDeath?.Invoke(this);
-    EnemyManager.Instance.OnEnemyKilled();
+    //OnDeath?.Invoke(this);
+    //EnemyManager.Instance.OnEnemyKilled();
     if (parentPool != null)
     {
+      OnDeath?.Invoke(this);
+      EnemyManager.Instance.OnEnemyKilled();
       parentPool.Release(gameObject);
     }
     else

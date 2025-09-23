@@ -23,21 +23,22 @@ public class ItemController : MonoBehaviour
         }
     }
 
-    public ItemWorld SpawnItem(ItemData data, Vector3 position, Quaternion rotation)
+    public ItemWorld SpawnItem(ItemData data, Vector3 position)
     {
         ItemWorld item = pool.Get();
         item.SetData(data);
-        item.transform.SetPositionAndRotation(position, rotation);
+        item.transform.position = position + data.PositionOffset;
+        item.transform.eulerAngles = data.Rotation;
         item.onRelease += ReleaseItem;
         return item;
     }
 
-    public ItemWorld SpawnRandomItem(Vector3 position, Quaternion rotation)
+    public ItemWorld SpawnRandomItem(Vector3 position)
     {
         int randomIndex = Random.Range(0, availableItems.Length);
         ItemData randomItem = availableItems[randomIndex];
 
-        return SpawnItem(randomItem, position, rotation);
+        return SpawnItem(randomItem, position);
     }
 
     public void ReleaseItem(ItemWorld item)

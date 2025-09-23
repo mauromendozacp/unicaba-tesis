@@ -1,6 +1,5 @@
 // PlayerHealth.cs
 using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections;
 using System;
 
@@ -17,11 +16,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
   private Material originalMaterial;
   private Renderer playerRenderer;
   private CharacterController characterController;
-  private PlayerInput playerInput;
 
   public bool IsAlive => currentHealth > 0;
 
   public event Action<float, IDamageable> OnDamaged;
+  public event Action<float, float> OnUpdateLife;
   public event Action<IDamageable> OnDeath;
 
   void Awake()
@@ -30,7 +29,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     playerRenderer = GetComponentInChildren<Renderer>();
     originalMaterial = playerRenderer.material;
     characterController = GetComponent<CharacterController>();
-    playerInput = GetComponent<PlayerInput>();
   }
 
   public void TakeDamage(float damage)
@@ -40,6 +38,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     currentHealth -= damage;
     if (currentHealth < 0) currentHealth = 0;
     OnDamaged?.Invoke(damage, this);
+    OnUpdateLife?.Invoke(currentHealth, maxHealth);
 
     StartCoroutine(DamageFeedbackCoroutine());
 

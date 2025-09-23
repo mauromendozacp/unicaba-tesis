@@ -2,25 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using System;
 
 public class EnemyManager : MonoBehaviour
 {
-  [SerializeField] List<GameObject> enemyPrefabs;
-  [SerializeField] int poolInitialSize = 10;
-  [SerializeField] int poolMaxSize = 20;
-  [SerializeField] List<Transform> spawnCenters;
-  [SerializeField] float maxSpawnRadius = 5f;
-  [SerializeField] int initialEnemiesCount = 2;
-  [SerializeField] int enemiesToAddPerWave = 1;
-  [SerializeField] float waveCooldownTime = 2f;
+  public event Action<int> OnWavesStart;   // Pasa el número total de oleadas
+  public event Action OnWaveStart;
+  public event Action OnWavesEnd;
 
-  private IObjectPool<GameObject> enemyPool;
-  private int currentEnemiesCount;
+  [Header("General")]
+  [Tooltip("Lista general de todos los prefabs de enemigos.")]
+  public List<GameObject> enemyPrefabs;
+
+  [Header("Configuración de Oleadas")]
+  [Tooltip("Lista de todas las oleadas de enemigos.")]
+  public List<Wave> waves;
+  [Tooltip("El tamaño máximo que puede alcanzar el pool.")]
+  public int poolMaxSize = 50;
+
+  [Header("Puntos de Spawn")]
+  [Tooltip("Lista de Transform de los puntos centrales para el spawn.")]
+  public List<Transform> spawnCenters;
+  [Tooltip("El radio máximo desde un centro donde se puede instanciar un enemigo.")]
+  public float maxSpawnRadius = 5f;
+
+  private Dictionary<string, GameObject> enemyPrefabDict;
+  //private IObjectPool<GameObject> enemyPool;
+  private Dictionary<string, IObjectPool<GameObject>> enemyPoolDict;
+  private int currentWaveIndex = 0;
+  private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
 
-  // Propiedad Pública (para que los enemigos notifiquen su muerte)
   public static EnemyManager Instance;
-
 
   private void Awake()
   {
@@ -32,99 +45,192 @@ public class EnemyManager : MonoBehaviour
     {
       Destroy(gameObject);
     }
+
+    enemyPrefabDict = new Dictionary<string, GameObject>();
+    foreach (GameObject prefab in enemyPrefabs)
+    {
+      if (prefab != null)
+      {
+        enemyPrefabDict[prefab.name] = prefab;
+      }
+    }
+    enemyPoolDict = new Dictionary<string, IObjectPool<GameObject>>();
   }
 
   void Start()
   {
     InitializePool();
-    currentEnemiesCount = initialEnemiesCount;
-    StartCoroutine(SpawnWave());
+    StartCoroutine(StartWaves());
   }
 
   void InitializePool()
   {
+    /*
     enemyPool = new ObjectPool<GameObject>(
         createFunc: CreatePooledItem,
         actionOnGet: OnTakeFromPool,
         actionOnRelease: OnReturnToPool,
         actionOnDestroy: OnDestroyPoolObject,
         collectionCheck: false,
-        defaultCapacity: poolInitialSize,
+        defaultCapacity: 20,
         maxSize: poolMaxSize
     );
-
-    // Pre-poblar el pool con algunos enemigos.
-    for (int i = 0; i < poolInitialSize; i++)
+    */
+    foreach (GameObject prefab in enemyPrefabs)
     {
-      enemyPool.Release(CreatePooledItem());
+      if (!enemyPoolDict.ContainsKey(prefab.name))
+      {
+        // Crea un pool para cada prefab de enemigo.
+        var pool = new ObjectPool<GameObject>(
+            createFunc: () => CreatePooledItem(prefab), // Se pasa el prefab a la función
+            actionOnGet: OnTakeFromPool,
+            actionOnRelease: OnReturnToPool,
+            actionOnDestroy: OnDestroyPoolObject,
+            collectionCheck: false,
+            defaultCapacity: 20,
+            maxSize: poolMaxSize
+        );
+        enemyPoolDict.Add(prefab.name, pool);
+      }
     }
   }
 
-  private GameObject CreatePooledItem()
+  /*
+    private GameObject CreatePooledItem()
+    {
+      if (enemyPrefabs.Count == 0)
+      {
+        Debug.LogError("No hay prefabs de enemigos en la lista general.");
+        return null;
+      }
+
+      GameObject prefabToInstantiate = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
+      GameObject enemy = Instantiate(prefabToInstantiate);
+
+      EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
+      if (enemyScript != null)
+      {
+        enemyScript.SetPool(enemyPool);
+      }
+      return enemy;
+    }
+  */
+
+  private GameObject CreatePooledItem(GameObject prefabToInstantiate)
   {
-    GameObject prefabToInstantiate = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
     GameObject enemy = Instantiate(prefabToInstantiate);
 
-    // Agregar una referencia al pool en el script del enemigo para que pueda ser devuelto.
     EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
     if (enemyScript != null)
     {
-      enemyScript.SetPool(enemyPool);
+      // Se modifica para que use el pool correspondiente al tipo de enemigo.
+      enemyScript.SetPool(enemyPoolDict[prefabToInstantiate.name]);
     }
-
     return enemy;
   }
-
   private void OnTakeFromPool(GameObject enemy)
   {
-    // Esto se llama cada vez que se toma un enemigo del pool.
     enemy.SetActive(true);
   }
 
   private void OnReturnToPool(GameObject enemy)
   {
-    // Esto se llama cada vez que un enemigo es devuelto al pool.
     enemy.SetActive(false);
   }
 
   private void OnDestroyPoolObject(GameObject enemy)
   {
-    // Esto se llama cuando el pool destruye un objeto (por ejemplo, al exceder el max size).
     Destroy(enemy);
   }
 
-  IEnumerator SpawnWave()
+  IEnumerator StartWaves()
   {
-    yield return new WaitForSeconds(waveCooldownTime); // Esperar entre oleadas
-    enemiesAlive = currentEnemiesCount;
+    OnWavesStart?.Invoke(waves.Count);
 
-    for (int i = 0; i < currentEnemiesCount; i++)
+    for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
     {
-      GameObject enemyToSpawn = enemyPool.Get();
-      if (enemyToSpawn != null)
+      OnWaveStart?.Invoke();
+
+      yield return StartCoroutine(SpawnCurrentWave());
+
+      yield return new WaitForSeconds(waves[currentWaveIndex].cooldownTime);
+    }
+
+    OnWavesEnd?.Invoke();
+  }
+
+  IEnumerator SpawnCurrentWave()
+  {
+    if (waves.Count == 0 || currentWaveIndex >= waves.Count)
+    {
+      yield break;
+    }
+
+    Wave currentWave = waves[currentWaveIndex];
+    enemiesToSpawnInCurrentWave = 0;
+
+    foreach (var waveContent in currentWave.enemiesInWave)
+    {
+      enemiesToSpawnInCurrentWave += waveContent.count;
+    }
+
+    enemiesAlive = enemiesToSpawnInCurrentWave;
+
+    foreach (var enemySpawn in currentWave.enemiesInWave)
+    {
+      /*
+      for (int i = 0; i < enemySpawn.count; i++)
       {
-        Vector3 spawnPosition = GetRandomSpawnPosition();
-        enemyToSpawn.transform.position = spawnPosition;
+        GameObject enemyToSpawn = enemyPool.Get();
+        if (enemyToSpawn != null)
+        {
+          // Reiniciar la posición y otros estados del enemigo
+          enemyToSpawn.transform.position = GetRandomSpawnPosition();
+          enemyToSpawn.SetActive(true);
+        }
       }
+      */
+      string enemyPrefabName = enemySpawn.enemyPrefab.name;
+      if (enemyPoolDict.ContainsKey(enemyPrefabName))
+      {
+        var specificEnemyPool = enemyPoolDict[enemyPrefabName];
+        for (int i = 0; i < enemySpawn.count; i++)
+        {
+          GameObject enemyToSpawn = specificEnemyPool.Get();
+          if (enemyToSpawn != null)
+          {
+            enemyToSpawn.transform.position = GetRandomSpawnPosition();
+            enemyToSpawn.SetActive(true);
+          }
+        }
+      }
+      else
+      {
+        Debug.LogError($"Pool para el enemigo '{enemyPrefabName}' no encontrado. Asegúrate de que el prefab está en la lista general de prefabs del EnemyManager.");
+      }
+    }
+
+    while (enemiesAlive > 0)
+    {
+      yield return null;
     }
   }
 
   Vector3 GetRandomSpawnPosition()
   {
-    Transform selectedCenter = spawnCenters[Random.Range(0, spawnCenters.Count)];
-    Vector2 randomCircle = Random.insideUnitCircle * maxSpawnRadius;
-    return selectedCenter.position + new Vector3(randomCircle.x, 1, randomCircle.y);
+    Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * maxSpawnRadius; ;
+    if (spawnCenters.Count == 0)
+    {
+      Debug.LogWarning("No hay centros de spawn definidos. Usando la posición del EnemyManager como fallback.");
+      return transform.position + new Vector3(randomCircle.x, 1.2f, randomCircle.y);
+    }
+
+    Transform selectedCenter = spawnCenters[UnityEngine.Random.Range(0, spawnCenters.Count)];
+    return selectedCenter.position + new Vector3(randomCircle.x, 1.2f, randomCircle.y);
   }
 
-  // Método para que los enemigos lo llamen al morir
   public void OnEnemyKilled()
   {
     enemiesAlive--;
-    if (enemiesAlive <= 0)
-    {
-      Debug.Log("¡Oleada completada! Preparando la siguiente...");
-      currentEnemiesCount += enemiesToAddPerWave;
-      StartCoroutine(SpawnWave());
-    }
   }
 }

@@ -60,6 +60,7 @@ public class EnemyPrototype : EnemyBase
 
     if (currentHealth <= 0)
     {
+      //Die();
       ChangeState(new DeathState(this));
     }
     else

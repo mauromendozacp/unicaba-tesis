@@ -429,7 +429,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e15ca19d-e649-4852-97d5-7fe8ccc44e94"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -517,7 +517,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""25060bbd-a3a6-476e-8fba-45ae484aad05"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -599,7 +599,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""7607c7b6-cd76-4816-beef-bd0341cfe950"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
