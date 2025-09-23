@@ -27,11 +27,13 @@ public class PlayerInputController : MonoBehaviour
     {
         playerMap.FindAction("Move").performed += OnMove;
         playerMap.FindAction("Move").canceled += OnStopMove;
+
         playerMap.FindAction("EquipItem").started += OnEquipItem;
         playerMap.FindAction("UseItem").started += OnUseItem;
         playerMap.FindAction("Previous").started += OnPreviousItem;
         playerMap.FindAction("Next").started += OnNextItem;
         playerMap.FindAction("Pause").started += OnPause;
+
         playerMap.Enable();
     }
 
@@ -39,11 +41,13 @@ public class PlayerInputController : MonoBehaviour
     {
         playerMap.FindAction("Move").performed -= OnMove;
         playerMap.FindAction("Move").canceled -= OnStopMove;
+
         playerMap.FindAction("EquipItem").started -= OnEquipItem;
         playerMap.FindAction("UseItem").started -= OnUseItem;
         playerMap.FindAction("Previous").started -= OnPreviousItem;
         playerMap.FindAction("Next").started -= OnNextItem;
         playerMap.FindAction("Pause").started -= OnPause;
+
         playerMap.Disable();
     }
 
@@ -94,5 +98,19 @@ public class PlayerInputController : MonoBehaviour
     public bool GetInputFire()
     {
         return fireAction != null && fireAction.IsPressed();
+    }
+
+    // Stick derecho (Vector2). Magnitud > 0.2f indica que se está apuntando con gamepad.
+    public Vector2 GetRightStickAim()
+    {
+        var gp = Gamepad.current;
+        return gp != null ? gp.rightStick.ReadValue() : Vector2.zero;
+    }
+
+    // Posición del puntero en pantalla (mouse/touchpad).
+    public Vector2 GetPointerScreenPosition()
+    {
+        var mouse = Mouse.current;
+        return mouse != null ? mouse.position.ReadValue() : Vector2.zero;
     }
 }

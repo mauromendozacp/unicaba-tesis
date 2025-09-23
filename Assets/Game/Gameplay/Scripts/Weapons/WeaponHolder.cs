@@ -7,7 +7,6 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField] private Transform weaponParent;
 
     private WeaponBase currentWeapon;
-
     public IWeapon CurrentWeapon => currentWeapon;
 
     private void Start()
@@ -33,6 +32,7 @@ public class WeaponHolder : MonoBehaviour
         {
             Destroy(currentWeapon.gameObject);
         }
+
         if (weaponParent == null)
         {
             weaponParent = transform.Find("Hand");
