@@ -99,7 +99,7 @@ public class ReviveController : MonoBehaviour
   {
     if (reviveEffectSphere != null) reviveEffectSphere.SetActive(true);
     if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(true);
-
+    reviveTimerText.text = ((int)(reviveTime)).ToString();
     float timer = reviveTime;
     int previousTimerInt = (int)Mathf.Ceil(timer);
     while (timer > 0f)
