@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 {
   [SerializeField] private float maxHealth = 100f;
   [SerializeField] private float invincibilityTime = 0.5f;
@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
   public bool IsAlive => currentHealth > 0;
   public bool IsDowned { get; private set; }
+  public bool IsRevivable => IsDowned;
 
   public event Action<float, IDamageable> OnDamaged;
   public event Action<float, float> OnUpdateLife;
@@ -88,5 +89,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     playerRenderer.material = originalMaterial;
     isInvincible = false;
+  }
+
+  public Vector3 GetPosition()
+  {
+    return transform.position;
   }
 }

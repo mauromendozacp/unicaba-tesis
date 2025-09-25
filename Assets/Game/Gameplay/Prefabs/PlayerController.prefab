@@ -289,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3273225196954518052
 Transform:
   m_ObjectHideFlags: 0
@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: -1477880225002385552}
   - component: {fileID: 5472234437480224036}
   - component: {fileID: 1200799538902002149}
+  - component: {fileID: 7567879441834714995}
   m_Layer: 3
   m_Name: PlayerController
   m_TagString: Player
@@ -464,8 +465,6 @@ MonoBehaviour:
   reviveTime: 10
   reviveAmount: 50
   reviveDetectRange: 2
-  reviveEffectSphere: {fileID: 4820101794760116565}
-  reviveTimerText: {fileID: 7882934652195191248}
 --- !u!114 &7299379270591168631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,6 +645,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13585ce521c11834e96c85f40e3e1299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7567879441834714995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212223590271132870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa8475d2712e0846bce83d9f4397ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveTime: 6
+  reviveDetectRange: 1.5
+  reviveAmount: 75
+  reviveEffectSphere: {fileID: 4820101794760116565}
+  reviveTimerText: {fileID: 7882934652195191248}
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0

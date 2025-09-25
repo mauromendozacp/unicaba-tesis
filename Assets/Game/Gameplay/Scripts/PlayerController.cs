@@ -19,20 +19,17 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float reviveAmount = 50f;
   [SerializeField] private float reviveDetectRange = 2f;
 
-  [Header("Revive Feedback")]
-  [SerializeField] private GameObject reviveEffectSphere;
-  [SerializeField] private TextMeshProUGUI reviveTimerText;
-
+  private ReviveController reviveController = null;
 
   private PlayerInputController inputController = null;
   private CharacterController characterController = null;
   private PlayerInventory inventory = null;
   private PlayerHealth playerHealth = null;
   private PlayerUI playerUI = null;
-  private PlayerSpawn playerSpawn = null;
-  private Coroutine reviveCoroutine = null;
-  private PlayerHealth targetToRevive = null;
-  bool isReviving = false;
+  //private PlayerSpawn playerSpawn = null;
+  //private Coroutine reviveCoroutine = null;
+  //private PlayerHealth targetToRevive = null;
+  //bool isReviving = false;
 
   private Vector3 velocity = Vector3.zero;
 
@@ -45,13 +42,14 @@ public class PlayerController : MonoBehaviour
     characterController = GetComponent<CharacterController>();
     inventory = GetComponent<PlayerInventory>();
     playerHealth = GetComponent<PlayerHealth>();
+    reviveController = GetComponent<ReviveController>();
 
     // weaponHolder puede estar en el mismo GameObject o como hijo
     if (weaponHolder == null)
       weaponHolder = GetComponentInChildren<WeaponHolder>();
 
-    if (reviveEffectSphere != null) reviveEffectSphere.SetActive(false);
-    if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(false);
+    //if (reviveEffectSphere != null) reviveEffectSphere.SetActive(false);
+    //if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(false);
   }
 
   private void Start()
@@ -69,12 +67,12 @@ public class PlayerController : MonoBehaviour
     playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
 
     inputController.onRevive += HandleReviveInput;
-    playerSpawn = FindFirstObjectByType<PlayerSpawn>();
+    //playerSpawn = FindFirstObjectByType<PlayerSpawn>();
   }
 
   private void Update()
   {
-    if (isReviving) return;
+    if (reviveController.IsReviving) return;
     Move();
     HandleFireInput();
   }
@@ -149,104 +147,13 @@ public class PlayerController : MonoBehaviour
 
     if (isPressed)
     {
-      if (reviveCoroutine == null)
-      {
-        targetToRevive = FindDownedTeammate();
-        if (targetToRevive != null)
-        {
-          Debug.Log("Iniciando revivir a " + targetToRevive.name);
-          reviveCoroutine = StartCoroutine(ReviveTeammateCoroutine());
-          if (reviveEffectSphere != null) reviveEffectSphere.SetActive(true);
-          if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(true);
-        }
-      }
+      reviveController.TryStartRevive();
     }
     else
     {
       // Si el botón se suelta, cancela el revivir
-      CancelRevive();
+      reviveController.CancelRevive();
     }
   }
 
-  private void CancelRevive()
-  {
-    if (reviveCoroutine != null)
-    {
-      StopCoroutine(reviveCoroutine);
-      reviveCoroutine = null;
-      // TODO: feedback visual o evento de cancelación
-    }
-    targetToRevive = null;
-    if (reviveEffectSphere != null) reviveEffectSphere.SetActive(false);
-    if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(false);
-    isReviving = false;
-  }
-
-  private PlayerHealth FindDownedTeammate()
-  {
-    /*
-    Collider[] hitColliders = Physics.OverlapSphere(transform.position, reviveDetectRange);
-
-    foreach (var hitCollider in hitColliders)
-    {
-      PlayerHealth teammateHealth = hitCollider.GetComponent<PlayerHealth>();
-      if (teammateHealth != null && teammateHealth != playerHealth && teammateHealth.IsDowned)
-      {
-        return teammateHealth;
-      }
-    }
-    return null;
-    */
-    PlayerHealth[] allPlayers = FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None);
-
-    foreach (var teammateHealth in allPlayers)
-    {
-      if (teammateHealth != null && teammateHealth != playerHealth && teammateHealth.IsDowned &&
-        Vector3.Distance(transform.position, teammateHealth.transform.position) <= reviveDetectRange)
-      {
-        return teammateHealth;
-      }
-    }
-    return null;
-  }
-
-  private IEnumerator ReviveTeammateCoroutine()
-  {
-    isReviving = true;
-    float timer = reviveTime;
-    int previousTimerInt = (int)Mathf.Ceil(timer);
-    while (timer > 0f)
-    {
-      int currentTimerInt = (int)Mathf.Ceil(timer);
-      if (reviveTimerText != null && currentTimerInt != previousTimerInt)
-      {
-        reviveTimerText.text = timer.ToString();
-        previousTimerInt = currentTimerInt;
-      }
-
-      if (targetToRevive == null || !targetToRevive.IsDowned)
-      {
-        Debug.Log("Revivir cancelado: Objetivo no válido.");
-        CancelRevive();
-        yield break; // Sale de la corrutina
-      }
-
-      Debug.Log("Reviviendo... " + timer + " / " + reviveTime);
-      timer -= Time.deltaTime;
-      yield return null;
-    }
-
-    if (targetToRevive != null)
-    {
-      targetToRevive.Revive(reviveAmount);
-      targetToRevive = null;
-    }
-    CancelRevive();
-  }
-
-  void OnDrawGizmosSelected()
-  {
-    Gizmos.color = Color.green;
-    Gizmos.DrawWireSphere(transform.position, reviveDetectRange);
-  }
 }
