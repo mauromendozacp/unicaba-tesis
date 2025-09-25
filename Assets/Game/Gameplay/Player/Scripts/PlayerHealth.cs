@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 {
   [SerializeField] private float maxHealth = 100f;
   [SerializeField] private float invincibilityTime = 0.5f;
@@ -15,25 +15,31 @@ public class PlayerHealth : MonoBehaviour, IDamageable
   private bool isInvincible = false;
   private Material originalMaterial;
   private Renderer playerRenderer;
-  private CharacterController characterController;
+  //private CharacterController characterController;
+  private PlayerInputController inputController;
 
   public bool IsAlive => currentHealth > 0;
+  public bool IsDowned { get; private set; }
+  public bool IsRevivable => IsDowned;
 
   public event Action<float, IDamageable> OnDamaged;
   public event Action<float, float> OnUpdateLife;
   public event Action<IDamageable> OnDeath;
+  public event Action<IDamageable> OnRevived;
 
   void Awake()
   {
     currentHealth = maxHealth;
     playerRenderer = GetComponentInChildren<Renderer>();
     originalMaterial = playerRenderer.material;
-    characterController = GetComponent<CharacterController>();
+    //characterController = GetComponent<CharacterController>();
+    inputController = GetComponent<PlayerInputController>();
+    IsDowned = false;
   }
 
   public void TakeDamage(float damage)
   {
-    if (isInvincible) return;
+    if (isInvincible || IsDowned) return;
 
     currentHealth -= damage;
     if (currentHealth < 0) currentHealth = 0;
@@ -50,15 +56,28 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
   private void Die()
   {
-    // Desactivar CharacterController
-    if (characterController != null)
+    if (inputController != null)
     {
-      characterController.enabled = false;
+      inputController.enabled = false;
     }
 
-    // Simular que el personaje está acostado
+    // Simular que el personaje está muerto
     transform.rotation = Quaternion.Euler(90, transform.rotation.y, transform.rotation.z);
+    IsDowned = true;
     OnDeath?.Invoke(this);
+  }
+
+  public void Revive(float healthRestored)
+  {
+    currentHealth = healthRestored;
+    if (inputController != null)
+    {
+      inputController.enabled = true;
+    }
+    transform.rotation = Quaternion.identity; // Devuelve la rotación normal
+    IsDowned = false;
+    OnRevived?.Invoke(this);
+    OnUpdateLife?.Invoke(currentHealth, maxHealth);
   }
 
   private IEnumerator DamageFeedbackCoroutine()
@@ -70,5 +89,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     playerRenderer.material = originalMaterial;
     isInvincible = false;
+  }
+
+  public Vector3 GetPosition()
+  {
+    return transform.position;
   }
 }
