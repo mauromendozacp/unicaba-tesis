@@ -31,7 +31,7 @@ public class WeaponPickup : MonoBehaviour
             var interactAction = playerInput.actions["Interact"];
             if (interactAction != null && interactAction.WasPressedThisFrame())
             {
-                GameObject weaponGO = Instantiate(weaponData.weaponPrefab, playerInRange.transform);
+                GameObject weaponGO = Instantiate(weaponData.Prefab, playerInRange.transform);
                 var weapon = weaponGO.GetComponent<WeaponBase>();
                 weapon.Init(weaponData);
                 playerInRange.EquipWeapon(weapon);

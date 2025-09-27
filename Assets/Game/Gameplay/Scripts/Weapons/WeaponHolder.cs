@@ -32,7 +32,7 @@ public class WeaponHolder : MonoBehaviour
     {
         if (defaultWeaponData != null)
         {
-            GameObject weaponGO = Instantiate(defaultWeaponData.weaponPrefab);
+            GameObject weaponGO = Instantiate(defaultWeaponData.Prefab);
             var weapon = weaponGO.GetComponent<WeaponBase>();
             weapon.Init(defaultWeaponData);
             EquipWeapon(weapon);

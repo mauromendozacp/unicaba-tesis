@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: MachineGun
   icon: {fileID: 21300000, guid: 77fed4e2f7785e748afbe67bc4699e8c, type: 3}
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  amount: 0
+  prefab: {fileID: 2254819947961644008, guid: b4d74c92fb78b97488e9083f2be25228, type: 3}
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
   damage: 8
   fireRate: 0.1
   maxAmmo: 200
   isDefault: 0
-  weaponPrefab: {fileID: 2254819947961644008, guid: b4d74c92fb78b97488e9083f2be25228, type: 3}

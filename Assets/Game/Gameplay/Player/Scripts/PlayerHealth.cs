@@ -95,4 +95,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   {
     return transform.position;
   }
+
+    public void IncreaseHealth(float increaseHealth)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + increaseHealth, 0, maxHealth);
+        OnUpdateLife?.Invoke(currentHealth, maxHealth);
+    }
 }

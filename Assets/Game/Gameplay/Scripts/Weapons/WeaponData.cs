@@ -8,15 +8,14 @@ public class WeaponData : ItemData
     public float fireRate;
     public int maxAmmo;
     public bool isDefault;
-    public GameObject weaponPrefab; // Prefab con WeaponBase
 
     public override void Use(GameObject user)
     {
         var holder = user.GetComponentInChildren<WeaponHolder>();
-        if (holder != null && weaponPrefab != null)
+        if (holder != null && Prefab != null)
         {
             // Instanciar el arma desde el prefab y inicializarla con este SO
-            var go = Instantiate(weaponPrefab);
+            var go = Instantiate(Prefab);
             var weapon = go.GetComponent<WeaponBase>();
             if (weapon != null)
             {
@@ -25,7 +24,7 @@ public class WeaponData : ItemData
             }
             else
             {
-                Debug.LogError($"[WeaponData] El prefab {weaponPrefab.name} no tiene un WeaponBase.");
+                Debug.LogError($"[WeaponData] El prefab {Prefab.name} no tiene un WeaponBase.");
                 Destroy(go);
             }
         }
