@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2254819947961644008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.03833, y: -108.71529, z: -123.37857}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,11 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7c58c370d805c4f9cd53e059f51b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  fireRate: 0.05
-  maxAmmo: 200
-  isDefault: 0
-  currentAmmo: 0
   projectilePool: {fileID: 5061561964523068716}
   muzzlePoint: {fileID: 4386165175058358930}
 --- !u!1 &3939557954115009905

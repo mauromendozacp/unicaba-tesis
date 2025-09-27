@@ -124,10 +124,21 @@ public class PlayerController : MonoBehaviour
     IEquipable itemEquipable = itemDetection.GetFirstItemDetection();
     if (itemEquipable != null)
     {
-      ItemData itemData = itemEquipable.GetItem();
-      inventory.EquipItem(itemEquipable.GetItem());
-      playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
-      itemEquipable.Equip();
+            if (itemEquipable.GetItem() is WeaponData)
+            {
+                WeaponData weaponData = itemEquipable.GetItem() as WeaponData;
+                GameObject weaponGO = Instantiate(weaponData.Prefab, weaponHolder.transform);
+                var weapon = weaponGO.GetComponent<WeaponBase>();
+                weapon.Init(weaponData);
+                weaponHolder.EquipWeapon(weapon);
+            }
+            else
+            {
+                ItemData itemData = itemEquipable.GetItem();
+                inventory.EquipItem(itemEquipable.GetItem());
+                playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
+            }
+            itemEquipable.Equip();
     }
   }
 
