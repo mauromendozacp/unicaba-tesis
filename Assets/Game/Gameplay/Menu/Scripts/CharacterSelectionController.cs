@@ -26,7 +26,7 @@ public class CharacterSelectionController : MonoBehaviour
 
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].Init(OnUpdatePlayersConfirm, GetCharacterSpriteByIndex);
+            slots[i].Init(OnUpdatePlayersConfirm, GetCharacterSpriteByIndex, playersData.Length);
         }
     }
 

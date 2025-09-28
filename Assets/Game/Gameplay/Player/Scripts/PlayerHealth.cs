@@ -61,8 +61,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
       inputController.enabled = false;
     }
 
-    // Simular que el personaje está muerto
-    transform.rotation = Quaternion.Euler(90, transform.rotation.y, transform.rotation.z);
     IsDowned = true;
     OnDeath?.Invoke(this);
   }

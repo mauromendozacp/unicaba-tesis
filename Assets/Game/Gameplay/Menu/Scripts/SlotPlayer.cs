@@ -19,10 +19,11 @@ public class SlotPlayer : MonoBehaviour
     public int CurrentCharacterIndex => currentCharacterIndex;
     public bool IsConfirm => isConfirm;
 
-    public void Init(Action onUpdateConfirm, Func<int, Sprite> onGetCharacterSpriteByIndex)
+    public void Init(Action onUpdateConfirm, Func<int, Sprite> onGetCharacterSpriteByIndex, int maxCharacters)
     {
         this.onUpdateConfirm = onUpdateConfirm;
         this.onGetCharacterSpriteByIndex = onGetCharacterSpriteByIndex;
+        this.maxCharacters = maxCharacters;
     }
 
     public void InitButtons()

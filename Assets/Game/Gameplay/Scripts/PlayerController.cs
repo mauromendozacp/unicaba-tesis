@@ -1,14 +1,12 @@
 using System;
 using UnityEngine;
-using System.Collections;
-using TMPro;
 
 [RequireComponent(typeof(PlayerInputController))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-  [Header("General Settings")]
-  [SerializeField] private float speed = 0f;
+    [Header("General Settings")]
+    [SerializeField] private PlayerData defaultPlayerData = null;
   [SerializeField] private PlayerItemDetection itemDetection = null;
 
   [Header("Weapon System")]
@@ -21,12 +19,16 @@ public class PlayerController : MonoBehaviour
   private PlayerInventory inventory = null;
   private PlayerHealth playerHealth = null;
   private PlayerUI playerUI = null;
-  //private PlayerSpawn playerSpawn = null;
-  //private Coroutine reviveCoroutine = null;
-  //private PlayerHealth targetToRevive = null;
-  //bool isReviving = false;
+    private PlayerAnimationController animationController = null;
+    //private PlayerSpawn playerSpawn = null;
+    //private Coroutine reviveCoroutine = null;
+    //private PlayerHealth targetToRevive = null;
+    //bool isReviving = false;
 
-  private Vector3 velocity = Vector3.zero;
+    private PlayerData data = null;
+
+    private float speed = 0f;
+    private Vector3 velocity = Vector3.zero;
 
   private Action onPause = null;
   //private InputAction fireAction;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     inventory = GetComponent<PlayerInventory>();
     playerHealth = GetComponent<PlayerHealth>();
     reviveController = GetComponent<ReviveController>();
+        animationController = GetComponentInChildren<PlayerAnimationController>();
 
     // weaponHolder puede estar en el mismo GameObject o como hijo
     if (weaponHolder == null)
@@ -60,8 +63,10 @@ public class PlayerController : MonoBehaviour
     playerUI?.ChangeSlot(inventory.SelectedIndex);
 
     playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
+        playerHealth.OnDeath += (player) => { animationController.ToggleDead(true); };
+        playerHealth.OnRevived += (player) => { animationController.ToggleDead(false); };
 
-    inputController.onRevive += HandleReviveInput;
+        inputController.onRevive += HandleReviveInput;
     //playerSpawn = FindFirstObjectByType<PlayerSpawn>();
   }
 
@@ -78,7 +83,20 @@ public class PlayerController : MonoBehaviour
     this.onPause = onPause;
 
     weaponHolder?.SetPlayerUI(playerUI);
-  }
+
+        if (data == null)
+        {
+            data = defaultPlayerData;
+        }
+
+        this.data = data;
+        GameObject playerPrefab = Instantiate(data.Prefab, transform);
+        playerPrefab.transform.SetPositionAndRotation(data.PositionOffset, Quaternion.identity);
+
+        this.playerUI.SetPlayerIcon(data.Icon);
+
+        speed = data.Speed;
+    }
 
   private void Move()
   {
@@ -87,6 +105,8 @@ public class PlayerController : MonoBehaviour
 
     Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
     characterController.Move(speed * Time.deltaTime * move);
+
+        animationController?.UpdateMoveAnimation(move);
 
     if (characterController.isGrounded && velocity.y < 0)
     {

@@ -12,21 +12,23 @@ public class PlayerSpawn : MonoBehaviour
 
     private Func<int, PlayerUI> onGetPlayerUI = null;
     private Action onPause = null;
+    private Action<int> onJoinPlayerUI = null;
 
     private PlayerData[] playersData = new PlayerData[4];
     private readonly List<PlayerInput> players = new List<PlayerInput>();
 
-    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause)
+    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action<int> onJoinPlayerUI)
     {
         this.onGetPlayerUI = onGetPlayerUI;
         this.onPause = onPause;
+        this.onJoinPlayerUI = onJoinPlayerUI;
 
         List<PlayerSelectionData> selectionPlayers = GameManager.Instance.GameDataManager.playersData;
         for (int i = 0; i < selectionPlayers.Count; i++)
         {
             var data = selectionPlayers[i];
-            playerInputManager.JoinPlayer(i, -1, data.controlScheme, data.device);
             playersData[i] = data.playerData;
+            playerInputManager.JoinPlayer(i, -1, data.controlScheme, data.device);
         }
     }
 
@@ -48,6 +50,8 @@ public class PlayerSpawn : MonoBehaviour
         }
 
         players.Add(playerInput);
+
+        onJoinPlayerUI?.Invoke(players.Count);
     }
 
     public void OnPlayerLeft(PlayerInput playerInput)

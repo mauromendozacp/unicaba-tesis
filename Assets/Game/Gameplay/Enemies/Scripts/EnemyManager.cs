@@ -6,7 +6,7 @@ using System;
 
 public class EnemyManager : MonoBehaviour
 {
-  public event Action<int> OnWavesStart;   // Pasa el número total de oleadas
+  public event Action<int, int> OnWavesStart;   // Pasa el número total de oleadas
   public event Action OnWaveStart;
   public event Action OnWavesEnd;
 
@@ -154,7 +154,7 @@ public class EnemyManager : MonoBehaviour
 
   IEnumerator StartWaves()
   {
-    OnWavesStart?.Invoke(waves.Count);
+    OnWavesStart?.Invoke(currentWaveIndex, waves.Count);
 
     for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
     {

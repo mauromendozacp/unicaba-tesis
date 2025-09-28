@@ -12,10 +12,10 @@ public class GameplayController : MonoBehaviour
         {
             TogglePause(true);
             gameplayUI.TogglePause(true);
-        });
+        }, gameplayUI.OnJoinPlayers);
 
         enemyManager.OnWaveStart += () => { gameplayUI.ToggleWave(true); };
-        //enemyManager.OnWavesStart += gameplayUI.OnUpdateWave(true);
+        enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
         enemyManager.OnWavesEnd += () => { gameplayUI.ToggleWave(false); };
     }
 
