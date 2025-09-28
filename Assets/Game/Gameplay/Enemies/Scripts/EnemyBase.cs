@@ -111,7 +111,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     if (parentPool != null)
     {
       OnDeath?.Invoke(this);
-      EnemyManager.Instance.OnEnemyKilled();
+      EnemyManager.Instance.OnEnemyKilled(transform.position);
       parentPool.Release(gameObject);
     }
     else

@@ -77,10 +77,10 @@ public class EnemyPrototype : EnemyBase
     }
   }
 
-  public void StopAllCoroutines()
+  /*public void StopAllCoroutines()
   {
     StopAllCoroutines();
-  }
+  }*/
 
   public void ChangeMaterial()
   {
@@ -117,7 +117,7 @@ public class EnemyPrototype : EnemyBase
     }
   }
 
-  public void Die()
+  public override void Die()
   {
     base.Die();
   }

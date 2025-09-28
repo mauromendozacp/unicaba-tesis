@@ -17,4 +17,6 @@ public class Wave : ScriptableObject
   public List<EnemySpawn> enemiesInWave;
   [Tooltip("Tiempo de espera para la siguiente oleada después de esta.")]
   public float cooldownTime;
+  [Tooltip("Cantidad de ítems que serán dropeados durante el transcurso de la oleada.")]
+  public int itemsToDropInWave;
 }
