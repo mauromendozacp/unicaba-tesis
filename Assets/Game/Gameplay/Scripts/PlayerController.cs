@@ -14,11 +14,6 @@ public class PlayerController : MonoBehaviour
   [Header("Weapon System")]
   [SerializeField] private WeaponHolder weaponHolder;
 
-  [Header("Revive Settings")]
-  [SerializeField] private float reviveTime = 10f;
-  [SerializeField] private float reviveAmount = 50f;
-  [SerializeField] private float reviveDetectRange = 2f;
-
   private ReviveController reviveController = null;
 
   private PlayerInputController inputController = null;
@@ -124,21 +119,21 @@ public class PlayerController : MonoBehaviour
     IEquipable itemEquipable = itemDetection.GetFirstItemDetection();
     if (itemEquipable != null)
     {
-            if (itemEquipable.GetItem() is WeaponData)
-            {
-                WeaponData weaponData = itemEquipable.GetItem() as WeaponData;
-                GameObject weaponGO = Instantiate(weaponData.Prefab, weaponHolder.transform);
-                var weapon = weaponGO.GetComponent<WeaponBase>();
-                weapon.Init(weaponData);
-                weaponHolder.EquipWeapon(weapon);
-            }
-            else
-            {
-                ItemData itemData = itemEquipable.GetItem();
-                inventory.EquipItem(itemEquipable.GetItem());
-                playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
-            }
-            itemEquipable.Equip();
+      if (itemEquipable.GetItem() is WeaponData)
+      {
+        WeaponData weaponData = itemEquipable.GetItem() as WeaponData;
+        GameObject weaponGO = Instantiate(weaponData.Prefab, weaponHolder.transform);
+        var weapon = weaponGO.GetComponent<WeaponBase>();
+        weapon.Init(weaponData);
+        weaponHolder.EquipWeapon(weapon);
+      }
+      else
+      {
+        ItemData itemData = itemEquipable.GetItem();
+        inventory.EquipItem(itemEquipable.GetItem());
+        playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
+      }
+      itemEquipable.Equip();
     }
   }
 

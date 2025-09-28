@@ -97,7 +97,7 @@ public class EnemyPrototype2 : EnemyBase
     }
   }
 
-  public void Die()
+  public override void Die()
   {
     base.Die();
   }

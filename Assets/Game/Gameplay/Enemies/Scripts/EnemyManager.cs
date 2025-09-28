@@ -140,7 +140,8 @@ public class EnemyManager : MonoBehaviour
 
   private void OnDestroyPoolObject(GameObject enemy)
   {
-    Destroy(enemy);
+    //Destroy(enemy);
+    DestroyImmediate(enemy);
   }
 
   IEnumerator StartWaves()

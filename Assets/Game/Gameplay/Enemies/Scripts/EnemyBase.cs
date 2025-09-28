@@ -104,7 +104,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  protected void Die()
+  public virtual void Die()
   {
     //OnDeath?.Invoke(this);
     //EnemyManager.Instance.OnEnemyKilled();
