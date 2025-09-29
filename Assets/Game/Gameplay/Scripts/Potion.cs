@@ -9,6 +9,7 @@ public class Potion : ItemData
 
     public override void Use(GameObject user)
     {
-        //aumentar la vida al jugador
+        PlayerHealth playerHealth = user.GetComponent<PlayerHealth>();
+        playerHealth.IncreaseHealth(heal);
     }
 }

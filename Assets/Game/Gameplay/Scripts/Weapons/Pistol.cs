@@ -6,14 +6,6 @@ public class Pistol : WeaponBase
     [SerializeField] private ProjectilePool projectilePool;
     [SerializeField] private Transform muzzlePoint;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        isDefault = true;
-        maxAmmo = -1; // -1 para munición infinita
-        currentAmmo = -1;
-    }
-
     private float nextFireTime = 0f;
 
     public override void Fire()

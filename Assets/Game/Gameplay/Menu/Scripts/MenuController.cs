@@ -73,6 +73,18 @@ public class MenuController : MonoBehaviour
 
     private void GoToGameplay()
     {
+        List<PlayerSelectionData> playersData = new List<PlayerSelectionData>();
+        for (int i = 0; i < players.Count; i++)
+        {
+            PlayerSelectionData data = new PlayerSelectionData();
+            int index = selectionController.Slots[i].CurrentCharacterIndex;
+            data.device = players[i].devices[0];
+            data.controlScheme = players[i].currentControlScheme;
+            data.playerData = selectionController.PlayerDatas[index];
+
+            GameManager.Instance.GameDataManager.playersData.Add(data);
+        }
+
         GameManager.Instance.ChangeScene(SceneGame.Gameplay);
     }
 }

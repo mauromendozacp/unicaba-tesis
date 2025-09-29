@@ -65,6 +65,6 @@ public class ItemController : MonoBehaviour
 
     private void OnDestroyItem(ItemWorld item)
     {
-        Destroy(item.gameObject);
+        Destroy(item?.gameObject);
     }
 }

@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    Debug.Log("Projectile hit: " + other.gameObject.name);
+    //Debug.Log("Projectile hit: " + other.gameObject.name);
     if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
     {
       var enemy = other.GetComponent<EnemyBase>();

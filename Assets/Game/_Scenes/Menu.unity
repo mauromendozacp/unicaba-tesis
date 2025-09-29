@@ -1840,6 +1840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersData:
   - {fileID: 11400000, guid: bf35f97ec330e064a989250dd6aea213, type: 2}
+  - {fileID: 11400000, guid: ad281277d5e73a84a817e9de77b813ba, type: 2}
   slots:
   - {fileID: 1616158189895227285}
   - {fileID: 1067946163}

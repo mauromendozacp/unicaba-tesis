@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187ac1c7beb42a743ae586132c8204f5, type: 3}
+  m_Name: Player_Roberta
+  m_EditorClassIdentifier: 
+  playerName: Roberta
+  maxLife: 500
+  speed: 5
+  icon: {fileID: 21300000, guid: 101fe3693a8bf5b41a55fd0bbc220448, type: 3}
+  prefab: {fileID: 7647134206250791342, guid: 850710d10cfdd814a8bd3f0836dec7a7, type: 3}
+  positionOffset: {x: 0, y: -1, z: 0}
