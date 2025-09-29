@@ -22,7 +22,8 @@ public class EnemyPrototype2 : EnemyBase
   {
     currentHealth = maxHealth;
     ChangeState(new Prototype2IdleState(this));
-    GetComponent<Collider>().enabled = true;
+    //GetComponent<Collider>().enabled = true;
+    EnableMovementAndCollisions();
   }
 
   protected override void Awake()
