@@ -894,10 +894,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -50
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 25
-  orthographic: 1
+  field of view: 45
+  orthographic: 0
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
@@ -1400,12 +1400,12 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 25
+    FieldOfView: 45
     OrthographicSize: 10
-    NearClipPlane: -50
+    NearClipPlane: 0.01
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 1
+    ModeOverride: 2
     PhysicalProperties:
       GateFit: 2
       SensorSize: {x: 21.946, y: 16.002}
