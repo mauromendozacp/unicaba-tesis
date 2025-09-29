@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 5472234437480224036}
   - component: {fileID: 1200799538902002149}
   - component: {fileID: 7567879441834714995}
+  - component: {fileID: 1050185694692027798}
   m_Layer: 3
   m_Name: PlayerController
   m_TagString: Player
@@ -659,6 +660,23 @@ MonoBehaviour:
   reviveAmount: 75
   reviveEffectSphere: {fileID: 4820101794760116565}
   reviveTimerText: {fileID: 7882934652195191248}
+--- !u!114 &1050185694692027798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212223590271132870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1953264ea672f243903efb1097a410d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  graphicsRoot: {fileID: 0}
+  fireRoot: {fileID: 0}
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0
