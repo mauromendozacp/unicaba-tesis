@@ -10,6 +10,9 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 move = Vector2.zero;
     private InputAction fireAction = null;
 
+    // 🆕 Nuevo campo
+    private InputAction lookAction = null;
+
     public Action onPause = null;
     public Action onEquipItem = null;
     public Action onUseItem = null;
@@ -21,6 +24,9 @@ public class PlayerInputController : MonoBehaviour
         inputAsset = GetComponent<PlayerInput>().actions;
         playerMap = inputAsset.FindActionMap("Player");
         fireAction = playerMap.FindAction("Fire");
+
+        // 🆕 Inicializamos la acción Look
+        lookAction = playerMap.FindAction("Look");
     }
 
     void OnEnable()
@@ -105,6 +111,12 @@ public class PlayerInputController : MonoBehaviour
     {
         var gp = Gamepad.current;
         return gp != null ? gp.rightStick.ReadValue() : Vector2.zero;
+    }
+
+    // 🆕 Nuevo método: usa la acción Look del Input System
+    public Vector2 GetLookInput()
+    {
+        return lookAction != null ? lookAction.ReadValue<Vector2>() : Vector2.zero;
     }
 
     // Posición del puntero en pantalla (mouse/touchpad).
