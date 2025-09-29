@@ -31,9 +31,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
   private Action onPause = null;
-  //private InputAction fireAction;
+    private Action onDeath = null;
 
-  private void Awake()
+    public PlayerHealth PlayerHealth => playerHealth;
+
+    //private InputAction fireAction;
+
+    private void Awake()
   {
     inputController = GetComponent<PlayerInputController>();
     characterController = GetComponent<CharacterController>();
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
         playerHealth.OnDeath += (player) => { animationController.ToggleDead(true); };
+        playerHealth.OnDeath += (player) => { onDeath?.Invoke(); };
         playerHealth.OnRevived += (player) => { animationController.ToggleDead(false); };
 
         inputController.onRevive += HandleReviveInput;
@@ -77,10 +82,11 @@ public class PlayerController : MonoBehaviour
     HandleFireInput();
   }
 
-  public void Init(PlayerUI playerUI, PlayerData data, Action onPause)
+  public void Init(PlayerUI playerUI, PlayerData data, Action onPause, Action onDeath)
   {
     this.playerUI = playerUI;
     this.onPause = onPause;
+        this.onDeath = onDeath;
 
     weaponHolder?.SetPlayerUI(playerUI);
 
