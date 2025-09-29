@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5449704309538813455
 Transform:
@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton head (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -161,6 +165,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
       propertyPath: m_Name
       value: Skeleton head (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -228,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton head (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -293,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
       propertyPath: m_Name
       value: Skeleton head (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -360,6 +376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton head (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -425,6 +445,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
       propertyPath: m_Name
       value: Skeleton head (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -492,6 +516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton head (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -558,6 +586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton head (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -623,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
       propertyPath: m_Name
       value: Skeleton head (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

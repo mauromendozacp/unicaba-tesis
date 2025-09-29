@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piso_Baldosas_1x2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83690d2e6923f6f4ab0ef9f0a9ab93ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

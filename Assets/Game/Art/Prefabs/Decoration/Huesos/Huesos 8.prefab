@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5449704309538813455
 Transform:
@@ -92,6 +92,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3894c56e999f75d4692357f26a2d02d2, type: 3}
       propertyPath: m_Name
       value: Skeleton_right_arm_B (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3894c56e999f75d4692357f26a2d02d2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -171,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton head
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072cf2089f5146240b82c93f04569893, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -236,6 +244,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f028d82e396133a4683ed429afca4b23, type: 3}
       propertyPath: m_Name
       value: Skeleton_right_leg_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f028d82e396133a4683ed429afca4b23, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -303,6 +315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_right_leg_A (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b5c622fa8ece9247a7a2e02e3a36497, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -369,6 +385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_pelvis_ribs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a0124b8ec294f0a4b886411a15b9d03e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -434,6 +454,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fbed94e5669665342b59fcbf3a96ce5e, type: 3}
       propertyPath: m_Name
       value: Skeleton_left_arm_B (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fbed94e5669665342b59fcbf3a96ce5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
