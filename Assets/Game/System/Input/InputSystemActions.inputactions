@@ -88,9 +88,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "271c6fef-fbeb-42cc-b399-e79f77ceec4e",
+                    "id": "829764cf-a670-47ec-afd3-4c553fdf9063",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -99,7 +99,7 @@
                 {
                     "name": "Accept",
                     "type": "Button",
-                    "id": "375fb133-aa2f-4a12-be3e-5745d797f58b",
+                    "id": "ca818c7e-c0e1-4413-aebd-a1f5fe81b32e",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -108,7 +108,25 @@
                 {
                     "name": "Back",
                     "type": "Button",
-                    "id": "2b259c65-4190-42a3-8988-3079787ec412",
+                    "id": "87baae9e-d0cd-4c27-b965-879220614a35",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "615cbf80-bcd7-410b-a2b1-053341f05c01",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Revive",
+                    "type": "Button",
+                    "id": "eba2bf77-1f13-4c1c-83d2-f194642c9468",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -503,51 +521,18 @@
                 },
                 {
                     "name": "",
-                    "id": "1ccba4d7-a83b-4bbe-8aa9-20ceb85d47c7",
-                    "path": "<Keyboard>/escape",
+                    "id": "1b74d053-0044-41db-ac2a-e401c98ae321",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Pause",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "66f470b2-66d6-4351-a31c-88d641c03b66",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5512daf4-bee2-4589-92b5-f51f8f2cc37d",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c4f50bcc-ad12-4749-bf3e-a42022789700",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accept",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a35e76ad-28d3-4a6b-860d-48b9cadd724c",
+                    "id": "cca1eaa6-848f-42e7-be83-e9375dfdbc22",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -558,8 +543,19 @@
                 },
                 {
                     "name": "",
-                    "id": "6a4bc9ea-2455-45d3-8a83-3c0a7fa50c1b",
-                    "path": "<Keyboard>/{Back}",
+                    "id": "a494e9e3-9a18-472a-a446-4d8e05485d3d",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accept",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b5bb70a-f9b5-4951-ae33-544cdd1a17df",
+                    "path": "<Keyboard>/backspace",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -569,12 +565,67 @@
                 },
                 {
                     "name": "",
-                    "id": "8cd3dcbc-bdeb-47e7-9194-7ecbe773ae47",
+                    "id": "738dfe89-f1c8-4b2c-ab63-ad3e14dc537b",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2e25a68-57e5-4eb7-a3e8-b00bb9e237b8",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07501d1e-8342-4259-9cac-1859e66c712d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63bc6e46-8b06-4d3e-a049-aa970acd2d94",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b34c04e-597a-43dd-9615-78bc7ce3d27a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Revive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53a8f618-3b0a-428b-9acc-078ea32b42f6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Revive",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

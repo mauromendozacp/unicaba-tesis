@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class WeaponPickup : MonoBehaviour
 {
-    [SerializeField] private WeaponBase weaponPrefab;
+    [SerializeField] private WeaponData weaponData;
 
     private WeaponHolder playerInRange;
     private PlayerInput playerInput;
@@ -31,7 +31,10 @@ public class WeaponPickup : MonoBehaviour
             var interactAction = playerInput.actions["Interact"];
             if (interactAction != null && interactAction.WasPressedThisFrame())
             {
-                playerInRange.EquipWeapon(weaponPrefab);
+                GameObject weaponGO = Instantiate(weaponData.Prefab, playerInRange.transform);
+                var weapon = weaponGO.GetComponent<WeaponBase>();
+                weapon.Init(weaponData);
+                playerInRange.EquipWeapon(weapon);
                 Destroy(gameObject);
             }
         }

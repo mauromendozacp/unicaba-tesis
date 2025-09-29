@@ -16,12 +16,14 @@ public class SlotPlayer : MonoBehaviour
     private Action onUpdateConfirm = null;
     private Func<int, Sprite> onGetCharacterSpriteByIndex = null;
 
+    public int CurrentCharacterIndex => currentCharacterIndex;
     public bool IsConfirm => isConfirm;
 
-    public void Init(Action onUpdateConfirm, Func<int, Sprite> onGetCharacterSpriteByIndex)
+    public void Init(Action onUpdateConfirm, Func<int, Sprite> onGetCharacterSpriteByIndex, int maxCharacters)
     {
         this.onUpdateConfirm = onUpdateConfirm;
         this.onGetCharacterSpriteByIndex = onGetCharacterSpriteByIndex;
+        this.maxCharacters = maxCharacters;
     }
 
     public void InitButtons()
@@ -35,7 +37,7 @@ public class SlotPlayer : MonoBehaviour
     {
         SetCharacter();
         ToggleChangeCharacters(true);
-        confirmBtn.interactable = true;
+        ToggleConfirm(true);
         onUpdateConfirm?.Invoke();
     }
 
@@ -67,6 +69,11 @@ public class SlotPlayer : MonoBehaviour
         ToggleChangeCharacters(!isConfirm);
 
         onUpdateConfirm?.Invoke();
+    }
+
+    public void ToggleConfirm(bool status)
+    {
+        confirmBtn.interactable = status;
     }
 
     private void SetCharacter()

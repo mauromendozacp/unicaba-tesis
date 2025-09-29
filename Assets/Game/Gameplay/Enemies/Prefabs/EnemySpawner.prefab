@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 401732453079664954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3890556, y: -0.15406556, z: -0.21345863}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,16 +47,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 9136665731692348206, guid: 1c8a2c55ccbcf0346aabad55a562ac71, type: 3}
-  poolInitialSize: 10
+  - {fileID: 3542624664555272393, guid: aa61a6b0c50728a4ba1464a89ade8069, type: 3}
+  waves:
+  - {fileID: 11400000, guid: c78efab314780304295540179c46f1fb, type: 2}
+  - {fileID: 11400000, guid: a5a3e1e29dcb8aa40ab5a9ddb19951d9, type: 2}
+  - {fileID: 11400000, guid: a0505ebd3cde89642b8507f7396d1789, type: 2}
   poolMaxSize: 20
   spawnCenters:
   - {fileID: 8852769364058859759}
   - {fileID: 3595457330897404071}
   - {fileID: 3057066273008267142}
   maxSpawnRadius: 2
-  initialEnemiesCount: 2
-  enemiesToAddPerWave: 1
-  waveCooldownTime: 2
 --- !u!1 &4066383602627456698
 GameObject:
   m_ObjectHideFlags: 0

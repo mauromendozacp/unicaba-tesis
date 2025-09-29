@@ -4,14 +4,19 @@ public class GameplayController : MonoBehaviour
 {
     [SerializeField] private GameplayUI gameplayUI = null;
     [SerializeField] private PlayerSpawn playerSpawn = null;
+    [SerializeField] private EnemyManager enemyManager = null;
 
     private void Awake()
     {
-        playerSpawn.Init(gameplayUI.GetPlayerUI, () => 
-        { 
+        playerSpawn.Init(gameplayUI.GetPlayerUI, () =>
+        {
             TogglePause(true);
             gameplayUI.TogglePause(true);
-        });
+        }, gameplayUI.OnJoinPlayers);
+
+        enemyManager.OnWaveStart += () => { gameplayUI.ToggleWave(true); };
+        enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
+        enemyManager.OnWavesEnd += () => { gameplayUI.ToggleWave(false); };
     }
 
     private void Start()

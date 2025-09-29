@@ -4,18 +4,23 @@ using UnityEngine;
 public class ItemWorld : MonoBehaviour, IEquipable
 {
     [SerializeField] private ItemData data = null;
-    [SerializeField] private MeshRenderer meshRenderer = null;
-    [SerializeField] private MeshFilter meshFilter = null;
 
     public ItemData Data => data;
     public Action<ItemWorld> onRelease = null;
+
+    private void Start()
+    {
+        if (data != null)
+        {
+            SetData(data);
+        }
+    }
 
     public void SetData(ItemData data)
     {
         this.data = data;
 
-        meshRenderer.material = data.Material;
-        meshFilter.mesh = data.Mesh;
+        GameObject item = Instantiate(data.Prefab, transform);
     }
 
     public void Get()

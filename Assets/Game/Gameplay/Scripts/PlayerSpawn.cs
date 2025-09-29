@@ -7,31 +7,51 @@ using UnityEngine.InputSystem;
 public class PlayerSpawn : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnLocations = null;
-    [SerializeField] public CinemachineTargetGroup targetGroup = null;
+    [SerializeField] private CinemachineTargetGroup targetGroup = null;
+    [SerializeField] private PlayerInputManager playerInputManager = null;
 
     private Func<int, PlayerUI> onGetPlayerUI = null;
     private Action onPause = null;
+    private Action<int> onJoinPlayerUI = null;
 
+    private PlayerData[] playersData = new PlayerData[4];
     private readonly List<PlayerInput> players = new List<PlayerInput>();
 
-    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause)
+    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action<int> onJoinPlayerUI)
     {
         this.onGetPlayerUI = onGetPlayerUI;
         this.onPause = onPause;
+        this.onJoinPlayerUI = onJoinPlayerUI;
+
+        List<PlayerSelectionData> selectionPlayers = GameManager.Instance.GameDataManager.playersData;
+        for (int i = 0; i < selectionPlayers.Count; i++)
+        {
+            var data = selectionPlayers[i];
+            playersData[i] = data.playerData;
+            playerInputManager.JoinPlayer(i, -1, data.controlScheme, data.device);
+        }
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         targetGroup.AddMember(playerInput.transform, 1f, 1f);
 
-        PlayerUI playerUI = onGetPlayerUI.Invoke(players.Count);
+        int index = players.Count;
+        PlayerUI playerUI = onGetPlayerUI.Invoke(index);
         if (playerUI != null)
         {
             PlayerController playerController = playerInput.GetComponent<PlayerController>();
-            playerController.Init(playerUI, onPause);
+            PlayerData data = playersData[index];
+
+            playerController.Init(playerUI, data, onPause);
+
+            Transform playerTransform = spawnLocations[index];
+            playerController.transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);
         }
 
         players.Add(playerInput);
+
+        onJoinPlayerUI?.Invoke(players.Count);
     }
 
     public void OnPlayerLeft(PlayerInput playerInput)
