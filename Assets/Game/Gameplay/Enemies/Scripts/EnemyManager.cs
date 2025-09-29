@@ -154,10 +154,11 @@ public class EnemyManager : MonoBehaviour
 
   IEnumerator StartWaves()
   {
-    OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
+    //OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
 
     for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
     {
+      OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
       OnWaveStart?.Invoke();
 
       yield return StartCoroutine(SpawnCurrentWave());
