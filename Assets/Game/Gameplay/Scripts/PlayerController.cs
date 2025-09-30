@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
   private Action onPause = null;
+  private Camera mainCam = null;
   //private InputAction fireAction;
 
   private void Awake()
@@ -40,11 +41,11 @@ public class PlayerController : MonoBehaviour
     inventory = GetComponent<PlayerInventory>();
     playerHealth = GetComponent<PlayerHealth>();
     reviveController = GetComponent<ReviveController>();
-        animationController = GetComponentInChildren<PlayerAnimationController>();
+    animationController = GetComponentInChildren<PlayerAnimationController>();
 
     // weaponHolder puede estar en el mismo GameObject o como hijo
-    if (weaponHolder == null)
-      weaponHolder = GetComponentInChildren<WeaponHolder>();
+        if (weaponHolder == null) weaponHolder = GetComponentInChildren<WeaponHolder>();
+        mainCam = Camera.main;
 
     //if (reviveEffectSphere != null) reviveEffectSphere.SetActive(false);
     //if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(false);
@@ -103,7 +104,12 @@ public class PlayerController : MonoBehaviour
     if (!characterController.enabled || !inputController.enabled) return;
     Vector2 moveInput = inputController.GetInputMove();
 
-    Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+    Vector3 f = mainCam != null ? mainCam.transform.forward : transform.forward;
+    Vector3 r = mainCam != null ? mainCam.transform.right : transform.right;
+    f.y = 0f; r.y = 0f;
+    f.Normalize(); r.Normalize();
+
+    Vector3 move = r * moveInput.x + f * moveInput.y;
     characterController.Move(speed * Time.deltaTime * move);
 
         animationController?.UpdateMoveAnimation(move);
