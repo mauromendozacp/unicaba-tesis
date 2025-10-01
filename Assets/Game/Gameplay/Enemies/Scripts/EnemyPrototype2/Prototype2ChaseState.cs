@@ -15,7 +15,7 @@ public class Prototype2ChaseState : IEnemyState
   public void Enter()
   {
     enemy.ChangeMaterial();
-    enemy.ActiveMovement();
+    //enemy.ActiveMovement();
   }
 
   public void Update()

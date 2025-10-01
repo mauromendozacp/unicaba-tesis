@@ -46,6 +46,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   private IObjectPool<GameObject> parentPool;
 
   protected NavMeshAgent agent;
+  protected Collider selfCollider;
+
+  private Collider[] hitColliders = new Collider[4]; // Array pre-asignado
 
   protected virtual void Awake()
   {
@@ -53,6 +56,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     currentHealth = maxHealth;
     rb = GetComponent<Rigidbody>();
     agent = GetComponent<NavMeshAgent>();
+    selfCollider = GetComponent<Collider>();
 
     if (agent != null)
     {
@@ -96,6 +100,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   {
     if (agent != null && agent.enabled && agent.isOnNavMesh)
     {
+      agent.isStopped = false;
       agent.SetDestination(targetPosition);
     }
   }
@@ -108,26 +113,35 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  public void ActiveMovement()
-  {
-    if (agent != null && agent.enabled && agent.isOnNavMesh)
+  /*
+    public void ActiveMovement()
     {
-      agent.isStopped = false;
+      if (agent != null && agent.enabled && agent.isOnNavMesh)
+      {
+        agent.isStopped = false;
+      }
     }
-  }
+    */
 
-  void OnCollisionEnter(Collision collision)
-  {
-    ResetKnockbackForce();
-  }
+  /*
+    void OnCollisionEnter(Collision collision)
+    {
+      //ResetKnockbackForce();
+      if (currentState.State == EnemyState.Damaged)
+      {
+        ResetKnockbackForce();
+      }
+    }
+    */
 
   // Métodos para aplicar y resetear la fuerza de retroceso al recibir el disparo
   public void ApplyKnockbackForce()
   {
-    if (agent != null)
+    DisableMovementAndCollisions();
+    /*if (agent != null)
     {
       agent.enabled = false; // Desactivar agente para permitir la física de knockback
-    }
+    }*/
     if (rb != null)
     {
       rb.isKinematic = false; // Asegurar que el Rigidbody pueda recibir la fuerza
@@ -150,12 +164,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
       agent.isStopped = false; // Asegurarse de que pueda volver a moverse
                                // Al reactivar, el estado Chase o Idle se encargará de darle un nuevo destino
     }
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = true;
+    }
   }
 
   public virtual void Die()
   {
     //OnDeath?.Invoke(this);
     //EnemyManager.Instance.OnEnemyKilled();
+    // TODO: Obtimizar la mamera en que se informa cuando un enemigo muere
     if (parentPool != null)
     {
       OnDeath?.Invoke(this);
@@ -170,42 +189,70 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
   public void DisableMovementAndCollisions()
   {
-    // Desactivar el NavMeshAgent para que no interfiera con el transform/rotación
     if (agent != null)
     {
+      agent.isStopped = true;
       agent.enabled = false;
     }
 
-    // Si el Rigidbody se utiliza para la física (aunque sea cinemático), 
-    // lo mejor es desactivar temporalmente la cinemática o el Rigidbody entero si el agente no está.
-    if (rb != null)
+    if (selfCollider != null)
     {
-      rb.isKinematic = false;
-      rb.linearVelocity = Vector3.zero;
-      rb.angularVelocity = Vector3.zero;
-      rb.isKinematic = true;
+      selfCollider.enabled = false;
     }
-
-    // Desactivar el Collider (esto lo haces en DeathState, pero es buena práctica tenerlo aquí si es común)
-    GetComponent<Collider>().enabled = false;
   }
+
+
 
   public void EnableMovementAndCollisions()
   {
-    if (agent != null)
-    {
-      agent.enabled = true;
-    }
-
     if (rb != null)
     {
       rb.isKinematic = false;
       rb.linearVelocity = Vector3.zero;
       rb.angularVelocity = Vector3.zero;
       rb.isKinematic = true;
-
     }
 
-    GetComponent<Collider>().enabled = true;
+    if (agent != null)
+    {
+      agent.enabled = true;
+      agent.isStopped = false;
+    }
+
+    selfCollider.enabled = true;
+  }
+
+
+  public Transform FindNearestPlayer()
+  {
+    // Filtrado eficiente
+    int numColliders = Physics.OverlapSphereNonAlloc(transform.position, chaseRadius, hitColliders, LayerMask.GetMask("Player"));
+
+    Transform closestTarget = null;
+    float minSqrDistance = float.MaxValue;
+
+    for (int i = 0; i < numColliders; i++)
+    {
+      IDamageable damageable = hitColliders[i].GetComponent<IDamageable>();
+      if (damageable == null || !damageable.IsAlive) continue;
+
+      Transform target = hitColliders[i].transform;
+
+      Vector3 directionToTarget = target.position - transform.position;
+      float sqrDistance = directionToTarget.sqrMagnitude;
+
+      if (sqrDistance < minSqrDistance)
+      {
+        minSqrDistance = sqrDistance;
+        closestTarget = target;
+      }
+    }
+
+    return closestTarget;
+  }
+
+  public float DistanceToTarget()
+  {
+    return Vector3.Distance(transform.position, CurrentTarget.position);
   }
 }
