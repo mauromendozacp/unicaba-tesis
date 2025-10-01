@@ -3455,8 +3455,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 401732453079664954, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: itemController
+      value: 
+      objectReference: {fileID: 1379630335}
     - target: {fileID: 3647418348432644899, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3533,7 +3537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayUI: {fileID: 2023444855}
   playerSpawn: {fileID: 365923550}
-  enemyManager: {fileID: 0}
+  enemyManager: {fileID: 1615395837}
 --- !u!4 &1103809651
 Transform:
   m_ObjectHideFlags: 0
@@ -3810,8 +3814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableItems:
   - {fileID: 11400000, guid: c1d7d1a15dc64f74abf6e27386d27576, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 816c8970dbc0c3d4585b582ac0d59401, type: 2}
+  - {fileID: 11400000, guid: 6341e8180b86e2445a90579e14e149c5, type: 2}
   prefab: {fileID: 4800167373160257259, guid: 84a507a5941982547b8fd575c47d6c91, type: 3}
 --- !u!4 &1379630336
 Transform:
@@ -4362,6 +4366,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84a507a5941982547b8fd575c47d6c91, type: 3}
+--- !u!114 &1615395837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+  m_PrefabInstance: {fileID: 1053792232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b37a701571dc834f9fbcf9300402e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1632144390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,9 +4796,9 @@ MonoBehaviour:
   menuBtn: {fileID: 2113034872}
   wavePanel: {fileID: 1632144390}
   waveText: {fileID: 1540407882}
-  hudPanel: {fileID: 0}
-  losePanel: {fileID: 0}
-  winPanel: {fileID: 0}
+  hudPanel: {fileID: 686695056}
+  losePanel: {fileID: 350795879}
+  winPanel: {fileID: 2052507867}
 --- !u!114 &2023444856
 MonoBehaviour:
   m_ObjectHideFlags: 0
