@@ -54,6 +54,17 @@ public class GameplayUI : MonoBehaviour
         return null;
     }
 
+    public void OnJoinPlayers(int playersCount)
+    {
+        for (int i = 0; i < playersCount; i++)
+        {
+            if (playersCount < players.Length)
+            {
+                players[i].gameObject.SetActive(true);
+            }
+        }
+    }
+
     public void OpenLosePanel()
     {
         hudPanel.SetActive(false);

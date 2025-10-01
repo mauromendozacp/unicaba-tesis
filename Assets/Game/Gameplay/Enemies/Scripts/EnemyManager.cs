@@ -6,7 +6,7 @@ using System;
 
 public class EnemyManager : MonoBehaviour
 {
-  public event Action<int> OnWavesStart;   // Pasa el número total de oleadas
+  public event Action<int, int> OnWavesStart;   // Pasa el número total de oleadas
   public event Action OnWaveStart;
   public event Action OnWavesEnd;
 
@@ -26,12 +26,16 @@ public class EnemyManager : MonoBehaviour
   [Tooltip("El radio máximo desde un centro donde se puede instanciar un enemigo.")]
   public float maxSpawnRadius = 5f;
 
+  [Header("Controller to drop items")]
+  [SerializeField] ItemController itemController;
+
   private Dictionary<string, GameObject> enemyPrefabDict;
   //private IObjectPool<GameObject> enemyPool;
   private Dictionary<string, IObjectPool<GameObject>> enemyPoolDict;
   private int currentWaveIndex = 0;
   private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
+  private List<int> dropIndices;
 
   public static EnemyManager Instance;
 
@@ -59,6 +63,10 @@ public class EnemyManager : MonoBehaviour
 
   void Start()
   {
+    if (itemController == null)
+    {
+      itemController = FindFirstObjectByType<ItemController>();
+    }
     InitializePool();
     StartCoroutine(StartWaves());
   }
@@ -140,15 +148,17 @@ public class EnemyManager : MonoBehaviour
 
   private void OnDestroyPoolObject(GameObject enemy)
   {
-    Destroy(enemy);
+    //Destroy(enemy);
+    DestroyImmediate(enemy);
   }
 
   IEnumerator StartWaves()
   {
-    OnWavesStart?.Invoke(waves.Count);
+    //OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
 
     for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
     {
+      OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
       OnWaveStart?.Invoke();
 
       yield return StartCoroutine(SpawnCurrentWave());
@@ -175,6 +185,26 @@ public class EnemyManager : MonoBehaviour
     }
 
     enemiesAlive = enemiesToSpawnInCurrentWave;
+
+    dropIndices = new List<int>();
+    int itemsToDrop = currentWave.itemsToDropInWave;
+
+    if (itemsToDrop > 0 && enemiesToSpawnInCurrentWave > 0)
+    {
+      int actualDrops = Mathf.Min(itemsToDrop, enemiesToSpawnInCurrentWave);
+      List<int> allIndices = new List<int>();
+      for (int i = 1; i <= enemiesToSpawnInCurrentWave; i++)
+      {
+        allIndices.Add(i);
+      }
+      for (int i = 0; i < actualDrops; i++)
+      {
+        int randomIndex = UnityEngine.Random.Range(0, allIndices.Count);
+        dropIndices.Add(allIndices[randomIndex]);
+        allIndices.RemoveAt(randomIndex);
+      }
+      dropIndices.Sort();
+    }
 
     foreach (var enemySpawn in currentWave.enemiesInWave)
     {
@@ -229,8 +259,22 @@ public class EnemyManager : MonoBehaviour
     return selectedCenter.position + new Vector3(randomCircle.x, 1.2f, randomCircle.y);
   }
 
-  public void OnEnemyKilled()
+  public void OnEnemyKilled(Vector3 enemyPosition)
   {
     enemiesAlive--;
+    if (enemiesAlive >= 0)
+    {
+      int currentKillIndex = enemiesToSpawnInCurrentWave - enemiesAlive;
+      if (dropIndices != null && dropIndices.Contains(currentKillIndex))
+      {
+        // dropIndices.Remove(currentKillIndex); 
+        if (itemController != null)
+        {
+          Vector3 itemPosition = new Vector3(enemyPosition.x, 1, enemyPosition.z);
+          itemController.SpawnRandomItem(itemPosition);
+          //Debug.Log($"Item dropped at kill index {currentKillIndex} at position {itemPosition} and wave {currentWaveIndex + 1}");
+        }
+      }
+    }
   }
 }

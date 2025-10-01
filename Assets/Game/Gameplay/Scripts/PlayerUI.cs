@@ -19,7 +19,6 @@ public class PlayerUI : MonoBehaviour
         playerImage.sprite = icon;
     }
 
-
     public void SetGunIcon(Sprite icon)
     {
         if (gunImage != null)

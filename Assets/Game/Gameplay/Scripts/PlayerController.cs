@@ -1,23 +1,16 @@
 using System;
 using UnityEngine;
-using System.Collections;
-using TMPro;
 
 [RequireComponent(typeof(PlayerInputController))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-  [Header("General Settings")]
-  [SerializeField] private float speed = 0f;
+    [Header("General Settings")]
+    [SerializeField] private PlayerData defaultPlayerData = null;
   [SerializeField] private PlayerItemDetection itemDetection = null;
 
   [Header("Weapon System")]
   [SerializeField] private WeaponHolder weaponHolder;
-
-  [Header("Revive Settings")]
-  [SerializeField] private float reviveTime = 10f;
-  [SerializeField] private float reviveAmount = 50f;
-  [SerializeField] private float reviveDetectRange = 2f;
 
   private ReviveController reviveController = null;
 
@@ -26,27 +19,39 @@ public class PlayerController : MonoBehaviour
   private PlayerInventory inventory = null;
   private PlayerHealth playerHealth = null;
   private PlayerUI playerUI = null;
-  //private PlayerSpawn playerSpawn = null;
-  //private Coroutine reviveCoroutine = null;
-  //private PlayerHealth targetToRevive = null;
-  //bool isReviving = false;
+    private PlayerAnimationController animationController = null;
+    //private PlayerSpawn playerSpawn = null;
+    //private Coroutine reviveCoroutine = null;
+    //private PlayerHealth targetToRevive = null;
+    //bool isReviving = false;
 
-  private Vector3 velocity = Vector3.zero;
+    private PlayerData data = null;
 
-  private Action onPause = null;
-  //private InputAction fireAction;
+    private float speed = 0f;
+    private Vector3 velocity = Vector3.zero;
 
-  private void Awake()
+    private Action onPause = null;
+    private Camera mainCam = null;
+    //private InputAction fireAction;
+    private Action onDeath = null;
+
+    public PlayerHealth PlayerHealth => playerHealth;
+
+    //private InputAction fireAction;
+
+    private void Awake()
   {
     inputController = GetComponent<PlayerInputController>();
     characterController = GetComponent<CharacterController>();
     inventory = GetComponent<PlayerInventory>();
     playerHealth = GetComponent<PlayerHealth>();
     reviveController = GetComponent<ReviveController>();
+    animationController = GetComponentInChildren<PlayerAnimationController>();
 
     // weaponHolder puede estar en el mismo GameObject o como hijo
     if (weaponHolder == null)
       weaponHolder = GetComponentInChildren<WeaponHolder>();
+    mainCam = Camera.main;
 
     //if (reviveEffectSphere != null) reviveEffectSphere.SetActive(false);
     //if (reviveTimerText != null) reviveTimerText.gameObject.SetActive(false);
@@ -65,8 +70,11 @@ public class PlayerController : MonoBehaviour
     playerUI?.ChangeSlot(inventory.SelectedIndex);
 
     playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
+        playerHealth.OnDeath += (player) => { animationController.ToggleDead(true); };
+        playerHealth.OnDeath += (player) => { onDeath?.Invoke(); };
+        playerHealth.OnRevived += (player) => { animationController.ToggleDead(false); };
 
-    inputController.onRevive += HandleReviveInput;
+        inputController.onRevive += HandleReviveInput;
     //playerSpawn = FindFirstObjectByType<PlayerSpawn>();
   }
 
@@ -77,21 +85,43 @@ public class PlayerController : MonoBehaviour
     HandleFireInput();
   }
 
-  public void Init(PlayerUI playerUI, PlayerData data, Action onPause)
+  public void Init(PlayerUI playerUI, PlayerData data, Action onPause, Action onDeath)
   {
     this.playerUI = playerUI;
     this.onPause = onPause;
+        this.onDeath = onDeath;
 
     weaponHolder?.SetPlayerUI(playerUI);
-  }
+
+        if (data == null)
+        {
+            data = defaultPlayerData;
+        }
+
+        this.data = data;
+        GameObject playerPrefab = Instantiate(data.Prefab, transform);
+        playerPrefab.transform.SetPositionAndRotation(data.PositionOffset, Quaternion.identity);
+
+        this.playerUI.SetPlayerIcon(data.Icon);
+
+        speed = data.Speed;
+    }
 
   private void Move()
   {
     if (!characterController.enabled || !inputController.enabled) return;
     Vector2 moveInput = inputController.GetInputMove();
 
-    Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+    Vector3 f = mainCam != null ? mainCam.transform.forward : transform.forward;
+    Vector3 r = mainCam != null ? mainCam.transform.right : transform.right;
+    f.y = 0f; r.y = 0f;
+    f.Normalize(); r.Normalize();
+
+    Vector3 move = r * moveInput.x + f * moveInput.y;
+    
     characterController.Move(speed * Time.deltaTime * move);
+
+        animationController?.UpdateMoveAnimation(move);
 
     if (characterController.isGrounded && velocity.y < 0)
     {
@@ -124,21 +154,21 @@ public class PlayerController : MonoBehaviour
     IEquipable itemEquipable = itemDetection.GetFirstItemDetection();
     if (itemEquipable != null)
     {
-            if (itemEquipable.GetItem() is WeaponData)
-            {
-                WeaponData weaponData = itemEquipable.GetItem() as WeaponData;
-                GameObject weaponGO = Instantiate(weaponData.Prefab, weaponHolder.transform);
-                var weapon = weaponGO.GetComponent<WeaponBase>();
-                weapon.Init(weaponData);
-                weaponHolder.EquipWeapon(weapon);
-            }
-            else
-            {
-                ItemData itemData = itemEquipable.GetItem();
-                inventory.EquipItem(itemEquipable.GetItem());
-                playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
-            }
-            itemEquipable.Equip();
+      if (itemEquipable.GetItem() is WeaponData)
+      {
+        WeaponData weaponData = itemEquipable.GetItem() as WeaponData;
+        GameObject weaponGO = Instantiate(weaponData.Prefab, weaponHolder.transform);
+        var weapon = weaponGO.GetComponent<WeaponBase>();
+        weapon.Init(weaponData);
+        weaponHolder.EquipWeapon(weapon);
+      }
+      else
+      {
+        ItemData itemData = itemEquipable.GetItem();
+        inventory.EquipItem(itemEquipable.GetItem());
+        playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
+      }
+      itemEquipable.Equip();
     }
   }
 

@@ -56,6 +56,7 @@ public class AttackState : IEnemyState
 
   public void Exit()
   {
+    //enemy.ActiveMovement();
     enemy.SetAttackCollider(false);
   }
 }

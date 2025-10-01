@@ -15,8 +15,9 @@ public class DeathState : IEnemyState
 
   public void Enter()
   {
+    enemy.DisableMovementAndCollisions();
     enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, enemy.transform.rotation.z);
-    enemy.GetComponent<Collider>().enabled = false;
+    //enemy.GetComponent<Collider>().enabled = false;
     enemy.StartCoroutine(DieCoroutine());
   }
 

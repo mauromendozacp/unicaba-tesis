@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameplayController : MonoBehaviour
@@ -12,16 +13,31 @@ public class GameplayController : MonoBehaviour
         {
             TogglePause(true);
             gameplayUI.TogglePause(true);
-        });
+        },
+        OnPlayerDeath, gameplayUI.OnJoinPlayers);
 
         enemyManager.OnWaveStart += () => { gameplayUI.ToggleWave(true); };
-        //enemyManager.OnWavesStart += gameplayUI.OnUpdateWave(true);
+        enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
         enemyManager.OnWavesEnd += () => { gameplayUI.ToggleWave(false); };
     }
 
     private void Start()
     {
         gameplayUI.Init(() => { TogglePause(false); }, GoToMenu);
+    }
+
+    private void OnPlayerDeath()
+    {
+        List<PlayerController> players = playerSpawn.GetPlayers();
+        for(int i = 0; i < players.Count; i++)
+        {
+            if (players[i].PlayerHealth.IsAlive)
+            {
+                return;
+            }
+        }
+
+        gameplayUI.OpenLosePanel();
     }
 
     private void TogglePause(bool status)

@@ -31,7 +31,7 @@ public class DamagedState : IEnemyState
   private IEnumerator ReturnToPreviousState()
   {
     yield return new WaitForSeconds(1f);
-    if (enemy.CurrentTarget != null)
+    /*if (enemy.CurrentTarget != null)
     {
       enemy.ChangeState(new ChaseState(enemy));
     }
@@ -39,6 +39,8 @@ public class DamagedState : IEnemyState
     {
       enemy.ChangeState(new IdleState(enemy));
     }
+    */
+    enemy.ChangeState(new IdleState(enemy));
   }
 }
 

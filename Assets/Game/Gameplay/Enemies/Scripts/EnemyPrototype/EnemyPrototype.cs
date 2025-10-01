@@ -20,7 +20,8 @@ public class EnemyPrototype : EnemyBase
   {
     currentHealth = maxHealth;
     ChangeState(new IdleState(this));
-    GetComponent<Collider>().enabled = true;
+    //GetComponent<Collider>().enabled = true;
+    EnableMovementAndCollisions();
   }
 
   protected override void Awake()
@@ -77,10 +78,10 @@ public class EnemyPrototype : EnemyBase
     }
   }
 
-  public void StopAllCoroutines()
+  /*public void StopAllCoroutines()
   {
     StopAllCoroutines();
-  }
+  }*/
 
   public void ChangeMaterial()
   {
@@ -117,7 +118,7 @@ public class EnemyPrototype : EnemyBase
     }
   }
 
-  public void Die()
+  public override void Die()
   {
     base.Die();
   }
