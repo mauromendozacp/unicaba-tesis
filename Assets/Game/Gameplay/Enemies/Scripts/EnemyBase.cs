@@ -22,14 +22,21 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   [SerializeField] float moveSpeed = 4f;
   public float currentSpeed;
   public float CurrentSpeed => currentSpeed;
+
+
+  public float AttackCooldown => attackCooldown;
+
+  [SerializeField] float knockbackForceMultiplier = 0.5f;
+
+  [Header("Attack Settings")]
+  [SerializeField] protected Collider attackCollider;
+  [SerializeField] protected float attackDamage = 40f;
+  [SerializeField] protected float attackCooldown = 1f;
+
   [SerializeField] float attackRange = 2f;
   public float AttackRange => attackRange;
   [SerializeField] float chaseRadius = 10f;
   public float ChaseRadius => chaseRadius;
-  [SerializeField] float attackCooldown = 1f;
-  public float AttackCooldown => attackCooldown;
-
-  [SerializeField] float knockbackForceMultiplier = 0.5f;
 
   private Rigidbody rb;
   protected float lastDamage;

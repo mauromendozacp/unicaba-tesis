@@ -12,9 +12,6 @@ public class EnemyPrototype : EnemyBase
   [SerializeField] Material damagedMaterial;
   Material originalMaterial;
 
-  [Header("Attack Settings")]
-  [SerializeField] private Collider attackCollider;
-  [SerializeField] private float attackDamage = 40f;
 
   void OnEnable()
   {

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SpiderEnemy : EnemyBase
 {
-  [Header("Attack Settings")]
-  [SerializeField] private Collider attackCollider;
-  [SerializeField] private float attackDamage = 40f;
+  //[Header("Attack Settings")]
+  //[SerializeField] private Collider attackCollider;
+  //[SerializeField] private float attackDamage = 40f;
 
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
