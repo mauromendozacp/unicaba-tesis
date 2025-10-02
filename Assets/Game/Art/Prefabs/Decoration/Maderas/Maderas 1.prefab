@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4947588392556752065}
+  - component: {fileID: 2215242569797155395}
   m_Layer: 0
   m_Name: Maderas 1
   m_TagString: Untagged
@@ -36,6 +37,27 @@ Transform:
   - {fileID: 8928193877258658969}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2215242569797155395
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6497032727152711966}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.425653, y: 1, z: 1.9445219}
+  m_Center: {x: 0.010170061, y: 0, z: 0.3275503}
 --- !u!1001 &909426906527490242
 PrefabInstance:
   m_ObjectHideFlags: 0

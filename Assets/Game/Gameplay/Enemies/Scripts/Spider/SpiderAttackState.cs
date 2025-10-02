@@ -51,7 +51,7 @@ public class SpiderAttackState : IEnemyState
     }
 
     // Activa el collider del ataque durante un breve periodo (depende del tiempo de la animación)
-    enemy.StartCoroutine(ActivateAttackColliderForTime(0.3f));
+    enemy.StartCoroutine(ActivateAttackColliderForTime(0.5f));
   }
 
   private IEnumerator ActivateAttackColliderForTime(float duration)

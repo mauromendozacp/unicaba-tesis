@@ -400,10 +400,12 @@ MonoBehaviour:
   maxHealth: 30
   moveSpeed: 4
   currentSpeed: 0
+  knockbackForceMultiplier: 0.5
+  attackCollider: {fileID: 0}
+  attackDamage: 40
+  attackCooldown: 1
   attackRange: 2
   chaseRadius: 60
-  attackCooldown: 1
-  knockbackForceMultiplier: 0.5
   horns: {fileID: 7323482280122064140}
   idleMaterial: {fileID: 2100000, guid: e1a9edba81bf2c0478781fd2f9bdd225, type: 2}
   chaseMaterial: {fileID: 2100000, guid: 2f01972d3f2b9d64ebb1156273a7cc04, type: 2}
@@ -412,7 +414,7 @@ MonoBehaviour:
   fireBallPrefab: {fileID: 6288021988018342856, guid: 323aa300805dd074cacf10ae575a78f3, type: 3}
   firePoint: {fileID: 8988164921998392177}
   fireBallSpeed: 8
-  attackDistance: 12
+  attackDistance: 10
 --- !u!195 &4304732641537292731
 NavMeshAgent:
   m_ObjectHideFlags: 0
