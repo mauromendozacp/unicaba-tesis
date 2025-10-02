@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3703c7c87ea85df498b04ab915060c30, type: 3}
   m_Name: Llave_Puerta_lvl_1
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  itemName: Llave puerta 1
+  icon: {fileID: 21300000, guid: f33e3539333e53b4191cae88a95db23b, type: 3}
+  prefab: {fileID: 3271835021359982296, guid: 03e4e6ec1ef251e4e9f717086ba5f193, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
-  doorId: 
+  doorId: 1

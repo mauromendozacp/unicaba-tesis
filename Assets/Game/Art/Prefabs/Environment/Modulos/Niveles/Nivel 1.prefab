@@ -81,13 +81,11 @@ MonoBehaviour:
   itemWorldPrefab: {fileID: 4800167373160257259, guid: 84a507a5941982547b8fd575c47d6c91, type: 3}
   itemSpawnSettings:
   - Name: Llave
-    Prefab: {fileID: 3271835021359982296, guid: 03e4e6ec1ef251e4e9f717086ba5f193, type: 3}
     ItemData: {fileID: 11400000, guid: fea36c219a2e30144b9cca3164686c05, type: 2}
     SpawnPositions:
     - {x: 0.4915738, y: 0, z: 6.1521845}
     - {x: 2.9497528, y: 0, z: 7.1830864}
     - {x: -1.1882294, y: 0, z: 3.5571966}
-    - {x: -0.79288936, y: 0, z: 6.4596887}
     RespawnTime: 0
 --- !u!1 &8145406138262247544
 GameObject:

@@ -3111,7 +3111,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wave 1/3
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 557d65860a4a9204e8a310ff3cef17f4, type: 2}
   m_sharedMaterial: {fileID: 5182549272632911163, guid: 557d65860a4a9204e8a310ff3cef17f4, type: 2}
@@ -3138,7 +3138,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.55
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3789,6 +3789,8 @@ MonoBehaviour:
   hudPanel: {fileID: 686695056}
   losePanel: {fileID: 350795879}
   winPanel: {fileID: 2052507867}
+  keysText: {fileID: 1540407882}
+  totalKeys: 3
 --- !u!114 &2023444856
 MonoBehaviour:
   m_ObjectHideFlags: 0

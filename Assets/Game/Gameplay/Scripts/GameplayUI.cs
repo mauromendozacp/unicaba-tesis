@@ -18,6 +18,12 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private GameObject losePanel = null;
     [SerializeField] private GameObject winPanel = null;
 
+    [Header("Contador de llaves")]
+    [SerializeField] private TMP_Text keysText = null;
+    [SerializeField] private int totalKeys = 3;
+
+    private int currentKeys = 0;
+
     public void Init(Action onResume, Action onMenu)
     {
         resumeBtn.onClick.AddListener(() =>
@@ -27,6 +33,8 @@ public class GameplayUI : MonoBehaviour
         });
 
         menuBtn.onClick.AddListener(onMenu.Invoke);
+
+        UpdateKeysText();
     }
 
     public void TogglePause(bool status)
@@ -75,5 +83,25 @@ public class GameplayUI : MonoBehaviour
     {
         hudPanel.SetActive(false);
         winPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    private void UpdateKeysText()
+    {
+        if (keysText != null)
+        {
+            keysText.text = $"{currentKeys}/{totalKeys}";
+        }
+    }
+
+    public void AddKey()
+    {
+        currentKeys++;
+        UpdateKeysText();
+
+        if (currentKeys >= totalKeys)
+        {
+            OpenWinPanel();
+        }
     }
 }

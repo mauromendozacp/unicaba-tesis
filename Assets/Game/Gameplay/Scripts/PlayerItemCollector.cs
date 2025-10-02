@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerItemCollector : MonoBehaviour
 {
     private PlayerInventory inventory;
+    private PlayerUI playerUI;
 
     private void Awake()
     {
@@ -11,6 +12,12 @@ public class PlayerItemCollector : MonoBehaviour
         if (inventory == null)
         {
             inventory = GetComponentInChildren<PlayerInventory>();
+        }
+
+        playerUI = GetComponent<PlayerUI>();
+        if (playerUI == null)
+        {
+            playerUI = GetComponentInChildren<PlayerUI>();
         }
 
         if (inventory == null)
@@ -49,11 +56,21 @@ public class PlayerItemCollector : MonoBehaviour
         {
             inventory.AddKey(keyItem.DoorId);
             Debug.Log($"[PlayerItemCollector] Llave agregada al inventario: {keyItem.DoorId}");
+
+            if (playerUI != null && playerUI.Inventory != null)
+                playerUI.Inventory.OnAddKey(keyItem.DoorId, data.Icon);
+
+            GameplayUI gameplayUI = FindObjectOfType<GameplayUI>();
+            if (gameplayUI != null)
+                gameplayUI.AddKey();
         }
         else
         {
             inventory.EquipItem(data);
             Debug.Log($"[PlayerItemCollector] Item equipado: {data.ItemName}");
+
+            if (playerUI != null)
+                playerUI.OnEquipItem(inventory.SelectedIndex, data);
         }
 
         itemWorld.Release();
