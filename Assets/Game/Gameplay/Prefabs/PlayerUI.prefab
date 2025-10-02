@@ -319,6 +319,7 @@ MonoBehaviour:
   limitedAmmo: {fileID: 5901108350421912652}
   unlimitedAmmo: {fileID: 4179167546264571375}
   currentAmmo: {fileID: 4374543167541716723}
+  ammoText: {fileID: 0}
   inventory: {fileID: 7697335897415871492}
 --- !u!1 &4179167546264571375
 GameObject:
