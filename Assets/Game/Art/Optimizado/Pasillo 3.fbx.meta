@@ -3,7 +3,12 @@ guid: 01fd4083e2474b94b970952a005309ee
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gris claro 1.001
+    second: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
