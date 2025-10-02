@@ -2,28 +2,32 @@ using UnityEngine;
 
 public class MachineGun : WeaponBase
 {
-    [Header("Projectile Settings")]
-    [SerializeField] private ProjectilePool projectilePool;
+    [Header("Projectile")]
+    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private int poolInitialSize = 24;
+    [SerializeField] private ProjectileObjectPool projectilePool;
     [SerializeField] private Transform muzzlePoint;
 
     private float nextFireTime = 0f;
+
+    private void Awake()
+    {
+        if (projectilePool == null && projectilePrefab != null)
+            projectilePool = ProjectilePoolManager.Instance?.GetPool(projectilePrefab, poolInitialSize);
+    }
 
     public override void Fire()
     {
         if (Time.time < nextFireTime) return;
         if (currentAmmo <= 0) return;
+        if (projectilePool == null || muzzlePoint == null) return;
 
         nextFireTime = Time.time + fireRate;
         currentAmmo--;
 
-        if (projectilePool != null && muzzlePoint != null)
-        {
-            Projectile proj = projectilePool.Get();
-            proj.transform.position = muzzlePoint.position;
-            proj.transform.rotation = muzzlePoint.rotation;
-            proj.transform.SetParent(null);
-            proj.SetDirection(muzzlePoint.forward);
-            proj.SetPool(projectilePool);
-        }
+        var proj = projectilePool.Get();
+        proj.transform.position = muzzlePoint.position;
+        proj.transform.rotation = muzzlePoint.rotation;
+        proj.SetDirection(muzzlePoint.forward);
     }
 }
