@@ -6,21 +6,16 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField] private WeaponData defaultWeaponData;
     [SerializeField] private Transform weaponParent;
 
-    [Header("UI")]
-    [SerializeField] private PlayerUI playerUI;
+    private PlayerUI playerUI;
 
     private WeaponBase currentWeapon;
 
     public IWeapon CurrentWeapon => currentWeapon;
 
-    private void Start()
-    {
-        EquipDefaultWeapon();
-    }
-
     public void SetPlayerUI(PlayerUI ui)
     {
         playerUI = ui;
+        EquipDefaultWeapon();
         if (playerUI != null && currentWeapon != null)
         {
             playerUI.SetGunIcon(currentWeapon.Icon);

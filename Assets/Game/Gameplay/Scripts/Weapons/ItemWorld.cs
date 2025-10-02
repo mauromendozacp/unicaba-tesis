@@ -59,4 +59,9 @@ public class ItemWorld : MonoBehaviour, IEquipable
     {
         onRelease?.Invoke(this);
     }
+
+    public ItemType GetItemType()
+    {
+        return data.Type;
+    }
 }

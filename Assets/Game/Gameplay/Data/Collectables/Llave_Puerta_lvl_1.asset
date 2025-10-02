@@ -17,4 +17,5 @@ MonoBehaviour:
   prefab: {fileID: 3271835021359982296, guid: 03e4e6ec1ef251e4e9f717086ba5f193, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
+  type: 3
   doorId: 1

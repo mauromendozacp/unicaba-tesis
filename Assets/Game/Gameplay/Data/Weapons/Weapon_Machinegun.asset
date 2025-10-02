@@ -17,6 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 2254819947961644008, guid: b4d74c92fb78b97488e9083f2be25228, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
+  type: 2
   damage: 8
   fireRate: 0.1
   maxAmmo: 200
