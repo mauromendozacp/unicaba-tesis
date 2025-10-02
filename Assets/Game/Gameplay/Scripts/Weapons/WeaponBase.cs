@@ -43,5 +43,8 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
 
     public virtual void OnPickup() { }
     public virtual void OnDrop() { }
+
+    // NUEVO: por defecto no es infinita
+    public virtual bool HasInfiniteAmmo => false;
 }
 

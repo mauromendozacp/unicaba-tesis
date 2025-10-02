@@ -17,4 +17,4 @@ MonoBehaviour:
   prefab: {fileID: 2053649373712773487, guid: 43c4e87989c00e74facd548af7edf36d, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: -90, y: 0, z: 0}
-  heal: 5
+  heal: 30

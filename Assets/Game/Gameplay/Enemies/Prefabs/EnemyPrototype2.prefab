@@ -397,8 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a7ebdff06954641ba38eb38c49187d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
-  moveSpeed: 4
+  maxHealth: 15
+  moveSpeed: 3.5
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
   attackCollider: {fileID: 0}

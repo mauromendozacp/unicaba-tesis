@@ -712,11 +712,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  moveSpeed: 3.5
+  moveSpeed: 3
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
   attackCollider: {fileID: 6503089782551746891}
-  attackDamage: 40
+  attackDamage: 20
   attackCooldown: 2
   attackRange: 2
   chaseRadius: 60

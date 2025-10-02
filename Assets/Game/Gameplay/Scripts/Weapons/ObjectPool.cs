@@ -1,41 +1,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+public class ProjectileObjectPool : MonoBehaviour
 {
-    [SerializeField] private T prefab;
-    [SerializeField] private int initialSize = 10;
+    [SerializeField] private Projectile prefab;
+    [SerializeField] private int initialSize = 16;
 
-    private Queue<T> pool = new Queue<T>();
+    private readonly Queue<Projectile> pool = new();
+    private bool initialized = false;
 
     private void Awake()
     {
-        for (int i = 0; i < initialSize; i++)
+        if (prefab != null && !initialized)
+            Init(prefab, initialSize);
+    }
+
+    public void SetPrefab(Projectile p, int size)
+    {
+        if (initialized) return;
+        prefab = p;
+        initialSize = size;
+        Init(prefab, initialSize);
+    }
+
+    private void Init(Projectile p, int size)
+    {
+        if (p == null) return;
+        initialized = true;
+        for (int i = 0; i < size; i++)
         {
-            T obj = Instantiate(prefab, transform);
-            obj.gameObject.SetActive(false);
-            pool.Enqueue(obj);
+            var inst = Create();
+            inst.gameObject.SetActive(false);
+            pool.Enqueue(inst);
         }
     }
 
-    public T Get()
+    private Projectile Create()
     {
-        if (pool.Count > 0)
-        {
-            T obj = pool.Dequeue();
-            obj.gameObject.SetActive(true);
-            return obj;
-        }
-        else
-        {
-            T obj = Instantiate(prefab, transform);
-            return obj;
-        }
+        var p = Instantiate(prefab, transform);
+        p.SetPool(this);
+        return p;
     }
 
-    public void ReturnToPool(T obj)
+    public Projectile Get()
     {
-        obj.gameObject.SetActive(false);
-        pool.Enqueue(obj);
+        if (!initialized) Init(prefab, initialSize);
+        Projectile p = pool.Count > 0 ? pool.Dequeue() : Create();
+        p.gameObject.SetActive(true);
+        return p;
+    }
+
+    public void ReturnToPool(Projectile p)
+    {
+        if (p == null) return;
+        p.gameObject.SetActive(false);
+        pool.Enqueue(p);
     }
 }

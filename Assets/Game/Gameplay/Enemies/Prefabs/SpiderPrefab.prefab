@@ -421,12 +421,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c5ed208ee6c6b48894d8c3371c46e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
-  moveSpeed: 5
+  maxHealth: 20
+  moveSpeed: 4
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
   attackCollider: {fileID: 4781245295191525633}
-  attackDamage: 40
+  attackDamage: 25
   attackCooldown: 1.5
   attackRange: 2
   chaseRadius: 60
