@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8417361359673230750, guid: 544fd5da479f18748947baaa3e76f240, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 8577250129722032071, guid: 544fd5da479f18748947baaa3e76f240, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -420,12 +424,12 @@ MonoBehaviour:
   maxHealth: 30
   moveSpeed: 5
   currentSpeed: 0
-  attackRange: 2
-  chaseRadius: 60
-  attackCooldown: 1.5
   knockbackForceMultiplier: 0.5
   attackCollider: {fileID: 4781245295191525633}
   attackDamage: 40
+  attackCooldown: 1.5
+  attackRange: 2
+  chaseRadius: 60
 --- !u!54 &1336981058147976220
 Rigidbody:
   m_ObjectHideFlags: 0

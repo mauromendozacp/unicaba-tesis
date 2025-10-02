@@ -788,7 +788,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 45
+  field of view: 25
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -814,8 +814,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3826835, y: 0.000000065321515, z: -0.00000002705706, w: 0.9238795}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
+  m_LocalRotation: {x: 0.36722153, y: 0.2233645, z: -0.091311894, w: 0.89828664}
+  m_LocalPosition: {x: -14.68, y: 31.3, z: -27.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FramingMode: 2
   FramingSize: 0.8
-  CenterOffset: {x: 0, y: 0}
+  CenterOffset: {x: 0.9, y: 0.77}
   Damping: 2
   SizeAdjustment: 2
   LateralAdjustment: 0
@@ -1188,7 +1188,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 4.7, y: -9.32, z: 8.66}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
     Enabled: 0
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 10, z: -10}
+  FollowOffset: {x: -14.68, y: 31.3, z: -27.9}
 --- !u!114 &454248453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1238,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 45
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 1000
@@ -1265,8 +1265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454248449}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3826835, y: 0.000000058926062, z: -0.000000011617082, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
+  m_LocalRotation: {x: 0.36722153, y: 0.22336449, z: -0.09131189, w: 0.8982866}
+  m_LocalPosition: {x: -14.68, y: 31.3, z: -27.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
