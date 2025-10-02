@@ -50,6 +50,6 @@ public class Prototype2AttackState : IEnemyState
 
   public void Exit()
   {
-    enemy.ActiveMovement();
+    //enemy.ActiveMovement();
   }
 }

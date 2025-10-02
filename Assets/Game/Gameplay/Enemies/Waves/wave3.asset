@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesInWave:
   - enemyPrefab: {fileID: 9136665731692348206, guid: 1c8a2c55ccbcf0346aabad55a562ac71, type: 3}
-    count: 8
+    count: 4
   - enemyPrefab: {fileID: 3542624664555272393, guid: aa61a6b0c50728a4ba1464a89ade8069, type: 3}
     count: 3
+  - enemyPrefab: {fileID: 7655484918804050333, guid: 5e2ab6fef917c1940928109fcc1ba2f2, type: 3}
+    count: 4
   cooldownTime: 6
   itemsToDropInWave: 3

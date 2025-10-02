@@ -12,15 +12,17 @@ public class PlayerSpawn : MonoBehaviour
 
     private Func<int, PlayerUI> onGetPlayerUI = null;
     private Action onPause = null;
+    private Action onDeath = null;
     private Action<int> onJoinPlayerUI = null;
 
     private PlayerData[] playersData = new PlayerData[4];
     private readonly List<PlayerInput> players = new List<PlayerInput>();
 
-    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action<int> onJoinPlayerUI)
+    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action onDeath, Action<int> onJoinPlayerUI)
     {
         this.onGetPlayerUI = onGetPlayerUI;
         this.onPause = onPause;
+        this.onDeath = onDeath;
         this.onJoinPlayerUI = onJoinPlayerUI;
 
         List<PlayerSelectionData> selectionPlayers = GameManager.Instance.GameDataManager.playersData;
@@ -43,7 +45,7 @@ public class PlayerSpawn : MonoBehaviour
             PlayerController playerController = playerInput.GetComponent<PlayerController>();
             PlayerData data = playersData[index];
 
-            playerController.Init(playerUI, data, onPause);
+            playerController.Init(playerUI, data, onPause, onDeath);
 
             Transform playerTransform = spawnLocations[index];
             playerController.transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);
@@ -60,8 +62,14 @@ public class PlayerSpawn : MonoBehaviour
         players.Remove(playerInput);
     }
 
-    public List<PlayerInput> GetPlayers()
+    public List<PlayerController> GetPlayers()
     {
-        return players;
+        List<PlayerController> playerControllers = new List<PlayerController>();
+        for (int i = 0; i < players.Count; i++)
+        {
+            playerControllers.Add(players[i].GetComponent<PlayerController>());
+        }
+
+        return playerControllers;
     }
 }
