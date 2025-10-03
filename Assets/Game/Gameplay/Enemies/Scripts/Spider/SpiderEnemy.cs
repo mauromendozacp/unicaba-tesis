@@ -72,4 +72,9 @@ public class SpiderEnemy : EnemyBase
       attackCollider.enabled = active;
     }
   }
+
+  public override void Kill()
+  {
+    ChangeState(new SpiderDeathState(this));
+  }
 }

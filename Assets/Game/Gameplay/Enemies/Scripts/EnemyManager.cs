@@ -6,7 +6,7 @@ using System;
 
 public class EnemyManager : MonoBehaviour
 {
-  public event Action<int, int> OnWavesStart;   // Pasa el número total de oleadas
+  public event Action<int, int> OnWavesStart; // Oleada actual, Total de oleadas
   public event Action OnWaveStart;
   public event Action OnWavesEnd;
 
@@ -30,8 +30,8 @@ public class EnemyManager : MonoBehaviour
   [SerializeField] ItemController itemController;
 
   private Dictionary<string, GameObject> enemyPrefabDict;
-  //private IObjectPool<GameObject> enemyPool;
   private Dictionary<string, IObjectPool<GameObject>> enemyPoolDict;
+  private Transform poolParent;
   private int currentWaveIndex = 0;
   private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
@@ -44,6 +44,7 @@ public class EnemyManager : MonoBehaviour
     if (Instance == null)
     {
       Instance = this;
+      poolParent = transform;
     }
     else
     {
@@ -73,24 +74,13 @@ public class EnemyManager : MonoBehaviour
 
   void InitializePool()
   {
-    /*
-    enemyPool = new ObjectPool<GameObject>(
-        createFunc: CreatePooledItem,
-        actionOnGet: OnTakeFromPool,
-        actionOnRelease: OnReturnToPool,
-        actionOnDestroy: OnDestroyPoolObject,
-        collectionCheck: false,
-        defaultCapacity: 20,
-        maxSize: poolMaxSize
-    );
-    */
     foreach (GameObject prefab in enemyPrefabs)
     {
       if (!enemyPoolDict.ContainsKey(prefab.name))
       {
         // Crea un pool para cada prefab de enemigo.
         var pool = new ObjectPool<GameObject>(
-            createFunc: () => CreatePooledItem(prefab), // Se pasa el prefab a la función
+            createFunc: () => CreatePooledItem(prefab),
             actionOnGet: OnTakeFromPool,
             actionOnRelease: OnReturnToPool,
             actionOnDestroy: OnDestroyPoolObject,
@@ -103,30 +93,10 @@ public class EnemyManager : MonoBehaviour
     }
   }
 
-  /*
-    private GameObject CreatePooledItem()
-    {
-      if (enemyPrefabs.Count == 0)
-      {
-        Debug.LogError("No hay prefabs de enemigos en la lista general.");
-        return null;
-      }
-
-      GameObject prefabToInstantiate = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
-      GameObject enemy = Instantiate(prefabToInstantiate);
-
-      EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
-      if (enemyScript != null)
-      {
-        enemyScript.SetPool(enemyPool);
-      }
-      return enemy;
-    }
-  */
 
   private GameObject CreatePooledItem(GameObject prefabToInstantiate)
   {
-    GameObject enemy = Instantiate(prefabToInstantiate);
+    GameObject enemy = Instantiate(prefabToInstantiate, poolParent);
 
     EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
     if (enemyScript != null)
@@ -148,14 +118,15 @@ public class EnemyManager : MonoBehaviour
 
   private void OnDestroyPoolObject(GameObject enemy)
   {
-    //Destroy(enemy);
+#if UNITY_EDITOR
     DestroyImmediate(enemy);
+#else
+    Destroy(fireball);
+#endif
   }
 
   IEnumerator StartWaves()
   {
-    //OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
-
     for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
     {
       OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
@@ -208,18 +179,6 @@ public class EnemyManager : MonoBehaviour
 
     foreach (var enemySpawn in currentWave.enemiesInWave)
     {
-      /*
-      for (int i = 0; i < enemySpawn.count; i++)
-      {
-        GameObject enemyToSpawn = enemyPool.Get();
-        if (enemyToSpawn != null)
-        {
-          // Reiniciar la posición y otros estados del enemigo
-          enemyToSpawn.transform.position = GetRandomSpawnPosition();
-          enemyToSpawn.SetActive(true);
-        }
-      }
-      */
       string enemyPrefabName = enemySpawn.enemyPrefab.name;
       if (enemyPoolDict.ContainsKey(enemyPrefabName))
       {
@@ -275,6 +234,22 @@ public class EnemyManager : MonoBehaviour
           //Debug.Log($"Item dropped at kill index {currentKillIndex} at position {itemPosition} and wave {currentWaveIndex + 1}");
         }
       }
+    }
+  }
+
+  public void KillAllEnemies()
+  {
+    StopAllCoroutines();
+    EnemyBase[] activeEnemies = FindObjectsByType<EnemyBase>(FindObjectsSortMode.None);
+
+    foreach (EnemyBase enemy in activeEnemies)
+    {
+      if (enemy.IsAlive)
+      {
+        enemy.Kill();
+      }
+
+      enemiesAlive = 0;
     }
   }
 }

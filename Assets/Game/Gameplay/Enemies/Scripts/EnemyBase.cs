@@ -262,4 +262,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   {
     return Vector3.Distance(transform.position, CurrentTarget.position);
   }
+
+  public abstract void Kill();
 }

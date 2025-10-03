@@ -7,15 +7,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 {
   [SerializeField] private float maxHealth = 100f;
   [SerializeField] private float invincibilityTime = 0.5f;
-  [SerializeField] private Material damagedMaterial;
+  //[SerializeField] private Material damagedMaterial;
 
   private float currentHealth;
   public float Health => currentHealth;
 
   private bool isInvincible = false;
-  private Material originalMaterial;
-  private Renderer playerRenderer;
-  //private CharacterController characterController;
+  //private Material originalMaterial;
+  //private Renderer playerRenderer;
   private PlayerInputController inputController;
 
   public bool IsAlive => currentHealth > 0;
@@ -30,9 +29,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   void Awake()
   {
     currentHealth = maxHealth;
-    playerRenderer = GetComponentInChildren<Renderer>();
-    originalMaterial = playerRenderer.material;
-    //characterController = GetComponent<CharacterController>();
+    //playerRenderer = GetComponentInChildren<Renderer>();
+    //originalMaterial = playerRenderer.material;
     inputController = GetComponent<PlayerInputController>();
     IsDowned = false;
   }
@@ -81,11 +79,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   private IEnumerator DamageFeedbackCoroutine()
   {
     isInvincible = true;
-    playerRenderer.material = damagedMaterial;
+    //playerRenderer.material = damagedMaterial;
 
     yield return new WaitForSeconds(invincibilityTime);
 
-    playerRenderer.material = originalMaterial;
+    //playerRenderer.material = originalMaterial;
     isInvincible = false;
   }
 
@@ -94,9 +92,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
     return transform.position;
   }
 
-    public void IncreaseHealth(float increaseHealth)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + increaseHealth, 0, maxHealth);
-        OnUpdateLife?.Invoke(currentHealth, maxHealth);
-    }
+  public void IncreaseHealth(float increaseHealth)
+  {
+    currentHealth = Mathf.Clamp(currentHealth + increaseHealth, 0, maxHealth);
+    OnUpdateLife?.Invoke(currentHealth, maxHealth);
+  }
 }
