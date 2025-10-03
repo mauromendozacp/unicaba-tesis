@@ -18,7 +18,14 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private GameObject losePanel = null;
     [SerializeField] private GameObject winPanel = null;
 
-    public void Init(Action onResume, Action onMenu)
+    [SerializeField] private Button retryBtn = null;
+    [SerializeField] private Button loseMenuBtn = null;
+    [SerializeField] private Button nextLevelButton = null;
+
+    [Header("Contador de llaves")]
+    [SerializeField] private TMP_Text keysText = null;
+
+    public void Init(Action onResume, Action onMenu, Action onRetry, Action onNextLevel)
     {
         resumeBtn.onClick.AddListener(() =>
         {
@@ -27,6 +34,10 @@ public class GameplayUI : MonoBehaviour
         });
 
         menuBtn.onClick.AddListener(onMenu.Invoke);
+
+        retryBtn.onClick.AddListener(onRetry.Invoke);
+        loseMenuBtn.onClick.AddListener(onMenu.Invoke);
+        nextLevelButton.onClick.AddListener(onNextLevel.Invoke);
     }
 
     public void TogglePause(bool status)
@@ -58,7 +69,7 @@ public class GameplayUI : MonoBehaviour
     {
         for (int i = 0; i < playersCount; i++)
         {
-            if (playersCount < players.Length)
+            if (i < players.Length)
             {
                 players[i].gameObject.SetActive(true);
             }
@@ -75,5 +86,10 @@ public class GameplayUI : MonoBehaviour
     {
         hudPanel.SetActive(false);
         winPanel.SetActive(true);
+    }
+
+    public void UpdateKeysText(int keys)
+    {
+        keysText.text = "x " + keys;
     }
 }

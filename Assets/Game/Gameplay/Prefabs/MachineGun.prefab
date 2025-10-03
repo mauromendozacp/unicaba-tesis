@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 793954552079292341}
   - {fileID: 4386165175058358930}
@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7c58c370d805c4f9cd53e059f51b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePool: {fileID: 5061561964523068716}
+  projectilePrefab: {fileID: 7559643882329239354, guid: 2e0c20c072f191b45a2bead4fc7dea41, type: 3}
+  poolInitialSize: 24
+  projectilePool: {fileID: 0}
   muzzlePoint: {fileID: 4386165175058358930}
 --- !u!1 &3939557954115009905
 GameObject:
@@ -93,8 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b412ca8f944234489b6af70573e652d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7559643882329239354, guid: 3c3b33df27c0fa34892f845bce0667f7, type: 3}
-  initialSize: 20
+  internalPool: {fileID: 0}
 --- !u!1 &6369880950433764897
 GameObject:
   m_ObjectHideFlags: 0

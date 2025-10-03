@@ -20,10 +20,7 @@ public class PlayerController : MonoBehaviour
   private PlayerHealth playerHealth = null;
   private PlayerUI playerUI = null;
     private PlayerAnimationController animationController = null;
-    //private PlayerSpawn playerSpawn = null;
-    //private Coroutine reviveCoroutine = null;
-    //private PlayerHealth targetToRevive = null;
-    //bool isReviving = false;
+    private PlayerItemCollector itemCollector = null;
 
     private PlayerData data = null;
 
@@ -34,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCam = null;
     //private InputAction fireAction;
     private Action onDeath = null;
+    private Action onCollectKey = null;
 
     public PlayerHealth PlayerHealth => playerHealth;
 
@@ -47,6 +45,7 @@ public class PlayerController : MonoBehaviour
     playerHealth = GetComponent<PlayerHealth>();
     reviveController = GetComponent<ReviveController>();
     animationController = GetComponentInChildren<PlayerAnimationController>();
+        itemCollector = GetComponent<PlayerItemCollector>();
 
     // weaponHolder puede estar en el mismo GameObject o como hijo
     if (weaponHolder == null)
@@ -75,7 +74,9 @@ public class PlayerController : MonoBehaviour
         playerHealth.OnRevived += (player) => { animationController.ToggleDead(false); };
 
         inputController.onRevive += HandleReviveInput;
-    //playerSpawn = FindFirstObjectByType<PlayerSpawn>();
+
+        itemCollector.Init(onCollectKey);
+        
   }
 
   private void Update()
@@ -85,11 +86,12 @@ public class PlayerController : MonoBehaviour
     HandleFireInput();
   }
 
-  public void Init(PlayerUI playerUI, PlayerData data, Action onPause, Action onDeath)
+  public void Init(PlayerUI playerUI, PlayerData data, Action onPause, Action onDeath, Action onCollectKey)
   {
     this.playerUI = playerUI;
     this.onPause = onPause;
         this.onDeath = onDeath;
+        this.onCollectKey = onCollectKey;
 
     weaponHolder?.SetPlayerUI(playerUI);
 
@@ -197,4 +199,8 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+    public void ToggleInput(bool status)
+    {
+        inputController.enabled = status;
+    }
 }
