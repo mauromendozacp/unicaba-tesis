@@ -14,6 +14,7 @@ public class PlayerAimController : MonoBehaviour
     private Transform rotateTarget;
     private Vector3 aimPoint;
     private Vector3 aimDirection;
+    private PlayerInput playerInput;
 
     public Vector3 AimPoint => aimPoint;
     public Vector3 AimDirection => aimDirection;
@@ -21,7 +22,8 @@ public class PlayerAimController : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInputController>();
-        cam = Camera.main;
+        playerInput = GetComponent<PlayerInput>();
+        cam = playerInput != null && playerInput.camera != null ? playerInput.camera : Camera.main;
         rotateTarget = graphicsRoot != null ? graphicsRoot : transform;
         if (fireRoot == null) fireRoot = transform;
     }
@@ -43,8 +45,8 @@ public class PlayerAimController : MonoBehaviour
         Vector2 lookInput = input.GetLookInput();
         Vector2 pointerScreen = input.GetPointerScreenPosition();
 
-        bool usingMouse = Mouse.current != null && Mouse.current.delta.ReadValue().sqrMagnitude > 0.001f;
-        bool usingStick = lookInput.sqrMagnitude > 0.1f;
+        bool usingMouse = playerInput != null && !string.IsNullOrEmpty(playerInput.currentControlScheme) && playerInput.currentControlScheme.ToLower().Contains("mouse");
+        bool usingStick = !usingMouse && lookInput.sqrMagnitude > 0.1f;
 
         // 🖱 MODO MOUSE: raycast desde puntero
         if (usingMouse || !usingStick)
@@ -68,7 +70,6 @@ public class PlayerAimController : MonoBehaviour
             aimPoint = rotateTarget.position + aimDirection * 5f;
         }
 
-        // Rotar hacia el punto calculado
         Vector3 flat = aimPoint - rotateTarget.position;
         flat.y = 0f;
         if (flat.sqrMagnitude > 0.0001f)

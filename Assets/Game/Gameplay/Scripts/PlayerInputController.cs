@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,9 +19,12 @@ public class PlayerInputController : MonoBehaviour
     public Action onNextItem = null;
     public Action<bool> onRevive = null;
 
+    private PlayerInput playerInput = null;
+
     private void Awake()
     {
-        inputAsset = GetComponent<PlayerInput>().actions;
+        playerInput = GetComponent<PlayerInput>();
+        inputAsset = playerInput.actions;
         playerMap = inputAsset.FindActionMap("Player");
         fireAction = playerMap.FindAction("Fire");
         reviveAction = playerMap.FindAction("Revive");
@@ -98,7 +102,6 @@ public class PlayerInputController : MonoBehaviour
         return move;
     }
 
-    // Devuelve true mientras el botón de disparo esté presionado
     public bool GetInputFire()
     {
         return fireAction != null && fireAction.IsPressed();
@@ -116,22 +119,23 @@ public class PlayerInputController : MonoBehaviour
     {
         onRevive?.Invoke(false);
     }
-  
-  public Vector2 GetRightStickAim()
+
+    public Vector2 GetRightStickAim()
     {
-        var gp = Gamepad.current;
+        if (playerInput == null || playerInput.devices.Count == 0) return Vector2.zero;
+        var gp = playerInput.devices.OfType<Gamepad>().FirstOrDefault();
         return gp != null ? gp.rightStick.ReadValue() : Vector2.zero;
     }
 
     public Vector2 GetLookInput()
     {
-      return lookAction != null ? lookAction.ReadValue<Vector2>() : Vector2.zero;
+        return lookAction != null ? lookAction.ReadValue<Vector2>() : Vector2.zero;
     }
 
     public Vector2 GetPointerScreenPosition()
     {
-      var mouse = Mouse.current;
-      return mouse != null ? mouse.position.ReadValue() : Vector2.zero;
+        if (playerInput == null || playerInput.devices.Count == 0) return Vector2.zero;
+        var mouse = playerInput.devices.OfType<Mouse>().FirstOrDefault();
+        return mouse != null ? mouse.position.ReadValue() : Vector2.zero;
     }
-
 }
