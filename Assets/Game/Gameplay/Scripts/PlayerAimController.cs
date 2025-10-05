@@ -10,6 +10,7 @@ public class PlayerAimController : MonoBehaviour
     [SerializeField] private Transform fireRoot;
 
     private PlayerInputController input;
+    private PlayerHealth playerHealth;
     private Camera cam;
     private Transform rotateTarget;
     private Vector3 aimPoint;
@@ -22,6 +23,7 @@ public class PlayerAimController : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInputController>();
+        playerHealth = GetComponent<PlayerHealth>();
         playerInput = GetComponent<PlayerInput>();
         cam = playerInput != null && playerInput.camera != null ? playerInput.camera : Camera.main;
         rotateTarget = graphicsRoot != null ? graphicsRoot : transform;
@@ -30,11 +32,12 @@ public class PlayerAimController : MonoBehaviour
 
     private void Start()
     {
-        UpdateAimPosition(); // alineamos al inicio
+        UpdateAimPosition();
     }
 
     private void Update()
     {
+        if (playerHealth != null && !playerHealth.IsAlive) return;
         UpdateAimPosition();
     }
 
@@ -48,7 +51,6 @@ public class PlayerAimController : MonoBehaviour
         bool usingMouse = playerInput != null && !string.IsNullOrEmpty(playerInput.currentControlScheme) && playerInput.currentControlScheme.ToLower().Contains("mouse");
         bool usingStick = !usingMouse && lookInput.sqrMagnitude > 0.1f;
 
-        // 🖱 MODO MOUSE: raycast desde puntero
         if (usingMouse || !usingStick)
         {
             Ray ray = cam.ScreenPointToRay(pointerScreen);
@@ -63,7 +65,6 @@ public class PlayerAimController : MonoBehaviour
                     aimPoint = rotateTarget.position + rotateTarget.forward * 10f;
             }
         }
-        // 🎮 MODO GAMEPAD: usar vector Look
         else if (usingStick)
         {
             aimDirection = new Vector3(lookInput.x, 0, lookInput.y).normalized;
