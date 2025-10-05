@@ -8,6 +8,7 @@ public class PlayerAimController : MonoBehaviour
     [SerializeField] private LayerMask aimLayers = ~0;
     [SerializeField] private Transform graphicsRoot;
     [SerializeField] private Transform fireRoot;
+    [SerializeField] private float mouseDeadZoneRadius = 1.5f;
 
     private PlayerInputController input;
     private PlayerHealth playerHealth;
@@ -64,6 +65,12 @@ public class PlayerAimController : MonoBehaviour
                 else
                     aimPoint = rotateTarget.position + rotateTarget.forward * 10f;
             }
+
+            Vector3 flatMouse = aimPoint - rotateTarget.position;
+            flatMouse.y = 0f;
+
+            if (flatMouse.magnitude < mouseDeadZoneRadius)
+                return;
         }
         else if (usingStick)
         {
