@@ -10,6 +10,10 @@ public class EnemyManager : MonoBehaviour
   public event Action OnWaveStart;
   public event Action OnWavesEnd;
 
+  [Header("Control de Inicio")]
+  [Tooltip("Si está activado, las oleadas comenzarán automáticamente al inicio del juego. De lo contrario, se deben iniciar llamando a StartEnemyWaves().")]
+  public bool autoStartWaves = false;
+
   [Header("General")]
   [Tooltip("Lista general de todos los prefabs de enemigos.")]
   public List<GameObject> enemyPrefabs;
@@ -69,7 +73,19 @@ public class EnemyManager : MonoBehaviour
       itemController = FindFirstObjectByType<ItemController>();
     }
     InitializePool();
-    StartCoroutine(StartWaves());
+    if (autoStartWaves)
+    {
+      StartEnemyWaves();
+    }
+  }
+
+  public void StartEnemyWaves()
+  {
+    if (waves.Count > 0)
+    {
+      StopCoroutine(nameof(StartWaves));
+      StartCoroutine(nameof(StartWaves));
+    }
   }
 
   void InitializePool()
@@ -121,7 +137,7 @@ public class EnemyManager : MonoBehaviour
 #if UNITY_EDITOR
     DestroyImmediate(enemy);
 #else
-    Destroy(fireball);
+    Destroy(enemy);
 #endif
   }
 

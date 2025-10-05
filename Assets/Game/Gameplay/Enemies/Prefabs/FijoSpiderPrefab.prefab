@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 544fd5da479f18748947baaa3e76f240, type: 3}
       propertyPath: m_Name
-      value: SpiderPrefab
+      value: FijoSpiderPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 544fd5da479f18748947baaa3e76f240, type: 3}
       propertyPath: m_Layer
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  isTerritorial: 0
+  isTerritorial: 1
   moveSpeed: 4.5
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
@@ -430,7 +430,7 @@ MonoBehaviour:
   attackDamage: 18
   attackCooldown: 1.5
   attackRange: 2
-  chaseRadius: 200
+  chaseRadius: 10
   maxChaseDistance: 15
 --- !u!54 &1336981058147976220
 Rigidbody:

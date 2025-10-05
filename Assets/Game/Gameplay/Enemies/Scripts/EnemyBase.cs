@@ -19,7 +19,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   protected float currentHealth;
   public float Health => currentHealth;
 
+  [Header("Movement Settings")]
+  [SerializeField] protected bool isTerritorial = false;
+  public bool IsTerritorial => isTerritorial;
   [SerializeField] float moveSpeed = 4f;
+  protected Vector3 initialPosition;
   public float currentSpeed;
   public float CurrentSpeed => currentSpeed;
 
@@ -37,11 +41,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   public float AttackRange => attackRange;
   [SerializeField] float chaseRadius = 10f;
   public float ChaseRadius => chaseRadius;
+  [SerializeField] float maxChaseDistance = 15f;
 
   private Rigidbody rb;
   protected float lastDamage;
 
   public Transform CurrentTarget { get; set; }
+  protected IDamageable currentTargetDamageable = null;
 
   protected IEnemyState currentState;
 
@@ -61,6 +67,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   {
     currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
     currentHealth = maxHealth;
+    initialPosition = transform.position;
     rb = GetComponent<Rigidbody>();
     agent = GetComponent<NavMeshAgent>();
     selfCollider = GetComponent<Collider>();
@@ -69,6 +76,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
       agent.speed = currentSpeed;
       agent.stoppingDistance = 0.1f;
+      //agent.stoppingDistance = attackRange * 0.8f;
       agent.updateRotation = true; // El agente maneja la rotación
     }
   }
@@ -252,10 +260,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
       {
         minSqrDistance = sqrDistance;
         closestTarget = target;
+        currentTargetDamageable = damageable;
       }
     }
 
     return closestTarget;
+  }
+
+  public bool isTargetAlive()
+  {
+    return currentTargetDamageable != null && currentTargetDamageable.IsAlive;
   }
 
   public float DistanceToTarget()
@@ -264,4 +278,50 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   }
 
   public abstract void Kill();
+
+  public void LookAtTarget()
+  {
+    if (CurrentTarget != null)
+    {
+      Vector3 direction = (CurrentTarget.position - transform.position).normalized;
+      direction.y = 0; // Mantener la rotación en el plano horizontal
+      if (direction != Vector3.zero)
+      {
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+      }
+    }
+  }
+
+  public Vector3 GetInitialPosition()
+  {
+    return initialPosition;
+  }
+
+  protected virtual void OnDrawGizmosSelected()
+  {
+    // Visualización del Radio de Persecución (ChaseRadius)
+    Gizmos.color = Color.yellow;
+    Gizmos.DrawWireSphere(transform.position, chaseRadius);
+
+    // Visualización del Límite Territorial (MaxChaseDistance)
+    if (isTerritorial)
+    {
+      Gizmos.color = Color.red;
+      Gizmos.DrawWireSphere(initialPosition, maxChaseDistance);
+    }
+  }
+
+  public bool IsTooFarFromOrigin(float margin = 0f)
+  {
+    if (!isTerritorial || CurrentTarget == null) return false;
+
+    float effectiveMaxDistance = maxChaseDistance + margin;
+    if (effectiveMaxDistance < 0) effectiveMaxDistance = 0;
+
+    float distanceSqr = (CurrentTarget.position - initialPosition).sqrMagnitude;
+    float maxDistanceSqr = effectiveMaxDistance * effectiveMaxDistance;
+
+    return distanceSqr > maxDistanceSqr;
+  }
 }

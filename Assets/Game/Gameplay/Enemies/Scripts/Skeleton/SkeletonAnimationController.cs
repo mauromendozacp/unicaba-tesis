@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class SpiderAnimationController : MonoBehaviour
+public class SkeletonAnimationController : MonoBehaviour
 {
   readonly string animWalk = "Walk";
   readonly string animAttack = "Attack";
   readonly string animIdle = "Idle";
   readonly string animDeath = "Death";
-  readonly string animJump = "Jump";
+  readonly string animHurt = "Hurt";
+
   private Animator anim = null;
 
   private void Awake()
@@ -31,12 +32,11 @@ public class SpiderAnimationController : MonoBehaviour
 
   public void TriggerDamage()
   {
-    anim?.SetTrigger(animJump);
+    anim?.SetTrigger(animHurt);
   }
 
   public void TriggerDeath()
   {
     anim?.SetTrigger(animDeath);
   }
-
 }

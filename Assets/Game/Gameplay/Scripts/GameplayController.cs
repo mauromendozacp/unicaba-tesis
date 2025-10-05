@@ -9,6 +9,7 @@ public class GameplayController : MonoBehaviour
   [SerializeField] private int maxKeysToWin = 0;
 
   private int keys = 0;
+  private bool lastWaveToWin = false;
 
   private void Awake()
   {
@@ -21,7 +22,32 @@ public class GameplayController : MonoBehaviour
 
     enemyManager.OnWaveStart += () => { gameplayUI.ToggleWave(true); };
     enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
+    enemyManager.OnWavesStart += CheckLastWave;
     enemyManager.OnWavesEnd += () => { gameplayUI.ToggleWave(false); };
+    enemyManager.OnWavesEnd += CheckVictory;
+    gameplayUI.ToggleWave(false);
+  }
+
+  private void CheckLastWave(int currentWave, int totalWaves)
+  {
+    lastWaveToWin = currentWave == totalWaves;
+  }
+
+  private void CheckVictory()
+  {
+    if (lastWaveToWin)
+    {
+      gameplayUI.OpenWinPanel();
+
+      List<PlayerController> players = playerSpawn.GetPlayers();
+      for (int i = 0; i < players.Count; i++)
+      {
+        players[i].ToggleInput(false);
+      }
+
+      //eliminar todos los enemigos
+      enemyManager.KillAllEnemies();
+    }
   }
 
   private void Start()
@@ -61,16 +87,8 @@ public class GameplayController : MonoBehaviour
 
     if (keys >= maxKeysToWin)
     {
-      gameplayUI.OpenWinPanel();
+      enemyManager.StartEnemyWaves();
 
-      List<PlayerController> players = playerSpawn.GetPlayers();
-      for (int i = 0; i < players.Count; i++)
-      {
-        players[i].ToggleInput(false);
-      }
-
-      //eliminar todos los enemigos
-      enemyManager.KillAllEnemies();
     }
   }
 

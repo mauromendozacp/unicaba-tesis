@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class SpiderDamagedState : IEnemyState
+public class SkeletonDamagedState : IEnemyState
 {
-  private readonly SpiderEnemy enemy;
+  private readonly SkeletonEnemy enemy;
 
   public EnemyState State { get; private set; }
-  private const float recoveryTime = 1f;
+  private const float recoveryTime = 1.5f;
 
-  public SpiderDamagedState(SpiderEnemy enemy)
+  public SkeletonDamagedState(SkeletonEnemy enemy)
   {
     this.enemy = enemy;
     State = EnemyState.Damaged;
@@ -34,11 +34,11 @@ public class SpiderDamagedState : IEnemyState
 
     if (enemy.CurrentTarget != null)
     {
-      enemy.ChangeState(new SpiderChaseState(enemy));
+      enemy.ChangeState(new SkeletonChaseState(enemy));
     }
     else
     {
-      enemy.ChangeState(new SpiderIdleState(enemy));
+      enemy.ChangeState(new SkeletonIdleState(enemy));
     }
   }
 }

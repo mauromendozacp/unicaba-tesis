@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpiderAttackState : IEnemyState
+public class SkeletonAttackState : IEnemyState
 {
-  private readonly SpiderEnemy enemy;
+  private readonly SkeletonEnemy enemy;
   private float lastAttackTime;
 
   public EnemyState State { get; private set; }
 
-  public SpiderAttackState(SpiderEnemy enemy)
+  public SkeletonAttackState(SkeletonEnemy enemy)
   {
     this.enemy = enemy;
     State = EnemyState.Attack;
@@ -25,7 +25,7 @@ public class SpiderAttackState : IEnemyState
   {
     if (enemy.CurrentTarget == null || !enemy.isTargetAlive())
     {
-      enemy.ChangeState(new SpiderIdleState(enemy));
+      enemy.ChangeState(new SkeletonIdleState(enemy));
       return;
     }
 
@@ -33,7 +33,7 @@ public class SpiderAttackState : IEnemyState
 
     if (enemy.CurrentTarget != null && enemy.DistanceToTarget() > enemy.AttackRange + 0.5f)
     {
-      enemy.ChangeState(new SpiderChaseState(enemy));
+      enemy.ChangeState(new SkeletonChaseState(enemy));
     }
     else if (Time.time >= lastAttackTime + enemy.AttackCooldown)
     {
@@ -48,18 +48,10 @@ public class SpiderAttackState : IEnemyState
     {
       enemy.Animator.TriggerAttack();
     }
-    enemy.StartCoroutine(ActivateAttackColliderForTime(0.5f));
   }
 
-  private IEnumerator ActivateAttackColliderForTime(float duration)
-  {
-    enemy.SetAttackCollider(true);
-    yield return new WaitForSeconds(duration);
-    enemy.SetAttackCollider(false);
-  }
 
   public void Exit()
   {
-    enemy.SetAttackCollider(false);
   }
 }

@@ -333,10 +333,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6220248
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.019681692}
 --- !u!54 &4376425754726342474
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 15
+  isTerritorial: 0
   moveSpeed: 3.5
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
@@ -405,7 +406,8 @@ MonoBehaviour:
   attackDamage: 40
   attackCooldown: 1
   attackRange: 2
-  chaseRadius: 60
+  chaseRadius: 200
+  maxChaseDistance: 15
   horns: {fileID: 7323482280122064140}
   idleMaterial: {fileID: 2100000, guid: e1a9edba81bf2c0478781fd2f9bdd225, type: 2}
   chaseMaterial: {fileID: 2100000, guid: 2f01972d3f2b9d64ebb1156273a7cc04, type: 2}

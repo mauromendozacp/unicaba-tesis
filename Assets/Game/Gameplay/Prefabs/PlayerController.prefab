@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 213712122916606729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalPosition: {x: 0.389, y: -0.471, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -617,7 +617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultWeaponData: {fileID: 11400000, guid: 816c8970dbc0c3d4585b582ac0d59401, type: 2}
   weaponParent: {fileID: 6940750611022271293}
-  playerUI: {fileID: 3865117997295965762, guid: f56185e9e1054c8459d96f03ff7c7b89, type: 3}
 --- !u!114 &5472234437480224036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,7 +631,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   invincibilityTime: 0.5
-  damagedMaterial: {fileID: 2100000, guid: 609ab27ec00ddff4db00528a99c31f71, type: 2}
 --- !u!114 &1200799538902002149
 MonoBehaviour:
   m_ObjectHideFlags: 0

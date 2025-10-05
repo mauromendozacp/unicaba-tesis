@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class SpiderChaseState : IEnemyState
+public class SkeletonChaseState : IEnemyState
 {
-  private readonly SpiderEnemy enemy;
+  private readonly SkeletonEnemy enemy;
   public EnemyState State { get; private set; }
 
-  public SpiderChaseState(SpiderEnemy enemy)
+  public SkeletonChaseState(SkeletonEnemy enemy)
   {
     this.enemy = enemy;
     State = EnemyState.Chase;
@@ -23,20 +23,20 @@ public class SpiderChaseState : IEnemyState
   {
     if (enemy.CurrentTarget == null || !enemy.isTargetAlive())
     {
-      enemy.ChangeState(new SpiderIdleState(enemy));
+      enemy.ChangeState(new SkeletonIdleState(enemy));
       return;
     }
 
     if (enemy.IsTooFarFromOrigin())
     {
       enemy.StopMovement();
-      enemy.ChangeState(new SpiderIdleState(enemy));
+      enemy.ChangeState(new SkeletonIdleState(enemy));
       return;
     }
 
     if (enemy.CurrentTarget != null && enemy.DistanceToTarget() <= enemy.AttackRange + 0.1f)
     {
-      enemy.ChangeState(new SpiderAttackState(enemy));
+      enemy.ChangeState(new SkeletonAttackState(enemy));
     }
 
     enemy.MoveTo(enemy.CurrentTarget.position);

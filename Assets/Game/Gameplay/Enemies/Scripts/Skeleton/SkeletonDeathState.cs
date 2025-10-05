@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class SpiderDeathState : IEnemyState
+public class SkeletonDeathState : IEnemyState
 {
-  private readonly SpiderEnemy enemy;
+  private readonly SkeletonEnemy enemy;
   public EnemyState State { get; private set; }
 
-  public SpiderDeathState(SpiderEnemy enemy)
+  public SkeletonDeathState(SkeletonEnemy enemy)
   {
     this.enemy = enemy;
     State = EnemyState.Death;
@@ -27,7 +27,7 @@ public class SpiderDeathState : IEnemyState
 
   private IEnumerator DieCoroutine()
   {
-    yield return new WaitForSeconds(3f);
+    yield return new WaitForSeconds(4f);
     enemy.Die();
   }
 }

@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class SpiderEnemy : EnemyBase
 {
-  //[Header("Attack Settings")]
-  //[SerializeField] private Collider attackCollider;
-  //[SerializeField] private float attackDamage = 40f;
-
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
 
@@ -28,10 +24,7 @@ public class SpiderEnemy : EnemyBase
 
   void Start()
   {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = false;
-    }
+    SetAttackCollider(false);
   }
 
   void OnTriggerEnter(Collider other)
