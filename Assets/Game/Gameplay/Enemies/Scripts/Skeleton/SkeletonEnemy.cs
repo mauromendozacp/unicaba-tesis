@@ -16,13 +16,15 @@ public class SkeletonEnemy : EnemyBase
 
   protected override void Awake()
   {
-    animator = GetComponent<SkeletonAnimationController>();
+    //animator = GetComponent<SkeletonAnimationController>();
     base.Awake();
-    ChangeState(new SkeletonIdleState(this));
+    //ChangeState(new SkeletonIdleState(this));
   }
 
   void Start()
   {
+    animator = GetComponent<SkeletonAnimationController>();
+    ChangeState(new SkeletonIdleState(this));
     SetAttackCollider(false);
   }
 

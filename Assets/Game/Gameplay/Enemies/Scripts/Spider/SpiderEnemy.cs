@@ -17,13 +17,15 @@ public class SpiderEnemy : EnemyBase
 
   protected override void Awake()
   {
-    animator = GetComponent<SpiderAnimationController>();
+    //animator = GetComponent<SpiderAnimationController>();
     base.Awake();
-    ChangeState(new SpiderIdleState(this));
+    //ChangeState(new SpiderIdleState(this));
   }
 
   void Start()
   {
+    animator = GetComponent<SpiderAnimationController>();
+    ChangeState(new SpiderIdleState(this));
     SetAttackCollider(false);
   }
 
