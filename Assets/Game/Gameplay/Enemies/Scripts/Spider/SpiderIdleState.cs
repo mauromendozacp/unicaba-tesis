@@ -62,6 +62,6 @@ public class SpiderIdleState : IEnemyState
 
   public void Exit()
   {
-    enemy.Animator.ToggleIdle(false);
+    enemy.Animator?.ToggleIdle(false);
   }
 }

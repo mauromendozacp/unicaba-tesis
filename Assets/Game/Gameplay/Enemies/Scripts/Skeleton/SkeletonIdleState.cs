@@ -62,6 +62,6 @@ public class SkeletonIdleState : IEnemyState
 
   public void Exit()
   {
-    enemy.Animator.ToggleIdle(false);
+    enemy.Animator?.ToggleIdle(false);
   }
 }
