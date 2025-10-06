@@ -3,7 +3,8 @@ using UnityEngine;
 public class Sawblade : MonoBehaviour
 {
   [Tooltip("Cantidad de daño que infligirá la sierra.")]
-  [SerializeField] private float damage = 100f;
+  [SerializeField] private float damage = 65f;
+  [SerializeField][Range(0.0f, 1.0f)] private float maxSpeed = 0.7f;
 
   private Animator sawAnimator;
   private Collider sawCollider;
@@ -18,7 +19,7 @@ public class Sawblade : MonoBehaviour
 
   private void Start()
   {
-    float randomSpeed = Random.Range(0.4f, 0.7f);
+    float randomSpeed = Random.Range(0.6f * maxSpeed, maxSpeed);
     sawAnimator.speed = randomSpeed;
     float randomStartTime = Random.Range(0f, 1f);
     sawAnimator.Play("Sierra", 0, randomStartTime);
