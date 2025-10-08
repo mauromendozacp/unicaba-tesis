@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
         playerHealth.OnDeath += (player) => { animationController.ToggleDead(true); };
         playerHealth.OnDeath += (player) => { onDeath?.Invoke(); };
         playerHealth.OnRevived += (player) => { animationController.ToggleDead(false); };
+        playerHealth.SetInitialData(data.MaxLife);
 
         inputController.onRevive += HandleReviveInput;
 

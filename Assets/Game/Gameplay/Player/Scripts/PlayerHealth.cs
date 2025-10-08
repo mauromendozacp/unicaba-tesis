@@ -5,14 +5,15 @@ using System;
 
 public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 {
-  [SerializeField] private float maxHealth = 100f;
   [SerializeField] private float invincibilityTime = 0.5f;
-  //[SerializeField] private Material damagedMaterial;
+    //[SerializeField] private Material damagedMaterial;
 
-  private float currentHealth;
-  public float Health => currentHealth;
+    private float maxHealth = 0f;
+    private float currentHealth = 0f;
+    private bool isInvincible = false;
 
-  private bool isInvincible = false;
+    public float Health => currentHealth;
+
   //private Material originalMaterial;
   //private Renderer playerRenderer;
   private PlayerInputController inputController;
@@ -28,7 +29,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 
   void Awake()
   {
-    currentHealth = maxHealth;
     //playerRenderer = GetComponentInChildren<Renderer>();
     //originalMaterial = playerRenderer.material;
     inputController = GetComponent<PlayerInputController>();
@@ -97,4 +97,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
     currentHealth = Mathf.Clamp(currentHealth + increaseHealth, 0, maxHealth);
     OnUpdateLife?.Invoke(currentHealth, maxHealth);
   }
+
+    public void SetInitialData(float maxHealth)
+    {
+        this.maxHealth = maxHealth;
+        currentHealth = maxHealth;
+    }
 }

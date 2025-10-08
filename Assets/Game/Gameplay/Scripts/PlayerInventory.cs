@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
             if (slots[i] == null)
             {
                 emptyItemIndex = i;
+                break;
             }
         }
 
