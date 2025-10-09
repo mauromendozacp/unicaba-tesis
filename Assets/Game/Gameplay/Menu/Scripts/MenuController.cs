@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] private PlayerInputManager inputManager = null;
-
     [SerializeField] private GameObject menuPanel = null;
     [SerializeField] private Button playBtn = null;
     [SerializeField] private Button quitBtn = null;
+    [SerializeField] private AudioEvent menuMusic = null;
 
     [SerializeField] private CharacterSelectionController selectionController = null;
 
@@ -21,6 +20,8 @@ public class MenuController : MonoBehaviour
         quitBtn.onClick.AddListener(OnQuit);
 
         selectionController.Init(GoToGameplay, OpenMenu, GetPlayersCount);
+
+        GameManager.Instance.AudioManager.PlayAudio(menuMusic);
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
