@@ -8,21 +8,43 @@ public class Projectile : MonoBehaviour
   [SerializeField] private float damage = 10f;
   [Header("Colisión")]
   [SerializeField] private LayerMask hitMask = ~0; // Paredes + Enemigos
+  [Header("Trail")]
+  [SerializeField] private TrailRenderer trail;
+  [SerializeField] private BulletTrailScriptableObject trailConfig;
 
   private Vector3 direction = Vector3.zero;
   private float timer = 0f;
   private ProjectileObjectPool pool;
 
-  public void SetDirection(Vector3 dir)
+  public void SetPool(ProjectileObjectPool pool)
   {
-    direction = dir.sqrMagnitude > 0f ? dir.normalized : Vector3.zero;
+    this.pool = pool;
   }
-
-  public void SetPool(ProjectileObjectPool p) => pool = p;
 
   private void OnEnable()
   {
     timer = 0f;
+    if (trail != null)
+    {
+      trail.emitting = false;
+      trail.Clear();
+    }
+  }
+
+  public void SetDirection(Vector3 dir)
+  {
+    direction = dir.sqrMagnitude > 0f ? dir.normalized : Vector3.zero;
+    
+    if (trail != null)
+    {
+      if (trailConfig != null) trailConfig.SetupTrail(trail);
+      Invoke(nameof(EnableTrail), 0.02f);
+    }
+  }
+
+  private void EnableTrail()
+  {
+    if (trail != null) trail.emitting = true;
   }
 
   private void Update()
@@ -51,7 +73,6 @@ public class Projectile : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    // Fallback si aparece dentro de un collider
     HandleHit(other);
     ReturnToPool();
   }
@@ -64,12 +85,16 @@ public class Projectile : MonoBehaviour
       if (enemy != null && enemy.IsAlive)
         enemy.TakeDamage(damage);
     }
-    // Para paredes u otros: solo retorno (ya se hace fuera)
   }
 
   private void ReturnToPool()
   {
     direction = Vector3.zero;
+    if (trail != null)
+    {
+      trail.emitting = false;
+      trail.Clear();
+    }
     if (pool != null) pool.ReturnToPool(this);
     else gameObject.SetActive(false);
   }
@@ -78,6 +103,11 @@ public class Projectile : MonoBehaviour
   {
     direction = Vector3.zero;
     timer = 0f;
+    if (trail != null)
+    {
+      trail.emitting = false;
+      trail.Clear();
+    }
   }
 
   public float GetDamage() => damage;
