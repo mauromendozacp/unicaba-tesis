@@ -372,6 +372,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5551013751722654909, guid: a4d258031cdae20459661962d2101213, type: 3}
   m_PrefabInstance: {fileID: 118496689}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &118496691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7679943843893853653, guid: a4d258031cdae20459661962d2101213, type: 3}
+  m_PrefabInstance: {fileID: 118496689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &179554309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,6 +2386,14 @@ PrefabInstance:
     - target: {fileID: 6846122663389668726, guid: bec84358aa3e7284caa85a8d0eb14f37, type: 3}
       propertyPath: itemSpawnSettings.Array.data[0].SpawnPositions.Array.data[3].z
       value: 39.87412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811653140638244634, guid: bec84358aa3e7284caa85a8d0eb14f37, type: 3}
+      propertyPath: m_Size.x
+      value: 2.8081415
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811653140638244634, guid: bec84358aa3e7284caa85a8d0eb14f37, type: 3}
+      propertyPath: m_Center.x
+      value: 1.058226
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4674,7 +4693,7 @@ MonoBehaviour:
   winPanel: {fileID: 2052507867}
   retryBtn: {fileID: 847193186}
   loseMenuBtn: {fileID: 1769345085}
-  nextLevelButton: {fileID: 0}
+  nextLevelButton: {fileID: 118496691}
   keysText: {fileID: 179554310}
 --- !u!114 &2023444856
 MonoBehaviour:
