@@ -39,6 +39,7 @@ public class EnemyManager : MonoBehaviour
   private int currentWaveIndex = 0;
   private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
+  private Dictionary<int, ItemData> dropMap;
   private List<int> dropIndices;
 
   public static EnemyManager Instance;
@@ -174,23 +175,47 @@ public class EnemyManager : MonoBehaviour
     enemiesAlive = enemiesToSpawnInCurrentWave;
 
     dropIndices = new List<int>();
-    int itemsToDrop = currentWave.itemsToDropInWave;
+    dropMap = new Dictionary<int, ItemData>();
 
-    if (itemsToDrop > 0 && enemiesToSpawnInCurrentWave > 0)
+    List<ItemData> totalItemsToDrop = new List<ItemData>();
+    foreach (var itemDrop in currentWave.itemsToDropInWave)
     {
-      int actualDrops = Mathf.Min(itemsToDrop, enemiesToSpawnInCurrentWave);
-      List<int> allIndices = new List<int>();
+      for (int i = 0; i < itemDrop.count; i++)
+      {
+        if (itemDrop.itemData != null)
+        {
+          totalItemsToDrop.Add(itemDrop.itemData);
+        }
+      }
+    }
+
+    // Determinar cuáles de los N enemigos serán los que dropeen
+    int totalDropsCount = totalItemsToDrop.Count;
+
+    if (totalDropsCount > 0 && enemiesToSpawnInCurrentWave > 0)
+    {
+      int actualDrops = Mathf.Min(totalDropsCount, enemiesToSpawnInCurrentWave);
+
+      List<int> availableKillIndices = new List<int>();
       for (int i = 1; i <= enemiesToSpawnInCurrentWave; i++)
       {
-        allIndices.Add(i);
+        availableKillIndices.Add(i);
       }
+
       for (int i = 0; i < actualDrops; i++)
       {
-        int randomIndex = UnityEngine.Random.Range(0, allIndices.Count);
-        dropIndices.Add(allIndices[randomIndex]);
-        allIndices.RemoveAt(randomIndex);
+        ItemData itemToDrop = totalItemsToDrop[i];
+
+        // Seleccionar un índice de muerte aleatorio de los disponibles
+        int randomIndex = UnityEngine.Random.Range(0, availableKillIndices.Count);
+        int killIndex = availableKillIndices[randomIndex];
+
+        // Asignar el ItemData a ese índice de muerte
+        dropMap.Add(killIndex, itemToDrop);
+
+        // Remover el índice para que no se repita
+        availableKillIndices.RemoveAt(randomIndex);
       }
-      dropIndices.Sort();
     }
 
     foreach (var enemySpawn in currentWave.enemiesInWave)
@@ -239,15 +264,20 @@ public class EnemyManager : MonoBehaviour
     enemiesAlive--;
     if (enemiesAlive >= 0)
     {
+      // El índice de muerte es el número de enemigos que han muerto en la oleada (empezando en 1)
       int currentKillIndex = enemiesToSpawnInCurrentWave - enemiesAlive;
-      if (dropIndices != null && dropIndices.Contains(currentKillIndex))
+
+      // Chequear si este índice de muerte estaba en nuestro mapa de drops
+      if (dropMap != null && dropMap.ContainsKey(currentKillIndex))
       {
-        // dropIndices.Remove(currentKillIndex); 
+        ItemData itemToDrop = dropMap[currentKillIndex];
+        //dropMap.Remove(currentKillIndex); // remover la entrada si ya se usó.
+
         if (itemController != null)
         {
           Vector3 itemPosition = new Vector3(enemyPosition.x, 1, enemyPosition.z);
-          itemController.SpawnRandomItem(itemPosition);
-          //Debug.Log($"Item dropped at kill index {currentKillIndex} at position {itemPosition} and wave {currentWaveIndex + 1}");
+          itemController.SpawnItem(itemToDrop, itemPosition);
+          //Debug.Log($"Item '{itemToDrop.name}' dropped at kill index {currentKillIndex} at position {itemPosition} and wave {currentWaveIndex + 1}");
         }
       }
     }
