@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  minimapSprite: {fileID: 7086491850755630856}
+  minimapSprite: {fileID: 3106204495285780420}
 --- !u!54 &6692205599778049418
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -246,8 +246,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7634322616135771606, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
   m_PrefabInstance: {fileID: 7095407933503771141}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &7086491850755630856 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 13428502997398797, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
+--- !u!114 &3106204495285780420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5290752559403888065, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
   m_PrefabInstance: {fileID: 7095407933503771141}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e65782e2015fe48a6447b1128214e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

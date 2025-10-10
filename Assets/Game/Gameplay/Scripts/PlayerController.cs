@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("General Settings")]
     [SerializeField] private PlayerData defaultPlayerData = null;
     [SerializeField] private PlayerItemDetection itemDetection = null;
-    [SerializeField] private SpriteRenderer minimapSprite = null;
+    [SerializeField] private SpriteMinimapIcon minimapSprite = null;
 
     [Header("Weapon System")]
     [SerializeField] private WeaponHolder weaponHolder;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         speed = data.Speed;
 
         //minimapSprite.sprite = data.MinimapIcon;
-        minimapSprite.sprite = minimapIcon;
+        minimapSprite.SetSprite(minimapIcon);
     }
 
     private void Move()

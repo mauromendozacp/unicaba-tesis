@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPlayerData: {fileID: 11400000, guid: bf35f97ec330e064a989250dd6aea213, type: 2}
   itemDetection: {fileID: 3318913069838923435}
-  minimapSprite: {fileID: 176327072811112391}
+  minimapSprite: {fileID: 5418185240411066123}
   weaponHolder: {fileID: -1477880225002385552}
 --- !u!114 &7299379270591168631
 MonoBehaviour:
@@ -849,11 +849,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
---- !u!212 &176327072811112391 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 13428502997398797, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
+--- !u!114 &5418185240411066123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5290752559403888065, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
   m_PrefabInstance: {fileID: 170509716927455946}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e65782e2015fe48a6447b1128214e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7759502423587440412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7634322616135771606, guid: aea79d8b4b8c32544b01c8e4240e4aae, type: 3}
