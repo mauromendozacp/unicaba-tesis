@@ -41,7 +41,7 @@ public class CutoutObject : MonoBehaviour
         Shader.SetGlobalFloat("_FalloffSize", 1.0f);
         return;
 
-        Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
+        /*Vector2 cutoutPos = mainCamera.WorldToViewportPoint(targetObject.position);
         cutoutPos.y /= (Screen.width / Screen.height);
 
         Vector3 offset = targetObject.position - transform.position;
@@ -55,6 +55,6 @@ public class CutoutObject : MonoBehaviour
             {
                 
             }
-        }
+        }*/
     }
 }

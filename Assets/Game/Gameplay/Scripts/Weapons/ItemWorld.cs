@@ -4,6 +4,7 @@ using System;
 public class ItemWorld : MonoBehaviour, IEquipable
 {
   [SerializeField] private ItemData data = null;
+    [SerializeField] private SpriteRenderer minimapSprite = null;
   private GameObject visualInstance = null;
 
   public ItemData Data => data;
@@ -38,6 +39,8 @@ public class ItemWorld : MonoBehaviour, IEquipable
     {
       Debug.LogWarning($"[ItemWorld] ItemData {data.name} no tiene prefab asignado.");
     }
+
+    minimapSprite.sprite = data.MinimapIcon;
   }
 
   public void Get()
