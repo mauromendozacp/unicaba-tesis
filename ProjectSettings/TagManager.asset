@@ -14,9 +14,9 @@ TagManager:
   - Projectile
   - Enemy
   - Item
-  - 
-  - 
-  - 
+  - Wall
+  - Minimap
+  - Floor
   - 
   - 
   - 

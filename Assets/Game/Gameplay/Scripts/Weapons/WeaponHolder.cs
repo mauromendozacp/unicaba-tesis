@@ -6,25 +6,21 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField] private WeaponData defaultWeaponData;
     [SerializeField] private Transform weaponParent;
 
-    [Header("UI")]
-    [SerializeField] private PlayerUI playerUI;
+    private PlayerUI playerUI;
 
     private WeaponBase currentWeapon;
 
     public IWeapon CurrentWeapon => currentWeapon;
 
-    private void Start()
-    {
-        EquipDefaultWeapon();
-    }
-
     public void SetPlayerUI(PlayerUI ui)
     {
         playerUI = ui;
+        EquipDefaultWeapon();
         if (playerUI != null && currentWeapon != null)
         {
             playerUI.SetGunIcon(currentWeapon.Icon);
             playerUI.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+            playerUI.SetGunStatus(currentWeapon.IsDefault);
         }
     }
 
@@ -45,8 +41,9 @@ public class WeaponHolder : MonoBehaviour
         {
             currentWeapon.AddAmmo(weaponInstance.MaxAmmo);
             Destroy(weaponInstance.gameObject);
-            playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
             playerUI?.SetGunIcon(currentWeapon.Icon);
+            playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+            playerUI?.SetGunStatus(currentWeapon.IsDefault);
             return;
         }
 
@@ -62,6 +59,7 @@ public class WeaponHolder : MonoBehaviour
         currentWeapon.OnPickup();
         playerUI?.SetGunIcon(currentWeapon.Icon);
         playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+        playerUI?.SetGunStatus(currentWeapon.IsDefault);
     }
 
     public void DropWeapon()

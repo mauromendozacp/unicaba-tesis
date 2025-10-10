@@ -21,13 +21,20 @@ public class SpiderChaseState : IEnemyState
 
   public void Update()
   {
-    if (enemy.CurrentTarget == null)
+    if (enemy.CurrentTarget == null || !enemy.isTargetAlive())
     {
       enemy.ChangeState(new SpiderIdleState(enemy));
       return;
     }
 
-    if (enemy.CurrentTarget != null && enemy.DistanceToTarget() <= enemy.AttackRange)
+    if (enemy.IsTooFarFromOrigin())
+    {
+      enemy.StopMovement();
+      enemy.ChangeState(new SpiderIdleState(enemy));
+      return;
+    }
+
+    if (enemy.CurrentTarget != null && enemy.DistanceToTarget() <= enemy.AttackRange + 0.1f)
     {
       enemy.ChangeState(new SpiderAttackState(enemy));
     }

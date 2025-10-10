@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 using TMPro;
 
 public class PlayerUI : MonoBehaviour
@@ -11,8 +10,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject limitedAmmo = null;
     [SerializeField] private GameObject unlimitedAmmo = null;
     [SerializeField] private TMP_Text currentAmmo = null;
-
     [SerializeField] private PlayerInventoryUI inventory = null;
+
+    public PlayerInventoryUI Inventory => inventory;
 
     public void SetPlayerIcon(Sprite icon)
     {
@@ -25,6 +25,12 @@ public class PlayerUI : MonoBehaviour
             gunImage.sprite = icon;
     }
 
+    public void SetGunStatus(bool isDefault)
+    {
+        limitedAmmo.SetActive(!isDefault);
+        unlimitedAmmo.SetActive(isDefault);
+    }
+
     public void OnUpdateLife(float life, float maxLife)
     {
         lifebar.fillAmount = life / maxLife;
@@ -32,7 +38,7 @@ public class PlayerUI : MonoBehaviour
 
     public void OnUpdateAmmo(int ammo)
     {
-        currentAmmo.text = ammo.ToString(); 
+        currentAmmo.text = ammo.ToString();
     }
 
     public void ChangeSlot(int index)

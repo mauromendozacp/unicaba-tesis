@@ -6,7 +6,7 @@ public class SpiderAnimationController : MonoBehaviour
   readonly string animAttack = "Attack";
   readonly string animIdle = "Idle";
   readonly string animDeath = "Death";
-  readonly string animJump = "Jump"; // Para el estado de daño (Damaged)
+  readonly string animJump = "Jump";
   private Animator anim = null;
 
   private void Awake()

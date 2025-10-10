@@ -119,4 +119,9 @@ public class EnemyPrototype : EnemyBase
   {
     base.Die();
   }
+
+  public override void Kill()
+  {
+    ChangeState(new DeathState(this));
+  }
 }

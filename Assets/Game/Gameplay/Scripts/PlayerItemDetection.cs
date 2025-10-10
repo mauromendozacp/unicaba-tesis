@@ -17,7 +17,11 @@ public class PlayerItemDetection : MonoBehaviour
         if (Utils.CheckLayerInMask(itemMask, other.gameObject.layer))
         {
             IEquipable itemEquipable = other.GetComponent<IEquipable>();
-            detectedItems.Add(itemEquipable);
+
+            if (itemEquipable != null && itemEquipable.GetItemType() != ItemType.Collectable)
+            {
+                detectedItems.Add(itemEquipable);
+            }
         }
     }
 
@@ -26,7 +30,11 @@ public class PlayerItemDetection : MonoBehaviour
         if (Utils.CheckLayerInMask(itemMask, other.gameObject.layer))
         {
             IEquipable itemEquipable = other.GetComponent<IEquipable>();
-            detectedItems.Remove(itemEquipable);
+
+            if (itemEquipable != null && itemEquipable.GetItemType() != ItemType.Collectable)
+            {
+                detectedItems.Remove(itemEquipable);
+            }
         }
     }
 

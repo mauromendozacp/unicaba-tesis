@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player_Roberto
   m_EditorClassIdentifier: 
   playerName: Roberto
-  maxLife: 500
+  maxLife: 100
   speed: 5
   icon: {fileID: 21300000, guid: 8d0057d69b68af64ba3db201bacc85dd, type: 3}
   prefab: {fileID: 8189980434977739222, guid: 212a5d93ac2c5674baec85a19c7a01c9, type: 3}

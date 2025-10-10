@@ -2,27 +2,43 @@ using UnityEngine;
 
 public class Pistol : WeaponBase
 {
-    [Header("Projectile Settings")]
-    [SerializeField] private ProjectilePool projectilePool;
+    [Header("Setup")]
     [SerializeField] private Transform muzzlePoint;
+    
+    [Header("Projectile")]
+    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private int poolInitialSize = 16;
 
-    private float nextFireTime = 0f;
+    private float nextFireTime;
 
+    // Disparo simple. Munición ilimitada si es default.
     public override void Fire()
     {
         if (Time.time < nextFireTime) return;
+        
+        // Si NO es default, chequea munición normal
+        if (!isDefault)
+        {
+            if (currentAmmo <= 0) return;
+            currentAmmo--;
+        }
+        else
+        {
+            // Asegura que al menos tenga un valor visible > 0 para UI si ésta lo muestra
+            if (currentAmmo <= 0) currentAmmo = 1;
+        }
+
         nextFireTime = Time.time + fireRate;
 
-        if (projectilePool != null && muzzlePoint != null)
-        {
-            Projectile proj = projectilePool.Get();
-            proj.transform.position = muzzlePoint.position;
-            proj.transform.rotation = muzzlePoint.rotation;
-            proj.transform.SetParent(null);
-            proj.SetDirection(muzzlePoint.forward);
-            proj.SetPool(projectilePool);
-        }
-    }
+        if (muzzlePoint == null || projectilePrefab == null) return;
 
-    public override bool IsAmmoEmpty => false; // Nunca se queda sin munición
+        // Obtener (lazy) el pool cada vez: evita problemas de orden de creación
+        var pool = ProjectilePoolManager.Instance?.GetPool(projectilePrefab, poolInitialSize);
+        if (pool == null) return;
+
+        var proj = pool.Get();
+        proj.transform.position = muzzlePoint.position;
+        proj.transform.rotation = muzzlePoint.rotation;
+        proj.SetDirection(muzzlePoint.forward);
+    }
 }

@@ -9,20 +9,23 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] private Transform[] spawnLocations = null;
     [SerializeField] private CinemachineTargetGroup targetGroup = null;
     [SerializeField] private PlayerInputManager playerInputManager = null;
+    [SerializeField] private Sprite[] playerIcons = null;
 
     private Func<int, PlayerUI> onGetPlayerUI = null;
     private Action onPause = null;
     private Action onDeath = null;
+    private Action onCollectKey = null;
     private Action<int> onJoinPlayerUI = null;
 
     private PlayerData[] playersData = new PlayerData[4];
     private readonly List<PlayerInput> players = new List<PlayerInput>();
 
-    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action onDeath, Action<int> onJoinPlayerUI)
+    public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action onDeath, Action onCollectKey, Action<int> onJoinPlayerUI)
     {
         this.onGetPlayerUI = onGetPlayerUI;
         this.onPause = onPause;
         this.onDeath = onDeath;
+        this.onCollectKey = onCollectKey;
         this.onJoinPlayerUI = onJoinPlayerUI;
 
         List<PlayerSelectionData> selectionPlayers = GameManager.Instance.GameDataManager.playersData;
@@ -45,7 +48,7 @@ public class PlayerSpawn : MonoBehaviour
             PlayerController playerController = playerInput.GetComponent<PlayerController>();
             PlayerData data = playersData[index];
 
-            playerController.Init(playerUI, data, onPause, onDeath);
+            playerController.Init(playerUI, data, playerIcons[players.Count], onPause, onDeath, onCollectKey);
 
             Transform playerTransform = spawnLocations[index];
             playerController.transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);

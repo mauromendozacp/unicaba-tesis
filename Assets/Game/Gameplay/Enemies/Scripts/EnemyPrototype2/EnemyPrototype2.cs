@@ -35,17 +35,32 @@ public class EnemyPrototype2 : EnemyBase
 
   public void ShootFireBall()
   {
-    if (fireBallPrefab == null || firePoint == null)
+    if (FireballPoolManager.Instance == null || firePoint == null)
     {
-      Debug.LogError("FireBallPrefab or FirePoint not assigned in EnemyPrototype2.");
+      Debug.LogError("FireballPoolManager.Instance or FirePoint not assigned/available.");
       return;
     }
 
-    GameObject fireBall = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+    GameObject fireBall = FireballPoolManager.Instance.GetFireball();
+    fireBall.transform.position = firePoint.position;
+    fireBall.transform.rotation = firePoint.rotation;
+
+    Rigidbody rb = fireBall.GetComponent<Rigidbody>();
+    if (rb == null)
+    {
+      Debug.LogError("Fireball prefab is missing a Rigidbody component.");
+      FireballPoolManager.Instance.ReleaseFireball(fireBall);
+      return;
+    }
+
     if (CurrentTarget != null)
     {
       Vector3 direction = (CurrentTarget.position - firePoint.position).normalized;
-      fireBall.GetComponent<Rigidbody>().linearVelocity = direction * fireBallSpeed;
+      rb.linearVelocity = direction * fireBallSpeed;
+    }
+    else
+    {
+      rb.linearVelocity = firePoint.forward * fireBallSpeed;
     }
   }
 
@@ -101,5 +116,10 @@ public class EnemyPrototype2 : EnemyBase
   public override void Die()
   {
     base.Die();
+  }
+
+  public override void Kill()
+  {
+    ChangeState(new Prototype2DeathState(this));
   }
 }

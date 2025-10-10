@@ -16,7 +16,6 @@ public class SpiderDeathState : IEnemyState
   {
     enemy.DisableMovementAndCollisions();
     enemy.Animator?.TriggerDeath();
-    //enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, //enemy.transform.rotation.z);
     enemy.StartCoroutine(DieCoroutine());
   }
 

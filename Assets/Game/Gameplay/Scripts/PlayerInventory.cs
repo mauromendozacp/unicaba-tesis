@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
     private ItemData[] slots = new ItemData[3];
     private int selectedIndex = 0;
+    private HashSet<string> keys = new HashSet<string>();
 
     public int SelectedIndex => selectedIndex;
 
@@ -23,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
             if (slots[i] == null)
             {
                 emptyItemIndex = i;
+                break;
             }
         }
 
@@ -64,5 +67,26 @@ public class PlayerInventory : MonoBehaviour
     public ItemData GetItem(int slot)
     {
         return slots[slot];
+    }
+
+    public void AddKey(string doorId)
+    {
+        if (!string.IsNullOrEmpty(doorId))
+        {
+            keys.Add(doorId);
+        }
+    }
+
+    public bool HasKey(string doorId)
+    {
+        return keys.Contains(doorId);
+    }
+
+    public void RemoveKey(string doorId)
+    {
+        if (keys.Contains(doorId))
+        {
+            keys.Remove(doorId);
+        }
     }
 }

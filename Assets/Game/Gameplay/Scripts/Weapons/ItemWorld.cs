@@ -1,42 +1,70 @@
-using System;
 using UnityEngine;
+using System;
 
 public class ItemWorld : MonoBehaviour, IEquipable
 {
-    [SerializeField] private ItemData data = null;
+  [SerializeField] private ItemData data = null;
+    [SerializeField] private SpriteRenderer minimapSprite = null;
+  private GameObject visualInstance = null;
 
-    public ItemData Data => data;
-    public Action<ItemWorld> onRelease = null;
+  public ItemData Data => data;
+  public Action<ItemWorld> onRelease = null;
 
-    private void Start()
+  private void Start()
+  {
+    if (data != null)
     {
-        if (data != null)
-        {
-            SetData(data);
-        }
+      SetData(data);
+    }
+  }
+
+  public void SetData(ItemData newData)
+  {
+    data = newData;
+
+    // Limpia visual anterior
+    if (visualInstance != null)
+    {
+      Destroy(visualInstance);
     }
 
-    public void SetData(ItemData data)
+    // Instancia el prefab visual del ItemData
+    if (data.Prefab != null)
     {
-        this.data = data;
-
-        GameObject item = Instantiate(data.Prefab, transform);
+      visualInstance = Instantiate(data.Prefab, transform);
+      visualInstance.transform.localPosition = data.PositionOffset;
+      visualInstance.transform.localEulerAngles = data.Rotation;
+    }
+    else
+    {
+      Debug.LogWarning($"[ItemWorld] ItemData {data.name} no tiene prefab asignado.");
     }
 
-    public void Get()
-    {
-        gameObject.SetActive(true);
-    }
+    minimapSprite.sprite = data.MinimapIcon;
+  }
 
-    public void Release()
-    {
-        gameObject.SetActive(false);
-    }
+  public void Get()
+  {
+    gameObject.SetActive(true);
+  }
 
-    public ItemData GetItem() => data;
+  public void Release()
+  {
+    gameObject.SetActive(false);
+  }
 
-    public virtual void Equip()
-    {
-        onRelease?.Invoke(this);
-    }
+  public ItemData GetItem()
+  {
+    return data;
+  }
+
+  public void Equip()
+  {
+    onRelease?.Invoke(this);
+  }
+
+  public ItemType GetItemType()
+  {
+    return data.Type;
+  }
 }

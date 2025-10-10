@@ -6,9 +6,13 @@ using System;
 
 public class EnemyManager : MonoBehaviour
 {
-  public event Action<int, int> OnWavesStart;   // Pasa el número total de oleadas
+  public event Action<int, int> OnWavesStart; // Oleada actual, Total de oleadas
   public event Action OnWaveStart;
   public event Action OnWavesEnd;
+
+  [Header("Control de Inicio")]
+  [Tooltip("Si está activado, las oleadas comenzarán automáticamente al inicio del juego. De lo contrario, se deben iniciar llamando a StartEnemyWaves().")]
+  public bool autoStartWaves = false;
 
   [Header("General")]
   [Tooltip("Lista general de todos los prefabs de enemigos.")]
@@ -30,11 +34,12 @@ public class EnemyManager : MonoBehaviour
   [SerializeField] ItemController itemController;
 
   private Dictionary<string, GameObject> enemyPrefabDict;
-  //private IObjectPool<GameObject> enemyPool;
   private Dictionary<string, IObjectPool<GameObject>> enemyPoolDict;
+  private Transform poolParent;
   private int currentWaveIndex = 0;
   private int enemiesToSpawnInCurrentWave;
   private int enemiesAlive;
+  private Dictionary<int, ItemData> dropMap;
   private List<int> dropIndices;
 
   public static EnemyManager Instance;
@@ -44,6 +49,7 @@ public class EnemyManager : MonoBehaviour
     if (Instance == null)
     {
       Instance = this;
+      poolParent = transform;
     }
     else
     {
@@ -68,29 +74,30 @@ public class EnemyManager : MonoBehaviour
       itemController = FindFirstObjectByType<ItemController>();
     }
     InitializePool();
-    StartCoroutine(StartWaves());
+    if (autoStartWaves)
+    {
+      StartEnemyWaves();
+    }
+  }
+
+  public void StartEnemyWaves()
+  {
+    if (waves.Count > 0)
+    {
+      StopCoroutine(nameof(StartWaves));
+      StartCoroutine(nameof(StartWaves));
+    }
   }
 
   void InitializePool()
   {
-    /*
-    enemyPool = new ObjectPool<GameObject>(
-        createFunc: CreatePooledItem,
-        actionOnGet: OnTakeFromPool,
-        actionOnRelease: OnReturnToPool,
-        actionOnDestroy: OnDestroyPoolObject,
-        collectionCheck: false,
-        defaultCapacity: 20,
-        maxSize: poolMaxSize
-    );
-    */
     foreach (GameObject prefab in enemyPrefabs)
     {
       if (!enemyPoolDict.ContainsKey(prefab.name))
       {
         // Crea un pool para cada prefab de enemigo.
         var pool = new ObjectPool<GameObject>(
-            createFunc: () => CreatePooledItem(prefab), // Se pasa el prefab a la función
+            createFunc: () => CreatePooledItem(prefab),
             actionOnGet: OnTakeFromPool,
             actionOnRelease: OnReturnToPool,
             actionOnDestroy: OnDestroyPoolObject,
@@ -103,30 +110,10 @@ public class EnemyManager : MonoBehaviour
     }
   }
 
-  /*
-    private GameObject CreatePooledItem()
-    {
-      if (enemyPrefabs.Count == 0)
-      {
-        Debug.LogError("No hay prefabs de enemigos en la lista general.");
-        return null;
-      }
-
-      GameObject prefabToInstantiate = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
-      GameObject enemy = Instantiate(prefabToInstantiate);
-
-      EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
-      if (enemyScript != null)
-      {
-        enemyScript.SetPool(enemyPool);
-      }
-      return enemy;
-    }
-  */
 
   private GameObject CreatePooledItem(GameObject prefabToInstantiate)
   {
-    GameObject enemy = Instantiate(prefabToInstantiate);
+    GameObject enemy = Instantiate(prefabToInstantiate, poolParent);
 
     EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
     if (enemyScript != null)
@@ -148,14 +135,15 @@ public class EnemyManager : MonoBehaviour
 
   private void OnDestroyPoolObject(GameObject enemy)
   {
-    //Destroy(enemy);
+#if UNITY_EDITOR
     DestroyImmediate(enemy);
+#else
+    Destroy(enemy);
+#endif
   }
 
   IEnumerator StartWaves()
   {
-    //OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
-
     for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
     {
       OnWavesStart?.Invoke(currentWaveIndex + 1, waves.Count);
@@ -187,39 +175,51 @@ public class EnemyManager : MonoBehaviour
     enemiesAlive = enemiesToSpawnInCurrentWave;
 
     dropIndices = new List<int>();
-    int itemsToDrop = currentWave.itemsToDropInWave;
+    dropMap = new Dictionary<int, ItemData>();
 
-    if (itemsToDrop > 0 && enemiesToSpawnInCurrentWave > 0)
+    List<ItemData> totalItemsToDrop = new List<ItemData>();
+    foreach (var itemDrop in currentWave.itemsToDropInWave)
     {
-      int actualDrops = Mathf.Min(itemsToDrop, enemiesToSpawnInCurrentWave);
-      List<int> allIndices = new List<int>();
+      for (int i = 0; i < itemDrop.count; i++)
+      {
+        if (itemDrop.itemData != null)
+        {
+          totalItemsToDrop.Add(itemDrop.itemData);
+        }
+      }
+    }
+
+    // Determinar cuáles de los N enemigos serán los que dropeen
+    int totalDropsCount = totalItemsToDrop.Count;
+
+    if (totalDropsCount > 0 && enemiesToSpawnInCurrentWave > 0)
+    {
+      int actualDrops = Mathf.Min(totalDropsCount, enemiesToSpawnInCurrentWave);
+
+      List<int> availableKillIndices = new List<int>();
       for (int i = 1; i <= enemiesToSpawnInCurrentWave; i++)
       {
-        allIndices.Add(i);
+        availableKillIndices.Add(i);
       }
+
       for (int i = 0; i < actualDrops; i++)
       {
-        int randomIndex = UnityEngine.Random.Range(0, allIndices.Count);
-        dropIndices.Add(allIndices[randomIndex]);
-        allIndices.RemoveAt(randomIndex);
+        ItemData itemToDrop = totalItemsToDrop[i];
+
+        // Seleccionar un índice de muerte aleatorio de los disponibles
+        int randomIndex = UnityEngine.Random.Range(0, availableKillIndices.Count);
+        int killIndex = availableKillIndices[randomIndex];
+
+        // Asignar el ItemData a ese índice de muerte
+        dropMap.Add(killIndex, itemToDrop);
+
+        // Remover el índice para que no se repita
+        availableKillIndices.RemoveAt(randomIndex);
       }
-      dropIndices.Sort();
     }
 
     foreach (var enemySpawn in currentWave.enemiesInWave)
     {
-      /*
-      for (int i = 0; i < enemySpawn.count; i++)
-      {
-        GameObject enemyToSpawn = enemyPool.Get();
-        if (enemyToSpawn != null)
-        {
-          // Reiniciar la posición y otros estados del enemigo
-          enemyToSpawn.transform.position = GetRandomSpawnPosition();
-          enemyToSpawn.SetActive(true);
-        }
-      }
-      */
       string enemyPrefabName = enemySpawn.enemyPrefab.name;
       if (enemyPoolDict.ContainsKey(enemyPrefabName))
       {
@@ -264,17 +264,38 @@ public class EnemyManager : MonoBehaviour
     enemiesAlive--;
     if (enemiesAlive >= 0)
     {
+      // El índice de muerte es el número de enemigos que han muerto en la oleada (empezando en 1)
       int currentKillIndex = enemiesToSpawnInCurrentWave - enemiesAlive;
-      if (dropIndices != null && dropIndices.Contains(currentKillIndex))
+
+      // Chequear si este índice de muerte estaba en nuestro mapa de drops
+      if (dropMap != null && dropMap.ContainsKey(currentKillIndex))
       {
-        // dropIndices.Remove(currentKillIndex); 
+        ItemData itemToDrop = dropMap[currentKillIndex];
+        //dropMap.Remove(currentKillIndex); // remover la entrada si ya se usó.
+
         if (itemController != null)
         {
           Vector3 itemPosition = new Vector3(enemyPosition.x, 1, enemyPosition.z);
-          itemController.SpawnRandomItem(itemPosition);
-          //Debug.Log($"Item dropped at kill index {currentKillIndex} at position {itemPosition} and wave {currentWaveIndex + 1}");
+          itemController.SpawnItem(itemToDrop, itemPosition);
+          //Debug.Log($"Item '{itemToDrop.name}' dropped at kill index {currentKillIndex} at position {itemPosition} and wave {currentWaveIndex + 1}");
         }
       }
+    }
+  }
+
+  public void KillAllEnemies()
+  {
+    StopAllCoroutines();
+    EnemyBase[] activeEnemies = FindObjectsByType<EnemyBase>(FindObjectsSortMode.None);
+
+    foreach (EnemyBase enemy in activeEnemies)
+    {
+      if (enemy.IsAlive)
+      {
+        enemy.Kill();
+      }
+
+      enemiesAlive = 0;
     }
   }
 }

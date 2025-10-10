@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class SpiderEnemy : EnemyBase
 {
-  //[Header("Attack Settings")]
-  //[SerializeField] private Collider attackCollider;
-  //[SerializeField] private float attackDamage = 40f;
-
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
 
@@ -21,17 +17,16 @@ public class SpiderEnemy : EnemyBase
 
   protected override void Awake()
   {
-    animator = GetComponent<SpiderAnimationController>();
+    //animator = GetComponent<SpiderAnimationController>();
     base.Awake();
-    ChangeState(new SpiderIdleState(this));
+    //ChangeState(new SpiderIdleState(this));
   }
 
   void Start()
   {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = false;
-    }
+    animator = GetComponent<SpiderAnimationController>();
+    ChangeState(new SpiderIdleState(this));
+    SetAttackCollider(false);
   }
 
   void OnTriggerEnter(Collider other)
@@ -71,5 +66,10 @@ public class SpiderEnemy : EnemyBase
     {
       attackCollider.enabled = active;
     }
+  }
+
+  public override void Kill()
+  {
+    ChangeState(new SpiderDeathState(this));
   }
 }
