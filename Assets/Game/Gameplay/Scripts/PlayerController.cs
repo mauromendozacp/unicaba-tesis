@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("General Settings")]
     [SerializeField] private PlayerData defaultPlayerData = null;
     [SerializeField] private PlayerItemDetection itemDetection = null;
+    [SerializeField] private SpriteMinimapIcon minimapSprite = null;
 
     [Header("Weapon System")]
     [SerializeField] private WeaponHolder weaponHolder;
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
         HandleFireInput();
     }
 
-    public void Init(PlayerUI playerUI, PlayerData data, Action onPause, Action onDeath, Action onCollectKey)
+    public void Init(PlayerUI playerUI, PlayerData data, Sprite minimapIcon, Action onPause, Action onDeath, Action onCollectKey)
     {
         this.playerUI = playerUI;
         this.onPause = onPause;
@@ -98,6 +99,9 @@ public class PlayerController : MonoBehaviour
 
         this.playerUI.SetPlayerIcon(data.Icon);
         speed = data.Speed;
+
+        //minimapSprite.sprite = data.MinimapIcon;
+        minimapSprite.SetSprite(minimapIcon);
     }
 
     private void Move()

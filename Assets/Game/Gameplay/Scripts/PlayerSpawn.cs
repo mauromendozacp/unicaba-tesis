@@ -9,6 +9,7 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] private Transform[] spawnLocations = null;
     [SerializeField] private CinemachineTargetGroup targetGroup = null;
     [SerializeField] private PlayerInputManager playerInputManager = null;
+    [SerializeField] private Sprite[] playerIcons = null;
 
     private Func<int, PlayerUI> onGetPlayerUI = null;
     private Action onPause = null;
@@ -47,7 +48,7 @@ public class PlayerSpawn : MonoBehaviour
             PlayerController playerController = playerInput.GetComponent<PlayerController>();
             PlayerData data = playersData[index];
 
-            playerController.Init(playerUI, data, onPause, onDeath, onCollectKey);
+            playerController.Init(playerUI, data, playerIcons[players.Count], onPause, onDeath, onCollectKey);
 
             Transform playerTransform = spawnLocations[index];
             playerController.transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);
