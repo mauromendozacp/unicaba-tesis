@@ -673,12 +673,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1953264ea672f243903efb1097a410d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimLayers:
+  floorLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
-  graphicsRoot: {fileID: 0}
-  fireRoot: {fileID: 0}
+    m_Bits: 2048
   mouseDeadZoneRadius: 1.5
+  stickDeadZone: 0.25
 --- !u!54 &8390846258433141028
 Rigidbody:
   m_ObjectHideFlags: 0
