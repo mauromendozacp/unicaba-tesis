@@ -7,6 +7,7 @@ public class DamagedState : IEnemyState
   private readonly EnemyPrototype enemy;
   private const float knockbackForce = 5f;
   public EnemyState State { get; private set; }
+  private const float recoveryTime = 0.15f;
 
   public DamagedState(EnemyPrototype enemy)
   {
@@ -16,8 +17,9 @@ public class DamagedState : IEnemyState
 
   public void Enter()
   {
-    enemy.ApplyKnockbackForce();
-    enemy.ChangeMaterial();
+    //enemy.ApplyKnockbackForce();
+    enemy.ToggleDamageMaterial(true);
+    //enemy.ChangeMaterial();
     enemy.StartCoroutine(ReturnToPreviousState());
   }
 
@@ -25,12 +27,20 @@ public class DamagedState : IEnemyState
 
   public void Exit()
   {
-    enemy.ResetKnockbackForce();
+    //enemy.ResetKnockbackForce();
+    enemy.ToggleDamageMaterial(false);
   }
 
   private IEnumerator ReturnToPreviousState()
   {
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(recoveryTime);
+
+    if (!enemy.IsAlive)
+    {
+      enemy.ChangeState(new DeathState(enemy));
+      yield return null;
+    }
+
     /*if (enemy.CurrentTarget != null)
     {
       enemy.ChangeState(new ChaseState(enemy));

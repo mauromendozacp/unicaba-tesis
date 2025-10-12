@@ -8,8 +8,8 @@ public class EnemyPrototype2 : EnemyBase
   [SerializeField] Material chaseMaterial;
   [SerializeField] Material attackMaterial;
 
-  [SerializeField] Material damagedMaterial;
-  Material originalMaterial;
+  //[SerializeField] Material damagedMaterial;
+  //Material originalMaterial;
 
   [Header("Long Range Attack Settings")]
   [SerializeField] GameObject fireBallPrefab;
@@ -30,7 +30,7 @@ public class EnemyPrototype2 : EnemyBase
   {
     base.Awake();
     originalMaterial = GetComponentInChildren<Renderer>().material;
-    ChangeState(new Prototype2IdleState(this));
+    //ChangeState(new Prototype2IdleState(this));
   }
 
   public void ShootFireBall()
@@ -66,8 +66,11 @@ public class EnemyPrototype2 : EnemyBase
 
   public override void TakeDamage(float damage)
   {
+    if (!IsAlive) return;
     base.TakeDamage(damage);
+    ChangeState(new Prototype2DamagedState(this));
 
+    /*
     if (currentHealth <= 0)
     {
       ChangeState(new Prototype2DeathState(this));
@@ -76,6 +79,7 @@ public class EnemyPrototype2 : EnemyBase
     {
       ChangeState(new Prototype2DamagedState(this));
     }
+    */
   }
 
   public void ChangeMaterial()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.AI;
@@ -27,13 +28,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   public float currentSpeed;
   public float CurrentSpeed => currentSpeed;
 
-
-  public float AttackCooldown => attackCooldown;
-
+  [Header("Damage Settings")]
   [SerializeField] float knockbackForceMultiplier = 0.5f;
+  [SerializeField] protected List<Renderer> damageRenderer;
+  [SerializeField] protected Material damagedMaterial;
+  protected Material originalMaterial;
 
   [Header("Attack Settings")]
   [SerializeField] protected Collider attackCollider;
+  public float AttackCooldown => attackCooldown;
   [SerializeField] protected float attackDamage = 40f;
   [SerializeField] protected float attackCooldown = 1f;
 
@@ -65,19 +68,37 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
   protected virtual void Awake()
   {
-    currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
-    currentHealth = maxHealth;
-    initialPosition = transform.position;
     rb = GetComponent<Rigidbody>();
     agent = GetComponent<NavMeshAgent>();
     selfCollider = GetComponent<Collider>();
+  }
 
+  protected virtual void Start()
+  {
+    currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
+    currentHealth = maxHealth;
+    initialPosition = transform.position;
     if (agent != null)
     {
       agent.speed = currentSpeed;
       agent.stoppingDistance = 0.1f;
       //agent.stoppingDistance = attackRange * 0.8f;
       agent.updateRotation = true; // El agente maneja la rotación
+    }
+    if (damageRenderer != null && damageRenderer.Count > 0 && damagedMaterial != null)
+    {
+      originalMaterial = damageRenderer[0].material;
+    }
+  }
+
+  public void ToggleDamageMaterial(bool active)
+  {
+    if (damageRenderer != null && damagedMaterial != null && originalMaterial != null)
+    {
+      foreach (var renderer in damageRenderer)
+      {
+        renderer.material = active ? damagedMaterial : originalMaterial;
+      }
     }
   }
 
@@ -216,6 +237,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
+  public void ToggleSelfCollider(bool active)
+  {
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = active;
+    }
+  }
 
 
   public void EnableMovementAndCollisions()
@@ -323,5 +351,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     float maxDistanceSqr = effectiveMaxDistance * effectiveMaxDistance;
 
     return distanceSqr > maxDistanceSqr;
+  }
+
+  public void SetAttackCollider(bool active)
+  {
+    if (attackCollider != null)
+    {
+      attackCollider.enabled = active;
+    }
   }
 }

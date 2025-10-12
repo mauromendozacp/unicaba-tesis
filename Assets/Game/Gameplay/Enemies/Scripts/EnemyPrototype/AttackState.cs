@@ -17,7 +17,7 @@ public class AttackState : IEnemyState
 
   public void Enter()
   {
-    enemy.ChangeMaterial();
+    //enemy.ChangeMaterial();
     lastAttackTime = Time.time;
     PerformAttack();
   }

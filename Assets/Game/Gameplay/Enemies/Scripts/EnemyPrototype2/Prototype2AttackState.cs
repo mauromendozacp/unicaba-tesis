@@ -16,7 +16,7 @@ public class Prototype2AttackState : IEnemyState
 
   public void Enter()
   {
-    enemy.ChangeMaterial();
+    //enemy.ChangeMaterial();
     enemy.StopAllCoroutines(); // Detener cualquier coroutine previa, como la de retroceso
     lastAttackTime = Time.time;
     PerformAttack();

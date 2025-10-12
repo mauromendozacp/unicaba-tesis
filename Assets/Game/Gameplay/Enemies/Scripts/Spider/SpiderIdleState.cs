@@ -28,6 +28,7 @@ public class SpiderIdleState : IEnemyState
     if (enemy.CurrentTarget != null && !enemy.IsTooFarFromOrigin())
     {
       enemy.ChangeState(new SpiderChaseState(enemy));
+      return;
     }
 
     if (enemy.IsTerritorial)
