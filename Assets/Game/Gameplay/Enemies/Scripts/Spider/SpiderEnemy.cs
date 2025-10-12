@@ -22,10 +22,11 @@ public class SpiderEnemy : EnemyBase
     //ChangeState(new SpiderIdleState(this));
   }
 
-  void Start()
+  protected override void Start()
   {
+    base.Start();
     animator = GetComponent<SpiderAnimationController>();
-    ChangeState(new SpiderIdleState(this));
+    //ChangeState(new SpiderIdleState(this));
     SetAttackCollider(false);
   }
 
@@ -48,8 +49,11 @@ public class SpiderEnemy : EnemyBase
 
   public override void TakeDamage(float damage)
   {
+    if (!IsAlive) return;
     base.TakeDamage(damage);
+    ChangeState(new SpiderDamagedState(this));
 
+    /*
     if (currentHealth <= 0)
     {
       ChangeState(new SpiderDeathState(this));
@@ -58,15 +62,9 @@ public class SpiderEnemy : EnemyBase
     {
       ChangeState(new SpiderDamagedState(this));
     }
+    */
   }
 
-  public void SetAttackCollider(bool active)
-  {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = active;
-    }
-  }
 
   public override void Kill()
   {

@@ -817,6 +817,9 @@ MonoBehaviour:
   moveSpeed: 3
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
+  damageRenderer:
+  - {fileID: 2210901811999984785}
+  damagedMaterial: {fileID: 2100000, guid: 3e202341f1fa2e842b0070c960b4da73, type: 2}
   attackCollider: {fileID: 6827411991035214664}
   attackDamage: 20
   attackCooldown: 2
@@ -827,7 +830,6 @@ MonoBehaviour:
   idleMaterial: {fileID: 2100000, guid: e1a9edba81bf2c0478781fd2f9bdd225, type: 2}
   chaseMaterial: {fileID: 2100000, guid: 2f01972d3f2b9d64ebb1156273a7cc04, type: 2}
   attackMaterial: {fileID: 2100000, guid: 609ab27ec00ddff4db00528a99c31f71, type: 2}
-  damagedMaterial: {fileID: 2100000, guid: 609ab27ec00ddff4db00528a99c31f71, type: 2}
 --- !u!195 &1652774689973977980
 NavMeshAgent:
   m_ObjectHideFlags: 0

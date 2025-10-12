@@ -37,6 +37,7 @@ public class SpiderChaseState : IEnemyState
     if (enemy.CurrentTarget != null && enemy.DistanceToTarget() <= enemy.AttackRange + 0.1f)
     {
       enemy.ChangeState(new SpiderAttackState(enemy));
+      return;
     }
 
     enemy.MoveTo(enemy.CurrentTarget.position);

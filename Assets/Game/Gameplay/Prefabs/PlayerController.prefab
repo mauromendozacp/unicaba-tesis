@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa8475d2712e0846bce83d9f4397ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reviveTime: 6
+  reviveTime: 4
   reviveDetectRange: 1.5
   reviveAmount: 75
   reviveEffectSphere: {fileID: 4820101794760116565}
