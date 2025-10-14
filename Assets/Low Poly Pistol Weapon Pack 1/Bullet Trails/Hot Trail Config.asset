@@ -36,8 +36,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Time: 0.5
-  MinVertexDistance: 0.1
+  Time: 0.15
+  MinVertexDistance: 0.05
   ColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -65,6 +65,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   Material: {fileID: 2100000, guid: 0648951e0b6613b458ad52951cd0413b, type: 2}

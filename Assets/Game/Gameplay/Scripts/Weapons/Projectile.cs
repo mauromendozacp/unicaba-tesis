@@ -29,12 +29,12 @@ public class Projectile : MonoBehaviour
       trail.emitting = false;
       trail.Clear();
     }
+    Physics.IgnoreLayerCollision(gameObject.layer, gameObject.layer, true);
   }
 
   public void SetDirection(Vector3 dir)
   {
     direction = dir.sqrMagnitude > 0f ? dir.normalized : Vector3.zero;
-    
     if (trail != null)
     {
       if (trailConfig != null) trailConfig.SetupTrail(trail);
@@ -52,15 +52,12 @@ public class Projectile : MonoBehaviour
     if (direction != Vector3.zero)
     {
       Vector3 step = direction * speed * Time.deltaTime;
-
-      // Raycast anti túnel
       if (Physics.Raycast(transform.position, direction, out RaycastHit hit, step.magnitude, hitMask, QueryTriggerInteraction.Ignore))
       {
         HandleHit(hit.collider);
         ReturnToPool();
         return;
       }
-
       transform.position += step;
     }
 
