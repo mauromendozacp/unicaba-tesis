@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkeletonEnemy : EnemyBase
+public class SkeletonEnemy : EnemySoldier
 {
   SkeletonAnimationController animator;
   public SkeletonAnimationController Animator => animator;

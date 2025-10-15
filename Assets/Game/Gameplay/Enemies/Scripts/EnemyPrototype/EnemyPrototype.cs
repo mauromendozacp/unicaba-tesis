@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-public class EnemyPrototype : EnemyBase
+public class EnemyPrototype : EnemySoldier
 {
   [SerializeField] GameObject horns;
   [SerializeField] Material idleMaterial;

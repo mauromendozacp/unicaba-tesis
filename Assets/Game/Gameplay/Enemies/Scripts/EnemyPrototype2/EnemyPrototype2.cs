@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyPrototype2 : EnemyBase
+public class EnemyPrototype2 : EnemySoldier
 {
   [SerializeField] GameObject horns;
   [SerializeField] Material idleMaterial;

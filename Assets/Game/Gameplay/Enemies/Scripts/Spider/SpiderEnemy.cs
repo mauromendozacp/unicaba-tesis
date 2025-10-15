@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpiderEnemy : EnemyBase
+public class SpiderEnemy : EnemySoldier
 {
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
