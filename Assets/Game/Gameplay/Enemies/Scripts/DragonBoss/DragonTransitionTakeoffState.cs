@@ -14,8 +14,8 @@ public class DragonTransitionTakeoffState : IState
 
   public void OnEnter()
   {
-    //_boss.animator.Play("takeoff");
     _boss.Animator.SetTrigger("TakeOff");
+    //Debug.Log($"#{_boss.stateChangeCounter} Trigger TakeOff activado");
     _boss.Rb.useGravity = false; // Desactivar gravedad para volar
   }
 

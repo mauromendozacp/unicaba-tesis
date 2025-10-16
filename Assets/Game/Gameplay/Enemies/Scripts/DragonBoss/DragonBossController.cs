@@ -1,6 +1,24 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using Unity.VisualScripting;
 
+public enum CombatStance
+{
+  NEUTRAL = 0,
+
+  // Estados agresivos
+  Aggressive,     // Atacando activamente, alta frecuencia de ataques
+  ENRAGED,        // Furia total, daño y velocidad maximizados
+  FocusAttack,    // Enfocado en un ataque específico o en un objetivo
+
+  // Estados defensivos o de utilidad
+  Defensive,      // Recibiendo poco daño, cubriéndose
+  Vulnerable,     // Acaba de fallar un ataque, expuesto, recibiendo más daño
+  Regeneration,   // Recuperando vida o armadura
+  Summoning,      // Invocando esbirros
+  Charging        // Cargando un ataque grande o habilidad especial
+}
 public class DragonBossController : EnemyBase
 {
   [Header("Componentes")]
@@ -15,17 +33,33 @@ public class DragonBossController : EnemyBase
   public Collider FlameCollider => _flameCollider;
   public Collider BiteCollider => _biteCollider;
 
+
   [Header("Estadísticas")]
   public float groundMoveSpeed = 4f;
   public float airMoveSpeed = 8f;
   public float rotationSpeed = 10f;
 
+  [SerializeField][Tooltip("Velocidad de rotación de seguimiento cuando tira el aliento de fuego.")] float _attackRotationSpeed = 1f;
+  public float AttackRotationSpeed => _attackRotationSpeed;
+
+  public float FireballSpeed = 6.0f;
+
+  public Transform FireballSpawnPoint;
+
   public override Transform CurrentTarget => currentTargetDamageable != null && currentTargetDamageable.IsAlive ? (currentTargetDamageable as MonoBehaviour).transform : null;
 
   IState currentState;
+  CombatStance currentStance = CombatStance.NEUTRAL;
   DragonStateFactory stateFactory;
 
   public Rigidbody Rb => rb;
+
+  public event Action OnDragonBossDeath;
+
+  [SerializeField][Tooltip("Umbral de vida para entrar en modo furia (30%).")] float enragedHealthThreshold = 0.3f;
+  [SerializeField][Tooltip("Umbral de daño acumuladodo para intentar escapar volando (5%) en modo furia.")] float damageToEscapeThreshold = 0.05f;
+  float damageToEscape = 0f;
+
 
   protected override void Awake()
   {
@@ -57,7 +91,7 @@ public class DragonBossController : EnemyBase
     currentState?.OnExit();
     currentState = newState;
     currentState.OnEnter();
-    Debug.Log($"Estado del Dragón cambiado a: {newState.GetType().Name}");
+    //Debug.Log($"#{++stateChangeCounter} Estado del Dragón cambiado a: {newState.GetType().Name}");
   }
 
 
@@ -70,12 +104,25 @@ public class DragonBossController : EnemyBase
     if (currentHealth <= 0)
     {
       ChangeState(stateFactory.Die());
+      return;
     }
-    else if (currentHealth <= maxHealth * 0.3f && !IsAirState(currentState))
+
+    if (currentStance == CombatStance.ENRAGED)
     {
-      // Transición a FASE 3 (Furia) forzada al 30% de vida si está en tierra
-      ChangeState(stateFactory.TransitionTakeoff());
+      damageToEscape -= damage;
+      if (!IsAirState(currentState) && damageToEscape <= 0)
+      {
+        damageToEscape = maxHealth * damageToEscapeThreshold;
+        ChangeState(stateFactory.TransitionTakeoff());
+        return;
+      }
     }
+    else if (currentHealth <= maxHealth * enragedHealthThreshold)
+    {
+      Debug.Log("El Dragón entra en modo Furia!");
+      currentStance = CombatStance.ENRAGED;
+    }
+
   }
 
   private bool IsAirState(IState state)
@@ -135,7 +182,7 @@ public class DragonBossController : EnemyBase
 
   void OnTriggerEnter(Collider other)
   {
-    Debug.Log($"DragonBossController: OnTriggerEnter con {other.name}");
+    //Debug.Log($"DragonBossController: OnTriggerEnter con {other.name}");
     if (other.CompareTag("Player"))
     {
       IDamageable player = other.GetComponent<IDamageable>();
@@ -151,5 +198,34 @@ public class DragonBossController : EnemyBase
     ToggleDamageMaterial(true);
     yield return new WaitForSeconds(0.05f);
     ToggleDamageMaterial(false);
+
+  }
+
+  public override void Die()
+  {
+    OnDragonBossDeath?.Invoke();
+    Debug.Log("El Dragón ha muerto.");
+    rb.isKinematic = true;
+    enabled = false;
+    _hitBoxCollider.enabled = false;
+    transform.Find("MinimapIcon")?.gameObject.SetActive(false);
+  }
+
+
+
+
+  /* Debug */
+  [HideInInspector] public Vector3 CurrentRepositionTarget { get; set; } = Vector3.zero;
+  [HideInInspector] public int stateChangeCounter = 0;
+
+  private void OnDrawGizmos()
+  {
+    if (CurrentRepositionTarget != Vector3.zero)
+    {
+      Gizmos.color = Color.yellow;
+      Gizmos.DrawLine(transform.position, CurrentRepositionTarget);
+      Gizmos.color = Color.red;
+      Gizmos.DrawSphere(CurrentRepositionTarget, 1f);
+    }
   }
 }

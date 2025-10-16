@@ -15,6 +15,7 @@ public class DragonTransitionLandingState : IState
   {
     //_boss.animator.Play("lands");
     _boss.Animator.SetTrigger("Lands");
+    //Debug.Log($"#{_boss.stateChangeCounter} Trigger Lands activado");
     _boss.Rb.useGravity = true; // Reactivar gravedad (cae hacia el suelo)
   }
 

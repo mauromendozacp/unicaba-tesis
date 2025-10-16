@@ -16,6 +16,7 @@ public class DragonGroundMoveState : IState
   public void OnEnter()
   {
     _boss.Animator.SetBool("Walk", true);
+    //Debug.Log($"#{_boss.stateChangeCounter} Bool Walk VERDADERO");
     _boss.Rb.useGravity = true;
   }
 
@@ -66,6 +67,7 @@ public class DragonGroundMoveState : IState
   public void OnExit()
   {
     _boss.Animator.SetBool("Walk", false);
+    //Debug.Log($"#{_boss.stateChangeCounter} Bool Walk FALSO");
     _boss.Rb.linearVelocity = Vector3.zero;
   }
 }

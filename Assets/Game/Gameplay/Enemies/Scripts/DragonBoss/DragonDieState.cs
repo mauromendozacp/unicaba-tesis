@@ -13,21 +13,15 @@ public class DragonDieState : IState
 
   public void OnEnter()
   {
-    //_boss.animator.Play("die");
     _boss.Animator.SetTrigger("Die");
+    //Debug.Log($"#{_boss.stateChangeCounter} Trigger Die activado");
     _boss.Rb.linearVelocity = Vector3.zero;
     _boss.Rb.useGravity = true;
 
-    // Desactivar el control de la IA
-    _boss.enabled = false;
-
-    Debug.Log("¡El Dragón ha sido derrotado!");
+    _boss.Die();
   }
 
-  public void Tick()
-  {
-    // Se podría añadir lógica de fade-out o explosión aquí
-  }
+  public void Tick() { }
 
-  public void OnExit() { } // Nunca se sale del estado de muerte
+  public void OnExit() { }
 }
