@@ -19,6 +19,7 @@ public class DragonAirHoverAttackState : IState
   {
     //_boss.animator.Play("hover");
     _boss.Animator.SetBool("Hover", true);
+    //Debug.Log($"#{_boss.stateChangeCounter} Bool Hover VERDADERO");
     _boss.Rb.linearVelocity = Vector3.zero; // Se queda flotando en su lugar
     _boss.Rb.useGravity = false;
     _timer = _attackDuration;
@@ -38,14 +39,14 @@ public class DragonAirHoverAttackState : IState
       Vector3 targetFlatPos = new Vector3(target.position.x, _boss.transform.position.y, target.position.z);
       Vector3 flatDirection = (targetFlatPos - _boss.transform.position).normalized;
       Quaternion lookRotation = Quaternion.LookRotation(flatDirection);
-      _boss.transform.rotation = Quaternion.Slerp(_boss.transform.rotation, lookRotation, Time.deltaTime * _boss.rotationSpeed);
+      _boss.transform.rotation = Quaternion.Slerp(_boss.transform.rotation, lookRotation, Time.deltaTime * _boss.rotationSpeed / 5);
     }
 
     if (_bombTimer <= 0)
     {
       // Lógica de "Bombardeo":
       // Aquí llamarías a una función para instanciar una bola de fuego que caiga
-      Debug.Log("DRAGÓN BOMBARDEANDO al objetivo.");
+      //Debug.Log("DRAGÓN BOMBARDEANDO al objetivo.");
       _bombTimer = _bombDropInterval;
     }
 
@@ -66,5 +67,6 @@ public class DragonAirHoverAttackState : IState
   public void OnExit()
   {
     _boss.Animator.SetBool("Hover", false);
+    //Debug.Log($"#{_boss.stateChangeCounter} Bool Hover FALSO");
   }
 }

@@ -17,6 +17,7 @@ public class DragonGroundIdleState : IState
   public void OnEnter()
   {
     _boss.Animator.SetBool("IdleSimple", true);
+    //Debug.Log($"#{_boss.stateChangeCounter} Bool IdleSimple VERDADERO");
     _timer = Random.Range(_minIdle, _maxIdle);
     _boss.Rb.linearVelocity = Vector3.zero;
     _boss.Rb.useGravity = true;
@@ -29,7 +30,7 @@ public class DragonGroundIdleState : IState
 
     if (_timer <= 0)
     {
-      Debug.Log(_boss.CurrentTarget);
+      //Debug.Log(_boss.CurrentTarget);
       if (_boss.CurrentTarget == null)
       {
         _boss.ChangeState(_factory.TransitionTakeoff());
@@ -37,12 +38,16 @@ public class DragonGroundIdleState : IState
       }
 
       // Decisión de IA simple: Moverse o Despegue
-      int action = Random.Range(0, 1);
+      int action = Random.Range(0, 4);
+      //int action = 3;
 
       if (action <= 1)
         _boss.ChangeState(_factory.GroundMove());
       else if (action == 2)
         _boss.ChangeState(_factory.TransitionTakeoff());
+      else if (action == 3)
+        _boss.ChangeState(_factory.GroundAttack("FireBall"));
+
       /*
       else if (action == 3)
         _boss.ChangeState(_factory.GroundAttack("Bite"));
@@ -55,5 +60,6 @@ public class DragonGroundIdleState : IState
   public void OnExit()
   {
     _boss.Animator.SetBool("IdleSimple", false);
+    //Debug.Log($"#{_boss.stateChangeCounter} Bool IdleSimple FALSO");
   }
 }
