@@ -59,10 +59,15 @@ public class FireballPoolManager : MonoBehaviour
   private void OnReturnedToPool(GameObject fireball)
   {
     fireball.SetActive(false);
-    // Restablece cualquier estado que necesite ser limpiado
-    // Por ejemplo, si el Fireball tuviera un Rigidbody, podrías hacer:
-    // fireball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-    // fireball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    Rigidbody rb = fireball.GetComponent<Rigidbody>();
+    if (rb != null)
+    {
+      rb.linearVelocity = Vector3.zero;
+      rb.angularVelocity = Vector3.zero;
+      fireball.transform.position = Vector3.zero;
+      fireball.transform.rotation = Quaternion.identity;
+      rb.useGravity = false;
+    }
   }
 
   private void OnTakeFromPool(GameObject fireball)

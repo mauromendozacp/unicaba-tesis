@@ -17,12 +17,10 @@ public class DragonAirFlyRepositionState : IState
   public void OnEnter()
   {
     _boss.Animator.SetBool("FlyingFWD", true);
-    //Debug.Log($"#{_boss.stateChangeCounter} Bool FlyingFWD VERDADERO");
     _timer = _repositionTime;
 
     // Elegir una posición aleatoria y alta en la arena para reposicionarse
     Vector3 currentPosition = _boss.transform.position;
-
     Vector3 newTargetPosition;
     float minDistanceSquared = 15f * 15f;
     float distanceSquared;
@@ -58,7 +56,11 @@ public class DragonAirFlyRepositionState : IState
 
     if (_timer <= 0)
     {
-      if (Random.value > 0.6f)
+      if(_boss.CurrentTarget == null)
+      {
+        _boss.ChangeState(_factory.TransitionLanding());
+      }
+      else if ( Random.value > 0.6f)
       {
         _boss.ChangeState(_factory.TransitionLanding());
       }
@@ -72,7 +74,6 @@ public class DragonAirFlyRepositionState : IState
   public void OnExit()
   {
     _boss.Animator.SetBool("FlyingFWD", false);
-    //Debug.Log($"#{_boss.stateChangeCounter} Bool FlyingFWD FALSO");
     _boss.Rb.linearVelocity = Vector3.zero;
 
     /* Debug */

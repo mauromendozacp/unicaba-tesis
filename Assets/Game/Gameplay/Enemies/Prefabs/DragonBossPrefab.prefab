@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 48294508159276475}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.69, z: 7.41}
-  m_LocalScale: {x: 1, y: 4.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.69, z: 8.5678}
+  m_LocalScale: {x: 1, y: 5.6578503, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6642916191238930078}
@@ -138,8 +138,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4453015, y: 1, z: 8.482832}
-  m_Center: {x: 0.0015645126, y: 0.77, z: 7.2281075}
+  m_Size: {x: 1.4453015, y: 1, z: 11.285352}
+  m_Center: {x: 0.0015645027, y: 0.77, z: 8.629366}
 --- !u!65 &8036661640563044500
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1667,7 +1667,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2415433364300858307, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_Name
-      value: DragonBossPrefab Variant
+      value: DragonBossPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 2415433364300858307, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_IsActive
@@ -1814,6 +1814,10 @@ MonoBehaviour:
   attackRange: 2
   chaseRadius: 100
   maxChaseDistance: 15
+  biteDamage: 35
+  flameDamage: 20
+  enragedHealthThreshold: 0.3
+  damageToEscapeThreshold: 0.05
   _animator: {fileID: 258537132047893632}
   _hitBoxCollider: {fileID: 4965304902596364867}
   _flameCollider: {fileID: 1369480161369741726}
@@ -1825,8 +1829,6 @@ MonoBehaviour:
   _attackRotationSpeed: 1
   FireballSpeed: 6
   FireballSpawnPoint: {fileID: 4292268531949335691}
-  enragedHealthThreshold: 0.3
-  damageToEscapeThreshold: 0.05
   stateChangeCounter: 0
 --- !u!4 &6642916191238930078 stripped
 Transform:
