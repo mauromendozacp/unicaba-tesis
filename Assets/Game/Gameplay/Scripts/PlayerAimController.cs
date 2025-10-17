@@ -5,18 +5,17 @@ using UnityEngine.InputSystem;
 public class PlayerAimController : MonoBehaviour
 {
     [Header("Aim Settings")]
-    [SerializeField] private LayerMask aimLayers = ~0;
-    [SerializeField] private Transform graphicsRoot;
-    [SerializeField] private Transform fireRoot;
+    [SerializeField] private LayerMask floorLayer;
     [SerializeField] private float mouseDeadZoneRadius = 1.5f;
+    [SerializeField] private float stickDeadZone = 0.25f;
 
     private PlayerInputController input;
     private PlayerHealth playerHealth;
     private Camera cam;
-    private Transform rotateTarget;
+    private PlayerInput playerInput;
     private Vector3 aimPoint;
     private Vector3 aimDirection;
-    private PlayerInput playerInput;
+    private Vector3 lastNonZeroAimDirection;
 
     public Vector3 AimPoint => aimPoint;
     public Vector3 AimDirection => aimDirection;
@@ -27,8 +26,6 @@ public class PlayerAimController : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerInput = GetComponent<PlayerInput>();
         cam = playerInput != null && playerInput.camera != null ? playerInput.camera : Camera.main;
-        rotateTarget = graphicsRoot != null ? graphicsRoot : transform;
-        if (fireRoot == null) fireRoot = transform;
     }
 
     private void Start()
@@ -50,43 +47,55 @@ public class PlayerAimController : MonoBehaviour
         Vector2 pointerScreen = input.GetPointerScreenPosition();
 
         bool usingMouse = playerInput != null && !string.IsNullOrEmpty(playerInput.currentControlScheme) && playerInput.currentControlScheme.ToLower().Contains("mouse");
-        bool usingStick = !usingMouse && lookInput.sqrMagnitude > 0.1f;
+        bool usingStick = !usingMouse && lookInput.sqrMagnitude > stickDeadZone * stickDeadZone;
 
-        if (usingMouse || !usingStick)
+        if (usingMouse)
         {
             Ray ray = cam.ScreenPointToRay(pointerScreen);
-            if (Physics.Raycast(ray, out var hit, 1000f, aimLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(ray, out var hit, 1000f, floorLayer, QueryTriggerInteraction.Ignore))
                 aimPoint = hit.point;
             else
             {
-                Plane plane = new Plane(Vector3.up, new Vector3(rotateTarget.position.y, 0f, 0f));
+                Plane plane = new Plane(Vector3.up, new Vector3(transform.position.y, 0f, 0f));
                 if (plane.Raycast(ray, out float enter))
                     aimPoint = ray.origin + ray.direction * enter;
                 else
-                    aimPoint = rotateTarget.position + rotateTarget.forward * 10f;
+                    aimPoint = transform.position + transform.forward * 10f;
             }
 
-            Vector3 flatMouse = aimPoint - rotateTarget.position;
+            Vector3 flatMouse = aimPoint - transform.position;
             flatMouse.y = 0f;
-
             if (flatMouse.magnitude < mouseDeadZoneRadius)
                 return;
+
+            aimDirection = flatMouse.normalized;
+            lastNonZeroAimDirection = aimDirection;
         }
         else if (usingStick)
         {
             aimDirection = new Vector3(lookInput.x, 0, lookInput.y).normalized;
-            aimPoint = rotateTarget.position + aimDirection * 5f;
+            lastNonZeroAimDirection = aimDirection;
+            aimPoint = transform.position + aimDirection * 5f;
+        }
+        else
+        {
+            if (lastNonZeroAimDirection.sqrMagnitude > 0.0001f)
+            {
+                aimDirection = lastNonZeroAimDirection;
+                aimPoint = transform.position + aimDirection * 5f;
+            }
+            else
+            {
+                return;
+            }
         }
 
-        Vector3 flat = aimPoint - rotateTarget.position;
+        Vector3 flat = aimPoint - transform.position;
         flat.y = 0f;
         if (flat.sqrMagnitude > 0.0001f)
         {
-            aimDirection = flat.normalized;
-            Quaternion look = Quaternion.LookRotation(aimDirection, Vector3.up);
-            rotateTarget.rotation = look;
-            if (fireRoot != rotateTarget)
-                fireRoot.rotation = look;
+            Quaternion look = Quaternion.LookRotation(flat.normalized, Vector3.up);
+            transform.rotation = look;
         }
     }
 }

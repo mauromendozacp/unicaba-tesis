@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkeletonEnemy : EnemyBase
+public class SkeletonEnemy : EnemySoldier
 {
   SkeletonAnimationController animator;
   public SkeletonAnimationController Animator => animator;
@@ -21,18 +21,21 @@ public class SkeletonEnemy : EnemyBase
     //ChangeState(new SkeletonIdleState(this));
   }
 
-  void Start()
+  protected override void Start()
   {
+    base.Start();
     animator = GetComponent<SkeletonAnimationController>();
-    ChangeState(new SkeletonIdleState(this));
+    //ChangeState(new SkeletonIdleState(this));
     SetAttackCollider(false);
   }
 
 
   public override void TakeDamage(float damage)
   {
+    if (!IsAlive) return;
     base.TakeDamage(damage);
-
+    ChangeState(new SkeletonDamagedState(this));
+    /*
     if (currentHealth <= 0)
     {
       ChangeState(new SkeletonDeathState(this));
@@ -41,15 +44,9 @@ public class SkeletonEnemy : EnemyBase
     {
       ChangeState(new SkeletonDamagedState(this));
     }
+    */
   }
 
-  public void SetAttackCollider(bool active)
-  {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = active;
-    }
-  }
 
   public override void Kill()
   {
