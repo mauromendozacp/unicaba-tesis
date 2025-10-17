@@ -9,6 +9,8 @@ public class DragonAirHoverAttackState : IState
   private float _bombDropInterval = 0.5f;
   private float _bombTimer;
 
+  private const float BOMB_FALL_SPEED = 15f; // Velocidad de la bola de fuego en el aire.
+
   public DragonAirHoverAttackState(DragonBossController boss, DragonStateFactory factory)
   {
     _boss = boss;
@@ -17,11 +19,10 @@ public class DragonAirHoverAttackState : IState
 
   public void OnEnter()
   {
-    //_boss.animator.Play("hover");
     _boss.Animator.SetBool("Hover", true);
-    //Debug.Log($"#{_boss.stateChangeCounter} Bool Hover VERDADERO");
-    _boss.Rb.linearVelocity = Vector3.zero; // Se queda flotando en su lugar
+    _boss.Rb.linearVelocity = Vector3.zero;
     _boss.Rb.useGravity = false;
+    _boss.CurrentAttack = DragonAttackType.AIR_FIREBALL;
     _timer = _attackDuration;
     _bombTimer = _bombDropInterval;
   }
@@ -32,7 +33,6 @@ public class DragonAirHoverAttackState : IState
     _bombTimer -= Time.deltaTime;
 
     // Mantener la mirada en el objetivo mientras bombardea
-    //Transform target = _boss.GetTarget();
     Transform target = _boss.CurrentTarget;
     if (target != null)
     {
@@ -44,9 +44,7 @@ public class DragonAirHoverAttackState : IState
 
     if (_bombTimer <= 0)
     {
-      // Lógica de "Bombardeo":
-      // Aquí llamarías a una función para instanciar una bola de fuego que caiga
-      //Debug.Log("DRAGÓN BOMBARDEANDO al objetivo.");
+      ExecuteAirBombAttack(target);
       _bombTimer = _bombDropInterval;
     }
 
@@ -67,6 +65,36 @@ public class DragonAirHoverAttackState : IState
   public void OnExit()
   {
     _boss.Animator.SetBool("Hover", false);
-    //Debug.Log($"#{_boss.stateChangeCounter} Bool Hover FALSO");
+    _boss.CurrentAttack = DragonAttackType.AIR_NONE;
+  }
+
+  private void ExecuteAirBombAttack(Transform target)
+  {
+    if (_boss.FireballSpawnPoint == null)
+    {
+      Debug.LogWarning("FireballSpawnPoint no asignado en DragonBossController.");
+      return;
+    }
+
+    Vector3 spawnPos = _boss.FireballSpawnPoint.position;
+    Vector3 targetPos = target.position;
+
+    Vector3 launchDirection = (targetPos - spawnPos).normalized;
+
+    FireSingleBall(spawnPos, launchDirection, BOMB_FALL_SPEED);
+  }
+
+  private void FireSingleBall(Vector3 position, Vector3 direction, float speed)
+  {
+    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
+
+    fireballGO.transform.position = position;
+    fireballGO.transform.rotation = Quaternion.LookRotation(direction);
+
+    Rigidbody rb = fireballGO.GetComponent<Rigidbody>();
+    if (rb != null)
+    {
+      rb.linearVelocity = direction * speed;
+    }
   }
 }

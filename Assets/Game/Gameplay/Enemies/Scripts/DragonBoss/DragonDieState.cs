@@ -14,7 +14,6 @@ public class DragonDieState : IState
   public void OnEnter()
   {
     _boss.Animator.SetTrigger("Die");
-    //Debug.Log($"#{_boss.stateChangeCounter} Trigger Die activado");
     _boss.Rb.linearVelocity = Vector3.zero;
     _boss.Rb.useGravity = true;
 

@@ -3,6 +3,16 @@ using System.Collections;
 using System;
 using Unity.VisualScripting;
 
+public enum DragonAttackType
+{
+  GROUND_NONE = 0,
+  GROUND_BITE,
+  GROUND_FLAME,
+  GROUND_FIREBALL,
+  AIR_NONE = 10,
+  AIR_FIREBALL
+}
+
 public enum CombatStance
 {
   NEUTRAL = 0,
@@ -21,6 +31,17 @@ public enum CombatStance
 }
 public class DragonBossController : EnemyBase
 {
+  [Header("Estadísticas de Ataque / Daño")]
+  public float biteDamage = 35f;
+  public float flameDamage = 20f;
+  [SerializeField][Tooltip("Umbral de vida para entrar en modo furia (30%).")] float enragedHealthThreshold = 0.3f;
+  [SerializeField][Tooltip("Umbral de daño acumuladodo para intentar escapar volando (5%) en modo furia.")] float damageToEscapeThreshold = 0.05f;
+  [Header("Ataque Aéreo")]
+  [SerializeField]
+  [Tooltip("Ajuste de altura del punto al que se apunta para el ataque aéreo.")] public float AirBombTargetElevation = 1.5f;
+  float damageToEscape = 0f;
+
+
   [Header("Componentes")]
   [SerializeField] Animator _animator;
   [SerializeField] Collider _hitBoxCollider; // El collider que recibe daño
@@ -34,7 +55,7 @@ public class DragonBossController : EnemyBase
   public Collider BiteCollider => _biteCollider;
 
 
-  [Header("Estadísticas")]
+  [Header("Estadísticas de velocidad")]
   public float groundMoveSpeed = 4f;
   public float airMoveSpeed = 8f;
   public float rotationSpeed = 10f;
@@ -50,22 +71,20 @@ public class DragonBossController : EnemyBase
 
   IState currentState;
   CombatStance currentStance = CombatStance.NEUTRAL;
+  [HideInInspector] public DragonAttackType CurrentAttack { get; set; } = DragonAttackType.GROUND_NONE;
+
   DragonStateFactory stateFactory;
 
   public Rigidbody Rb => rb;
 
   public event Action OnDragonBossDeath;
 
-  [SerializeField][Tooltip("Umbral de vida para entrar en modo furia (30%).")] float enragedHealthThreshold = 0.3f;
-  [SerializeField][Tooltip("Umbral de daño acumuladodo para intentar escapar volando (5%) en modo furia.")] float damageToEscapeThreshold = 0.05f;
-  float damageToEscape = 0f;
-
 
   protected override void Awake()
   {
     base.Awake();
     stateFactory = new DragonStateFactory(this);
-    rb.freezeRotation = true; // Previene que la física lo rote inesperadamente
+    rb.freezeRotation = true;
   }
 
   void OnEnable()
@@ -73,12 +92,6 @@ public class DragonBossController : EnemyBase
     if (FlameCollider != null) FlameCollider.enabled = false;
     if (BiteCollider != null) BiteCollider.enabled = false;
     ChangeState(stateFactory.GroundIdle());
-  }
-
-
-  protected override void Start()
-  {
-    base.Start();
   }
 
   void Update()
@@ -98,7 +111,6 @@ public class DragonBossController : EnemyBase
   public override void TakeDamage(float damage)
   {
     currentHealth -= damage;
-    //Debug.Log($"Dragón recibió {damage}. Vida: {currentHealth}");
     StartCoroutine(AppyDamageFeedback());
 
     if (currentHealth <= 0)
@@ -133,20 +145,22 @@ public class DragonBossController : EnemyBase
     state is DragonAirFlyRepositionState;
   }
 
-  // Método que se llama desde los Eventos de Animación
-  public void OnAnimationEvent(string eventName)
-  {
-    // Permite a los estados manejar eventos específicos de la animación.
-    // Ejemplo: Si el estado actual es un ataque, llama a su propio método para generar daño.
-    if (currentState is DragonGroundAttackState attackState)
+  /*
+    // Método que se llama desde los Eventos de Animación
+    public void OnAnimationEvent(string eventName)
     {
-      attackState.HandleAttackEvent(eventName);
+      // Permite a los estados manejar eventos específicos de la animación.
+      // Ejemplo: Si el estado actual es un ataque, llama a su propio método para generar daño.
+      if (currentState is DragonGroundAttackState attackState)
+      {
+        attackState.HandleAttackEvent(eventName);
+      }
+      else if (currentState is DragonTransitionTakeoffState takeoffState)
+      {
+        takeoffState.HandleAnimationEnd();
+      }
     }
-    else if (currentState is DragonTransitionTakeoffState takeoffState)
-    {
-      takeoffState.HandleAnimationEnd();
-    }
-  }
+  */
 
   public override Transform FindNearestPlayer()
   {
@@ -182,13 +196,20 @@ public class DragonBossController : EnemyBase
 
   void OnTriggerEnter(Collider other)
   {
-    //Debug.Log($"DragonBossController: OnTriggerEnter con {other.name}");
     if (other.CompareTag("Player"))
     {
       IDamageable player = other.GetComponent<IDamageable>();
       if (player != null && player.IsAlive)
       {
-        player.TakeDamage(25.0f);
+        switch (CurrentAttack)
+        {
+          case DragonAttackType.GROUND_BITE:
+            player.TakeDamage(biteDamage);
+            break;
+          case DragonAttackType.GROUND_FLAME:
+            player.TakeDamage(flameDamage);
+            break;
+        }
       }
     }
   }
@@ -204,14 +225,11 @@ public class DragonBossController : EnemyBase
   public override void Die()
   {
     OnDragonBossDeath?.Invoke();
-    Debug.Log("El Dragón ha muerto.");
     rb.isKinematic = true;
     enabled = false;
     _hitBoxCollider.enabled = false;
     transform.Find("MinimapIcon")?.gameObject.SetActive(false);
   }
-
-
 
 
   /* Debug */
