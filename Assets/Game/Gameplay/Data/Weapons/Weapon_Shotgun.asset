@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985b6d7af9eb7434f90ceca5ef8e7b0a, type: 3}
+  m_Name: Weapon_Shotgun
+  m_EditorClassIdentifier: 
+  itemName: 
+  icon: {fileID: 21300000, guid: 85c5e4b62028f1145b3598ac4c4c8cde, type: 3}
+  prefab: {fileID: 2254819947961644008, guid: 0d57b195095effa4796a8b67230445f9, type: 3}
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
+  type: 0
+  damage: 10
+  fireRate: 0.5
+  maxAmmo: 100
+  isDefault: 0
