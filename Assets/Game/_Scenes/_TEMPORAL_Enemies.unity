@@ -3980,6 +3980,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1379630335}
     - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: waves.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: 'waves.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0db947d708900794d91ac56fbbac0645, type: 2}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: 'waves.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 786ca056456e17d43a706b150f999206, type: 2}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: enemyPrefabs.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -3995,6 +4007,10 @@ PrefabInstance:
       propertyPath: 'enemyPrefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 5429482583878813926, guid: 584b3ff224f0b6246bc0054cdd73d7c4, type: 3}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 5767978099721368480, guid: 5a157eac9992e9e4e8d25c1f05076f71, type: 3}
     - target: {fileID: 3057066273008267142, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.08
@@ -4564,6 +4580,7 @@ MonoBehaviour:
   availableItems:
   - {fileID: 11400000, guid: c1d7d1a15dc64f74abf6e27386d27576, type: 2}
   - {fileID: 11400000, guid: 6341e8180b86e2445a90579e14e149c5, type: 2}
+  - {fileID: 11400000, guid: d8296e9bf747c3e45906802abe9c0686, type: 2}
   prefab: {fileID: 4800167373160257259, guid: 84a507a5941982547b8fd575c47d6c91, type: 3}
 --- !u!4 &1379630336
 Transform:
@@ -6742,11 +6759,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075952249}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2103709920 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292268531949335691, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-  m_PrefabInstance: {fileID: 2768319220519873303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2035340544108540906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6812,29 +6824,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3579861490658968338, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4307693266974971714, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4307693266974971714, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-      propertyPath: maxHealth
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4307693266974971714, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-      propertyPath: FireballSpawnPoint
-      value: 
-      objectReference: {fileID: 2103709920}
     - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_Name
       value: DragonBossPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6642916191238930078, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6875,10 +6867,6 @@ PrefabInstance:
     - target: {fileID: 6642916191238930078, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8713633232682458078, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

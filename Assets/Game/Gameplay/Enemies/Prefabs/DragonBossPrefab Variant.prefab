@@ -1822,6 +1822,12 @@ MonoBehaviour:
   groundMoveSpeed: 4
   airMoveSpeed: 8
   rotationSpeed: 10
+  _attackRotationSpeed: 1
+  FireballSpeed: 6
+  FireballSpawnPoint: {fileID: 4292268531949335691}
+  enragedHealthThreshold: 0.3
+  damageToEscapeThreshold: 0.05
+  stateChangeCounter: 0
 --- !u!4 &6642916191238930078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
