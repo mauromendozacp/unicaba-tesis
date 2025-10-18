@@ -13,12 +13,7 @@ public class GameplayController : MonoBehaviour
 
   private void Awake()
   {
-    playerSpawn.Init(gameplayUI.GetPlayerUI, () =>
-    {
-      TogglePause(true);
-      gameplayUI.TogglePause(true);
-    },
-    OnPlayerDeath, AddKeys, gameplayUI.OnJoinPlayers);
+    playerSpawn.Init(gameplayUI.GetPlayerUI, OnPause, OnPlayerDeath, AddKeys, gameplayUI.OnJoinPlayers);
 
     enemyManager.OnWaveStart += () => { gameplayUI.ToggleWave(true); };
     enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
@@ -52,8 +47,41 @@ public class GameplayController : MonoBehaviour
 
   private void Start()
   {
-    gameplayUI.Init(() => { TogglePause(false); }, GoToMenu, RetryLevel, NextLevel);
+    gameplayUI.Init(OnResume, GoToMenu, RetryLevel, NextLevel);
   }
+
+    private void OnResume()
+    {
+        TogglePause(false);
+
+        if (playerSpawn.PlayerInputs[0].currentControlScheme == "Gamepad")
+        {
+            GameManager.Instance.CursorManager.ToggleCursor(0, false);
+        }
+
+        List<PlayerController> players = playerSpawn.GetPlayers();
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].ToggleGameplayInputs(true);
+        }
+    }
+
+    private void OnPause()
+    {
+        TogglePause(true);
+        gameplayUI.TogglePause(true);
+
+        if (playerSpawn.PlayerInputs[0].currentControlScheme == "Gamepad")
+        {
+            GameManager.Instance.CursorManager.ToggleCursor(0, true);
+        }
+
+        List<PlayerController> players = playerSpawn.GetPlayers();
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].ToggleGameplayInputs(false);
+        }
+    }
 
   private void OnPlayerDeath()
   {
@@ -76,6 +104,8 @@ public class GameplayController : MonoBehaviour
 
   private void GoToMenu()
   {
+        GameManager.Instance.GameDataManager.playersData.Clear();
+
     TogglePause(false);
     GameManager.Instance.ChangeScene(SceneGame.Menu);
   }

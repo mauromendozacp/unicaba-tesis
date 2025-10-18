@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 
   //private Material originalMaterial;
   //private Renderer playerRenderer;
-  private PlayerInputController inputController;
+  private PlayerInputGameplayController inputController;
 
   public bool IsAlive => currentHealth > 0;
   public bool IsDowned { get; private set; }
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   {
     //playerRenderer = GetComponentInChildren<Renderer>();
     //originalMaterial = playerRenderer.material;
-    inputController = GetComponent<PlayerInputController>();
+    inputController = GetComponent<PlayerInputGameplayController>();
     IsDowned = false;
   }
 

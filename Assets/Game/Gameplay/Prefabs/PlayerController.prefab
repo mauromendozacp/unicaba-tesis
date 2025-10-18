@@ -391,7 +391,6 @@ GameObject:
   - component: {fileID: 5237317482402452050}
   - component: {fileID: 1618733865769910339}
   - component: {fileID: 7064953267972065153}
-  - component: {fileID: 7299379270591168631}
   - component: {fileID: 5482039823722391062}
   - component: {fileID: -1477880225002385552}
   - component: {fileID: 5472234437480224036}
@@ -400,6 +399,7 @@ GameObject:
   - component: {fileID: 1050185694692027798}
   - component: {fileID: 8390846258433141028}
   - component: {fileID: 274823519144655917}
+  - component: {fileID: 5886657393373039754}
   m_Layer: 3
   m_Name: PlayerController
   m_TagString: Player
@@ -467,18 +467,6 @@ MonoBehaviour:
   itemDetection: {fileID: 3318913069838923435}
   minimapSprite: {fileID: 5418185240411066123}
   weaponHolder: {fileID: -1477880225002385552}
---- !u!114 &7299379270591168631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5212223590271132870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6daacff7b219ea646a1b45a0a9d6d4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5482039823722391062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +708,18 @@ MonoBehaviour:
   itemMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &5886657393373039754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212223590271132870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e21230c0e641a744953a3dcaa535457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7265605456867317631
 GameObject:
   m_ObjectHideFlags: 0

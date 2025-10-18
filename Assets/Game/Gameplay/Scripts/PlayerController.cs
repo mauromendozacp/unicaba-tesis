@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInputController))]
+[RequireComponent(typeof(PlayerInputGameplayController))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private ReviveController reviveController = null;
 
-    private PlayerInputController inputController = null;
+    private PlayerInputGameplayController inputController = null;
     private CharacterController characterController = null;
     private PlayerInventory inventory = null;
     private PlayerHealth playerHealth = null;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        inputController = GetComponent<PlayerInputController>();
+        inputController = GetComponent<PlayerInputGameplayController>();
         characterController = GetComponent<CharacterController>();
         inventory = GetComponent<PlayerInventory>();
         playerHealth = GetComponent<PlayerHealth>();
@@ -194,5 +194,17 @@ public class PlayerController : MonoBehaviour
     public void ToggleInput(bool status)
     {
         inputController.enabled = status;
+    }
+
+    public void ToggleGameplayInputs(bool status)
+    {
+        if (status)
+        {
+            inputController.PlayerMap.Enable();
+        }
+        else
+        {
+            inputController.PlayerMap.Disable();
+        }
     }
 }

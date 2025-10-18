@@ -10,7 +10,7 @@ public enum ControlScheme
 
 public class PlayerMenuController : MonoBehaviour
 {
-    private PlayerMenuInputController inputController = null;
+    private PlayerInputUIController inputController = null;
     private PlayerInput playerInput = null;
 
     private CharacterSelectionController selectionController = null;
@@ -19,7 +19,7 @@ public class PlayerMenuController : MonoBehaviour
 
     private void Awake()
     {
-        inputController = GetComponent<PlayerMenuInputController>();
+        inputController = GetComponent<PlayerInputUIController>();
         playerInput = GetComponent<PlayerInput>();
     }
 

@@ -3,9 +3,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerInputGameplayController : PlayerInputUIController
 {
-    private InputActionAsset inputAsset = null;
     private InputActionMap playerMap = null;
 
     private Vector2 move = Vector2.zero;
@@ -21,18 +20,23 @@ public class PlayerInputController : MonoBehaviour
 
     private PlayerInput playerInput = null;
 
-    private void Awake()
+    public InputActionMap PlayerMap => playerMap;
+
+    protected override void Awake()
     {
+        base.Awake();
+
         playerInput = GetComponent<PlayerInput>();
-        inputAsset = playerInput.actions;
         playerMap = inputAsset.FindActionMap("Player");
         fireAction = playerMap.FindAction("Fire");
         reviveAction = playerMap.FindAction("Revive");
         lookAction = playerMap.FindAction("Look");
     }
 
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         playerMap.FindAction("Move").performed += OnMove;
         playerMap.FindAction("Move").canceled += OnStopMove;
         playerMap.FindAction("EquipItem").started += OnEquipItem;
@@ -45,8 +49,10 @@ public class PlayerInputController : MonoBehaviour
         playerMap.Enable();
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         playerMap.FindAction("Move").performed -= OnMove;
         playerMap.FindAction("Move").canceled -= OnStopMove;
         playerMap.FindAction("EquipItem").started -= OnEquipItem;

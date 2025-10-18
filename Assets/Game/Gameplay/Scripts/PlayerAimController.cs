@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInputController))]
+[RequireComponent(typeof(PlayerInputGameplayController))]
 public class PlayerAimController : MonoBehaviour
 {
     [Header("Aim Settings")]
@@ -9,7 +9,7 @@ public class PlayerAimController : MonoBehaviour
     [SerializeField] private float mouseDeadZoneRadius = 1.5f;
     [SerializeField] private float stickDeadZone = 0.25f;
 
-    private PlayerInputController input;
+    private PlayerInputGameplayController input;
     private PlayerHealth playerHealth;
     private Camera cam;
     private PlayerInput playerInput;
@@ -22,7 +22,7 @@ public class PlayerAimController : MonoBehaviour
 
     private void Awake()
     {
-        input = GetComponent<PlayerInputController>();
+        input = GetComponent<PlayerInputGameplayController>();
         playerHealth = GetComponent<PlayerHealth>();
         playerInput = GetComponent<PlayerInput>();
         cam = playerInput != null && playerInput.camera != null ? playerInput.camera : Camera.main;
