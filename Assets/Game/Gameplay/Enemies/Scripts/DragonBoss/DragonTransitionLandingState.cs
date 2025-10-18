@@ -15,6 +15,7 @@ public class DragonTransitionLandingState : IState
   {
     _boss.Animator.SetTrigger("Lands");
     _boss.Rb.useGravity = true;
+    _boss.EnableCollisions();
   }
 
   public void Tick()
@@ -30,5 +31,6 @@ public class DragonTransitionLandingState : IState
   public void OnExit()
   {
     _boss.Rb.linearVelocity = Vector3.zero;
+    _boss.EnableMovementAndCollisions();
   }
 }

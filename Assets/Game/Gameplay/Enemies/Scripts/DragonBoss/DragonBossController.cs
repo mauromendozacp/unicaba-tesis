@@ -226,7 +226,7 @@ public class DragonBossController : EnemyBase
   {
     OnDragonBossDeath?.Invoke();
     rb.isKinematic = true;
-    enabled = false;
+    //enabled = false;
     _hitBoxCollider.enabled = false;
     transform.Find("MinimapIcon")?.gameObject.SetActive(false);
   }

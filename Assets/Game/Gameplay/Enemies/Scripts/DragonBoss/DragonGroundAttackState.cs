@@ -38,7 +38,8 @@ public class DragonGroundAttackState : IState
   public void OnEnter()
   {
     _boss.Animator.SetTrigger(_attackAnimation);
-    _boss.Rb.linearVelocity = Vector3.zero;
+    //_boss.Rb.linearVelocity = Vector3.zero;
+    _boss.StopMovement();
     _attackExecuted = false;
   }
 
@@ -82,6 +83,8 @@ public class DragonGroundAttackState : IState
     if (_damageTrigger != null && !_isFireballAttack) _damageTrigger.enabled = false;
     if (_attackAnimation == "Drakaris") _boss.flame.SetActive(false);
     _boss.CurrentAttack = DragonAttackType.GROUND_NONE;
+    //_boss.Rb.linearVelocity = Vector3.zero;
+    _boss.StopMovement();
   }
 
   /*

@@ -29,6 +29,7 @@ public class DragonGroundMoveState : IState
     }
 
     Vector3 targetPos = target.position;
+    /*
     Vector3 currentPos = _boss.transform.position;
 
     Vector3 flatDirection = (new Vector3(targetPos.x, currentPos.y, targetPos.z) - currentPos).normalized;
@@ -39,26 +40,33 @@ public class DragonGroundMoveState : IState
       Quaternion lookRotation = Quaternion.LookRotation(flatDirection);
       _boss.transform.rotation = Quaternion.Slerp(_boss.transform.rotation, lookRotation, Time.deltaTime * _boss.rotationSpeed);
     }
-
+    */
+    float distance = _boss.DistanceToTarget();
     if (distance < _minAttackDistance)
     {
-      _boss.Rb.linearVelocity = Vector3.zero;
+      //_boss.Rb.linearVelocity = Vector3.zero;
+      _boss.StopMovement();
       _boss.ChangeState(_factory.GroundAttack("Bite"));
     }
     else if (distance > _maxAttackDistance)
     {
-      _boss.Rb.linearVelocity = flatDirection * _boss.groundMoveSpeed;
+      //_boss.Rb.linearVelocity = flatDirection * _boss.groundMoveSpeed;
+      _boss.MoveTo(targetPos);
     }
     else
     {
-      _boss.Rb.linearVelocity = Vector3.zero;
+      //_boss.Rb.linearVelocity = Vector3.zero;
+      _boss.StopMovement();
       _boss.ChangeState(_factory.GroundAttack("Drakaris"));
     }
+    // si agent.updateRotation es falso, llamar a LookAtTarget para rotar hacia el objetivo
+    _boss.LookAtTarget();
   }
 
   public void OnExit()
   {
     _boss.Animator.SetBool("Walk", false);
-    _boss.Rb.linearVelocity = Vector3.zero;
+    //_boss.Rb.linearVelocity = Vector3.zero;
+    _boss.StopMovement();
   }
 }

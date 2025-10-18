@@ -18,8 +18,8 @@ public class DragonGroundIdleState : IState
   {
     _boss.Animator.SetBool("IdleSimple", true);
     _timer = Random.Range(_minIdle, _maxIdle);
-    _boss.Rb.linearVelocity = Vector3.zero;
-    _boss.Rb.useGravity = true;
+    //_boss.Rb.linearVelocity = Vector3.zero;
+    //_boss.Rb.useGravity = true;
     _boss.FindNearestPlayer();
   }
 

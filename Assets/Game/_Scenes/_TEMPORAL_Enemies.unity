@@ -1259,7 +1259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4093402899498832851, guid: 3fae832f14f91d747ae3d332a77e479f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4367877364148979757, guid: 3fae832f14f91d747ae3d332a77e479f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1811,6 +1811,7 @@ GameObject:
   - component: {fileID: 455331224}
   - component: {fileID: 455331223}
   - component: {fileID: 455331222}
+  - component: {fileID: 455331227}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1942,6 +1943,38 @@ Transform:
   - {fileID: 477375953}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &455331227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455331221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.5
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 1e4c93e76443235438188893671dc75c, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &475424041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3541,7 +3574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5767978099721368480, guid: 5a157eac9992e9e4e8d25c1f05076f71, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6077775820437366878, guid: 5a157eac9992e9e4e8d25c1f05076f71, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3711,7 +3744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5429482583878813926, guid: 584b3ff224f0b6246bc0054cdd73d7c4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5695369942211957528, guid: 584b3ff224f0b6246bc0054cdd73d7c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3948,7 +3981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7971126282652106309, guid: 90759024cc082a841b1b67040df615b6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3983,6 +4016,14 @@ PrefabInstance:
       propertyPath: waves.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: 'waves.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a5a3e1e29dcb8aa40ab5a9ddb19951d9, type: 2}
+    - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: 'waves.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a0505ebd3cde89642b8507f7396d1789, type: 2}
     - target: {fileID: 2446235721148567024, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: 'waves.Array.data[3]'
       value: 
@@ -4501,7 +4542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308950918597888886, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1619381071333134472, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6018,7 +6059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3594085779321958897, guid: 3b76f6bb1476f514b907fcfce689f59c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3869613064831363599, guid: 3b76f6bb1476f514b907fcfce689f59c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6824,9 +6865,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4307693266974971714, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_Name
       value: DragonBossPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6642916191238930078, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_LocalPosition.x

@@ -16,6 +16,8 @@ public class DragonTransitionTakeoffState : IState
   {
     _boss.Animator.SetTrigger("TakeOff");
     _boss.Rb.useGravity = false;
+    _boss.Rb.isKinematic = false;
+    _boss.DisableMovementAndCollisions();
   }
 
   public void Tick()

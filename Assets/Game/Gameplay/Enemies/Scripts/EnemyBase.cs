@@ -102,12 +102,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  public void StopMovement()
+  public bool StopMovement()
   {
+    bool isStopped = false;
     if (agent != null && agent.enabled && agent.isOnNavMesh)
     {
       agent.isStopped = true;
+      isStopped = true;
     }
+    return isStopped;
   }
 
   /*
@@ -224,6 +227,14 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
 
     selfCollider.enabled = true;
+  }
+
+  public void EnableCollisions()
+  {
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = true;
+    }
   }
 
 

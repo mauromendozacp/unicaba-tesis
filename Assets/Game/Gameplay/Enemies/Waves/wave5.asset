@@ -19,7 +19,7 @@ MonoBehaviour:
     count: 6
   - enemyPrefab: {fileID: 5429482583878813926, guid: 584b3ff224f0b6246bc0054cdd73d7c4, type: 3}
     count: 5
-  cooldownTime: 15
+  cooldownTime: 2
   itemsToDropInWave:
   - itemData: {fileID: 11400000, guid: c1d7d1a15dc64f74abf6e27386d27576, type: 2}
     count: 2
