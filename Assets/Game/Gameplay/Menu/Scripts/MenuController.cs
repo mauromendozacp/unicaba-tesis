@@ -29,7 +29,26 @@ public class MenuController : MonoBehaviour
         PlayerMenuController player = playerInput.GetComponent<PlayerMenuController>();
         if (player != null)
         {
-            player.Init(selectionController, players.Count, players.Count == 0);
+            bool isFirstPlayer = GetPlayersCount() == 0;
+
+            player.Init(selectionController, GetPlayersCount(), isFirstPlayer);
+
+            if (playerInput.currentControlScheme == "Gamepad")
+            {
+                GameManager.Instance.CursorManager.InitCursor(GetPlayersCount(), playerInput);
+
+                if (menuPanel.gameObject.activeSelf)
+                {
+                    if (isFirstPlayer)
+                    {
+                        GameManager.Instance.CursorManager.ToggleCursor(0, true);
+                    }
+                }
+                else
+                {
+                    GameManager.Instance.CursorManager.ToggleCursor(GetPlayersCount(), true);
+                }
+            }
         }
 
         players.Add(playerInput);
@@ -37,6 +56,12 @@ public class MenuController : MonoBehaviour
 
     public void OnPlayerLeft(PlayerInput playerInput)
     {
+        if (playerInput.currentControlScheme == "Gamepad")
+        {
+            int index = players.IndexOf(playerInput);
+            GameManager.Instance.CursorManager.ToggleCursor(index, false);
+        }
+
         players.Remove(playerInput);
     }
 
@@ -49,6 +74,14 @@ public class MenuController : MonoBehaviour
     {
         selectionController.Toggle(true);
         Toggle(false);
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].currentControlScheme == "Gamepad")
+            {
+                GameManager.Instance.CursorManager.ToggleCursor(i, true);
+            }
+        }
     }
 
     private void OnQuit()
@@ -63,6 +96,12 @@ public class MenuController : MonoBehaviour
 
     private void OpenMenu()
     {
+        GameManager.Instance.CursorManager.ToggleAllCursors(false);
+        if (players[0].currentControlScheme == "Gamepad")
+        {
+            GameManager.Instance.CursorManager.ToggleCursor(0, true);
+        }
+
         selectionController.Toggle(false);
         Toggle(transform);
     }
@@ -74,6 +113,8 @@ public class MenuController : MonoBehaviour
 
     private void GoToGameplay()
     {
+        GameManager.Instance.CursorManager.ToggleAllCursors(false);
+
         List<PlayerSelectionData> playersData = new List<PlayerSelectionData>();
         for (int i = 0; i < players.Count; i++)
         {

@@ -27,7 +27,14 @@ public class PlayerMenuController : MonoBehaviour
     {
         SlotPlayer slotPlayer = selectionController.GetSlotByIndex(playerIndex);
 
-        ControlScheme control = GetControl();
+        slotPlayer.InitButtons();
+
+        if (isMainPlayer)
+        {
+            selectionController.InitButtons();
+        }
+
+        /*ControlScheme control = GetControl();
         switch (control)
         {
             case ControlScheme.None:
@@ -53,7 +60,7 @@ public class PlayerMenuController : MonoBehaviour
                 break;
             default:
                 break;
-        }
+        }*/
 
         slotPlayer.OnJoinPlayer();
     }
