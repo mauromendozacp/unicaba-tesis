@@ -15,6 +15,7 @@ public class DragonGroundMoveState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = true;
     _boss.Animator.SetBool("Walk", true);
     _boss.Rb.useGravity = true;
   }

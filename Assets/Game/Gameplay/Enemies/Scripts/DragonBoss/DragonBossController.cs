@@ -31,6 +31,23 @@ public enum CombatStance
 }
 public class DragonBossController : EnemyBase
 {
+
+  [Header("Configuración de Arena y Vuelo")]
+  [Tooltip("Límites del área de vuelo (X=Mín, Y=Máx) para generar posiciones aleatorias.")]
+  [SerializeField] private Vector2 arenaBoundsX = new Vector2(-20f, 20f);
+  [Tooltip("Límites del área de vuelo (X=Mín, Y=Máx) para generar posiciones aleatorias.")]
+  [SerializeField] private Vector2 arenaBoundsZ = new Vector2(-20f, 20f);
+  [Tooltip("Distancia mínima al punto actual para que se considere un nuevo punto de reposicionamiento válido.")]
+  [SerializeField] private float minRepositionDistance = 15f;
+  [Tooltip("Altura fija a la que el dragón volará y se reposicionará.")]
+  [SerializeField] private float flyHeight = 10f;
+
+  public Vector2 ArenaBoundsX => arenaBoundsX;
+  public Vector2 ArenaBoundsZ => arenaBoundsZ;
+  public float MinRepositionDistance => minRepositionDistance;
+  public float FlyHeight => flyHeight;
+
+
   [Header("Estadísticas de Ataque / Daño")]
   public float biteDamage = 35f;
   public float flameDamage = 20f;
@@ -38,8 +55,9 @@ public class DragonBossController : EnemyBase
   [SerializeField][Tooltip("Umbral de daño acumuladodo para intentar escapar volando (5%) en modo furia.")] float damageToEscapeThreshold = 0.05f;
   [Header("Ataque Aéreo")]
   [SerializeField]
-  [Tooltip("Ajuste de altura del punto al que se apunta para el ataque aéreo.")] public float AirBombTargetElevation = 1.5f;
+  //[Tooltip("Ajuste de altura del punto al que se apunta para el ataque aéreo.")] public float AirBombTargetElevation = 1.5f;
   float damageToEscape = 0f;
+  public bool IsVulnerable;
 
 
   [Header("Componentes")]
@@ -56,14 +74,27 @@ public class DragonBossController : EnemyBase
 
 
   [Header("Estadísticas de velocidad")]
-  public float groundMoveSpeed = 4f;
-  public float airMoveSpeed = 8f;
-  public float rotationSpeed = 10f;
+  public float neutralGroundMoveSpeed = 4f;
+  public float neutralAirMoveSpeed = 8f;
+  public float neutralRotationSpeed = 10f;
 
-  [SerializeField][Tooltip("Velocidad de rotación de seguimiento cuando tira el aliento de fuego.")] float _attackRotationSpeed = 1f;
+  public float enragedGroundMoveSpeed = 8f;
+  public float enragedAirMoveSpeed = 12f;
+  //public float enragedRotationSpeed = 15f;
+
+  [HideInInspector] public float groundMoveSpeed;
+  [HideInInspector] public float airMoveSpeed;
+  [HideInInspector] public float rotationSpeed;
+
+  [SerializeField] float neutralAttackRotationSpeed = 1f;
+  [SerializeField] float enragedAttackRotationSpeed = 1.6f;
+  float _attackRotationSpeed;
   public float AttackRotationSpeed => _attackRotationSpeed;
 
-  public float FireballSpeed = 6.0f;
+  [SerializeField] float neutralFireballSpeed = 8.0f;
+  [SerializeField] float enragedFireballSpeed = 12.0f;
+
+  public float FireballSpeed { get; private set; }
 
   public Transform FireballSpawnPoint;
 
@@ -79,6 +110,29 @@ public class DragonBossController : EnemyBase
 
   public event Action OnDragonBossDeath;
 
+  public void ChangeCombatStance(CombatStance stance)
+  {
+    currentStance = stance;
+    switch (currentStance)
+    {
+      case CombatStance.NEUTRAL:
+        groundMoveSpeed = neutralGroundMoveSpeed;
+        airMoveSpeed = neutralAirMoveSpeed;
+        rotationSpeed = neutralRotationSpeed;
+        _attackRotationSpeed = neutralAttackRotationSpeed;
+        FireballSpeed = neutralFireballSpeed;
+        break;
+      case CombatStance.ENRAGED:
+        groundMoveSpeed = enragedGroundMoveSpeed;
+        airMoveSpeed = enragedAirMoveSpeed;
+        //rotationSpeed = enragedRotationSpeed;
+        _attackRotationSpeed = enragedAttackRotationSpeed;
+        FireballSpeed = enragedFireballSpeed;
+        break;
+    }
+    SetSpeed(groundMoveSpeed);
+  }
+
 
   protected override void Awake()
   {
@@ -92,6 +146,7 @@ public class DragonBossController : EnemyBase
     if (FlameCollider != null) FlameCollider.enabled = false;
     if (BiteCollider != null) BiteCollider.enabled = false;
     ChangeState(stateFactory.GroundIdle());
+    ChangeCombatStance(CombatStance.NEUTRAL);
   }
 
   void Update()
@@ -110,6 +165,7 @@ public class DragonBossController : EnemyBase
 
   public override void TakeDamage(float damage)
   {
+    if (!IsVulnerable) return;
     currentHealth -= damage;
     StartCoroutine(AppyDamageFeedback());
 
@@ -119,22 +175,25 @@ public class DragonBossController : EnemyBase
       return;
     }
 
-    if (currentStance == CombatStance.ENRAGED)
+    switch (currentStance)
     {
-      damageToEscape -= damage;
-      if (!IsAirState(currentState) && damageToEscape <= 0)
-      {
-        damageToEscape = maxHealth * damageToEscapeThreshold;
-        ChangeState(stateFactory.TransitionTakeoff());
-        return;
-      }
+      case CombatStance.ENRAGED:
+        damageToEscape -= damage;
+        if (!IsAirState(currentState) && damageToEscape <= 0)
+        {
+          damageToEscape = maxHealth * damageToEscapeThreshold;
+          ChangeState(stateFactory.TransitionTakeoff());
+          return;
+        }
+        break;
+      case CombatStance.NEUTRAL:
+        if (currentHealth <= maxHealth * enragedHealthThreshold)
+        {
+          Debug.Log("El Dragón entra en modo Furia!");
+          ChangeCombatStance(CombatStance.ENRAGED);
+        }
+        break;
     }
-    else if (currentHealth <= maxHealth * enragedHealthThreshold)
-    {
-      Debug.Log("El Dragón entra en modo Furia!");
-      currentStance = CombatStance.ENRAGED;
-    }
-
   }
 
   private bool IsAirState(IState state)

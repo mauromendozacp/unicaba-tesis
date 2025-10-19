@@ -16,6 +16,7 @@ public class DragonGroundIdleState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = true;
     _boss.Animator.SetBool("IdleSimple", true);
     _timer = Random.Range(_minIdle, _maxIdle);
     //_boss.Rb.linearVelocity = Vector3.zero;

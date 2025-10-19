@@ -302,4 +302,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   }
 
   public abstract void Kill();
+
+  public void SetSpeed(float speed)
+  {
+    if (agent != null)
+    {
+      agent.speed = speed;
+    }
+  }
 }

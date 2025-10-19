@@ -19,6 +19,7 @@ public class DragonAirHoverAttackState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = false;
     _boss.Animator.SetBool("Hover", true);
     _boss.Rb.linearVelocity = Vector3.zero;
     _boss.Rb.useGravity = false;
@@ -44,6 +45,11 @@ public class DragonAirHoverAttackState : IState
 
     if (_bombTimer <= 0)
     {
+      if (target == null)
+      {
+        _boss.ChangeState(_factory.AirFlyReposition());
+        return;
+      }
       ExecuteAirBombAttack(target);
       _bombTimer = _bombDropInterval;
     }

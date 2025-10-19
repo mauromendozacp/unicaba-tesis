@@ -13,6 +13,7 @@ public class DragonTransitionLandingState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = false;
     _boss.Animator.SetTrigger("Lands");
     _boss.Rb.useGravity = true;
     _boss.EnableCollisions();
