@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03de41db69fc1694cb4a21e41c7898ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 500
   knockbackForceMultiplier: 0.5
   damageRenderer:
   - {fileID: 993435255901718407}
@@ -1856,21 +1856,32 @@ MonoBehaviour:
   attackRange: 2
   chaseRadius: 100
   maxChaseDistance: 15
+  arenaBoundsX: {x: -20, y: 20}
+  arenaBoundsZ: {x: -20, y: 20}
+  minRepositionDistance: 15
+  flyHeight: 10
   biteDamage: 35
   flameDamage: 20
   enragedHealthThreshold: 0.3
   damageToEscapeThreshold: 0.05
-  AirBombTargetElevation: 1.5
+  damageToEscape: 0
   _animator: {fileID: 258537132047893632}
   _hitBoxCollider: {fileID: 4965304902596364867}
   _flameCollider: {fileID: 1369480161369741726}
   _biteCollider: {fileID: 8036661640563044500}
   flame: {fileID: 48294508159276475}
+  neutralGroundMoveSpeed: 4
+  neutralAirMoveSpeed: 8
+  neutralRotationSpeed: 10
+  enragedGroundMoveSpeed: 8
+  enragedAirMoveSpeed: 10
   groundMoveSpeed: 4
   airMoveSpeed: 8
   rotationSpeed: 10
-  _attackRotationSpeed: 1
-  FireballSpeed: 6
+  neutralAttackRotationSpeed: 1
+  enragedAttackRotationSpeed: 1.6
+  neutralFireballSpeed: 8
+  enragedFireballSpeed: 12
   FireballSpawnPoint: {fileID: 3301573678065908506}
   stateChangeCounter: 0
 --- !u!195 &6879549569976659862
@@ -1883,7 +1894,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

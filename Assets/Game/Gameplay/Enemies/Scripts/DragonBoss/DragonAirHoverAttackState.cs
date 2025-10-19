@@ -44,6 +44,11 @@ public class DragonAirHoverAttackState : IState
 
     if (_bombTimer <= 0)
     {
+      if (target == null)
+      {
+        _boss.ChangeState(_factory.AirFlyReposition());
+        return;
+      }
       ExecuteAirBombAttack(target);
       _bombTimer = _bombDropInterval;
     }

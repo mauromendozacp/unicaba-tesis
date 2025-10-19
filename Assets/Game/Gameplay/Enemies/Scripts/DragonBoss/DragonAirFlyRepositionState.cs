@@ -22,16 +22,16 @@ public class DragonAirFlyRepositionState : IState
     // Elegir una posición aleatoria y alta en la arena para reposicionarse
     Vector3 currentPosition = _boss.transform.position;
     Vector3 newTargetPosition;
-    float minDistanceSquared = 15f * 15f;
+    float minDistanceSquared = _boss.MinRepositionDistance * _boss.MinRepositionDistance;
     float distanceSquared;
 
     // Bucle para elegir una posición aleatoria que cumpla con el requisito de distancia
     do
     {
       // Elegir una posición aleatoria dentro del rango -20 a 20 para x y z.
-      float randomX = Random.Range(-20f, 20f);
-      float randomZ = Random.Range(-20f, 20f);
-      newTargetPosition = new Vector3(randomX, 10f, randomZ);
+      float randomX = Random.Range(_boss.ArenaBoundsX.x, _boss.ArenaBoundsX.y);
+      float randomZ = Random.Range(_boss.ArenaBoundsZ.x, _boss.ArenaBoundsZ.y);
+      newTargetPosition = new Vector3(randomX, _boss.FlyHeight, randomZ);
 
       float dx = newTargetPosition.x - currentPosition.x;
       float dz = newTargetPosition.z - currentPosition.z;
@@ -56,11 +56,11 @@ public class DragonAirFlyRepositionState : IState
 
     if (_timer <= 0)
     {
-      if(_boss.CurrentTarget == null)
+      if (_boss.CurrentTarget == null)
       {
         _boss.ChangeState(_factory.TransitionLanding());
       }
-      else if ( Random.value > 0.6f)
+      else if (Random.value > 0.6f)
       {
         _boss.ChangeState(_factory.TransitionLanding());
       }
