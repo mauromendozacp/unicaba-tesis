@@ -19,6 +19,7 @@ public class DragonAirHoverAttackState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = false;
     _boss.Animator.SetBool("Hover", true);
     _boss.Rb.linearVelocity = Vector3.zero;
     _boss.Rb.useGravity = false;

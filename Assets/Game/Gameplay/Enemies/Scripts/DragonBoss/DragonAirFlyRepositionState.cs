@@ -16,6 +16,7 @@ public class DragonAirFlyRepositionState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = false;
     _boss.Animator.SetBool("FlyingFWD", true);
     _timer = _repositionTime;
 

@@ -15,6 +15,7 @@ public class DragonDieState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = false;
     _boss.Animator.SetTrigger("Die");
     _boss.EnableCollisions();
     _boss.Rb.useGravity = true;

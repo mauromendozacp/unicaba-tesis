@@ -57,6 +57,7 @@ public class DragonBossController : EnemyBase
   [SerializeField]
   //[Tooltip("Ajuste de altura del punto al que se apunta para el ataque aéreo.")] public float AirBombTargetElevation = 1.5f;
   float damageToEscape = 0f;
+  public bool IsVulnerable;
 
 
   [Header("Componentes")]
@@ -164,6 +165,7 @@ public class DragonBossController : EnemyBase
 
   public override void TakeDamage(float damage)
   {
+    if (!IsVulnerable) return;
     currentHealth -= damage;
     StartCoroutine(AppyDamageFeedback());
 

@@ -14,6 +14,7 @@ public class DragonTransitionTakeoffState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = false;
     _boss.Animator.SetTrigger("TakeOff");
     _boss.Rb.useGravity = false;
     _boss.Rb.isKinematic = false;

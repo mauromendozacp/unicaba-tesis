@@ -37,6 +37,7 @@ public class DragonGroundAttackState : IState
 
   public void OnEnter()
   {
+    _boss.IsVulnerable = true;
     _boss.Animator.SetTrigger(_attackAnimation);
     //_boss.Rb.linearVelocity = Vector3.zero;
     _boss.StopMovement();
