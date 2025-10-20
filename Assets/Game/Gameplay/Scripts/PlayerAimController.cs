@@ -44,10 +44,12 @@ public class PlayerAimController : MonoBehaviour
         if (cam == null) return;
 
         Vector2 lookInput = input.GetLookInput();
+        Vector2 moveInput = input.GetInputMove();
         Vector2 pointerScreen = input.GetPointerScreenPosition();
 
         bool usingMouse = playerInput != null && !string.IsNullOrEmpty(playerInput.currentControlScheme) && playerInput.currentControlScheme.ToLower().Contains("mouse");
-        bool usingStick = !usingMouse && lookInput.sqrMagnitude > stickDeadZone * stickDeadZone;
+        bool usingStickAim = !usingMouse && lookInput.sqrMagnitude > stickDeadZone * stickDeadZone;
+        bool usingMoveAim = !usingMouse && !usingStickAim && moveInput.sqrMagnitude > stickDeadZone * stickDeadZone;
 
         if (usingMouse)
         {
@@ -71,9 +73,15 @@ public class PlayerAimController : MonoBehaviour
             aimDirection = flatMouse.normalized;
             lastNonZeroAimDirection = aimDirection;
         }
-        else if (usingStick)
+        else if (usingStickAim)
         {
             aimDirection = new Vector3(lookInput.x, 0, lookInput.y).normalized;
+            lastNonZeroAimDirection = aimDirection;
+            aimPoint = transform.position + aimDirection * 5f;
+        }
+        else if (usingMoveAim)
+        {
+            aimDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
             lastNonZeroAimDirection = aimDirection;
             aimPoint = transform.position + aimDirection * 5f;
         }
