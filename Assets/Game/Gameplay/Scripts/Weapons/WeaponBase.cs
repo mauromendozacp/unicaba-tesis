@@ -11,6 +11,13 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
 
     protected WeaponData weaponData;
 
+    [Header("Audio")]
+    [SerializeField] private AudioEvent fireAudioEvent;
+    private AudioEvent lastPlayedAudioEvent = null;
+    private float lastPlayedAudioTime = 0f;
+    [SerializeField] private float audioDebounceWindow = 0.15f; 
+    [SerializeField] private bool bypassAudioDebounce = false; 
+
     public virtual float Damage => damage;
     public virtual float FireRate => fireRate;
     public virtual int MaxAmmo => maxAmmo;
@@ -44,7 +51,49 @@ public abstract class WeaponBase : MonoBehaviour, IWeapon
     public virtual void OnPickup() { }
     public virtual void OnDrop() { }
 
-    // NUEVO: por defecto no es infinita
     public virtual bool HasInfiniteAmmo => false;
+
+    protected void PlayFireAudio(Vector3 position)
+    {
+        if (fireAudioEvent == null || fireAudioEvent.Clip == null) return;
+
+        if (!bypassAudioDebounce)
+        {
+            if (lastPlayedAudioEvent == fireAudioEvent && Time.time - lastPlayedAudioTime < audioDebounceWindow)
+                return;
+        }
+        bool played = false;
+        try
+        {
+            if (GameManager.Instance != null && GameManager.Instance.AudioManager != null)
+            {
+                GameManager.Instance.AudioManager.PlayAudio(fireAudioEvent, position);
+                played = true;
+            }
+        }
+        catch {}
+
+        if (!played)
+            AudioSource.PlayClipAtPoint(fireAudioEvent.Clip, position, fireAudioEvent.Volume);
+
+        lastPlayedAudioEvent = fireAudioEvent;
+        lastPlayedAudioTime = Time.time;
+    }
+
+    protected void PlayAudioEvent(AudioEvent audioEvent, Vector3 position)
+    {
+        if (audioEvent == null || audioEvent.Clip == null) return;
+        try
+        {
+            if (GameManager.Instance != null && GameManager.Instance.AudioManager != null)
+            {
+                GameManager.Instance.AudioManager.PlayAudio(audioEvent, position);
+                return;
+            }
+        }
+        catch { }
+
+        AudioSource.PlayClipAtPoint(audioEvent.Clip, position, audioEvent.Volume);
+    }
 }
 

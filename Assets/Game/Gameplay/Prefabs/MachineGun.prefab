@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7c58c370d805c4f9cd53e059f51b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireAudioEvent: {fileID: 11400000, guid: 2203df0952e433a4bb915f5ccd6366ea, type: 2}
+  audioDebounceWindow: 0.15
+  bypassAudioDebounce: 1
   projectilePrefab: {fileID: 7559643882329239354, guid: 2e0c20c072f191b45a2bead4fc7dea41, type: 3}
   poolInitialSize: 24
   projectilePool: {fileID: 0}

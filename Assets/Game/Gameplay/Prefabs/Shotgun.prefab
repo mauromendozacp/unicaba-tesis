@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0788842a523d36841bbdebfd65a70963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireAudioEvent: {fileID: 11400000, guid: af13164799bda6f418dc960618d7c394, type: 2}
+  audioDebounceWindow: 0.15
   projectilePrefab: {fileID: 7559643882329239354, guid: 8e3ea7a7f44fa594bb0773fc4e72776a, type: 3}
   poolInitialSize: 32
   projectilePool: {fileID: 0}
@@ -54,6 +56,7 @@ MonoBehaviour:
   pelletsPerShot: 8
   spreadAngle: 15
   reloadTime: 1.5
+  pumpAudioEvent: {fileID: 11400000, guid: 021af32e4a9bf83488431b1d9c08efc9, type: 2}
 --- !u!1 &3939557954115009905
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,5 +29,6 @@ public class MachineGun : WeaponBase
         proj.transform.position = muzzlePoint.position;
         proj.transform.rotation = muzzlePoint.rotation;
         proj.SetDirection(muzzlePoint.forward);
+        PlayFireAudio(muzzlePoint.position);
     }
 }

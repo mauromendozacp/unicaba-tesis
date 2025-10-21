@@ -11,7 +11,6 @@ public class Pistol : WeaponBase
 
     private float nextFireTime;
 
-    // Disparo simple. Munición ilimitada si es default.
     public override void Fire()
     {
         if (Time.time < nextFireTime) return;
@@ -40,5 +39,7 @@ public class Pistol : WeaponBase
         proj.transform.position = muzzlePoint.position;
         proj.transform.rotation = muzzlePoint.rotation;
         proj.SetDirection(muzzlePoint.forward);
+        // Reproducir sonido de disparo
+        PlayFireAudio(muzzlePoint.position);
     }
 }

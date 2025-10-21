@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e99067f8e40a84d9a381402bcd64d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDefault: 1
+  fireAudioEvent: {fileID: 11400000, guid: fbafe6d2253e025439391c7f5f0636b4, type: 2}
   muzzlePoint: {fileID: 4386165175058358930}
   projectilePrefab: {fileID: 7559643882329239354, guid: 3c3b33df27c0fa34892f845bce0667f7, type: 3}
   poolInitialSize: 16
