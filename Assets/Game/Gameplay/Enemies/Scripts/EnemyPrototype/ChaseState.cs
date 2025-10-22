@@ -14,7 +14,7 @@ public class ChaseState : IEnemyState
 
   public void Enter()
   {
-    enemy.ChangeMaterial();
+    //enemy.ChangeMaterial();
   }
 
   public void Update()

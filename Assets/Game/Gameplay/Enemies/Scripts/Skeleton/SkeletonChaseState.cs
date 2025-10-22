@@ -37,6 +37,7 @@ public class SkeletonChaseState : IEnemyState
     if (enemy.CurrentTarget != null && enemy.DistanceToTarget() <= enemy.AttackRange + 0.1f)
     {
       enemy.ChangeState(new SkeletonAttackState(enemy));
+      return;
     }
 
     enemy.MoveTo(enemy.CurrentTarget.position);

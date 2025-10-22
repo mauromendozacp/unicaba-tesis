@@ -1,17 +1,10 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.AI;
 
-public enum EnemyState
-{
-  Idle,
-  Chase,
-  Attack,
-  Retreat,
-  Damaged,
-  Death
-}
+
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -19,37 +12,30 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   protected float currentHealth;
   public float Health => currentHealth;
 
-  [Header("Movement Settings")]
-  [SerializeField] protected bool isTerritorial = false;
-  public bool IsTerritorial => isTerritorial;
-  [SerializeField] float moveSpeed = 4f;
-  protected Vector3 initialPosition;
-  public float currentSpeed;
-  public float CurrentSpeed => currentSpeed;
 
-
-  public float AttackCooldown => attackCooldown;
-
+  [Header("Damage Settings")]
   [SerializeField] float knockbackForceMultiplier = 0.5f;
+  [SerializeField] protected List<Renderer> damageRenderer;
+  [SerializeField] protected Material damagedMaterial;
+  protected Material originalMaterial;
 
   [Header("Attack Settings")]
   [SerializeField] protected Collider attackCollider;
+  public float AttackCooldown => attackCooldown;
   [SerializeField] protected float attackDamage = 40f;
   [SerializeField] protected float attackCooldown = 1f;
 
   [SerializeField] float attackRange = 2f;
   public float AttackRange => attackRange;
-  [SerializeField] float chaseRadius = 10f;
-  public float ChaseRadius => chaseRadius;
-  [SerializeField] float maxChaseDistance = 15f;
 
-  private Rigidbody rb;
+  [SerializeField] protected float chaseRadius = 10f;
+  public float ChaseRadius => chaseRadius;
+  [SerializeField] protected float maxChaseDistance = 15f;
+  protected Rigidbody rb;
   protected float lastDamage;
 
-  public Transform CurrentTarget { get; set; }
+  public virtual Transform CurrentTarget { get; set; }
   protected IDamageable currentTargetDamageable = null;
-
-  protected IEnemyState currentState;
 
   public bool IsAlive => currentHealth > 0;
 
@@ -61,43 +47,39 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   protected NavMeshAgent agent;
   protected Collider selfCollider;
 
-  private Collider[] hitColliders = new Collider[4]; // Array pre-asignado
+  protected Collider[] hitColliders = new Collider[4]; // Array pre-asignado
 
   protected virtual void Awake()
   {
-    currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
-    currentHealth = maxHealth;
-    initialPosition = transform.position;
     rb = GetComponent<Rigidbody>();
     agent = GetComponent<NavMeshAgent>();
     selfCollider = GetComponent<Collider>();
+  }
 
-    if (agent != null)
+  protected virtual void Start()
+  {
+    currentHealth = maxHealth;
+
+    if (damageRenderer != null && damageRenderer.Count > 0 && damagedMaterial != null)
     {
-      agent.speed = currentSpeed;
-      agent.stoppingDistance = 0.1f;
-      //agent.stoppingDistance = attackRange * 0.8f;
-      agent.updateRotation = true; // El agente maneja la rotación
+      originalMaterial = damageRenderer[0].material;
+    }
+  }
+
+  public void ToggleDamageMaterial(bool active)
+  {
+    if (damageRenderer != null && damagedMaterial != null && originalMaterial != null)
+    {
+      foreach (var renderer in damageRenderer)
+      {
+        renderer.material = active ? damagedMaterial : originalMaterial;
+      }
     }
   }
 
   public void SetPool(IObjectPool<GameObject> pool)
   {
     parentPool = pool;
-  }
-
-  protected virtual void Update()
-  {
-    currentState?.Update();
-  }
-
-  public void ChangeState(IEnemyState newState)
-  {
-
-    currentState?.Exit();
-    StopAllCoroutines();
-    currentState = newState;
-    currentState.Enter();
   }
 
   public virtual void TakeDamage(float damage)
@@ -120,12 +102,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  public void StopMovement()
+  public bool StopMovement()
   {
+    bool isStopped = false;
     if (agent != null && agent.enabled && agent.isOnNavMesh)
     {
       agent.isStopped = true;
+      isStopped = true;
     }
+    return isStopped;
   }
 
   /*
@@ -216,6 +201,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
+  public void ToggleSelfCollider(bool active)
+  {
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = active;
+    }
+  }
 
 
   public void EnableMovementAndCollisions()
@@ -237,8 +229,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     selfCollider.enabled = true;
   }
 
+  public void EnableCollisions()
+  {
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = true;
+    }
+  }
 
-  public Transform FindNearestPlayer()
+
+  public virtual Transform FindNearestPlayer()
   {
     // Filtrado eficiente
     int numColliders = Physics.OverlapSphereNonAlloc(transform.position, chaseRadius, hitColliders, LayerMask.GetMask("Player"));
@@ -277,7 +277,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     return Vector3.Distance(transform.position, CurrentTarget.position);
   }
 
-  public abstract void Kill();
+
 
   public void LookAtTarget()
   {
@@ -293,35 +293,21 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  public Vector3 GetInitialPosition()
+  public void SetAttackCollider(bool active)
   {
-    return initialPosition;
-  }
-
-  protected virtual void OnDrawGizmosSelected()
-  {
-    // Visualización del Radio de Persecución (ChaseRadius)
-    Gizmos.color = Color.yellow;
-    Gizmos.DrawWireSphere(transform.position, chaseRadius);
-
-    // Visualización del Límite Territorial (MaxChaseDistance)
-    if (isTerritorial)
+    if (attackCollider != null)
     {
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireSphere(initialPosition, maxChaseDistance);
+      attackCollider.enabled = active;
     }
   }
 
-  public bool IsTooFarFromOrigin(float margin = 0f)
+  public abstract void Kill();
+
+  public void SetSpeed(float speed)
   {
-    if (!isTerritorial || CurrentTarget == null) return false;
-
-    float effectiveMaxDistance = maxChaseDistance + margin;
-    if (effectiveMaxDistance < 0) effectiveMaxDistance = 0;
-
-    float distanceSqr = (CurrentTarget.position - initialPosition).sqrMagnitude;
-    float maxDistanceSqr = effectiveMaxDistance * effectiveMaxDistance;
-
-    return distanceSqr > maxDistanceSqr;
+    if (agent != null)
+    {
+      agent.speed = speed;
+    }
   }
 }

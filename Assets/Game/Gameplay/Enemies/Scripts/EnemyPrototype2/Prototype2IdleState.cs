@@ -13,7 +13,7 @@ public class Prototype2IdleState : IEnemyState
 
   public void Enter()
   {
-    enemy.ChangeMaterial();
+    //enemy.ChangeMaterial();
   }
 
   public void Update()

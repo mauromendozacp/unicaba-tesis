@@ -2212,6 +2212,9 @@ MonoBehaviour:
   moveSpeed: 4.5
   currentSpeed: 0
   knockbackForceMultiplier: 0.5
+  damageRenderer:
+  - {fileID: 9191393385292689399}
+  damagedMaterial: {fileID: 2100000, guid: 3e202341f1fa2e842b0070c960b4da73, type: 2}
   attackCollider: {fileID: 265180224246099332}
   attackDamage: 18
   attackCooldown: 1.5

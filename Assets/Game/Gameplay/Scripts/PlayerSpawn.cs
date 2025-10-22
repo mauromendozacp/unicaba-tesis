@@ -20,6 +20,8 @@ public class PlayerSpawn : MonoBehaviour
     private PlayerData[] playersData = new PlayerData[4];
     private readonly List<PlayerInput> players = new List<PlayerInput>();
 
+    public List<PlayerInput> PlayerInputs => players;
+
     public void Init(Func<int, PlayerUI> onGetPlayerUI, Action onPause, Action onDeath, Action onCollectKey, Action<int> onJoinPlayerUI)
     {
         this.onGetPlayerUI = onGetPlayerUI;
@@ -52,6 +54,11 @@ public class PlayerSpawn : MonoBehaviour
 
             Transform playerTransform = spawnLocations[index];
             playerController.transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);
+
+            if (playerInput.currentControlScheme == "Gamepad")
+            {
+                GameManager.Instance.CursorManager.InitCursor(players.Count, playerInput);
+            }
         }
 
         players.Add(playerInput);

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52467b5f8c660d47b6947e2b7051f6c, type: 3}
+  m_Name: wave4
+  m_EditorClassIdentifier: 
+  enemiesInWave:
+  - enemyPrefab: {fileID: 1308950918597888886, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
+    count: 4
+  - enemyPrefab: {fileID: 7971126282652106309, guid: 90759024cc082a841b1b67040df615b6, type: 3}
+    count: 4
+  - enemyPrefab: {fileID: 5429482583878813926, guid: 584b3ff224f0b6246bc0054cdd73d7c4, type: 3}
+    count: 4
+  cooldownTime: 15
+  itemsToDropInWave:
+  - itemData: {fileID: 11400000, guid: c1d7d1a15dc64f74abf6e27386d27576, type: 2}
+    count: 2
+  - itemData: {fileID: 11400000, guid: 6341e8180b86e2445a90579e14e149c5, type: 2}
+    count: 2
+  - itemData: {fileID: 11400000, guid: d8296e9bf747c3e45906802abe9c0686, type: 2}
+    count: 2

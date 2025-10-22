@@ -28,6 +28,7 @@ public class SkeletonIdleState : IEnemyState
     if (enemy.CurrentTarget != null && !enemy.IsTooFarFromOrigin())
     {
       enemy.ChangeState(new SkeletonChaseState(enemy));
+      return;
     }
 
     if (enemy.IsTerritorial)
