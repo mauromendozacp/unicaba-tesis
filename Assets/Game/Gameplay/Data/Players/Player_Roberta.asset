@@ -16,5 +16,7 @@ MonoBehaviour:
   maxLife: 100
   speed: 5
   icon: {fileID: 21300000, guid: 101fe3693a8bf5b41a55fd0bbc220448, type: 3}
+  inventoryIcon: {fileID: -1105683287, guid: fa81156474412b64886c5f6ddab7f58e, type: 3}
+  minimapIcon: {fileID: 0}
   prefab: {fileID: 7647134206250791342, guid: 850710d10cfdd814a8bd3f0836dec7a7, type: 3}
   positionOffset: {x: 0, y: -1, z: 0}

@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         GameObject playerPrefab = Instantiate(data.Prefab, transform);
         playerPrefab.transform.SetPositionAndRotation(data.PositionOffset, Quaternion.identity);
 
-        this.playerUI.SetPlayerIcon(data.Icon);
+        this.playerUI.SetPlayerIcon(data.InventoryIcon);
         speed = data.Speed;
 
         //minimapSprite.sprite = data.MinimapIcon;

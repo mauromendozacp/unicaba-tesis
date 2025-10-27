@@ -5,23 +5,53 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject menuPanel = null;
+    [SerializeField] private SectionPanel[] panels = null;
     [SerializeField] private Button playBtn = null;
+    [SerializeField] private Button optionsBtn = null;
+    [SerializeField] private Button creditsBtn = null;
+    [SerializeField] private Button tutorialBtn = null;
+    [SerializeField] private Button controlBtn = null;
     [SerializeField] private Button quitBtn = null;
+    [SerializeField] private Button[] backMenuBtns = null;
+    [SerializeField] private Button[] backOptionsBtns = null;
+    [SerializeField] private OptionSound musicOption = null;
+    [SerializeField] private OptionSound sfxOption = null;
     [SerializeField] private AudioEvent menuMusic = null;
 
     [SerializeField] private CharacterSelectionController selectionController = null;
+
+    private PANEL_TYPE currentPanel = default;
 
     private List<PlayerInput> players = new List<PlayerInput>();
 
     private void Start()
     {
         playBtn.onClick.AddListener(OnPlay);
+        optionsBtn.onClick.AddListener(() => ShowPanel(PANEL_TYPE.OPTIONS));
+        creditsBtn.onClick.AddListener(() => ShowPanel(PANEL_TYPE.CREDITS));
+        tutorialBtn.onClick.AddListener(() => ShowPanel(PANEL_TYPE.TUTORIAL));
+        controlBtn.onClick.AddListener(() => ShowPanel(PANEL_TYPE.CONTROLS));
         quitBtn.onClick.AddListener(OnQuit);
 
-        selectionController.Init(GoToGameplay, OpenMenu, GetPlayersCount);
+        for (int i = 0; i < backMenuBtns.Length; i++)
+        {
+            backMenuBtns[i].onClick.AddListener(() => ShowPanel(PANEL_TYPE.MENU));
+        }
+
+        for (int i = 0; i < backMenuBtns.Length; i++)
+        {
+            backOptionsBtns[i].onClick.AddListener(() => ShowPanel(PANEL_TYPE.OPTIONS));
+        }
+
+        selectionController.Init(GoToGameplay, OpenMenu);
+
+        AudioManager audioManager = GameManager.Instance.AudioManager;
+        musicOption.Init(audioManager.MusicEnabled, audioManager.MusicVolume, audioManager.UpdateMusicVolume, audioManager.ToggleMusic);
+        sfxOption.Init(audioManager.SfxEnabled, audioManager.SfxVolume, audioManager.UpdateSfxVolume, audioManager.ToggleSFX);
 
         GameManager.Instance.AudioManager.PlayAudio(menuMusic);
+
+        ShowPanel(PANEL_TYPE.MENU);
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
@@ -37,7 +67,7 @@ public class MenuController : MonoBehaviour
             {
                 GameManager.Instance.CursorManager.InitCursor(GetPlayersCount(), playerInput);
 
-                if (menuPanel.gameObject.activeSelf)
+                if (currentPanel == PANEL_TYPE.MENU)
                 {
                     if (isFirstPlayer)
                     {
@@ -65,6 +95,16 @@ public class MenuController : MonoBehaviour
         players.Remove(playerInput);
     }
 
+    private void ShowPanel(PANEL_TYPE type)
+    {
+        for (int i = 0; i < panels.Length; i++)
+        {
+            panels[i].Toggle(panels[i].Type == type);
+        }
+
+        currentPanel = type;
+    }
+
     public void InitSelectionButtons()
     {
         selectionController.InitButtons();
@@ -72,8 +112,7 @@ public class MenuController : MonoBehaviour
 
     private void OnPlay()
     {
-        selectionController.Toggle(true);
-        Toggle(false);
+        ShowPanel(PANEL_TYPE.SELECTION);
 
         for (int i = 0; i < players.Count; i++)
         {
@@ -89,11 +128,6 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
-    private void Toggle(bool status)
-    {
-        menuPanel.gameObject.SetActive(status);
-    }
-
     private void OpenMenu()
     {
         GameManager.Instance.CursorManager.ToggleAllCursors(false);
@@ -102,8 +136,7 @@ public class MenuController : MonoBehaviour
             GameManager.Instance.CursorManager.ToggleCursor(0, true);
         }
 
-        selectionController.Toggle(false);
-        Toggle(transform);
+        ShowPanel(PANEL_TYPE.MENU);
     }
 
     private int GetPlayersCount()
@@ -127,6 +160,14 @@ public class MenuController : MonoBehaviour
             GameManager.Instance.GameDataManager.playersData.Add(data);
         }
 
-        GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+        for (int i = 0; i < backOptionsBtns.Length; i++)
+        {
+            backOptionsBtns[i].onClick.RemoveAllListeners();
+        }
+
+        backOptionsBtns[0].onClick.AddListener(() => ShowPanel(PANEL_TYPE.CONTROLS));
+        backOptionsBtns[1].onClick.AddListener(() => GameManager.Instance.ChangeScene(SceneGame.Gameplay));
+
+        ShowPanel(PANEL_TYPE.TUTORIAL);
     }
 }
