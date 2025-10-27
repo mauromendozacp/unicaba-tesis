@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448991c694c03954c819c2792251410d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 900
   knockbackForceMultiplier: 0.5
   damageRenderer:
   - {fileID: 3035617546883738957}

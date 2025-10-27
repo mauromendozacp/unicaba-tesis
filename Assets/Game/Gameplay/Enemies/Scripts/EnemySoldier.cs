@@ -19,7 +19,7 @@ public abstract class EnemySoldier : EnemyBase
   [Header("Movement Settings")]
   [SerializeField] protected bool isTerritorial = false;
   public bool IsTerritorial => isTerritorial;
-  [SerializeField] float moveSpeed = 4f;
+  [SerializeField] protected float moveSpeed = 4f;
   protected Vector3 initialPosition;
   public float currentSpeed;
   public float CurrentSpeed => currentSpeed;
