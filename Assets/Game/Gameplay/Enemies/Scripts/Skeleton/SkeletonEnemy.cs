@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SkeletonEnemy : EnemySoldier
 {
@@ -14,43 +15,37 @@ public class SkeletonEnemy : EnemySoldier
     EnableMovementAndCollisions();
   }
 
-  protected override void Awake()
-  {
-    //animator = GetComponent<SkeletonAnimationController>();
-    base.Awake();
-    //ChangeState(new SkeletonIdleState(this));
-  }
-
   protected override void Start()
   {
     base.Start();
     animator = GetComponent<SkeletonAnimationController>();
-    //ChangeState(new SkeletonIdleState(this));
     SetAttackCollider(false);
   }
-
 
   public override void TakeDamage(float damage)
   {
     if (!IsAlive) return;
     base.TakeDamage(damage);
-    ChangeState(new SkeletonDamagedState(this));
-    /*
-    if (currentHealth <= 0)
+    StartCoroutine(DamageMaterial());
+    if (!IsAlive)
     {
-      ChangeState(new SkeletonDeathState(this));
+      Kill();
     }
-    else
-    {
-      ChangeState(new SkeletonDamagedState(this));
-    }
-    */
+  }
+
+  private IEnumerator DamageMaterial()
+  {
+    ToggleDamageMaterial(true);
+    yield return new WaitForSeconds(0.1f);
+    ToggleDamageMaterial(false);
+    yield break;
   }
 
 
   public override void Kill()
   {
     ChangeState(new SkeletonDeathState(this));
+    ToggleDamageMaterial(false);
   }
 
   public void EnableAttackCollider()

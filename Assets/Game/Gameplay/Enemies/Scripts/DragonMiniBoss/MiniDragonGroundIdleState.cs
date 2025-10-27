@@ -22,7 +22,7 @@ public class MiniDragonGroundIdleState : IState
 
     // Elegir objetivo al entrar
     _boss.FindNearestPlayer();
-    Debug.Log(_boss.CurrentTarget);
+    //Debug.Log(_boss.CurrentTarget);
 
     // Probabilidad de gritar al entrar en Idle
     /*if (Random.value < 0.2f)
@@ -35,7 +35,7 @@ public class MiniDragonGroundIdleState : IState
   {
     _timer -= Time.deltaTime;
     if (_timer > 0) return;
-    Debug.Log(_boss.CurrentTarget);
+    //Debug.Log(_boss.CurrentTarget);
     // 1. Prioridad: Buscar y atacar
     if (_boss.CurrentTarget != null)
     {

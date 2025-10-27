@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SpiderEnemy : EnemySoldier
 {
@@ -46,28 +47,29 @@ public class SpiderEnemy : EnemySoldier
     }
   }
 
-
   public override void TakeDamage(float damage)
   {
     if (!IsAlive) return;
     base.TakeDamage(damage);
-    ChangeState(new SpiderDamagedState(this));
+    StartCoroutine(DamageMaterial());
+    if (!IsAlive)
+    {
+      Kill();
+    }
+  }
 
-    /*
-    if (currentHealth <= 0)
-    {
-      ChangeState(new SpiderDeathState(this));
-    }
-    else
-    {
-      ChangeState(new SpiderDamagedState(this));
-    }
-    */
+  private IEnumerator DamageMaterial()
+  {
+    ToggleDamageMaterial(true);
+    yield return new WaitForSeconds(0.1f);
+    ToggleDamageMaterial(false);
+    yield break;
   }
 
 
   public override void Kill()
   {
     ChangeState(new SpiderDeathState(this));
+    ToggleDamageMaterial(false);
   }
 }

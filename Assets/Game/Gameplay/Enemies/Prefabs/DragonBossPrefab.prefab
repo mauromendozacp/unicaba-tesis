@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03de41db69fc1694cb4a21e41c7898ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 1500
   knockbackForceMultiplier: 0.5
   damageRenderer:
   - {fileID: 993435255901718407}
@@ -1865,6 +1865,7 @@ MonoBehaviour:
   enragedHealthThreshold: 0.3
   damageToEscapeThreshold: 0.05
   damageToEscape: 0
+  IsVulnerable: 0
   _animator: {fileID: 258537132047893632}
   _hitBoxCollider: {fileID: 4965304902596364867}
   _flameCollider: {fileID: 1369480161369741726}
