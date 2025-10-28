@@ -45,10 +45,10 @@ public class GameplayController : MonoBehaviour
     }
   }
 
-  private void Start()
-  {
-    gameplayUI.Init(OnResume, GoToMenu, RetryLevel, NextLevel);
-  }
+    private void Start()
+    {
+        gameplayUI.Init(OnResume, GoToMenu, OnRestart, RetryLevel, NextLevel);
+    }
 
     private void OnResume()
     {
@@ -81,6 +81,12 @@ public class GameplayController : MonoBehaviour
         {
             players[i].ToggleGameplayInputs(false);
         }
+    }
+
+    private void OnRestart()
+    {
+        TogglePause(false);
+        GameManager.Instance.ChangeScene(SceneGame.Gameplay);
     }
 
   private void OnPlayerDeath()

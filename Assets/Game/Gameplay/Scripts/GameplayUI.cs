@@ -9,35 +9,49 @@ public class GameplayUI : MonoBehaviour
 
     [SerializeField] private GameObject pausePanel = null;
     [SerializeField] private Button resumeBtn = null;
+    [SerializeField] private Button optionsBtn = null;
+    [SerializeField] private Button restartBtn = null;
     [SerializeField] private Button menuBtn = null;
 
     [SerializeField] private GameObject wavePanel = null;
     [SerializeField] private TMP_Text waveText = null;
 
     [SerializeField] private GameObject hudPanel = null;
+    [SerializeField] private GameObject optionsPanel = null;
     [SerializeField] private GameObject losePanel = null;
     [SerializeField] private GameObject winPanel = null;
 
     [SerializeField] private Button retryBtn = null;
     [SerializeField] private Button loseMenuBtn = null;
     [SerializeField] private Button nextLevelButton = null;
+    [SerializeField] private Button exitOptionsButton = null;
 
     [Header("Contador de llaves")]
     [SerializeField] private TMP_Text keysText = null;
 
-    public void Init(Action onResume, Action onMenu, Action onRetry, Action onNextLevel)
+    public void Init(Action onResume, Action onMenu, Action onRestart, Action onRetry, Action onNextLevel)
     {
         resumeBtn.onClick.AddListener(() =>
         {
             onResume?.Invoke();
             TogglePause(false);
         });
-
+        optionsBtn.onClick.AddListener(() => 
+        {
+            hudPanel.SetActive(false);
+            optionsPanel.SetActive(true);
+        });
+        restartBtn.onClick.AddListener(onRestart.Invoke);
         menuBtn.onClick.AddListener(onMenu.Invoke);
 
         retryBtn.onClick.AddListener(onRetry.Invoke);
         loseMenuBtn.onClick.AddListener(onMenu.Invoke);
         nextLevelButton.onClick.AddListener(onNextLevel.Invoke);
+        exitOptionsButton.onClick.AddListener(() =>
+        {
+            hudPanel.SetActive(true);
+            optionsPanel.SetActive(false);
+        });
     }
 
     public void TogglePause(bool status)
