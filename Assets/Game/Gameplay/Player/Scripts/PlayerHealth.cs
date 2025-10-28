@@ -121,10 +121,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
     {
         if (isGoldenEffectActive || goldenMaterial == null) return;
         
+        RefreshRenderers();
+        
         isGoldenEffectActive = true;
         for (int i = 0; i < playerRenderers.Length; i++)
         {
-            playerRenderers[i].material = goldenMaterial;
+            if (playerRenderers[i] != null)
+            {
+                playerRenderers[i].material = goldenMaterial;
+            }
         }
     }
 
@@ -135,7 +140,28 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
         isGoldenEffectActive = false;
         for (int i = 0; i < playerRenderers.Length; i++)
         {
-            playerRenderers[i].material = originalMaterials[i];
+            if (playerRenderers[i] != null && i < originalMaterials.Length && originalMaterials[i] != null)
+            {
+                playerRenderers[i].material = originalMaterials[i];
+            }
+        }
+    }
+
+    private void RefreshRenderers()
+    {
+        playerRenderers = GetComponentsInChildren<Renderer>();
+        
+        if (originalMaterials == null || originalMaterials.Length != playerRenderers.Length)
+        {
+            originalMaterials = new Material[playerRenderers.Length];
+        }
+        
+        for (int i = 0; i < playerRenderers.Length; i++)
+        {
+            if (playerRenderers[i] != null && originalMaterials[i] == null)
+            {
+                originalMaterials[i] = playerRenderers[i].material;
+            }
         }
     }
 }
