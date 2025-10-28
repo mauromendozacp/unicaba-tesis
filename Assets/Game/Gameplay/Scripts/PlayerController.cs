@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private PlayerData data = null;
 
     private float speed = 0f;
+    private float baseSpeed = 0f;
     private Vector3 velocity = Vector3.zero;
 
     private Action onPause = null;
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
         this.playerUI.SetPlayerIcon(data.Icon);
         speed = data.Speed;
+        baseSpeed = data.Speed;
 
         //minimapSprite.sprite = data.MinimapIcon;
         minimapSprite.SetSprite(minimapIcon);
@@ -206,5 +208,15 @@ public class PlayerController : MonoBehaviour
         {
             inputController.PlayerMap.Disable();
         }
+    }
+
+    public void ModifySpeed(float multiplier)
+    {
+        speed = baseSpeed * multiplier;
+    }
+
+    public void RestoreSpeed()
+    {
+        speed = baseSpeed;
     }
 }

@@ -620,6 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibilityTime: 0.5
+  goldenMaterial: {fileID: 2100000, guid: 86c22259ff3dfa04dbbbaf73127c6d64, type: 2}
 --- !u!114 &1200799538902002149
 MonoBehaviour:
   m_ObjectHideFlags: 0

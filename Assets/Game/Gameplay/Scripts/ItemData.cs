@@ -18,6 +18,7 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] private Vector3 positionOffset = Vector3.zero;
     [SerializeField] private Vector3 rotation = Vector3.zero;
     [SerializeField] private ItemType type = ItemType.None;
+    [SerializeField] private AudioEvent useAudioEvent = null;
 
     public string ItemName => itemName;
     public Sprite Icon => icon;
@@ -28,4 +29,21 @@ public abstract class ItemData : ScriptableObject
     public ItemType Type => type;
 
     public abstract void Use(GameObject user);
+
+    protected void PlayUseAudio(Vector3 position)
+    {
+        if (useAudioEvent == null || useAudioEvent.Clip == null) return;
+
+        try
+        {
+            if (GameManager.Instance != null && GameManager.Instance.AudioManager != null)
+            {
+                GameManager.Instance.AudioManager.PlayAudio(useAudioEvent, position);
+                return;
+            }
+        }
+        catch { }
+
+        AudioSource.PlayClipAtPoint(useAudioEvent.Clip, position, useAudioEvent.Volume);
+    }
 }

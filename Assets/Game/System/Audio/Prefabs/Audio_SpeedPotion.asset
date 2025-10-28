@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92f4030fb5bdcef4089dcc4548b8dbcf, type: 3}
-  m_Name: AudioPistol_Fire
+  m_Name: Audio_SpeedPotion
   m_EditorClassIdentifier: 
   audioType: 0
   soundType: 0
-  clip: {fileID: 8300000, guid: af01818b2a170e3408cbb344591b3fb1, type: 3}
+  clip: {fileID: 8300000, guid: 480b48f006d76c14b83b0b1b72099272, type: 3}
   volume: 1

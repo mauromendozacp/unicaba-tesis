@@ -11,5 +11,6 @@ public class Potion : ItemData
     {
         PlayerHealth playerHealth = user.GetComponent<PlayerHealth>();
         playerHealth.IncreaseHealth(heal);
+        PlayUseAudio(user.transform.position);
     }
 }
