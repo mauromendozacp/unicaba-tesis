@@ -23,7 +23,9 @@ public class SpeedPotion : ItemData
     private IEnumerator ApplySpeedBoost(PlayerController player)
     {
         player.ModifySpeed(speedMultiplier);
+        player.EnableSpeedEffect();
         yield return new WaitForSeconds(duration);
         player.RestoreSpeed();
+        player.DisableSpeedEffect();
     }
 }

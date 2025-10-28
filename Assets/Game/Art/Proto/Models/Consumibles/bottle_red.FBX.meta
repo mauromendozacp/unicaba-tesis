@@ -106,3 +106,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 71778
+  packageName: Potions, Coin And Box of Pandora Pack
+  packageVersion: 1.0
+  assetPath: Assets/Game/Art/Proto/Models/Consumibles/bottle_red.FBX
+  uploadId: 137499

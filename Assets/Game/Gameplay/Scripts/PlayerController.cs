@@ -13,7 +13,11 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon System")]
     [SerializeField] private WeaponHolder weaponHolder;
 
+    [Header("Visual Effects")]
+    [SerializeField] private GameObject speedEffectPrefab;
+
     private ReviveController reviveController = null;
+    private GameObject activeSpeedEffect = null;
 
     private PlayerInputGameplayController inputController = null;
     private CharacterController characterController = null;
@@ -218,5 +222,23 @@ public class PlayerController : MonoBehaviour
     public void RestoreSpeed()
     {
         speed = baseSpeed;
+    }
+
+    public void EnableSpeedEffect()
+    {
+        if (speedEffectPrefab != null && activeSpeedEffect == null)
+        {
+            activeSpeedEffect = Instantiate(speedEffectPrefab, transform);
+            activeSpeedEffect.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    public void DisableSpeedEffect()
+    {
+        if (activeSpeedEffect != null)
+        {
+            Destroy(activeSpeedEffect);
+            activeSpeedEffect = null;
+        }
     }
 }

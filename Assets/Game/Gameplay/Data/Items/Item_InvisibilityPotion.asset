@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: 
   icon: {fileID: 21300000, guid: 8edfd9986d7bdec419b59812b1f68292, type: 3}
   minimapIcon: {fileID: 21300000, guid: 8edfd9986d7bdec419b59812b1f68292, type: 3}
-  prefab: {fileID: 2053649373712773487, guid: cbefaacb680016f468a7a0e063b11c6c, type: 3}
+  prefab: {fileID: 1000013846074356, guid: 11e31a2ebb4e6e246bcf8c0ba034a031, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   type: 0

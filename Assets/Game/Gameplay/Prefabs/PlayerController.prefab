@@ -467,6 +467,7 @@ MonoBehaviour:
   itemDetection: {fileID: 3318913069838923435}
   minimapSprite: {fileID: 5418185240411066123}
   weaponHolder: {fileID: -1477880225002385552}
+  speedEffectPrefab: {fileID: 5986232979032071491, guid: 1a5b8bed88fd43144bdb5d3c450246e9, type: 3}
 --- !u!114 &5482039823722391062
 MonoBehaviour:
   m_ObjectHideFlags: 0
