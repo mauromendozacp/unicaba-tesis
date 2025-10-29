@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class DragonGroundAttackState : IState
@@ -69,7 +70,14 @@ public class DragonGroundAttackState : IState
       else
       {
         _damageTrigger.enabled = true;
-        if (_attackAnimation == "Drakaris") _boss.flame.SetActive(true);
+        if (_attackAnimation == "Drakaris")
+        {
+          _boss.FlameCollider.gameObject.SetActive(true);
+          _boss.flame.SetActive(true);
+          _boss.flameEffect.gameObject.SetActive(true);
+          _boss.flameEffect.Play();
+
+        }
       }
       _attackExecuted = true;
     }
@@ -82,7 +90,14 @@ public class DragonGroundAttackState : IState
   public void OnExit()
   {
     if (_damageTrigger != null && !_isFireballAttack) _damageTrigger.enabled = false;
-    if (_attackAnimation == "Drakaris") _boss.flame.SetActive(false);
+    if (_attackAnimation == "Drakaris")
+    {
+      _boss.FlameCollider.gameObject.SetActive(false);
+      _boss.flame.SetActive(false);
+      _boss.flameEffect.Stop();
+      _boss.flameEffect.gameObject.SetActive(false);
+    }
+
     _boss.CurrentAttack = DragonAttackType.GROUND_NONE;
     //_boss.Rb.linearVelocity = Vector3.zero;
     _boss.StopMovement();

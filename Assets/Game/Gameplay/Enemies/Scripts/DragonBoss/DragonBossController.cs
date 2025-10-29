@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.VFX;
 
 public enum DragonAttackType
 {
@@ -68,6 +69,7 @@ public class DragonBossController : EnemyBase
   [SerializeField] Collider _flameCollider; // Collider del ataque de fuego
   [SerializeField] Collider _biteCollider; // Collider del ataque de mordida
   [SerializeField] public GameObject flame;
+  [SerializeField] public VisualEffect flameEffect;
 
   public Animator Animator => _animator;
   public Collider HitBoxCollider => _hitBoxCollider;
@@ -145,7 +147,8 @@ public class DragonBossController : EnemyBase
 
   void OnEnable()
   {
-    if (FlameCollider != null) FlameCollider.enabled = false;
+    //if (FlameCollider != null) FlameCollider.enabled = false;
+    if(FlameCollider != null) FlameCollider.gameObject.SetActive(false);
     if (BiteCollider != null) BiteCollider.enabled = false;
     ChangeState(stateFactory.GroundIdle());
     ChangeCombatStance(CombatStance.NEUTRAL);

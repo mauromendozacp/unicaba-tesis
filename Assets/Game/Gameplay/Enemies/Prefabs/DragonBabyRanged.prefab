@@ -216,6 +216,7 @@ MonoBehaviour:
   fireBallSpeedNeutral: 12
   optimalAttackDistance: 10
   attackRangeMargin: 2
+  fireballDamage: 15
 --- !u!54 &9218935131097435825
 Rigidbody:
   m_ObjectHideFlags: 0
