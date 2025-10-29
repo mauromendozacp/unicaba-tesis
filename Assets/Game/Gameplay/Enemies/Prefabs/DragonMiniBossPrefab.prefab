@@ -294,7 +294,7 @@ MonoBehaviour:
   attackDamage: 40
   attackCooldown: 1
   attackRange: 2
-  chaseRadius: 100
+  chaseRadius: 200
   maxChaseDistance: 15
   basicAttackDamage: 20
   tailAttackDamage: 25

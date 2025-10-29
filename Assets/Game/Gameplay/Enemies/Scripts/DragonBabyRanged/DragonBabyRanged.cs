@@ -13,6 +13,7 @@ public class DragonBabyRanged : EnemySoldier
   [SerializeField] float fireBallSpeedNeutral = 12f;
   [SerializeField] float optimalAttackDistance = 10f;
   [SerializeField] float attackRangeMargin = 2f;
+  [SerializeField] float fireballDamage = 15f;
 
 
   // Propiedades públicas para la IA
@@ -54,29 +55,18 @@ public class DragonBabyRanged : EnemySoldier
   // --- LÓGICA DE ATAQUE ---
   public void ShootFireBall()
   {
-    if (FireballPoolManager.Instance == null || firePoint == null) return;
-
+    if (FireballPoolManager.Instance == null || firePoint == null || CurrentTarget == null) return;
     lastAttackTime = Time.time;
+    Vector3 direction = (CurrentTarget.position - firePoint.position).normalized;
+    FireSingleBall(firePoint.position, direction);
+  }
 
-    GameObject fireBall = FireballPoolManager.Instance.GetFireball();
-    fireBall.transform.position = firePoint.position;
-
-    Rigidbody rb = fireBall.GetComponent<Rigidbody>();
-    if (CurrentTarget != null)
-    {
-      Vector3 direction = (CurrentTarget.position - firePoint.position).normalized;
-      rb.linearVelocity = direction * CurrentFireBallSpeed;
-      fireBall.transform.rotation = Quaternion.LookRotation(direction);
-
-      Fireball fireballScript = fireBall.GetComponent<Fireball>();
-      // Asume que Fireball tiene un campo 'damage'
-      //fireballScript.damage = IsEnraged ? attackDamage * 1.5f : attackDamage;
-      rb.useGravity = false;
-    }
-    else
-    {
-      FireballPoolManager.Instance.ReleaseFireball(fireBall);
-    }
+  public void FireSingleBall(Vector3 position, Vector3 direction)
+  {
+    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
+    Fireball fireball = fireballGO.GetComponent<Fireball>();
+    fireball.SetDamage(fireballDamage);
+    fireball.Launch(position, direction, CurrentFireBallSpeed);
   }
 
   // --- LÓGICA DE DAÑO Y MATERIALES ---
@@ -96,7 +86,12 @@ public class DragonBabyRanged : EnemySoldier
     ToggleDamageMaterial(true);
     yield return new WaitForSeconds(0.1f);
     ToggleDamageMaterial(false);
-    yield break;
+    /*
+    if (!IsAlive)
+    {
+      yield break;
+    }
+    */
   }
 
   public override void Kill()

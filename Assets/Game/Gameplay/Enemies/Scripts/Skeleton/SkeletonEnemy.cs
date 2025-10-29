@@ -38,7 +38,7 @@ public class SkeletonEnemy : EnemySoldier
     ToggleDamageMaterial(true);
     yield return new WaitForSeconds(0.1f);
     ToggleDamageMaterial(false);
-    yield break;
+    //yield break;
   }
 
 

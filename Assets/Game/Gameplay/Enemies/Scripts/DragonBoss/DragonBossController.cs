@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.VFX;
 
 public enum DragonAttackType
 {
@@ -51,6 +52,8 @@ public class DragonBossController : EnemyBase
   [Header("Estadísticas de Ataque / Daño")]
   public float biteDamage = 35f;
   public float flameDamage = 20f;
+  public float fireballDamage = 15f;
+
   [SerializeField][Tooltip("Umbral de vida para entrar en modo furia (30%).")] float enragedHealthThreshold = 0.3f;
   [SerializeField][Tooltip("Umbral de daño acumuladodo para intentar escapar volando (5%) en modo furia.")] float damageToEscapeThreshold = 0.05f;
   [Header("Ataque Aéreo")]
@@ -66,6 +69,7 @@ public class DragonBossController : EnemyBase
   [SerializeField] Collider _flameCollider; // Collider del ataque de fuego
   [SerializeField] Collider _biteCollider; // Collider del ataque de mordida
   [SerializeField] public GameObject flame;
+  [SerializeField] public VisualEffect flameEffect;
 
   public Animator Animator => _animator;
   public Collider HitBoxCollider => _hitBoxCollider;
@@ -143,7 +147,8 @@ public class DragonBossController : EnemyBase
 
   void OnEnable()
   {
-    if (FlameCollider != null) FlameCollider.enabled = false;
+    //if (FlameCollider != null) FlameCollider.enabled = false;
+    if(FlameCollider != null) FlameCollider.gameObject.SetActive(false);
     if (BiteCollider != null) BiteCollider.enabled = false;
     ChangeState(stateFactory.GroundIdle());
     ChangeCombatStance(CombatStance.NEUTRAL);
@@ -289,6 +294,15 @@ public class DragonBossController : EnemyBase
     _hitBoxCollider.enabled = false;
     transform.Find("MinimapIcon")?.gameObject.SetActive(false);
   }
+
+  public void FireSingleBall(Vector3 position, Vector3 direction)
+  {
+    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
+    Fireball fireball = fireballGO.GetComponent<Fireball>();
+    fireball.SetDamage(fireballDamage);
+    fireball.Launch(position, direction, FireballSpeed);
+  }
+
 
 
   /* Debug */
