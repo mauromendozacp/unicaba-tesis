@@ -74,15 +74,21 @@ public class Projectile : MonoBehaviour
     ReturnToPool();
   }
 
-  private void HandleHit(Collider col)
-  {
+private void HandleHit(Collider col)
+{
     if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
     {
-      var enemy = col.GetComponent<EnemyBase>();
-      if (enemy != null && enemy.IsAlive)
-        enemy.TakeDamage(damage);
+        var enemy = col.GetComponent<EnemyBase>();
+        if (enemy != null && enemy.IsAlive)
+            enemy.TakeDamage(damage);
     }
-  }
+
+    var destructible = col.GetComponent<ProceduralDestructible>();
+    if (destructible != null)
+    {
+        destructible.Break();
+    }
+}
 
   private void ReturnToPool()
   {
