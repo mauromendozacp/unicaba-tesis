@@ -77,30 +77,7 @@ public class MiniDragonAirRangedAttackState : IState
       Quaternion spreadRotation = Quaternion.Euler(randomX, randomY, 0);
       Vector3 finalDirection = spreadRotation * launchDirection;
 
-      FireSingleBall(spawnPos, finalDirection, _boss.FireballSpeed);
-    }
-  }
-
-  // Delegación al controlador de la Pool (asume que existe en MiniDragonController.cs o un Utility)
-  private void FireSingleBall(Vector3 position, Vector3 direction, float speed)
-  {
-    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
-
-    fireballGO.transform.position = position;
-    fireballGO.transform.rotation = Quaternion.LookRotation(direction);
-    //fireballGO.GetComponent<Fireball>().damage = _boss.FireballDamageNeutral; // Usar la base
-
-    // Aplicar el daño de Furia si es el caso
-    if (_boss.CurrentStance == CombatStance.ENRAGED)
-    {
-      //fireballGO.GetComponent<Fireball>().damage = _boss.fireballDamageEnraged;
-    }
-
-    Rigidbody rb = fireballGO.GetComponent<Rigidbody>();
-    if (rb != null)
-    {
-      rb.useGravity = false; // Vuelo Recto
-      rb.linearVelocity = direction * speed;
+      _boss.FireSingleBall(spawnPos, finalDirection);
     }
   }
 }

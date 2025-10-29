@@ -48,7 +48,7 @@ public abstract class EnemySoldier : EnemyBase
   {
 
     currentState?.Exit();
-    StopAllCoroutines();
+    //StopAllCoroutines();
     currentState = newState;
     currentState.Enter();
   }

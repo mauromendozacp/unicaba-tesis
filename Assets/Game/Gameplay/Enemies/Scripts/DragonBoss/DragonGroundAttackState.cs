@@ -110,7 +110,7 @@ public class DragonGroundAttackState : IState
 
     // 1. Fireball Central
     Vector3 centerDir = (targetPosition - spawnPos).normalized;
-    FireSingleBall(spawnPos, centerDir, _boss.FireballSpeed);
+    _boss.FireSingleBall(spawnPos, centerDir);
 
     // 2. Fireballs Laterales
     Vector3 flatDirectionToTarget = (new Vector3(targetPosition.x, spawnPos.y, targetPosition.z) - spawnPos).normalized;
@@ -120,12 +120,12 @@ public class DragonGroundAttackState : IState
     // Lateral Izquierdo: Rotar la dirección base a la izquierda (negativo)
     Vector3 leftDir = baseRotation * Quaternion.Euler(0, -flankAngle, 0) * Vector3.forward;
     leftDir = CalculateFlankingPitch(spawnPos, leftDir, targetPosition);
-    FireSingleBall(spawnPos, leftDir, _boss.FireballSpeed);
+    _boss.FireSingleBall(spawnPos, leftDir);
 
     // Lateral Derecho: Rotar la dirección base a la derecha (positivo)
     Vector3 rightDir = baseRotation * Quaternion.Euler(0, flankAngle, 0) * Vector3.forward;
     rightDir = CalculateFlankingPitch(spawnPos, rightDir, targetPosition);
-    FireSingleBall(spawnPos, rightDir, _boss.FireballSpeed);
+    _boss.FireSingleBall(spawnPos, rightDir);
   }
 
 
@@ -140,19 +140,5 @@ public class DragonGroundAttackState : IState
     Vector3 artificialTarget = spawnPos + (flatFlankDirection * targetDistance);
     artificialTarget.y = targetPos.y + 0.5f; // Ajuste de altura a la cabeza del jugador
     return (artificialTarget - spawnPos).normalized;
-  }
-
-  private void FireSingleBall(Vector3 position, Vector3 direction, float speed)
-  {
-    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
-
-    fireballGO.transform.position = position;
-    fireballGO.transform.rotation = Quaternion.LookRotation(direction);
-
-    Rigidbody rb = fireballGO.GetComponent<Rigidbody>();
-    if (rb != null)
-    {
-      rb.linearVelocity = direction * speed;
-    }
   }
 }

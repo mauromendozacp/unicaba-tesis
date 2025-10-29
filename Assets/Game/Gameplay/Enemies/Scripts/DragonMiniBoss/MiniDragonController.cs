@@ -67,6 +67,7 @@ public class MiniDragonController : EnemyBase
   public int FireballCount { get; private set; }
   public float FireballSpeed { get; private set; }
   public float RangedCooldown { get; private set; }
+  public float FireballDamage { get; private set; }
 
   // -- Lógica de Estado --
   private IState currentState;
@@ -137,6 +138,7 @@ public class MiniDragonController : EnemyBase
         RangedCooldown = rangedCooldownNeutral;
         FireballSpeed = fireballSpeedNeutral;
         FireballCount = fireballCountNeutral;
+        FireballDamage = fireballDamageNeutral;
         break;
       case CombatStance.ENRAGED:
         SetSpeed(enragedRunSpeed);
@@ -146,6 +148,7 @@ public class MiniDragonController : EnemyBase
         RangedCooldown = rangedCooldownEnraged;
         FireballSpeed = fireballSpeedEnraged;
         FireballCount = fireballCountEnraged;
+        FireballDamage = fireballDamageEnraged;
         break;
     }
   }
@@ -242,6 +245,14 @@ public class MiniDragonController : EnemyBase
     }
 
     return CurrentTarget;
+  }
+
+  public void FireSingleBall(Vector3 position, Vector3 direction)
+  {
+    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
+    Fireball fireball = fireballGO.GetComponent<Fireball>();
+    fireball.SetDamage(FireballDamage);
+    fireball.Launch(position, direction, FireballSpeed);
   }
 
   /* Debug */
