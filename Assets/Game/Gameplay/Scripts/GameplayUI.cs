@@ -23,13 +23,14 @@ public class GameplayUI : MonoBehaviour
 
     [SerializeField] private Button retryBtn = null;
     [SerializeField] private Button loseMenuBtn = null;
+    [SerializeField] private Button exitBtn = null;
     [SerializeField] private Button nextLevelButton = null;
     [SerializeField] private Button exitOptionsButton = null;
 
     [Header("Contador de llaves")]
     [SerializeField] private TMP_Text keysText = null;
 
-    public void Init(Action onResume, Action onMenu, Action onRestart, Action onRetry, Action onNextLevel)
+    public void Init(Action onResume, Action onMenu, Action onRestart, Action onRetry, Action onNextLevel, Action onQuitGame)
     {
         resumeBtn.onClick.AddListener(() =>
         {
@@ -52,6 +53,8 @@ public class GameplayUI : MonoBehaviour
             hudPanel.SetActive(true);
             optionsPanel.SetActive(false);
         });
+
+        exitBtn.onClick.AddListener(onQuitGame.Invoke);
     }
 
     public void TogglePause(bool status)

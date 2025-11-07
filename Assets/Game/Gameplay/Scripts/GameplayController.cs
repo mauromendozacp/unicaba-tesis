@@ -47,7 +47,7 @@ public class GameplayController : MonoBehaviour
 
     private void Start()
     {
-        gameplayUI.Init(OnResume, GoToMenu, OnRestart, RetryLevel, NextLevel);
+        gameplayUI.Init(OnResume, GoToMenu, OnRestart, RetryLevel, NextLevel, ExitGame);
     }
 
     private void OnResume()
@@ -115,6 +115,11 @@ public class GameplayController : MonoBehaviour
     TogglePause(false);
     GameManager.Instance.ChangeScene(SceneGame.Menu);
   }
+
+    private void ExitGame()
+    {
+        Application.Quit();
+    }
 
   private void AddKeys()
   {
