@@ -3,7 +3,6 @@ using UnityEngine;
 public class Pistol : WeaponBase
 {
     [Header("Setup")]
-    [SerializeField] private bool isDefault = true;        // Arma por defecto
     [SerializeField] private Transform muzzlePoint;
     
     [Header("Projectile")]

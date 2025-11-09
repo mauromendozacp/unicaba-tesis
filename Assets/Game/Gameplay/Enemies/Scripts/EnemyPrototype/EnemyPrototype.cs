@@ -2,15 +2,15 @@ using System;
 using UnityEngine;
 
 
-public class EnemyPrototype : EnemyBase
+public class EnemyPrototype : EnemySoldier
 {
   [SerializeField] GameObject horns;
   [SerializeField] Material idleMaterial;
   [SerializeField] Material chaseMaterial;
   [SerializeField] Material attackMaterial;
 
-  [SerializeField] Material damagedMaterial;
-  Material originalMaterial;
+  //[SerializeField] Material damagedMaterial;
+  //Material originalMaterial;
 
 
   void OnEnable()
@@ -24,13 +24,14 @@ public class EnemyPrototype : EnemyBase
   protected override void Awake()
   {
     base.Awake();
-    originalMaterial = GetComponentInChildren<Renderer>().material;
-    ChangeState(new IdleState(this));
+    //originalMaterial = GetComponentInChildren<Renderer>().material;
   }
 
 
-  void Start()
+  protected override void Start()
   {
+    base.Start();
+    //ChangeState(new IdleState(this));
     if (attackCollider != null)
     {
       attackCollider.enabled = false;
@@ -54,26 +55,11 @@ public class EnemyPrototype : EnemyBase
 
   public override void TakeDamage(float damage)
   {
+    if (!IsAlive) return;
     base.TakeDamage(damage);
-
-    if (currentHealth <= 0)
-    {
-      //Die();
-      ChangeState(new DeathState(this));
-    }
-    else
-    {
-      ChangeState(new DamagedState(this));
-    }
+    ChangeState(new DamagedState(this));
   }
 
-  public void SetAttackCollider(bool active)
-  {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = active;
-    }
-  }
 
   /*public void StopAllCoroutines()
   {
@@ -118,5 +104,10 @@ public class EnemyPrototype : EnemyBase
   public override void Die()
   {
     base.Die();
+  }
+
+  public override void Kill()
+  {
+    ChangeState(new DeathState(this));
   }
 }

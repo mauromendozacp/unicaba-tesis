@@ -1,17 +1,10 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.AI;
 
-public enum EnemyState
-{
-  Idle,
-  Chase,
-  Attack,
-  Retreat,
-  Damaged,
-  Death
-}
+
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -19,31 +12,30 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   protected float currentHealth;
   public float Health => currentHealth;
 
-  [SerializeField] float moveSpeed = 4f;
-  public float currentSpeed;
-  public float CurrentSpeed => currentSpeed;
 
-
-  public float AttackCooldown => attackCooldown;
-
+  [Header("Damage Settings")]
   [SerializeField] float knockbackForceMultiplier = 0.5f;
+  [SerializeField] protected List<Renderer> damageRenderer;
+  [SerializeField] protected Material damagedMaterial;
+  protected Material originalMaterial;
 
   [Header("Attack Settings")]
   [SerializeField] protected Collider attackCollider;
+  public virtual float AttackCooldown => attackCooldown;
   [SerializeField] protected float attackDamage = 40f;
   [SerializeField] protected float attackCooldown = 1f;
 
   [SerializeField] float attackRange = 2f;
-  public float AttackRange => attackRange;
-  [SerializeField] float chaseRadius = 10f;
-  public float ChaseRadius => chaseRadius;
+  public virtual float AttackRange => attackRange;
 
-  private Rigidbody rb;
+  [SerializeField] protected float chaseRadius = 10f;
+  public float ChaseRadius => chaseRadius;
+  [SerializeField] protected float maxChaseDistance = 15f;
+  protected Rigidbody rb;
   protected float lastDamage;
 
-  public Transform CurrentTarget { get; set; }
-
-  protected IEnemyState currentState;
+  public virtual Transform CurrentTarget { get; set; }
+  protected IDamageable currentTargetDamageable = null;
 
   public bool IsAlive => currentHealth > 0;
 
@@ -55,41 +47,39 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   protected NavMeshAgent agent;
   protected Collider selfCollider;
 
-  private Collider[] hitColliders = new Collider[4]; // Array pre-asignado
+  protected Collider[] hitColliders = new Collider[4]; // Array pre-asignado
 
   protected virtual void Awake()
   {
-    currentSpeed = moveSpeed * UnityEngine.Random.Range(0.75f, 1.0f);
-    currentHealth = maxHealth;
     rb = GetComponent<Rigidbody>();
     agent = GetComponent<NavMeshAgent>();
     selfCollider = GetComponent<Collider>();
+  }
 
-    if (agent != null)
+  protected virtual void Start()
+  {
+    currentHealth = maxHealth;
+
+    if (damageRenderer != null && damageRenderer.Count > 0 && damagedMaterial != null)
     {
-      agent.speed = currentSpeed;
-      agent.stoppingDistance = 0.1f;
-      agent.updateRotation = true; // El agente maneja la rotación
+      originalMaterial = damageRenderer[0].material;
+    }
+  }
+
+  public void ToggleDamageMaterial(bool active)
+  {
+    if (damageRenderer != null && damagedMaterial != null && originalMaterial != null)
+    {
+      foreach (var renderer in damageRenderer)
+      {
+        renderer.material = active ? damagedMaterial : originalMaterial;
+      }
     }
   }
 
   public void SetPool(IObjectPool<GameObject> pool)
   {
     parentPool = pool;
-  }
-
-  protected virtual void Update()
-  {
-    currentState?.Update();
-  }
-
-  public void ChangeState(IEnemyState newState)
-  {
-
-    currentState?.Exit();
-    StopAllCoroutines();
-    currentState = newState;
-    currentState.Enter();
   }
 
   public virtual void TakeDamage(float damage)
@@ -112,12 +102,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  public void StopMovement()
+  public bool StopMovement()
   {
+    bool isStopped = false;
     if (agent != null && agent.enabled && agent.isOnNavMesh)
     {
       agent.isStopped = true;
+      isStopped = true;
     }
+    return isStopped;
   }
 
   /*
@@ -208,6 +201,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
+  public void ToggleSelfCollider(bool active)
+  {
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = active;
+    }
+  }
 
 
   public void EnableMovementAndCollisions()
@@ -229,8 +229,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     selfCollider.enabled = true;
   }
 
+  public void EnableCollisions()
+  {
+    if (selfCollider != null)
+    {
+      selfCollider.enabled = true;
+    }
+  }
 
-  public Transform FindNearestPlayer()
+
+  public virtual Transform FindNearestPlayer()
   {
     // Filtrado eficiente
     int numColliders = Physics.OverlapSphereNonAlloc(transform.position, chaseRadius, hitColliders, LayerMask.GetMask("Player"));
@@ -252,14 +260,54 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
       {
         minSqrDistance = sqrDistance;
         closestTarget = target;
+        currentTargetDamageable = damageable;
       }
     }
 
     return closestTarget;
   }
 
+  public bool isTargetAlive()
+  {
+    return currentTargetDamageable != null && currentTargetDamageable.IsAlive;
+  }
+
   public float DistanceToTarget()
   {
     return Vector3.Distance(transform.position, CurrentTarget.position);
+  }
+
+
+
+  public void LookAtTarget()
+  {
+    if (CurrentTarget != null)
+    {
+      Vector3 direction = (CurrentTarget.position - transform.position).normalized;
+      direction.y = 0; // Mantener la rotación en el plano horizontal
+      if (direction != Vector3.zero)
+      {
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+      }
+    }
+  }
+
+  public void SetAttackCollider(bool active)
+  {
+    if (attackCollider != null)
+    {
+      attackCollider.enabled = active;
+    }
+  }
+
+  public abstract void Kill();
+
+  public void SetSpeed(float speed)
+  {
+    if (agent != null)
+    {
+      agent.speed = speed;
+    }
   }
 }

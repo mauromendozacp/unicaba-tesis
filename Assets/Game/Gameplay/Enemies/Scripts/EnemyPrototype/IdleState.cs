@@ -13,7 +13,7 @@ public class IdleState : IEnemyState
 
   public void Enter()
   {
-    enemy.ChangeMaterial();
+    //enemy.ChangeMaterial();
   }
 
   public void Update()

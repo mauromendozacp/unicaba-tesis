@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -14,6 +15,9 @@ TagManager:
   - Projectile
   - Enemy
   - Item
+  - Wall
+  - Minimap
+  - Floor
   - 
   - 
   - 
@@ -22,10 +26,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyHit
   - 
   - 
   - 

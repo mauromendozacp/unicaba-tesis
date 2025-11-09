@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyPrototype2 : EnemyBase
+public class EnemyPrototype2 : EnemySoldier
 {
   [SerializeField] GameObject horns;
   [SerializeField] Material idleMaterial;
   [SerializeField] Material chaseMaterial;
   [SerializeField] Material attackMaterial;
 
-  [SerializeField] Material damagedMaterial;
-  Material originalMaterial;
+  //[SerializeField] Material damagedMaterial;
+  //Material originalMaterial;
 
   [Header("Long Range Attack Settings")]
   [SerializeField] GameObject fireBallPrefab;
@@ -30,29 +30,47 @@ public class EnemyPrototype2 : EnemyBase
   {
     base.Awake();
     originalMaterial = GetComponentInChildren<Renderer>().material;
-    ChangeState(new Prototype2IdleState(this));
+    //ChangeState(new Prototype2IdleState(this));
   }
 
   public void ShootFireBall()
   {
-    if (fireBallPrefab == null || firePoint == null)
+    if (FireballPoolManager.Instance == null || firePoint == null)
     {
-      Debug.LogError("FireBallPrefab or FirePoint not assigned in EnemyPrototype2.");
+      Debug.LogError("FireballPoolManager.Instance or FirePoint not assigned/available.");
       return;
     }
 
-    GameObject fireBall = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+    GameObject fireBall = FireballPoolManager.Instance.GetFireball();
+    fireBall.transform.position = firePoint.position;
+    fireBall.transform.rotation = firePoint.rotation;
+
+    Rigidbody rb = fireBall.GetComponent<Rigidbody>();
+    if (rb == null)
+    {
+      Debug.LogError("Fireball prefab is missing a Rigidbody component.");
+      FireballPoolManager.Instance.ReleaseFireball(fireBall);
+      return;
+    }
+
     if (CurrentTarget != null)
     {
       Vector3 direction = (CurrentTarget.position - firePoint.position).normalized;
-      fireBall.GetComponent<Rigidbody>().linearVelocity = direction * fireBallSpeed;
+      rb.linearVelocity = direction * fireBallSpeed;
+    }
+    else
+    {
+      rb.linearVelocity = firePoint.forward * fireBallSpeed;
     }
   }
 
   public override void TakeDamage(float damage)
   {
+    if (!IsAlive) return;
     base.TakeDamage(damage);
+    ChangeState(new Prototype2DamagedState(this));
 
+    /*
     if (currentHealth <= 0)
     {
       ChangeState(new Prototype2DeathState(this));
@@ -61,6 +79,7 @@ public class EnemyPrototype2 : EnemyBase
     {
       ChangeState(new Prototype2DamagedState(this));
     }
+    */
   }
 
   public void ChangeMaterial()
@@ -101,5 +120,10 @@ public class EnemyPrototype2 : EnemyBase
   public override void Die()
   {
     base.Die();
+  }
+
+  public override void Kill()
+  {
+    ChangeState(new Prototype2DeathState(this));
   }
 }

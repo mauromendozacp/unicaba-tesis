@@ -20,6 +20,7 @@ public class WeaponHolder : MonoBehaviour
         {
             playerUI.SetGunIcon(currentWeapon.Icon);
             playerUI.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+            playerUI.SetGunStatus(currentWeapon.IsDefault);
         }
     }
 
@@ -40,8 +41,9 @@ public class WeaponHolder : MonoBehaviour
         {
             currentWeapon.AddAmmo(weaponInstance.MaxAmmo);
             Destroy(weaponInstance.gameObject);
-            playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
             playerUI?.SetGunIcon(currentWeapon.Icon);
+            playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+            playerUI?.SetGunStatus(currentWeapon.IsDefault);
             return;
         }
 
@@ -57,6 +59,7 @@ public class WeaponHolder : MonoBehaviour
         currentWeapon.OnPickup();
         playerUI?.SetGunIcon(currentWeapon.Icon);
         playerUI?.OnUpdateAmmo(currentWeapon.CurrentAmmo);
+        playerUI?.SetGunStatus(currentWeapon.IsDefault);
     }
 
     public void DropWeapon()

@@ -16,7 +16,8 @@ public class Prototype2DamagedState : IEnemyState
   public void Enter()
   {
     enemy.ApplyKnockbackForce();
-    enemy.ChangeMaterial();
+    //enemy.ChangeMaterial();
+    enemy.ToggleDamageMaterial(true);
     enemy.StartCoroutine(ReturnToPreviousState());
   }
 
@@ -25,11 +26,19 @@ public class Prototype2DamagedState : IEnemyState
   public void Exit()
   {
     enemy.ResetKnockbackForce();
+    enemy.ToggleDamageMaterial(false);
   }
 
   private IEnumerator ReturnToPreviousState()
   {
     yield return new WaitForSeconds(1f);
+
+    if (!enemy.IsAlive)
+    {
+      enemy.ChangeState(new Prototype2DeathState(enemy));
+      yield return null;
+    }
+
     if (enemy.CurrentTarget != null)
     {
       enemy.ChangeState(new Prototype2ChaseState(enemy));

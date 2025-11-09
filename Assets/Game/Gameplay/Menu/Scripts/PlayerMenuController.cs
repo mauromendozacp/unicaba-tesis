@@ -10,7 +10,7 @@ public enum ControlScheme
 
 public class PlayerMenuController : MonoBehaviour
 {
-    private PlayerMenuInputController inputController = null;
+    private PlayerInputUIController inputController = null;
     private PlayerInput playerInput = null;
 
     private CharacterSelectionController selectionController = null;
@@ -19,7 +19,7 @@ public class PlayerMenuController : MonoBehaviour
 
     private void Awake()
     {
-        inputController = GetComponent<PlayerMenuInputController>();
+        inputController = GetComponent<PlayerInputUIController>();
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -27,7 +27,14 @@ public class PlayerMenuController : MonoBehaviour
     {
         SlotPlayer slotPlayer = selectionController.GetSlotByIndex(playerIndex);
 
-        ControlScheme control = GetControl();
+        slotPlayer.InitButtons();
+
+        if (isMainPlayer)
+        {
+            selectionController.InitButtons();
+        }
+
+        /*ControlScheme control = GetControl();
         switch (control)
         {
             case ControlScheme.None:
@@ -53,7 +60,7 @@ public class PlayerMenuController : MonoBehaviour
                 break;
             default:
                 break;
-        }
+        }*/
 
         slotPlayer.OnJoinPlayer();
     }

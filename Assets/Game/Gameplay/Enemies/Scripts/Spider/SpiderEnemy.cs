@@ -1,11 +1,8 @@
 using UnityEngine;
+using System.Collections;
 
-public class SpiderEnemy : EnemyBase
+public class SpiderEnemy : EnemySoldier
 {
-  //[Header("Attack Settings")]
-  //[SerializeField] private Collider attackCollider;
-  //[SerializeField] private float attackDamage = 40f;
-
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
 
@@ -21,17 +18,17 @@ public class SpiderEnemy : EnemyBase
 
   protected override void Awake()
   {
-    animator = GetComponent<SpiderAnimationController>();
+    //animator = GetComponent<SpiderAnimationController>();
     base.Awake();
-    ChangeState(new SpiderIdleState(this));
+    //ChangeState(new SpiderIdleState(this));
   }
 
-  void Start()
+  protected override void Start()
   {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = false;
-    }
+    base.Start();
+    animator = GetComponent<SpiderAnimationController>();
+    //ChangeState(new SpiderIdleState(this));
+    SetAttackCollider(false);
   }
 
   void OnTriggerEnter(Collider other)
@@ -50,26 +47,29 @@ public class SpiderEnemy : EnemyBase
     }
   }
 
-
   public override void TakeDamage(float damage)
   {
+    if (!IsAlive) return;
     base.TakeDamage(damage);
-
-    if (currentHealth <= 0)
+    StartCoroutine(DamageMaterial());
+    if (!IsAlive)
     {
-      ChangeState(new SpiderDeathState(this));
-    }
-    else
-    {
-      ChangeState(new SpiderDamagedState(this));
+      Kill();
     }
   }
 
-  public void SetAttackCollider(bool active)
+  private IEnumerator DamageMaterial()
   {
-    if (attackCollider != null)
-    {
-      attackCollider.enabled = active;
-    }
+    ToggleDamageMaterial(true);
+    yield return new WaitForSeconds(0.1f);
+    ToggleDamageMaterial(false);
+    //yield break;
+  }
+
+
+  public override void Kill()
+  {
+    ChangeState(new SpiderDeathState(this));
+    ToggleDamageMaterial(false);
   }
 }

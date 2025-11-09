@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
 
     public int SelectedIndex => selectedIndex;
 
-    public void Init(PlayerInputController inputController)
+    public void Init(PlayerInputGameplayController inputController)
     {
         inputController.onUseItem += UseCurrentItem;
         inputController.onPreviousItem += SelectPreviousSlot;
@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
             if (slots[i] == null)
             {
                 emptyItemIndex = i;
+                break;
             }
         }
 

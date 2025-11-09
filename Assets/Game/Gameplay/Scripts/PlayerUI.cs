@@ -25,6 +25,12 @@ public class PlayerUI : MonoBehaviour
             gunImage.sprite = icon;
     }
 
+    public void SetGunStatus(bool isDefault)
+    {
+        limitedAmmo.SetActive(!isDefault);
+        unlimitedAmmo.SetActive(isDefault);
+    }
+
     public void OnUpdateLife(float life, float maxLife)
     {
         lifebar.fillAmount = life / maxLife;

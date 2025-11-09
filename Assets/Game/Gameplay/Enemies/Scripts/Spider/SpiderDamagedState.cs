@@ -5,9 +5,8 @@ public class SpiderDamagedState : IEnemyState
 {
   private readonly SpiderEnemy enemy;
 
-  private const float knockbackForce = 1f;
   public EnemyState State { get; private set; }
-  private const float recoveryTime = 1f; // Tiempo que pasa aturdido
+  private const float recoveryTime = 0.25f;
 
   public SpiderDamagedState(SpiderEnemy enemy)
   {
@@ -17,9 +16,10 @@ public class SpiderDamagedState : IEnemyState
 
   public void Enter()
   {
-    enemy.Animator?.TriggerDamage();
-    //enemy.ApplyKnockbackForce();
-    enemy.DisableMovementAndCollisions();
+    //enemy.Animator?.TriggerDamage();
+    enemy.ToggleDamageMaterial(true);
+    //enemy.DisableMovementAndCollisions();
+    enemy.ToggleSelfCollider(false);
     enemy.StartCoroutine(ReturnToPreviousState());
   }
 
@@ -27,13 +27,20 @@ public class SpiderDamagedState : IEnemyState
 
   public void Exit()
   {
-    //enemy.ResetKnockbackForce();
-    enemy.EnableMovementAndCollisions();
+    //enemy.EnableMovementAndCollisions();
+    enemy.ToggleSelfCollider(true);
+    enemy.ToggleDamageMaterial(false);
   }
 
   private IEnumerator ReturnToPreviousState()
   {
     yield return new WaitForSeconds(recoveryTime);
+
+    if (!enemy.IsAlive)
+    {
+      enemy.ChangeState(new SpiderDeathState(enemy));
+      yield return null;
+    }
 
     if (enemy.CurrentTarget != null)
     {

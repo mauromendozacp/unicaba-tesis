@@ -16,22 +16,22 @@ public class SpiderAttackState : IEnemyState
 
   public void Enter()
   {
+    enemy.StopMovement();
     lastAttackTime = Time.time;
     PerformAttack();
   }
 
   public void Update()
   {
-    if (enemy.CurrentTarget == null)
+    if (enemy.CurrentTarget == null || !enemy.isTargetAlive())
     {
       enemy.ChangeState(new SpiderIdleState(enemy));
       return;
     }
 
-    // Rotar para mirar al objetivo (incluso durante el ataque)
-    //enemy.transform.LookAt(enemy.CurrentTarget);
+    enemy.LookAtTarget();
 
-    if (enemy.CurrentTarget != null && enemy.DistanceToTarget() > enemy.AttackRange + 0.5f) // Agregamos un pequeño margen para que no ataque desde muy lejos
+    if (enemy.CurrentTarget != null && enemy.DistanceToTarget() > enemy.AttackRange + 0.5f)
     {
       enemy.ChangeState(new SpiderChaseState(enemy));
     }
@@ -44,13 +44,10 @@ public class SpiderAttackState : IEnemyState
 
   private void PerformAttack()
   {
-    // Activar animación de ataque
     if (enemy.Animator != null)
     {
       enemy.Animator.TriggerAttack();
     }
-
-    // Activa el collider del ataque durante un breve periodo (depende del tiempo de la animación)
     enemy.StartCoroutine(ActivateAttackColliderForTime(0.5f));
   }
 
