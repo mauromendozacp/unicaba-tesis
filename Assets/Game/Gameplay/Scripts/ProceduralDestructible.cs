@@ -120,8 +120,8 @@ public class ProceduralDestructible : MonoBehaviour
                 rb = frag.AddComponent<Rigidbody>();
 
             rb.mass = 0.15f * randomScaleFactor; // fragmentos grandes más pesados
-            rb.drag = airDrag;
-            rb.angularDrag = 0.6f;
+            rb.linearDamping = airDrag;
+            rb.angularDamping = 0.6f;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.useGravity = true;
