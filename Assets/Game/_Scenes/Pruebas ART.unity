@@ -430,10 +430,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nivel 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6327693253633349748, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -611,10 +607,6 @@ PrefabInstance:
     - target: {fileID: 6327693253633349748, guid: 4126ece5f63dc4b409bba45d58d4e0fe, type: 3}
       propertyPath: m_Name
       value: Nivel 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327693253633349748, guid: 4126ece5f63dc4b409bba45d58d4e0fe, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
