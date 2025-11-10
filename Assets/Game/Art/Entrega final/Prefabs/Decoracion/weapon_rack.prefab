@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0701501
+      value: 2.0701504
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalScale.y
@@ -18,23 +18,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0701501
+      value: 2.0701504
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.61
+      value: 13.524109
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 36.662437
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.1
+      value: 0.28061676
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9763803
+      value: -0.91780585
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalRotation.x
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.21605927
+      value: -0.39702946
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalRotation.z
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 24.955
+      value: -313.215
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 96181c57aeb41b7459ad760a14abe497, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e2c567cfae4258408352747114e1707, type: 2}
     - target: {fileID: 919132149155446097, guid: b86e8226501b4fb448a717e717531148, type: 3}
       propertyPath: m_Name
       value: weapon_rack
@@ -192,7 +192,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: a718baf20ed319f40b611a78d009a41b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: a718baf20ed319f40b611a78d009a41b, type: 3}
       propertyPath: m_Name
       value: two_handed_axe
@@ -274,7 +274,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: db4a584cab24eab489d9d937b652c928, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: db4a584cab24eab489d9d937b652c928, type: 3}
       propertyPath: m_Name
       value: spear
@@ -356,7 +356,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d80f2fad0824b0a4b808e8b7039475c0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: -2617123746920069645, guid: d80f2fad0824b0a4b808e8b7039475c0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 60f5956bc0aeb6b4980dd423ee7e7697, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: 60f5956bc0aeb6b4980dd423ee7e7697, type: 3}
       propertyPath: m_Name
       value: two_handed_hammer
@@ -524,7 +524,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 91bbe5bfd1bb1964cb8cfc75d0298d8e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: 91bbe5bfd1bb1964cb8cfc75d0298d8e, type: 3}
       propertyPath: m_Name
       value: two_handed_sword
@@ -606,7 +606,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 68884a1e055e7714e98092c6fdc34c18, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 257a1191d8e603044926fb3323e1e5e5, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: 68884a1e055e7714e98092c6fdc34c18, type: 3}
       propertyPath: m_Name
       value: Sword.002
