@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -7677641824306888865, guid: e325b57523f86a4448f680d96e8dab7c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6e2c567cfae4258408352747114e1707, type: 2}
+      objectReference: {fileID: 2100000, guid: d7854b127632b1b479e6b0738ea14e64, type: 2}
     - target: {fileID: 919132149155446097, guid: e325b57523f86a4448f680d96e8dab7c, type: 3}
       propertyPath: m_Name
       value: Pila de cajas x3

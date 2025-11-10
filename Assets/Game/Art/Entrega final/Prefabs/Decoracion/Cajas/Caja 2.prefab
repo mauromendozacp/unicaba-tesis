@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 3bcdac935bbce4f49b7352fa61efcf6b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 96181c57aeb41b7459ad760a14abe497, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e2c567cfae4258408352747114e1707, type: 2}
     - target: {fileID: 919132149155446097, guid: 3bcdac935bbce4f49b7352fa61efcf6b, type: 3}
       propertyPath: m_Name
       value: Caja 2

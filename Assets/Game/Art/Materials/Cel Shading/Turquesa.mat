@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Morado
+  m_Name: Turquesa
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -461,15 +461,15 @@ Material:
     - _utsVersionY: 11
     - _utsVersionZ: 0
     m_Colors:
-    - _1st_ShadeColor: {r: 0.3584906, g: 0.103150584, b: 0.14618534, a: 1}
-    - _2nd_ShadeColor: {r: 0.5283019, g: 0.22178711, b: 0.27344683, a: 1}
+    - _1st_ShadeColor: {r: 0.10196078, g: 0.2681482, b: 0.35686275, a: 1}
+    - _2nd_ShadeColor: {r: 0.22352941, g: 0.39465812, b: 0.5294118, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 0, b: 0, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 0, b: 0, a: 1}
-    - _BaseColor: {r: 0.4811321, g: 0.13389997, b: 0.19353612, a: 1}
+    - _BaseColor: {r: 0.13333336, g: 0.38671935, b: 0.48235294, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorMaskColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.4811321, g: 0.13389993, b: 0.19353607, a: 1}
+    - _Color: {r: 0.13333333, g: 0.3867193, b: 0.4823529, a: 1}
     - _ColorShift: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
@@ -478,7 +478,7 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 0}
     - _FirstShadeMaskColor: {r: 0, g: 1, b: 1, a: 1}
-    - _HighColor: {r: 0.38679248, g: 0.15873088, b: 0.19716817, a: 1}
+    - _HighColor: {r: 0.15686275, g: 0.29862598, b: 0.3882353, a: 1}
     - _HighlightMaskColor: {r: 1, g: 1, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
