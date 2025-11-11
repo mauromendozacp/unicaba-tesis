@@ -85,6 +85,8 @@ public class MiniDragonController : EnemyBase
   // --- Lógica de Combate ---
   public override Transform CurrentTarget => currentTargetDamageable != null && currentTargetDamageable.IsAlive ? (currentTargetDamageable as MonoBehaviour).transform : null;
 
+  public event Action OnDragonMiniBossDeath;
+
   protected override void Awake()
   {
     base.Awake();
@@ -245,6 +247,15 @@ public class MiniDragonController : EnemyBase
     }
 
     return CurrentTarget;
+  }
+
+  public override void Die()
+  {
+    OnDragonMiniBossDeath?.Invoke();
+    rb.isKinematic = true;
+    //enabled = false;
+    //_hitBoxCollider.enabled = false;
+    transform.Find("MinimapIcon")?.gameObject.SetActive(false);
   }
 
   public void FireSingleBall(Vector3 position, Vector3 direction)
