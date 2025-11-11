@@ -4134,6 +4134,22 @@ PrefabInstance:
       propertyPath: itemController
       value: 
       objectReference: {fileID: 1379630335}
+    - target: {fileID: 3057066273008267142, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394182585538292050, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394182585538292050, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3595457330897404071, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 3647418348432644899, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4173,6 +4189,18 @@ PrefabInstance:
     - target: {fileID: 3647418348432644899, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851923495334276807, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852769364058859759, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852769364058859759, guid: 862982fb0b005e94aa9260b3a63978f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6503,15 +6531,20 @@ MonoBehaviour:
   - {fileID: 311064430}
   pausePanel: {fileID: 1642105091}
   resumeBtn: {fileID: 847193186}
+  optionsBtn: {fileID: 0}
+  restartBtn: {fileID: 0}
   menuBtn: {fileID: 1522311714}
   wavePanel: {fileID: 1632144390}
   waveText: {fileID: 1540407882}
   hudPanel: {fileID: 686695056}
+  optionsPanel: {fileID: 0}
   losePanel: {fileID: 350795879}
   winPanel: {fileID: 2052507867}
   retryBtn: {fileID: 847193186}
   loseMenuBtn: {fileID: 1769345085}
+  exitBtn: {fileID: 0}
   nextLevelButton: {fileID: 118496691}
+  exitOptionsButton: {fileID: 0}
   keysText: {fileID: 179554310}
 --- !u!114 &2023444856
 MonoBehaviour:
@@ -6610,6 +6643,10 @@ PrefabInstance:
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_Name
       value: DragonBabyRanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5556586124494573039, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6964,9 +7001,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6071011708880965737, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_Name
       value: DragonBossPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6642916191238930078, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7363,6 +7408,10 @@ PrefabInstance:
     - target: {fileID: 1048387481896733641, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
       propertyPath: m_Name
       value: DragonMiniBossPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1048387481896733641, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7585627028001961656, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
       propertyPath: initialDestination
