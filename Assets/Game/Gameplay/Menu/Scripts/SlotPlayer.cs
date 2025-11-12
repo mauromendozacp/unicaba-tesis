@@ -7,21 +7,18 @@ public class SlotPlayer : MonoBehaviour
     [SerializeField] private Image slotCharacter = null;
     [SerializeField] private Button nextBtn = null;
     [SerializeField] private Button previuosBtn = null;
-    [SerializeField] private Button confirmBtn = null;
 
     private int currentCharacterIndex = 0;
     private int maxCharacters = 0;
     private bool isConfirm = false;
 
-    private Action onUpdateConfirm = null;
     private Func<int, Sprite> onGetCharacterSpriteByIndex = null;
 
     public int CurrentCharacterIndex => currentCharacterIndex;
     public bool IsConfirm => isConfirm;
 
-    public void Init(Action onUpdateConfirm, Func<int, Sprite> onGetCharacterSpriteByIndex, int maxCharacters)
+    public void Init(Func<int, Sprite> onGetCharacterSpriteByIndex, int maxCharacters)
     {
-        this.onUpdateConfirm = onUpdateConfirm;
         this.onGetCharacterSpriteByIndex = onGetCharacterSpriteByIndex;
         this.maxCharacters = maxCharacters;
     }
@@ -30,15 +27,12 @@ public class SlotPlayer : MonoBehaviour
     {
         nextBtn.onClick.AddListener(OnNextCharacter);
         previuosBtn.onClick.AddListener(OnPreviousCharacter);
-        confirmBtn.onClick.AddListener(OnConfirm);
     }
 
     public void OnJoinPlayer()
     {
         SetCharacter();
         ToggleChangeCharacters(true);
-        ToggleConfirm(true);
-        onUpdateConfirm?.Invoke();
     }
 
     public void OnNextCharacter()
@@ -63,19 +57,6 @@ public class SlotPlayer : MonoBehaviour
         SetCharacter();
     }
 
-    public void OnConfirm()
-    {
-        isConfirm = !isConfirm;
-        ToggleChangeCharacters(!isConfirm);
-
-        onUpdateConfirm?.Invoke();
-    }
-
-    public void ToggleConfirm(bool status)
-    {
-        confirmBtn.interactable = status;
-    }
-
     private void SetCharacter()
     {
         Sprite characterSprite = onGetCharacterSpriteByIndex.Invoke(currentCharacterIndex);
@@ -85,7 +66,7 @@ public class SlotPlayer : MonoBehaviour
         }
     }
 
-    private void ToggleChangeCharacters(bool status)
+    public void ToggleChangeCharacters(bool status)
     {
         nextBtn.interactable = status;
         previuosBtn.interactable = status;

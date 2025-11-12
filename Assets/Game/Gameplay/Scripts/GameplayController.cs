@@ -45,10 +45,10 @@ public class GameplayController : MonoBehaviour
     }
   }
 
-  private void Start()
-  {
-    gameplayUI.Init(OnResume, GoToMenu, RetryLevel, NextLevel);
-  }
+    private void Start()
+    {
+        gameplayUI.Init(OnResume, GoToMenu, OnRestart, RetryLevel, NextLevel, ExitGame);
+    }
 
     private void OnResume()
     {
@@ -83,6 +83,12 @@ public class GameplayController : MonoBehaviour
         }
     }
 
+    private void OnRestart()
+    {
+        TogglePause(false);
+        GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+    }
+
   private void OnPlayerDeath()
   {
     List<PlayerController> players = playerSpawn.GetPlayers();
@@ -109,6 +115,11 @@ public class GameplayController : MonoBehaviour
     TogglePause(false);
     GameManager.Instance.ChangeScene(SceneGame.Menu);
   }
+
+    private void ExitGame()
+    {
+        Application.Quit();
+    }
 
   private void AddKeys()
   {

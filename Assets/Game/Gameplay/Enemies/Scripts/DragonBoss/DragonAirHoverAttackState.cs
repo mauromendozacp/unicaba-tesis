@@ -9,7 +9,6 @@ public class DragonAirHoverAttackState : IState
   private float _bombDropInterval = 0.5f;
   private float _bombTimer;
 
-  private const float BOMB_FALL_SPEED = 15f; // Velocidad de la bola de fuego en el aire.
 
   public DragonAirHoverAttackState(DragonBossController boss, DragonStateFactory factory)
   {
@@ -87,20 +86,6 @@ public class DragonAirHoverAttackState : IState
 
     Vector3 launchDirection = (targetPos - spawnPos).normalized;
 
-    FireSingleBall(spawnPos, launchDirection, BOMB_FALL_SPEED);
-  }
-
-  private void FireSingleBall(Vector3 position, Vector3 direction, float speed)
-  {
-    GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
-
-    fireballGO.transform.position = position;
-    fireballGO.transform.rotation = Quaternion.LookRotation(direction);
-
-    Rigidbody rb = fireballGO.GetComponent<Rigidbody>();
-    if (rb != null)
-    {
-      rb.linearVelocity = direction * speed;
-    }
+     _boss.FireSingleBall(spawnPos, launchDirection);
   }
 }

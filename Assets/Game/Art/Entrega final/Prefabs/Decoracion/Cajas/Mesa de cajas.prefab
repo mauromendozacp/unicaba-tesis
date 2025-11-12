@@ -126,6 +126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin_03
       objectReference: {fileID: 0}
+    - target: {fileID: 1497690531390673949, guid: 9a40425ff2bcefe49bea4f7c669802fc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e80641f4bf96da4495d7f37c30f7047, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -210,6 +214,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5551874911567555543}
     m_Modifications:
+    - target: {fileID: 2783761371143441230, guid: 48358f4c2efa3bd42975957afaa1c4dc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e2c567cfae4258408352747114e1707, type: 2}
     - target: {fileID: 3957191738315665441, guid: 48358f4c2efa3bd42975957afaa1c4dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.7989634
@@ -320,7 +328,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: cdeb6a9368bba124280120b767394b79, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 403890c82abe5ef468b3252ca6641802, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: cdeb6a9368bba124280120b767394b79, type: 3}
       propertyPath: m_Name
       value: Knife
@@ -387,6 +395,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin_03 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1497690531390673949, guid: 9a40425ff2bcefe49bea4f7c669802fc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e80641f4bf96da4495d7f37c30f7047, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -648,6 +660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin_03 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1497690531390673949, guid: 9a40425ff2bcefe49bea4f7c669802fc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e80641f4bf96da4495d7f37c30f7047, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -841,7 +857,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: cdeb6a9368bba124280120b767394b79, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 403890c82abe5ef468b3252ca6641802, type: 2}
+      objectReference: {fileID: 2100000, guid: ac9ce744f1096a541b3492f566315707, type: 2}
     - target: {fileID: 919132149155446097, guid: cdeb6a9368bba124280120b767394b79, type: 3}
       propertyPath: m_Name
       value: Knife (1)
@@ -986,6 +1002,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4056252804243702026, guid: ac5d022f6e268694e8baeed6385d736c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 96181c57aeb41b7459ad760a14abe497, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1136,6 +1156,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5551874911567555543}
     m_Modifications:
+    - target: {fileID: 3629192623778519721, guid: c0f8877bd802dda4bafaff0cc5a01ba5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ffed7680202e50a41b0e3002b55ef17c, type: 2}
+    - target: {fileID: 5115979966158126338, guid: c0f8877bd802dda4bafaff0cc5a01ba5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a544f90c4426dac4b937a196fa886713, type: 2}
     - target: {fileID: 6338290128754497016, guid: c0f8877bd802dda4bafaff0cc5a01ba5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.82066905
@@ -1321,6 +1349,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4056252804243702026, guid: ac5d022f6e268694e8baeed6385d736c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 96181c57aeb41b7459ad760a14abe497, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1449,6 +1481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin_03 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1497690531390673949, guid: 9a40425ff2bcefe49bea4f7c669802fc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e80641f4bf96da4495d7f37c30f7047, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -21,12 +21,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
   [Header("Attack Settings")]
   [SerializeField] protected Collider attackCollider;
-  public float AttackCooldown => attackCooldown;
+  public virtual float AttackCooldown => attackCooldown;
   [SerializeField] protected float attackDamage = 40f;
   [SerializeField] protected float attackCooldown = 1f;
 
   [SerializeField] float attackRange = 2f;
-  public float AttackRange => attackRange;
+  public virtual float AttackRange => attackRange;
 
   [SerializeField] protected float chaseRadius = 10f;
   public float ChaseRadius => chaseRadius;
