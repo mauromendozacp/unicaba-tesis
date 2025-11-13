@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
         inputController.onNextItem += SelectNextSlot;
     }
 
-    public void EquipItem(ItemData item)
+    public int EquipItem(ItemData item)
     {
         int emptyItemIndex = -1;
         for (int i = 0; i < slots.Length; i++)
@@ -38,6 +38,8 @@ public class PlayerInventory : MonoBehaviour
             //falta implementar drop item
             slots[selectedIndex] = item;
         }
+
+        return emptyItemIndex >= 0 ? emptyItemIndex : selectedIndex;
     }
 
     private void UseCurrentItem()
