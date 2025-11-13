@@ -155,6 +155,7 @@ public class MiniDragonController : EnemyBase
     }
   }
 
+  [ContextMenu("Ejecutar TriggerWakeUp")]
   // Llamado por un trigger externo para iniciar el combate
   public void TriggerWakeUp()
   {
