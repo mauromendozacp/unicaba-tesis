@@ -1877,7 +1877,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615126}
   m_ExposedName: MinParticleSpeed
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: 
   m_Min:
     m_Type:
