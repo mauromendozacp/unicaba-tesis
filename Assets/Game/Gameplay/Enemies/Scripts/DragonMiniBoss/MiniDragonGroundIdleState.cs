@@ -48,11 +48,13 @@ public class MiniDragonGroundIdleState : IState
         // Ataque cuerpo a cuerpo aleatorio (Mordisco o Cola)
         string attack = Random.value < 0.5f ? "BasicAttack" : "TailAttack";
         _boss.ChangeState(_factory.MeleeAttack(attack));
+        return;
       }
       else if (dist <= _boss.ChaseRadius && canRange)
       {
         // Ataque a rango (Fireball)
         _boss.ChangeState(_factory.RangedAttack());
+        return;
       }
       else
       {
@@ -62,22 +64,26 @@ public class MiniDragonGroundIdleState : IState
         if (action < 6) // 60% Correr
         {
           _boss.ChangeState(_factory.GroundMove());
+          return;
         }
         else if (action < 9) // 30% Reposicionamiento Aéreo
         {
           _boss.ChangeState(_factory.TransitionTakeoff());
+          return;
         }
         else // 10% Reposo extendido
         {
           _timer = Random.Range(_minIdle, _maxIdle) * 2f;
+          return;
         }
       }
     }
     else
     {
-      // Si no hay target, intenta volar y buscar
-      _boss.ChangeState(_factory.TransitionTakeoff());
+      _boss.FindNearestPlayer();
     }
+
+    _timer = Random.Range(_minIdle, _maxIdle);
   }
 
   public void OnExit()

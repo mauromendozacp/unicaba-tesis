@@ -30,10 +30,16 @@ public class MiniDragonTransitionTakeoffState : IState
 
     _boss.Rb.linearVelocity = direction * _boss.airMoveSpeed;
 
-    if (Vector3.Distance(_boss.transform.position, targetPos) < _heightTolerance)
+    //Debug.Log($"Altura actual: {_boss.transform.position.y}, Altura objetivo: {targetHeight}, Distancia: {Vector3.Distance(_boss.transform.position, targetPos)}");
+    /*if (Vector3.Distance(_boss.transform.position, targetPos) < _heightTolerance)
+    {
+      HandleAnimationEnd();
+    }*/
+    if (_boss.transform.position.y >= targetHeight - _heightTolerance)
     {
       HandleAnimationEnd();
     }
+
 
     // Nota: Para mejorar, podrías esperar a que la animación de Talk Off haya progresado
     // antes de cambiar de estado, usando Animation Events o normalizedTime.

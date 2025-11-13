@@ -205,15 +205,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.06
+      value: 148.7
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.961
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -158.026
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalRotation.w
@@ -221,15 +221,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2726426776014739517, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448991c694c03954c819c2792251410d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 900
+  maxHealth: 500
   knockbackForceMultiplier: 0.5
   damageRenderer:
   - {fileID: 3035617546883738957}
@@ -294,7 +294,7 @@ MonoBehaviour:
   attackDamage: 40
   attackCooldown: 1
   attackRange: 2
-  chaseRadius: 200
+  chaseRadius: 250
   maxChaseDistance: 15
   basicAttackDamage: 20
   tailAttackDamage: 25
@@ -362,7 +362,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048387481896733641}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: -334000983
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8

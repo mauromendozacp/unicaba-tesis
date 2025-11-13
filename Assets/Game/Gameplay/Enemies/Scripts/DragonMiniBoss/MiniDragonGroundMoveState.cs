@@ -46,6 +46,7 @@ public class MiniDragonGroundMoveState : IState
       // En rango de ataque a distancia y Cooldown listo
       _boss.StopMovement();
       _boss.ChangeState(_factory.RangedAttack());
+      return;
     }
     else
     {
@@ -70,6 +71,7 @@ public class MiniDragonGroundMoveState : IState
     if (Random.value < 0.1f * Time.deltaTime) // Baja probabilidad de volar durante la persecución
     {
       _boss.ChangeState(_factory.TransitionTakeoff());
+      return;
     }
   }
 
