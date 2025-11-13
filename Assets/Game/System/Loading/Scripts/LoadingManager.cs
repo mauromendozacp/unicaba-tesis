@@ -15,7 +15,9 @@ public class LoadingManager : MonoBehaviour
     {
         { SceneGame.Menu, "Menu" },
         { SceneGame.Loading, "Loading" },
-        { SceneGame.Gameplay, "GameplayLevel1" }
+        { SceneGame.Gameplay_1, "GameplayLevel1" },
+        { SceneGame.Gameplay_2, "GameplayLevel2" },
+        { SceneGame.Gameplay_3, "GameplayLevel3" }
     };
 
   public void SetLoadingUI(LoadingUI loadingUI)

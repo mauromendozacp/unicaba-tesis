@@ -17,7 +17,7 @@ public class GameoverMenuController : MonoBehaviour
 
   void OnRetry()
   {
-    GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+    GameManager.Instance.ChangeScene(SceneGame.Gameplay_1);
   }
 
   void OnMenu()

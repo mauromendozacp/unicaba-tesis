@@ -166,7 +166,7 @@ public class MenuController : MonoBehaviour
         }
 
         backOptionsBtns[0].onClick.AddListener(() => ShowPanel(PANEL_TYPE.CONTROLS));
-        backOptionsBtns[1].onClick.AddListener(() => GameManager.Instance.ChangeScene(SceneGame.Gameplay));
+        backOptionsBtns[1].onClick.AddListener(() => GameManager.Instance.ChangeScene(SceneGame.Gameplay_1));
 
         ShowPanel(PANEL_TYPE.TUTORIAL);
     }
