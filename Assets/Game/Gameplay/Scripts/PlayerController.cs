@@ -166,8 +166,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 ItemData itemData = itemEquipable.GetItem();
-                inventory.EquipItem(itemEquipable.GetItem());
-                playerUI.OnEquipItem(inventory.SelectedIndex, itemData);
+                int equipIndex = inventory.EquipItem(itemEquipable.GetItem());
+                playerUI.OnEquipItem(equipIndex, itemData);
             }
             itemEquipable.Equip();
         }
