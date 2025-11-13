@@ -199,7 +199,14 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleInput(bool status)
     {
-        inputController.enabled = status;
+        if (status)
+        {
+            inputController.PlayerMap.Enable();
+        }
+        else
+        {
+            inputController.PlayerMap.Disable();
+        }
     }
 
     public void ToggleGameplayInputs(bool status)
