@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   {
     if (inputController != null)
     {
-      inputController.enabled = false;
+        inputController.PlayerMap.Disable();
     }
 
     IsDowned = true;
