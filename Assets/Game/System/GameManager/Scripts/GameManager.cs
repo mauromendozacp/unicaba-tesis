@@ -5,7 +5,9 @@ public enum SceneGame
 {
     Menu,
     Loading,
-    Gameplay
+    Gameplay_1,
+    Gameplay_2,
+    Gameplay_3
 }
 
 public class GameManager : MonoBehaviourSingleton<GameManager>

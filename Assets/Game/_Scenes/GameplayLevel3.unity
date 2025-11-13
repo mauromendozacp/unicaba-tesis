@@ -3387,6 +3387,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 783626000135393335, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
   m_PrefabInstance: {fileID: 717978337}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &717978339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7585627028001961656, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
+  m_PrefabInstance: {fileID: 717978337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448991c694c03954c819c2792251410d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &718506189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4583,7 +4594,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
+  m_VoxelSize: 0.083333336
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 668bf2bd65c0659479462d5b8af58e88, type: 2}
   m_BuildHeightMesh: 0
@@ -4798,6 +4809,8 @@ MonoBehaviour:
   playerSpawn: {fileID: 365923550}
   enemyManager: {fileID: 1053792233}
   maxKeysToWin: 3
+  nextLevel: 0
+  miniBoss: {fileID: 717978339}
 --- !u!4 &1103809651
 Transform:
   m_ObjectHideFlags: 0
@@ -5744,7 +5757,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 3584
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1fe9e14e3dc684a4f8eed63080b77682, type: 2}
   m_TargetDisplay: 0

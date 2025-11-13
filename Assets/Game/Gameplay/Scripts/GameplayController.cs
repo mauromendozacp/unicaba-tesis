@@ -7,6 +7,7 @@ public class GameplayController : MonoBehaviour
   [SerializeField] private PlayerSpawn playerSpawn = null;
   [SerializeField] private EnemyManager enemyManager = null;
   [SerializeField] private int maxKeysToWin = 0;
+    [SerializeField] private SceneGame nextLevel = default;
 
   [SerializeField] private MiniDragonController miniBoss;
 
@@ -111,7 +112,7 @@ public class GameplayController : MonoBehaviour
   private void OnRestart()
   {
     TogglePause(false);
-    GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+    GameManager.Instance.ChangeScene(SceneGame.Gameplay_1);
   }
 
   private void OnPlayerDeath()
@@ -160,11 +161,11 @@ public class GameplayController : MonoBehaviour
 
   private void RetryLevel()
   {
-    GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+    GameManager.Instance.ChangeScene(SceneGame.Gameplay_1);
   }
 
   private void NextLevel()
   {
-    GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+    GameManager.Instance.ChangeScene(nextLevel);
   }
 }
