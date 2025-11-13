@@ -274,6 +274,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
   public float DistanceToTarget()
   {
+    if (CurrentTarget == null)
+    {
+      return float.MaxValue;
+    }
     return Vector3.Distance(transform.position, CurrentTarget.position);
   }
 

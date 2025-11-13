@@ -8,6 +8,8 @@ public class GameplayController : MonoBehaviour
   [SerializeField] private EnemyManager enemyManager = null;
   [SerializeField] private int maxKeysToWin = 0;
 
+  [SerializeField] private MiniDragonController miniBoss;
+
   private int keys = 0;
   private bool lastWaveToWin = false;
 
@@ -19,7 +21,9 @@ public class GameplayController : MonoBehaviour
     enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
     enemyManager.OnWavesStart += CheckLastWave;
     enemyManager.OnWavesEnd += () => { gameplayUI.ToggleWave(false); };
-    enemyManager.OnWavesEnd += CheckVictory;
+    //enemyManager.OnWavesEnd += CheckVictory;
+    enemyManager.OnWavesEnd += WavesHasEnded;
+    miniBoss.OnDragonMiniBossDeath += Victory;
     gameplayUI.ToggleWave(false);
   }
 
@@ -27,6 +31,27 @@ public class GameplayController : MonoBehaviour
   {
     lastWaveToWin = currentWave == totalWaves;
   }
+
+  private void WavesHasEnded()
+  {
+    gameplayUI.ToggleWave(false);
+    //gameplayUI.ToggleMiniBoss(true);
+    miniBoss.TriggerWakeUp();
+  }
+
+  private void Victory()
+  {
+    gameplayUI.OpenWinPanel();
+
+    List<PlayerController> players = playerSpawn.GetPlayers();
+    for (int i = 0; i < players.Count; i++)
+    {
+      players[i].ToggleInput(false);
+    }
+    enemyManager.KillAllEnemies();
+  }
+
+
 
   private void CheckVictory()
   {
@@ -45,49 +70,49 @@ public class GameplayController : MonoBehaviour
     }
   }
 
-    private void Start()
+  private void Start()
+  {
+    gameplayUI.Init(OnResume, GoToMenu, OnRestart, RetryLevel, NextLevel, ExitGame);
+  }
+
+  private void OnResume()
+  {
+    TogglePause(false);
+
+    if (playerSpawn.PlayerInputs[0].currentControlScheme == "Gamepad")
     {
-        gameplayUI.Init(OnResume, GoToMenu, OnRestart, RetryLevel, NextLevel, ExitGame);
+      GameManager.Instance.CursorManager.ToggleCursor(0, false);
     }
 
-    private void OnResume()
+    List<PlayerController> players = playerSpawn.GetPlayers();
+    for (int i = 0; i < players.Count; i++)
     {
-        TogglePause(false);
+      players[i].ToggleGameplayInputs(true);
+    }
+  }
 
-        if (playerSpawn.PlayerInputs[0].currentControlScheme == "Gamepad")
-        {
-            GameManager.Instance.CursorManager.ToggleCursor(0, false);
-        }
+  private void OnPause()
+  {
+    TogglePause(true);
+    gameplayUI.TogglePause(true);
 
-        List<PlayerController> players = playerSpawn.GetPlayers();
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].ToggleGameplayInputs(true);
-        }
+    if (playerSpawn.PlayerInputs[0].currentControlScheme == "Gamepad")
+    {
+      GameManager.Instance.CursorManager.ToggleCursor(0, true);
     }
 
-    private void OnPause()
+    List<PlayerController> players = playerSpawn.GetPlayers();
+    for (int i = 0; i < players.Count; i++)
     {
-        TogglePause(true);
-        gameplayUI.TogglePause(true);
-
-        if (playerSpawn.PlayerInputs[0].currentControlScheme == "Gamepad")
-        {
-            GameManager.Instance.CursorManager.ToggleCursor(0, true);
-        }
-
-        List<PlayerController> players = playerSpawn.GetPlayers();
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].ToggleGameplayInputs(false);
-        }
+      players[i].ToggleGameplayInputs(false);
     }
+  }
 
-    private void OnRestart()
-    {
-        TogglePause(false);
-        GameManager.Instance.ChangeScene(SceneGame.Gameplay);
-    }
+  private void OnRestart()
+  {
+    TogglePause(false);
+    GameManager.Instance.ChangeScene(SceneGame.Gameplay);
+  }
 
   private void OnPlayerDeath()
   {
@@ -110,16 +135,16 @@ public class GameplayController : MonoBehaviour
 
   private void GoToMenu()
   {
-        GameManager.Instance.GameDataManager.playersData.Clear();
+    GameManager.Instance.GameDataManager.playersData.Clear();
 
     TogglePause(false);
     GameManager.Instance.ChangeScene(SceneGame.Menu);
   }
 
-    private void ExitGame()
-    {
-        Application.Quit();
-    }
+  private void ExitGame()
+  {
+    Application.Quit();
+  }
 
   private void AddKeys()
   {
