@@ -189,7 +189,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
   }
 
-  public void DisableMovementAndCollisions()
+  virtual public void DisableMovementAndCollisions()
   {
     if (agent != null)
     {
@@ -212,7 +212,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   }
 
 
-  public void EnableMovementAndCollisions()
+  virtual public void EnableMovementAndCollisions()
   {
     if (rb != null)
     {

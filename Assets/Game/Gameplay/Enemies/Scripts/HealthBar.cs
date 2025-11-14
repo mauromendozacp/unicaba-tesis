@@ -34,7 +34,6 @@ public class HealthBar : MonoBehaviour
 
   public void UpdateHealthBar()
   {
-    Debug.Log("Updating Health Bar");
     float value = ((float)_healtheable.Health) / _healtheable.MaxHealth;
     _CurrentHealthBar.transform.localScale = new Vector3(_originalScale.x * value, _originalScale.y, _originalScale.z);
     if (value >= 0.80f && _healthBarColor != HealthBarColor.Green)

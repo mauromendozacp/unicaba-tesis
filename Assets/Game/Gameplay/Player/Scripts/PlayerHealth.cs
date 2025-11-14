@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   private Renderer[] playerRenderers;
   private PlayerInputGameplayController inputController;
 
-  [SerializeField] float knockbackForceMultiplier = 0.5f;
+  //[SerializeField] float knockbackForceMultiplier = 0.5f;
   [SerializeField] protected Material damagedMaterial;
   protected Material originalMaterial;
 

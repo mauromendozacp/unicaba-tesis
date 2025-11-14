@@ -121,7 +121,7 @@ public class MiniDragonController : EnemyBase
     currentState?.OnExit();
     currentState = newState;
     currentState.OnEnter();
-    Debug.Log($"#{++stateChangeCounter} Estado del Dragón cambiado a: {newState.GetType().Name}");
+    //Debug.Log($"#{++stateChangeCounter} Estado del Dragón cambiado a: {newState.GetType().Name}");
   }
 
   public void ChangeStance(CombatStance stance)

@@ -28,7 +28,7 @@ public class SkeletonDeathState : IEnemyState
   private IEnumerator DieCoroutine()
   {
     yield return new WaitForSeconds(4f);
-    enemy.ToggleDamageMaterial(true);
+    enemy.ToggleDamageMaterial(false);
     enemy.Die();
   }
 }

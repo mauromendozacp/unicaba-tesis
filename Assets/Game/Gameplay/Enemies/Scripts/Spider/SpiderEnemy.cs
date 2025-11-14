@@ -74,7 +74,7 @@ public class SpiderEnemy : EnemySoldier
     //ToggleDamageMaterial(false);
   }
 
-  virtual public void DisableMovementAndCollisions()
+  public override void DisableMovementAndCollisions()
   {
     base.DisableMovementAndCollisions();
     if (armatureCollider != null)
@@ -83,7 +83,7 @@ public class SpiderEnemy : EnemySoldier
     }
   }
 
-  virtual public void EnableMovementAndCollisions()
+  public override void EnableMovementAndCollisions()
   {
     base.EnableMovementAndCollisions();
     if (armatureCollider != null)
