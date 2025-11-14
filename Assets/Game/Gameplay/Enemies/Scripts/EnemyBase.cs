@@ -11,7 +11,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   [SerializeField] protected float maxHealth = 30f;
   protected float currentHealth;
   public float Health => currentHealth;
-
+  public float MaxHealth => maxHealth;
 
   [Header("Damage Settings")]
   [SerializeField] float knockbackForceMultiplier = 0.5f;
@@ -48,6 +48,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
   protected Collider selfCollider;
 
   protected Collider[] hitColliders = new Collider[4]; // Array pre-asignado
+
+  [SerializeField] protected HealthBar healthBar;
 
   protected virtual void Awake()
   {

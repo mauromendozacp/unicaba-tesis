@@ -148,7 +148,7 @@ public class DragonBossController : EnemyBase
   void OnEnable()
   {
     //if (FlameCollider != null) FlameCollider.enabled = false;
-    if(FlameCollider != null) FlameCollider.gameObject.SetActive(false);
+    if (FlameCollider != null) FlameCollider.gameObject.SetActive(false);
     if (BiteCollider != null) BiteCollider.enabled = false;
     ChangeState(stateFactory.GroundIdle());
     ChangeCombatStance(CombatStance.NEUTRAL);
@@ -172,6 +172,10 @@ public class DragonBossController : EnemyBase
   {
     if (!IsVulnerable) return;
     currentHealth -= damage;
+    if (healthBar != null)
+    {
+      healthBar.UpdateHealthBar();
+    }
     StartCoroutine(AppyDamageFeedback());
 
     if (currentHealth <= 0)

@@ -175,6 +175,10 @@ public class MiniDragonController : EnemyBase
     }
 
     currentHealth -= damage;
+    if (healthBar != null)
+    {
+      healthBar.UpdateHealthBar();
+    }
     StartCoroutine(AppyDamageFeedback());
 
     if (currentHealth <= 0)
