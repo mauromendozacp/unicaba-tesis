@@ -2,22 +2,27 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
 {
   [SerializeField] private float invincibilityTime = 0.5f;
-    [SerializeField] private Material goldenMaterial;
+  [SerializeField] private Material goldenMaterial;
 
-    private float maxHealth = 0f;
-    private float currentHealth = 0f;
-    private bool isInvincible = false;
-    private bool isGoldenEffectActive = false;
+  private float maxHealth = 0f;
+  private float currentHealth = 0f;
+  private bool isInvincible = false;
+  private bool isGoldenEffectActive = false;
 
-    public float Health => currentHealth;
+  public float Health => currentHealth;
 
   private Material[] originalMaterials;
   private Renderer[] playerRenderers;
   private PlayerInputGameplayController inputController;
+
+  [SerializeField] float knockbackForceMultiplier = 0.5f;
+  [SerializeField] protected Material damagedMaterial;
+  protected Material originalMaterial;
 
   public bool IsAlive => currentHealth > 0;
   public bool IsDowned { get; private set; }
@@ -38,6 +43,24 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
     }
     inputController = GetComponent<PlayerInputGameplayController>();
     IsDowned = false;
+  }
+
+  public void ToggleDamageMaterial(bool active)
+  {
+    if (playerRenderers != null && damagedMaterial != null && originalMaterials != null)
+    {
+      for (int i = 0; i < playerRenderers.Length; i++)
+      {
+        if (playerRenderers[i] != null)
+        {
+          playerRenderers[i].material = active ? damagedMaterial : originalMaterials[i];
+        }
+      }
+    }
+    else
+    {
+      Debug.LogWarning("PlayerHealth: Renderers or materials not properly assigned.");
+    }
   }
 
   public void TakeDamage(float damage)
@@ -61,7 +84,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   {
     if (inputController != null)
     {
-        inputController.PlayerMap.Disable();
+      inputController.PlayerMap.Disable();
     }
 
     IsDowned = true;
@@ -84,9 +107,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
   private IEnumerator DamageFeedbackCoroutine()
   {
     isInvincible = true;
-
+    ToggleDamageMaterial(true);
     yield return new WaitForSeconds(invincibilityTime);
-
+    ToggleDamageMaterial(false);
     isInvincible = false;
   }
 
@@ -101,67 +124,67 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
     OnUpdateLife?.Invoke(currentHealth, maxHealth);
   }
 
-    public void SetInitialData(float maxHealth)
+  public void SetInitialData(float maxHealth)
+  {
+    this.maxHealth = maxHealth;
+    currentHealth = maxHealth;
+  }
+
+  public void SetInvincibility(bool invincible)
+  {
+    isInvincible = invincible;
+
+    if (invincible)
+      EnableGoldenEffect();
+    else
+      DisableGoldenEffect();
+  }
+
+  private void EnableGoldenEffect()
+  {
+    if (isGoldenEffectActive || goldenMaterial == null) return;
+
+    RefreshRenderers();
+
+    isGoldenEffectActive = true;
+    for (int i = 0; i < playerRenderers.Length; i++)
     {
-        this.maxHealth = maxHealth;
-        currentHealth = maxHealth;
+      if (playerRenderers[i] != null)
+      {
+        playerRenderers[i].material = goldenMaterial;
+      }
+    }
+  }
+
+  private void DisableGoldenEffect()
+  {
+    if (!isGoldenEffectActive) return;
+
+    isGoldenEffectActive = false;
+    for (int i = 0; i < playerRenderers.Length; i++)
+    {
+      if (playerRenderers[i] != null && i < originalMaterials.Length && originalMaterials[i] != null)
+      {
+        playerRenderers[i].material = originalMaterials[i];
+      }
+    }
+  }
+
+  private void RefreshRenderers()
+  {
+    playerRenderers = GetComponentsInChildren<Renderer>();
+
+    if (originalMaterials == null || originalMaterials.Length != playerRenderers.Length)
+    {
+      originalMaterials = new Material[playerRenderers.Length];
     }
 
-    public void SetInvincibility(bool invincible)
+    for (int i = 0; i < playerRenderers.Length; i++)
     {
-        isInvincible = invincible;
-        
-        if (invincible)
-            EnableGoldenEffect();
-        else
-            DisableGoldenEffect();
+      if (playerRenderers[i] != null && originalMaterials[i] == null)
+      {
+        originalMaterials[i] = playerRenderers[i].material;
+      }
     }
-
-    private void EnableGoldenEffect()
-    {
-        if (isGoldenEffectActive || goldenMaterial == null) return;
-        
-        RefreshRenderers();
-        
-        isGoldenEffectActive = true;
-        for (int i = 0; i < playerRenderers.Length; i++)
-        {
-            if (playerRenderers[i] != null)
-            {
-                playerRenderers[i].material = goldenMaterial;
-            }
-        }
-    }
-
-    private void DisableGoldenEffect()
-    {
-        if (!isGoldenEffectActive) return;
-        
-        isGoldenEffectActive = false;
-        for (int i = 0; i < playerRenderers.Length; i++)
-        {
-            if (playerRenderers[i] != null && i < originalMaterials.Length && originalMaterials[i] != null)
-            {
-                playerRenderers[i].material = originalMaterials[i];
-            }
-        }
-    }
-
-    private void RefreshRenderers()
-    {
-        playerRenderers = GetComponentsInChildren<Renderer>();
-        
-        if (originalMaterials == null || originalMaterials.Length != playerRenderers.Length)
-        {
-            originalMaterials = new Material[playerRenderers.Length];
-        }
-        
-        for (int i = 0; i < playerRenderers.Length; i++)
-        {
-            if (playerRenderers[i] != null && originalMaterials[i] == null)
-            {
-                originalMaterials[i] = playerRenderers[i].material;
-            }
-        }
-    }
+  }
 }

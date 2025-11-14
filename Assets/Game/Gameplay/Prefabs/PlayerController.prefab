@@ -622,6 +622,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincibilityTime: 0.5
   goldenMaterial: {fileID: 2100000, guid: 86c22259ff3dfa04dbbbaf73127c6d64, type: 2}
+  knockbackForceMultiplier: 0.5
+  damagedMaterial: {fileID: 2100000, guid: 3e202341f1fa2e842b0070c960b4da73, type: 2}
 --- !u!114 &1200799538902002149
 MonoBehaviour:
   m_ObjectHideFlags: 0
