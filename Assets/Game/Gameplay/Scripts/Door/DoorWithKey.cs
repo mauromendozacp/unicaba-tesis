@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -6,12 +7,12 @@ public class DoorWithKey : MonoBehaviour
     [Header("Animación")]
     [SerializeField] private Animator doorAnimator = null;
 
-    [Tooltip("Nombre del trigger en el Animator que abre la puerta")]
-    [SerializeField] private string openTriggerName = "Open";
-
-    [Header("Opciones")]
     [Tooltip("Si está activo, la puerta solo se abre una vez.")]
     [SerializeField] private bool openOnce = true;
+
+    [Header("Bloqueo de movimiento")]
+    [Tooltip("Tiempo en segundos que el jugador queda bloqueado mientras se abre la puerta.")]
+    [SerializeField] private float lockDuration = 0.5f;
 
     private bool isOpen = false;
 
@@ -25,12 +26,17 @@ public class DoorWithKey : MonoBehaviour
             doorAnimator = GetComponentInChildren<Animator>();
     }
 
+    private void Awake()
+    {
+        if (doorAnimator == null)
+            doorAnimator = GetComponentInChildren<Animator>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (openOnce && isOpen)
             return;
 
-        // Solo reaccionamos si lo que entra es (o tiene) un PlayerController
         PlayerController player = other.GetComponent<PlayerController>();
         if (player == null)
             player = other.GetComponentInParent<PlayerController>();
@@ -46,7 +52,7 @@ public class DoorWithKey : MonoBehaviour
 
         if (KeysManager.Instance.TryUseKey())
         {
-            OpenDoor();
+            StartCoroutine(OpenDoorSequence(player));
         }
         else
         {
@@ -54,16 +60,37 @@ public class DoorWithKey : MonoBehaviour
         }
     }
 
-    private void OpenDoor()
+    private IEnumerator OpenDoorSequence(PlayerController player)
+    {
+        if (player != null)
+        {
+            player.ToggleGameplayInputs(false);
+        }
+
+        OpenDoorInternal();
+
+        if (lockDuration > 0f)
+            yield return new WaitForSeconds(lockDuration);
+
+        if (player != null)
+        {
+            player.ToggleGameplayInputs(true);
+        }
+    }
+
+    private void OpenDoorInternal()
     {
         if (isOpen && openOnce)
             return;
 
         isOpen = true;
 
-        if (doorAnimator != null && !string.IsNullOrEmpty(openTriggerName))
+        if (doorAnimator == null)
+            doorAnimator = GetComponentInChildren<Animator>();
+
+        if (doorAnimator != null)
         {
-            doorAnimator.SetTrigger(openTriggerName);
+            doorAnimator.enabled = true;
         }
         else
         {

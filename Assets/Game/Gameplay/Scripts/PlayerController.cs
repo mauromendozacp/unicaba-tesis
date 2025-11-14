@@ -76,14 +76,14 @@ public class PlayerController : MonoBehaviour
 
         inputController.onRevive += HandleReviveInput;
 
-        itemCollector.Init(onCollectKey);
-    }
+        // 🔴 CAMBIO: armamos la acción que va a usar el PlayerItemCollector
+        Action collectorAction = onCollectKey;
+        if (KeysManager.Instance != null)
+        {
+            collectorAction += KeysManager.Instance.AddKey;
+        }
 
-    private void Update()
-    {
-        if (reviveController.IsReviving) return;
-        Move();
-        HandleFireInput();
+        itemCollector.Init(collectorAction);
     }
 
     public void Init(PlayerUI playerUI, PlayerData data, Sprite minimapIcon, Action onPause, Action onDeath, Action onCollectKey)
@@ -108,6 +108,13 @@ public class PlayerController : MonoBehaviour
 
         //minimapSprite.sprite = data.MinimapIcon;
         minimapSprite.SetSprite(minimapIcon);
+    }
+
+    private void Update()
+    {
+        if (reviveController.IsReviving) return;
+        Move();
+        HandleFireInput();
     }
 
     private void Move()
