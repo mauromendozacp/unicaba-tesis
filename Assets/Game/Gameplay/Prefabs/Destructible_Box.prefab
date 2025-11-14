@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1716858673475305978
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2653914514943894730, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_Name
+      value: Destructible_Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653914514943894730, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.678374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2726351
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9621175
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -148.358
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2653914514943894730, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1779641055542037193}
+  m_SourcePrefab: {fileID: 100100000, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+--- !u!1 &3676935034296640816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2653914514943894730, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
+  m_PrefabInstance: {fileID: 1716858673475305978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1779641055542037193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676935034296640816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d10085964443c4da467def6c111f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  woodFragmentPrefabs:
+  - {fileID: 2542924237762420959, guid: ac5d022f6e268694e8baeed6385d736c, type: 3}
+  - {fileID: 4224456495350100011, guid: 54abbe6249bf9f9499e5400ab8482aa1, type: 3}
+  - {fileID: 956276367903947142, guid: dad1f04f3fbd4c443b75154bf96bfb2b, type: 3}
+  intactWoodPercentage: 20
+  fragmentCount: 100
+  explosionMargin: 0.2
+  baseExplosionForce: 20
+  upwardModifier: 1.2
+  forceMultiplier: 0.25
+  radiusMultiplier: 0.25
+  minFragmentScale: 0.5
+  maxFragmentScale: 1.8
+  groundLayerName: Floor
+  groundOffset: 0.02
+  raycastDistance: 10
+  airDrag: 0.5
+  gravityScale: 1
