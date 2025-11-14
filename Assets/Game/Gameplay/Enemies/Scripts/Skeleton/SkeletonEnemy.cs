@@ -45,7 +45,7 @@ public class SkeletonEnemy : EnemySoldier
   public override void Kill()
   {
     ChangeState(new SkeletonDeathState(this));
-    ToggleDamageMaterial(false);
+    //ToggleDamageMaterial(false);
   }
 
   public void EnableAttackCollider()

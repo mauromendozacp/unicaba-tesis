@@ -28,6 +28,7 @@ public class SpiderDeathState : IEnemyState
   private IEnumerator DieCoroutine()
   {
     yield return new WaitForSeconds(3f);
+    enemy.ToggleDamageMaterial(false);
     enemy.Die();
   }
 }

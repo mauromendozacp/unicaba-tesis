@@ -71,7 +71,7 @@ public class SpiderEnemy : EnemySoldier
   public override void Kill()
   {
     ChangeState(new SpiderDeathState(this));
-    ToggleDamageMaterial(false);
+    //ToggleDamageMaterial(false);
   }
 
   virtual public void DisableMovementAndCollisions()

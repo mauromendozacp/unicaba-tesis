@@ -97,6 +97,6 @@ public class DragonBabyRanged : EnemySoldier
   public override void Kill()
   {
     ChangeState(new DragonBabyRangedDeathState(this));
-    ToggleDamageMaterial(false);
+    //ToggleDamageMaterial(false);
   }
 }
