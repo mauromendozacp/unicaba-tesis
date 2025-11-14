@@ -18,18 +18,20 @@ public class DoorWithKey : MonoBehaviour
 
     private void Reset()
     {
+        // Este collider (en el hijo) debe ser trigger
         Collider col = GetComponent<Collider>();
         if (col != null)
             col.isTrigger = true;
 
+        // Buscamos el animator en el padre (la puerta)
         if (doorAnimator == null)
-            doorAnimator = GetComponentInChildren<Animator>();
+            doorAnimator = GetComponentInParent<Animator>();
     }
 
     private void Awake()
     {
         if (doorAnimator == null)
-            doorAnimator = GetComponentInChildren<Animator>();
+            doorAnimator = GetComponentInParent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +39,7 @@ public class DoorWithKey : MonoBehaviour
         if (openOnce && isOpen)
             return;
 
+        // Solo reaccionamos si lo que entra es (o tiene) un PlayerController
         PlayerController player = other.GetComponent<PlayerController>();
         if (player == null)
             player = other.GetComponentInParent<PlayerController>();
@@ -64,6 +67,7 @@ public class DoorWithKey : MonoBehaviour
     {
         if (player != null)
         {
+            // Bloqueamos input de gameplay mientras se abre
             player.ToggleGameplayInputs(false);
         }
 
@@ -86,15 +90,18 @@ public class DoorWithKey : MonoBehaviour
         isOpen = true;
 
         if (doorAnimator == null)
-            doorAnimator = GetComponentInChildren<Animator>();
+            doorAnimator = GetComponentInParent<Animator>();
 
         if (doorAnimator != null)
         {
+            // Tu caso: el Animator ya está en la puerta, solo hay que activarlo
             doorAnimator.enabled = true;
         }
         else
         {
-            transform.Rotate(0f, 90f, 0f);
+            // Fallback por si no hay Animator: abre "teleport" girando algo
+            Transform doorRoot = transform.parent != null ? transform.parent : transform;
+            doorRoot.Rotate(0f, 90f, 0f);
         }
     }
 }
