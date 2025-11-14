@@ -2208,9 +2208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  isTerritorial: 0
-  moveSpeed: 4.5
-  currentSpeed: 0
   knockbackForceMultiplier: 0.5
   damageRenderer:
   - {fileID: 9191393385292689399}
@@ -2221,6 +2218,10 @@ MonoBehaviour:
   attackRange: 2
   chaseRadius: 200
   maxChaseDistance: 15
+  isTerritorial: 0
+  moveSpeed: 4.5
+  currentSpeed: 0
+  armatureCollider: {fileID: 2361879033601075210}
 --- !u!54 &7390354388971522533
 Rigidbody:
   m_ObjectHideFlags: 0

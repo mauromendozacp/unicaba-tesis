@@ -5,6 +5,7 @@ public class SpiderEnemy : EnemySoldier
 {
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
+  [SerializeField] Collider armatureCollider;
 
 
   void OnEnable()
@@ -71,5 +72,23 @@ public class SpiderEnemy : EnemySoldier
   {
     ChangeState(new SpiderDeathState(this));
     ToggleDamageMaterial(false);
+  }
+
+  virtual public void DisableMovementAndCollisions()
+  {
+    base.DisableMovementAndCollisions();
+    if (armatureCollider != null)
+    {
+      armatureCollider.enabled = false;
+    }
+  }
+
+  virtual public void EnableMovementAndCollisions()
+  {
+    base.EnableMovementAndCollisions();
+    if (armatureCollider != null)
+    {
+      armatureCollider.enabled = true;
+    }
   }
 }
