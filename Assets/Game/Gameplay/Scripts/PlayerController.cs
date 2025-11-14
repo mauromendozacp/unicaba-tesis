@@ -76,7 +76,6 @@ public class PlayerController : MonoBehaviour
 
         inputController.onRevive += HandleReviveInput;
 
-        // 🔴 CAMBIO: armamos la acción que va a usar el PlayerItemCollector
         Action collectorAction = onCollectKey;
         if (KeysManager.Instance != null)
         {
