@@ -4457,6 +4457,7 @@ MonoBehaviour:
   maxKeysToWin: 3
   nextLevel: 0
   miniBoss: {fileID: 0}
+  finalBoss: {fileID: 0}
 --- !u!4 &1103809651
 Transform:
   m_ObjectHideFlags: 0
@@ -4650,7 +4651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308950918597888886, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1619381071333134472, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
       propertyPath: m_LocalPosition.x

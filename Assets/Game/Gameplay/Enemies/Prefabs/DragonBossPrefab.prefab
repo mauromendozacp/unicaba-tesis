@@ -2139,7 +2139,7 @@ MonoBehaviour:
   attackDamage: 40
   attackCooldown: 1
   attackRange: 2
-  chaseRadius: 100
+  chaseRadius: 250
   maxChaseDistance: 15
   healthBar: {fileID: 2634991037525531240}
   arenaBoundsX: {x: -20, y: 20}

@@ -19,16 +19,16 @@ public enum CombatStance
   NEUTRAL = 0,
 
   // Estados agresivos
-  Aggressive,     // Atacando activamente, alta frecuencia de ataques
-  ENRAGED,        // Furia total, daño y velocidad maximizados
-  FocusAttack,    // Enfocado en un ataque específico o en un objetivo
+  //Aggressive,     // Atacando activamente, alta frecuencia de ataques
+  ENRAGED        // Furia total, daño y velocidad maximizados
+  //FocusAttack,    // Enfocado en un ataque específico o en un objetivo
 
   // Estados defensivos o de utilidad
-  Defensive,      // Recibiendo poco daño, cubriéndose
-  Vulnerable,     // Acaba de fallar un ataque, expuesto, recibiendo más daño
-  Regeneration,   // Recuperando vida o armadura
-  Summoning,      // Invocando esbirros
-  Charging        // Cargando un ataque grande o habilidad especial
+  //Defensive,      // Recibiendo poco daño, cubriéndose
+  //Vulnerable,     // Acaba de fallar un ataque, expuesto, recibiendo más daño
+  //Regeneration,   // Recuperando vida o armadura
+  //Summoning,      // Invocando esbirros
+  //Charging        // Cargando un ataque grande o habilidad especial
 }
 public class DragonBossController : EnemyBase
 {
@@ -135,6 +135,7 @@ public class DragonBossController : EnemyBase
         break;
     }
     SetSpeed(groundMoveSpeed);
+    Debug.Log($"El Dragón ha cambiado a la postura de combate: {currentStance}");
   }
 
 
@@ -164,7 +165,7 @@ public class DragonBossController : EnemyBase
     currentState?.OnExit();
     currentState = newState;
     currentState.OnEnter();
-    //Debug.Log($"#{++stateChangeCounter} Estado del Dragón cambiado a: {newState.GetType().Name}");
+    Debug.Log($"#{++stateChangeCounter} Estado del Dragón cambiado a: {newState.GetType().Name}");
   }
 
 
