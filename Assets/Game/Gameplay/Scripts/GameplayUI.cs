@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,8 @@ public class GameplayUI : MonoBehaviour
 
     [SerializeField] private GameObject hudPanel = null;
     [SerializeField] private GameObject optionsPanel = null;
+    [SerializeField] private OptionSound musicOption = null;
+    [SerializeField] private OptionSound sfxOption = null;
     [SerializeField] private GameObject losePanel = null;
     [SerializeField] private GameObject winPanel = null;
 
@@ -55,6 +58,10 @@ public class GameplayUI : MonoBehaviour
         });
 
         exitBtn.onClick.AddListener(onQuitGame.Invoke);
+
+        AudioManager audioManager = GameManager.Instance.AudioManager;
+        musicOption.Init(audioManager.MusicEnabled, audioManager.MusicVolume, audioManager.UpdateMusicVolume, audioManager.ToggleMusic);
+        sfxOption.Init(audioManager.SfxEnabled, audioManager.SfxVolume, audioManager.UpdateSfxVolume, audioManager.ToggleSFX);
     }
 
     public void TogglePause(bool status)

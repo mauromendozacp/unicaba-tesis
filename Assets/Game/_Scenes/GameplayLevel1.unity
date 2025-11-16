@@ -3266,6 +3266,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4966199032836920577, guid: 4f7f48142ab0e9245b96aef5382d7f08, type: 3}
   m_PrefabInstance: {fileID: 718506189}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &718506191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7384863578808660419, guid: 4f7f48142ab0e9245b96aef5382d7f08, type: 3}
+  m_PrefabInstance: {fileID: 718506189}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74dcbf0174f658428536a3d08d3b56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &742762270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4190,6 +4201,7 @@ MonoBehaviour:
   maxKeysToWin: 3
   nextLevel: 3
   miniBoss: {fileID: 1964319209}
+  finalBoss: {fileID: 0}
 --- !u!4 &1103809651
 Transform:
   m_ObjectHideFlags: 0
@@ -4402,6 +4414,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4966199032836920577, guid: 4f7f48142ab0e9245b96aef5382d7f08, type: 3}
   m_PrefabInstance: {fileID: 1183224024}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1183224026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7384863578808660419, guid: 4f7f48142ab0e9245b96aef5382d7f08, type: 3}
+  m_PrefabInstance: {fileID: 1183224024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74dcbf0174f658428536a3d08d3b56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1194779761
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,6 +6751,8 @@ MonoBehaviour:
   waveText: {fileID: 1540407882}
   hudPanel: {fileID: 686695056}
   optionsPanel: {fileID: 1693954823}
+  musicOption: {fileID: 718506191}
+  sfxOption: {fileID: 1183224026}
   losePanel: {fileID: 350795879}
   winPanel: {fileID: 2052507867}
   retryBtn: {fileID: 847193186}
