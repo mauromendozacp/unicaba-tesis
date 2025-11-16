@@ -19,5 +19,5 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: -90, y: 0, z: 0}
   type: 1
-  useAudioEvent: {fileID: 0}
+  useAudioEvent: {fileID: 11400000, guid: 6ab21d86ceb9f004bbdb247d98b84bc4, type: 2}
   heal: 30

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Item_InvisibilityPotion
   m_EditorClassIdentifier: 
   itemName: 
-  icon: {fileID: 21300000, guid: 8edfd9986d7bdec419b59812b1f68292, type: 3}
-  minimapIcon: {fileID: 21300000, guid: 8edfd9986d7bdec419b59812b1f68292, type: 3}
+  icon: {fileID: 21300000, guid: e6ac747090739c84db297857e7e32af9, type: 3}
+  minimapIcon: {fileID: 21300000, guid: e6ac747090739c84db297857e7e32af9, type: 3}
   prefab: {fileID: 1000013846074356, guid: 11e31a2ebb4e6e246bcf8c0ba034a031, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
-  type: 0
-  useAudioEvent: {fileID: 0}
+  type: 1
+  useAudioEvent: {fileID: 11400000, guid: 0b70b472fc668f24eb9afdaaacda464c, type: 2}
   duration: 5
