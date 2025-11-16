@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     private Camera mainCam = null;
     private Action onDeath = null;
     private Action onCollectKey = null;
+    private Action onDeathPlayer = null;
+    private Action onRevivePlayer = null;
 
     public PlayerHealth PlayerHealth => playerHealth;
 
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour
         playerHealth.OnUpdateLife += playerUI.OnUpdateLife;
         playerHealth.OnDeath += (player) => { animationController.ToggleDead(true); };
         playerHealth.OnDeath += (player) => { onDeath?.Invoke(); };
+        playerHealth.OnDeath += (player) => { onDeathPlayer?.Invoke(); };
+        playerHealth.OnRevived += (player) => { onRevivePlayer?.Invoke(); };
         playerHealth.OnRevived += (player) => { animationController.ToggleDead(false); };
         playerHealth.SetInitialData(data.MaxLife);
 
@@ -85,12 +89,14 @@ public class PlayerController : MonoBehaviour
         itemCollector.Init(collectorAction);
     }
 
-    public void Init(PlayerUI playerUI, PlayerData data, Sprite minimapIcon, Action onPause, Action onDeath, Action onCollectKey)
+    public void Init(PlayerUI playerUI, PlayerData data, Sprite minimapIcon, Action onPause, Action onDeath, Action onCollectKey, Action onDeathPlayer, Action onRevivePlayer)
     {
         this.playerUI = playerUI;
         this.onPause = onPause;
         this.onDeath = onDeath;
         this.onCollectKey = onCollectKey;
+        this.onDeathPlayer = onDeathPlayer;
+        this.onRevivePlayer = onRevivePlayer;
 
         weaponHolder?.SetPlayerUI(playerUI);
 

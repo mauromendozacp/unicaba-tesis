@@ -50,7 +50,15 @@ public class PlayerSpawn : MonoBehaviour
             PlayerController playerController = playerInput.GetComponent<PlayerController>();
             PlayerData data = playersData[index];
 
-            playerController.Init(playerUI, data, playerIcons[players.Count], onPause, onDeath, onCollectKey);
+            playerController.Init(playerUI, data, playerIcons[players.Count], onPause, onDeath, onCollectKey, 
+                () =>
+                {
+                    targetGroup.RemoveMember(playerInput.transform);
+                },
+                () =>
+                {
+                    targetGroup.AddMember(playerInput.transform, 1f, 1f);
+                });
 
             Transform playerTransform = spawnLocations[index];
             playerController.transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);
