@@ -328,6 +328,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8722019011666800202, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -412,6 +416,9 @@ MonoBehaviour:
   fireballCountEnraged: 4
   lastMeleeTime: 0
   lastRangedTime: 0
+  miniDragonRoarSound: {fileID: 11400000, guid: 3fade01aad1da924a94fd8aa48bd1769, type: 2}
+  fireballSound: {fileID: 11400000, guid: a15dbbbaddcf3d542b7e19196c7e04d8, type: 2}
+  death: {fileID: 11400000, guid: 801a3c923a9d3ae4d8cadc17893e88e2, type: 2}
   stateChangeCounter: 0
 --- !u!54 &1417733893793458873
 Rigidbody:

@@ -41,6 +41,10 @@ public class DragonBabyRangedAttackState : IEnemyState
     // 2. Ejecutar ataque si el cooldown lo permite
     if (Time.time >= enemy.LastAttackTime + enemy.AttackCooldown)
     {
+      if (enemy.fireballSound != null)
+      {
+        GameManager.Instance.AudioManager.PlayAudio(enemy.fireballSound);
+      }
       enemy.ShootFireBall();
       // Después de disparar, retrocede ligeramente para evitar ser predecible
       enemy.ChangeState(new DragonBabyRangedRetreatState(enemy));

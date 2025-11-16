@@ -160,6 +160,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8722019011666800202, guid: 8a170f0e9399aaf48a7cca07f45270ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -208,6 +212,7 @@ MonoBehaviour:
   attackRange: 2
   chaseRadius: 200
   maxChaseDistance: 15
+  healthBar: {fileID: 0}
   isTerritorial: 0
   moveSpeed: 4
   currentSpeed: 0
@@ -217,6 +222,7 @@ MonoBehaviour:
   optimalAttackDistance: 10
   attackRangeMargin: 2
   fireballDamage: 15
+  fireballSound: {fileID: 11400000, guid: a15dbbbaddcf3d542b7e19196c7e04d8, type: 2}
 --- !u!54 &9218935131097435825
 Rigidbody:
   m_ObjectHideFlags: 0

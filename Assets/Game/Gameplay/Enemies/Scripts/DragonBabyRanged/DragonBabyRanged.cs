@@ -29,6 +29,8 @@ public class DragonBabyRanged : EnemySoldier
   private float lastAttackTime;
   public float LastAttackTime => lastAttackTime;
 
+  [SerializeField] public AudioEvent fireballSound = null;
+
   void OnEnable()
   {
     ToggleDamageMaterial(false);

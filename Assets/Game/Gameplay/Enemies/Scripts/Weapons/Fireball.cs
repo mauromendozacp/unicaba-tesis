@@ -12,6 +12,8 @@ public class Fireball : MonoBehaviour
 
   private bool isAlive;
 
+  [SerializeField] AudioEvent fireballImpactSound = null;
+
   void Awake()
   {
     poolableItem = GetComponent<PoolableItem>();
@@ -115,6 +117,10 @@ public class Fireball : MonoBehaviour
       //GameObject.Destroy(attack, 2f);
     }
     */
+    if (fireballImpactSound != null)
+    {
+      GameManager.Instance.AudioManager.PlayAudio(fireballImpactSound);
+    }
     Quaternion explosionRotation = Quaternion.LookRotation(normal);
     GameObject attack = ExplosionPoolManager.Instance.GetExplosion();
     attack.transform.position = explosionPosition;

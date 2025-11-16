@@ -2,53 +2,55 @@ using UnityEngine;
 
 public class KeysManager : MonoBehaviour
 {
-    public static KeysManager Instance { get; private set; }
+  public static KeysManager Instance { get; private set; }
 
-    [Header("UI")]
-    [SerializeField] private GameplayUI gameplayUI = null;
+  [Header("UI")]
+  [SerializeField] private GameplayUI gameplayUI = null;
 
-    [SerializeField] private int initialKeys = 0;
+  [SerializeField] private int initialKeys = 0;
+  [SerializeField] AudioEvent keyPickupSound = null;
 
-    private int keys;
+  private int keys;
 
-    public int Keys => keys;
+  public int Keys => keys;
 
-    private void Awake()
+  private void Awake()
+  {
+    if (Instance != null && Instance != this)
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        keys = initialKeys;
-        UpdateUI();
+      Destroy(gameObject);
+      return;
     }
 
-    public void AddKey()
-    {
-        keys++;
-        UpdateUI();
-        Debug.Log("[KeysManager] Llave recogida. Total: " + keys);
-    }
+    Instance = this;
+    keys = initialKeys;
+    UpdateUI();
+  }
 
-    public bool TryUseKey()
-    {
-        if (keys <= 0)
-            return false;
+  public void AddKey()
+  {
+    keys++;
+    GameManager.Instance.AudioManager.PlayAudio(keyPickupSound);
+    UpdateUI();
+    Debug.Log("[KeysManager] Llave recogida. Total: " + keys);
+  }
 
-        keys--;
-        UpdateUI();
-        Debug.Log("[KeysManager] Llave usada. Restantes: " + keys);
-        return true;
-    }
+  public bool TryUseKey()
+  {
+    if (keys <= 0)
+      return false;
 
-    private void UpdateUI()
+    keys--;
+    UpdateUI();
+    Debug.Log("[KeysManager] Llave usada. Restantes: " + keys);
+    return true;
+  }
+
+  private void UpdateUI()
+  {
+    if (gameplayUI != null)
     {
-        if (gameplayUI != null)
-        {
-            gameplayUI.UpdateKeysText(keys);
-        }
+      gameplayUI.UpdateKeysText(keys);
     }
+  }
 }

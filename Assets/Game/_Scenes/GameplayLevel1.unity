@@ -3986,6 +3986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayUI: {fileID: 2023444855}
   initialKeys: 0
+  keyPickupSound: {fileID: 11400000, guid: fd75535d5127294429f670f7a106e0e0, type: 2}
 --- !u!1001 &1053792232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4620,6 +4621,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6725274610491342876, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 6725274610491342876, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
     - target: {fileID: 6741243256427762728, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4628,6 +4637,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7032756913640283726, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 7032756913640283726, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+    - target: {fileID: 7772292618449368817, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 7772292618449368817, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
     - target: {fileID: 8236646056191211777, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4656,6 +4681,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8558016537790946459, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 8558016537790946459, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
     - target: {fileID: 8720553680003556283, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -5658,6 +5691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 1053792233}
+  doorOpeningSound: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
 --- !u!1 &1578399858
 GameObject:
   m_ObjectHideFlags: 0
@@ -7108,7 +7142,7 @@ PrefabInstance:
       objectReference: {fileID: 1053792233}
     - target: {fileID: 7065722231330301290, guid: ba89fcc01913ff449ad7cfd9ebad0017, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.3
+      value: -42.58
       objectReference: {fileID: 0}
     - target: {fileID: 7065722231330301290, guid: ba89fcc01913ff449ad7cfd9ebad0017, type: 3}
       propertyPath: m_LocalPosition.y
