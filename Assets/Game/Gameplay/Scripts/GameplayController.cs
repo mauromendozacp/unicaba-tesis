@@ -132,7 +132,7 @@ public class GameplayController : MonoBehaviour
   private void OnRestart()
   {
     TogglePause(false);
-    GameManager.Instance.ChangeScene(SceneGame.Gameplay_1);
+    GameManager.Instance.ChangeScene(GameManager.Instance.CurrentScene);
   }
 
   private void OnPlayerDeath()
@@ -181,7 +181,7 @@ public class GameplayController : MonoBehaviour
 
   private void RetryLevel()
   {
-    GameManager.Instance.ChangeScene(SceneGame.Gameplay_1);
+    GameManager.Instance.ChangeScene(GameManager.Instance.CurrentScene);
   }
 
   private void NextLevel()

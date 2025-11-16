@@ -18,10 +18,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField] private GameDataManager gameDataManager = null;
     [SerializeField] private CursorManager cursorManager = null;
 
+    private SceneGame currentScene = default;
+
     public LoadingManager LoadingManager => loadingManager;
     public AudioManager AudioManager => audioManager;
     public GameDataManager GameDataManager => gameDataManager;
     public CursorManager CursorManager => cursorManager;
+    public SceneGame CurrentScene => currentScene;
 
     public override void Awake()
     {
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void ChangeScene(SceneGame nextScene, Action onComplete = null)
     {
+        currentScene = nextScene;
         audioManager.StopCurrentMusic();
         loadingManager.TransitionScene(nextScene, onComplete);
     }
