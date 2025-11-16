@@ -3707,6 +3707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragonMiniBossPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1048387481896733641, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4651,7 +4655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1308950918597888886, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1619381071333134472, guid: ed14b0c467219e34c989c612f25dcd76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6602,6 +6606,8 @@ MonoBehaviour:
   waveText: {fileID: 1540407882}
   hudPanel: {fileID: 686695056}
   optionsPanel: {fileID: 0}
+  musicOption: {fileID: 0}
+  sfxOption: {fileID: 0}
   losePanel: {fileID: 350795879}
   winPanel: {fileID: 2052507867}
   retryBtn: {fileID: 847193186}
@@ -7065,6 +7071,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4307693266974971714, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
+      propertyPath: maxHealth
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 6071011708880965737, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_Enabled
       value: 1

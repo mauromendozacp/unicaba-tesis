@@ -114,6 +114,11 @@ public class DragonBossController : EnemyBase
 
   public event Action OnDragonBossDeath;
 
+  [SerializeField] AudioEvent dragonRoarSound = null;
+  [SerializeField] AudioEvent fireballSound = null;
+  [SerializeField] public AudioEvent flameSound = null;
+  [SerializeField] AudioEvent deathSound = null;
+
   public void ChangeCombatStance(CombatStance stance)
   {
     currentStance = stance;
@@ -153,6 +158,7 @@ public class DragonBossController : EnemyBase
     if (BiteCollider != null) BiteCollider.enabled = false;
     ChangeState(stateFactory.GroundIdle());
     ChangeCombatStance(CombatStance.NEUTRAL);
+    if (dragonRoarSound != null) GameManager.Instance.AudioManager.PlayAudio(dragonRoarSound);
   }
 
   void Update()
@@ -305,6 +311,10 @@ public class DragonBossController : EnemyBase
     GameObject fireballGO = FireballPoolManager.Instance.GetFireball();
     Fireball fireball = fireballGO.GetComponent<Fireball>();
     fireball.SetDamage(fireballDamage);
+    if (fireballSound != null)
+    {
+      GameManager.Instance.AudioManager.PlayAudio(fireballSound);
+    }
     fireball.Launch(position, direction, FireballSpeed);
   }
 

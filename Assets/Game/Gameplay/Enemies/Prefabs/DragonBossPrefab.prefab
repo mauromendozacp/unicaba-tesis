@@ -2172,6 +2172,10 @@ MonoBehaviour:
   neutralFireballSpeed: 8
   enragedFireballSpeed: 12
   FireballSpawnPoint: {fileID: 3301573678065908506}
+  dragonRoarSound: {fileID: 11400000, guid: 0a37d5eb04261fc429b3b826d680770e, type: 2}
+  fireballSound: {fileID: 11400000, guid: a15dbbbaddcf3d542b7e19196c7e04d8, type: 2}
+  flameSound: {fileID: 11400000, guid: 32c473896c94c5f4aa7e860acb887e67, type: 2}
+  deathSound: {fileID: 11400000, guid: 801a3c923a9d3ae4d8cadc17893e88e2, type: 2}
   stateChangeCounter: 0
 --- !u!195 &6879549569976659862
 NavMeshAgent:

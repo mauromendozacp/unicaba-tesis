@@ -75,8 +75,8 @@ public class DragonGroundAttackState : IState
           _boss.FlameCollider.gameObject.SetActive(true);
           _boss.flame.SetActive(true);
           _boss.flameEffect.gameObject.SetActive(true);
+          if (_boss.flameSound != null) GameManager.Instance.AudioManager.PlayAudio(_boss.flameSound);
           _boss.flameEffect.Play();
-
         }
       }
       _attackExecuted = true;
