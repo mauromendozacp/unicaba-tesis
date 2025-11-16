@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 12
   lifetime: 5
+  fireballImpactSound: {fileID: 11400000, guid: c6cd1ec956b9f4c489faaa42ba968959, type: 2}
 --- !u!114 &2119124052276603396
 MonoBehaviour:
   m_ObjectHideFlags: 0

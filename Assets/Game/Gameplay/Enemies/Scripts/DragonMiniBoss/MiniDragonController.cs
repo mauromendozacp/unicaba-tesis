@@ -87,6 +87,10 @@ public class MiniDragonController : EnemyBase
 
   public event Action OnDragonMiniBossDeath;
 
+  [SerializeField] public AudioEvent miniDragonRoarSound = null;
+  [SerializeField] public AudioEvent fireballSound = null;
+  [SerializeField] public AudioEvent deathSound = null;
+
   protected override void Awake()
   {
     base.Awake();

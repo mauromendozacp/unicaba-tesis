@@ -4,6 +4,7 @@ public class DragonDoor : MonoBehaviour
 {
   Animator _anim;
   [SerializeField] EnemyManager _enemyManager;
+  [SerializeField] AudioEvent doorOpeningSound = null;
 
   void Awake()
   {
@@ -25,6 +26,11 @@ public class DragonDoor : MonoBehaviour
 
   public void Open()
   {
+    if (doorOpeningSound != null)
+    {
+      GameManager.Instance.AudioManager.PlayAudio(doorOpeningSound);
+    }
     _anim.enabled = true;
+
   }
 }

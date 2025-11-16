@@ -28,6 +28,7 @@ public class MiniDragonDieState : IState
     //_boss.DisableMovementAndCollisions();
 
     // Llamar al método de limpieza final del controlador
+    if (_boss.deathSound != null) GameManager.Instance.AudioManager.PlayAudio(_boss.deathSound);
     _boss.StartCoroutine(DieCorroutine());
   }
 

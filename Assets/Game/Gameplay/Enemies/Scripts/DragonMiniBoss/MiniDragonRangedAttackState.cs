@@ -55,6 +55,8 @@ public class MiniDragonRangedAttackState : IState
 
     Quaternion baseRotation = Quaternion.LookRotation(targetPos - spawnPos);
 
+    if (_boss.fireballSound != null) GameManager.Instance.AudioManager.PlayAudio(_boss.fireballSound);
+
     for (int i = 0; i < count; i++)
     {
       float angle = startAngle + i * angleStep;

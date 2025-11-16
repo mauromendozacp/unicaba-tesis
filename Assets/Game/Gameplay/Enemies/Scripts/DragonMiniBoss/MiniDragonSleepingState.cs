@@ -25,5 +25,9 @@ public class MiniDragonSleepingState : IState
   public void OnExit()
   {
     _boss.Animator.SetBool("Sleeping", false);
+    if (_boss.miniDragonRoarSound != null)
+    {
+      GameManager.Instance.AudioManager.PlayAudio(_boss.miniDragonRoarSound);
+    }
   }
 }

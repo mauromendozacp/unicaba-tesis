@@ -187,4 +187,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
       }
     }
   }
+
+  [ContextMenu("LLenar Vida")]
+  public void FillHealth()
+  {
+    currentHealth = maxHealth;
+    OnUpdateLife?.Invoke(currentHealth, maxHealth);
+  }
 }

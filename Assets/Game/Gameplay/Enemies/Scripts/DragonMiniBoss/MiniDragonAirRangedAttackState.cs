@@ -67,6 +67,8 @@ public class MiniDragonAirRangedAttackState : IState
     // Disparo recto (oblicuo) hacia el objetivo, sin gravedad
     Vector3 launchDirection = (targetPos - spawnPos).normalized;
 
+    if (_boss.fireballSound != null) GameManager.Instance.AudioManager.PlayAudio(_boss.fireballSound);
+
     for (int i = 0; i < count; i++)
     {
       // Simular una ligera dispersión para los ataques múltiples
