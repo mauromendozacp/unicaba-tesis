@@ -96,7 +96,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IRevivable
     currentHealth = healthRestored;
     if (inputController != null)
     {
-      inputController.enabled = true;
+      //inputController.enabled = true;
+      inputController.PlayerMap.Enable();
     }
     transform.rotation = Quaternion.identity; // Devuelve la rotación normal
     IsDowned = false;
