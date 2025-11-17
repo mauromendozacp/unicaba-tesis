@@ -7641,11 +7641,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071011708880965737, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_Name
       value: DragonBossPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368934818809636192, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6642916191238930078, guid: e17327e74b621eb48a602bdc1892f7a6, type: 3}
       propertyPath: m_LocalPosition.x
