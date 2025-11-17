@@ -15,7 +15,12 @@ public class DragonBabyRangedDeathState : IEnemyState
   public void Enter()
   {
     enemy.StopMovement();
+
+    /* CORREGIR */
     //enemy.DisableMovementAndCollisions();
+    enemy.StopAllCoroutines();
+    enemy.SetAttackCollider(false);
+
     enemy.Animator.TriggerDeath();
     // Opcional: animar o rotar para simular una caída
     // enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, enemy.transform.rotation.z);
@@ -29,8 +34,11 @@ public class DragonBabyRangedDeathState : IEnemyState
 
   private IEnumerator DieCoroutine()
   {
-    yield return new WaitForSeconds(3f);
     enemy.ToggleDamageMaterial(true);
+    yield return new WaitForSeconds(0.1f);
+    enemy.ToggleDamageMaterial(false);
+    //enemy.ToggleDamageMaterial(true);
+    yield return new WaitForSeconds(3f);
     enemy.Die();
   }
 }

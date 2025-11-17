@@ -98,6 +98,11 @@ public class DragonBabyRanged : EnemySoldier
 
   public override void Kill()
   {
+    /* CORREGIR */
+    StopAllCoroutines();
+    DisableMovementAndCollisions();
+    ToggleSelfCollider(false);
+
     ChangeState(new DragonBabyRangedDeathState(this));
     //ToggleDamageMaterial(false);
   }
