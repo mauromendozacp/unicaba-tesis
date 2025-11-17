@@ -326,7 +326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dragons
+  m_text: 'Dragon
 
     hunters'
   m_isRightToLeft: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 137.05
+  m_fontSize: 147
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2801,7 +2801,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<size=80>Cr\xE9ditos</size>\n\n<size=60>Game Design</size>\nAugusto Llanos\nAntonella
     Lapalma\n\n<size=60>Desarrollo</size>\nMatias Lorenzo\nMauro Mendoza\nJonatan
-    Espa\xF1a\nJuan Ignacio Bonini\n\n<size=60>Arte</size>\nAntolla Lapalma"
+    Espa\xF1a\nJuan Ignacio Bonini\n\n<size=60>Arte</size>\nAntonella Lapalma"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c208c178013865d43bc0f11e1b140a12, type: 2}
   m_sharedMaterial: {fileID: -9104195977656091527, guid: c208c178013865d43bc0f11e1b140a12, type: 2}
