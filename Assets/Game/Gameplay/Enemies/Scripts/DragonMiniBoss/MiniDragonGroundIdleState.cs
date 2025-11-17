@@ -61,12 +61,12 @@ public class MiniDragonGroundIdleState : IState
         // 2. Transiciones de Movimiento/Vuelo
         int action = Random.Range(0, 10);
         //int action = 0;
-        if (action < 6) // 60% Correr
+        if (action < 7) // 70% Correr
         {
           _boss.ChangeState(_factory.GroundMove());
           return;
         }
-        else if (action < 9) // 30% Reposicionamiento Aéreo
+        else if (action < 10) // 30% Reposicionamiento Aéreo
         {
           _boss.ChangeState(_factory.TransitionTakeoff());
           return;

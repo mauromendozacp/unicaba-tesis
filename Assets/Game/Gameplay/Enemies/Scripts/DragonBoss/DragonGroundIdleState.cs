@@ -36,12 +36,12 @@ public class DragonGroundIdleState : IState
         return;
       }
 
-      int action = Random.Range(0, 4);
-      if (action <= 1)
+      int action = Random.Range(0, 6);
+      if (action <= 2)
         _boss.ChangeState(_factory.GroundMove());
-      else if (action == 2)
+      else if (action <= 4)
         _boss.ChangeState(_factory.TransitionTakeoff());
-      else if (action == 3)
+      else if (action == 5)
         _boss.ChangeState(_factory.GroundAttack("FireBall"));
     }
   }

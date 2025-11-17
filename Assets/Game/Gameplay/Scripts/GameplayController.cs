@@ -172,11 +172,13 @@ public class GameplayController : MonoBehaviour
     keys++;
     gameplayUI.UpdateKeysText(keys);
 
+    /*
     if (keys >= maxKeysToWin)
     {
       enemyManager.StartEnemyWaves();
 
     }
+    */
   }
 
   private void RetryLevel()
