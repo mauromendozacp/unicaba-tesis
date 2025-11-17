@@ -848,8 +848,29 @@ MonoBehaviour:
   doorAnimator: {fileID: 208239852}
   openOnce: 1
   lockDuration: 0.5
-  doorOpeningSound: {fileID: 0}
-  doorClosedSound: {fileID: 0}
+  doorOpeningSound: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+  doorClosedSound: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+--- !u!65 &208239860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208239849}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13500732, y: 2.2483528, z: 2.0000005}
+  m_Center: {x: -0.1, y: 0.124379635, z: -1.0063016}
 --- !u!1001 &222115947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2978,7 +2999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &539605931
 Transform:
   m_ObjectHideFlags: 0
@@ -4593,7 +4614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 1053792233}
-  doorOpeningSound: {fileID: 0}
+  doorOpeningSound: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
 --- !u!1001 &883793663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7350,12 +7371,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 35768364841902504, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Center.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 35768364841902504, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 197646925659648195, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.989
+      objectReference: {fileID: 0}
+    - target: {fileID: 442488054690422660, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 442488054690422660, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+    - target: {fileID: 664035311531199955, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525950852033350288, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1569941768665488524, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7397,6 +7438,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1675134049152775495, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 1675134049152775495, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+    - target: {fileID: 1987200489595381983, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 1987200489595381983, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+    - target: {fileID: 2046173051147265771, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Center.x
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2046173051147265771, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -7413,7 +7474,19 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2737366375843259950, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233747679171865340, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3884466869427349289, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056310517642416501, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -7429,9 +7502,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.132
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386334233055189284, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5632195488249495226, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723453161169881888, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5789349983914159913, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Enabled
@@ -7444,6 +7549,34 @@ PrefabInstance:
     - target: {fileID: 6096680555331778856, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258454122064961127, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6327693253633349748, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Name
@@ -7461,12 +7594,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8186084801637158545, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorClosedSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+    - target: {fileID: 8186084801637158545, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: doorOpeningSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
     m_RemovedComponents:
     - {fileID: 3823929064355669068, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
     - {fileID: 8812042897662443268, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+    - {fileID: 8871665306510075802, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+    - {fileID: 9210522170470019483, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+    - {fileID: 1337133715836675085, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
     m_RemovedGameObjects:
     - {fileID: 717759508869573241, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
     - {fileID: 8370724232536668662, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+    - {fileID: 13704539582231416, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+    - {fileID: 2029668345000686651, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1569941768665488524, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       insertIndex: 48
@@ -7486,7 +7632,13 @@ PrefabInstance:
       addedObject: {fileID: 42574304}
     - targetCorrespondingSourceObject: {fileID: 3940254627177324672, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 208239860}
+    - targetCorrespondingSourceObject: {fileID: 3940254627177324672, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 208239855}
+    - targetCorrespondingSourceObject: {fileID: 3077361638018082755, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1953418330}
     - targetCorrespondingSourceObject: {fileID: 3077361638018082755, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1953418325}
@@ -8050,8 +8202,29 @@ MonoBehaviour:
   doorAnimator: {fileID: 1953418322}
   openOnce: 1
   lockDuration: 0.5
-  doorOpeningSound: {fileID: 0}
-  doorClosedSound: {fileID: 0}
+  doorOpeningSound: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+  doorClosedSound: {fileID: 11400000, guid: a95f002f2e47f06488dd79ae57f1b4e5, type: 2}
+--- !u!65 &1953418330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953418319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13500732, y: 2.2483528, z: 2.0000005}
+  m_Center: {x: -0.1, y: 0.124379635, z: -1.0063016}
 --- !u!1 &1955654340
 GameObject:
   m_ObjectHideFlags: 0
