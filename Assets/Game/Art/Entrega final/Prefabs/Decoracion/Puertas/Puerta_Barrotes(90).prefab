@@ -210,3 +210,5 @@ MonoBehaviour:
   doorAnimator: {fileID: 3668689158509490989}
   openOnce: 1
   lockDuration: 0.5
+  doorOpeningSound: {fileID: 0}
+  doorClosedSound: {fileID: 0}
