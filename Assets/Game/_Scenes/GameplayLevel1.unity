@@ -4567,7 +4567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5464116093531805439, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: itemSpawnSettings.Array.data[0].SpawnPositions.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5464116093531805439, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: itemSpawnSettings.Array.data[0].SpawnPositions.Array.data[0].x
