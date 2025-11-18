@@ -10479,6 +10479,10 @@ PrefabInstance:
       propertyPath: doorOpeningSound
       value: 
       objectReference: {fileID: 11400000, guid: 19d393b83b73be3469ed5b2a0c6522ab, type: 2}
+    - target: {fileID: 8955553735360701920, guid: 4126ece5f63dc4b409bba45d58d4e0fe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -77.81
+      objectReference: {fileID: 0}
     - target: {fileID: 9178996866612906160, guid: 4126ece5f63dc4b409bba45d58d4e0fe, type: 3}
       propertyPath: m_Enabled
       value: 0
