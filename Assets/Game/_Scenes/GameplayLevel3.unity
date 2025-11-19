@@ -6197,6 +6197,8 @@ MonoBehaviour:
   nextLevel: 0
   miniBoss: {fileID: 717978339}
   finalBoss: {fileID: 416514923}
+  combatMusic: {fileID: 11400000, guid: c841ef133cc200d49bfee204d87265b8, type: 2}
+  explorationMusic: {fileID: 11400000, guid: 1ff89c456c0fbd0409437ad7c42780a2, type: 2}
 --- !u!4 &1103809651
 Transform:
   m_ObjectHideFlags: 0

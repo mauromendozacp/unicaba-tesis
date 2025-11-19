@@ -12,6 +12,8 @@ public class GameplayController : MonoBehaviour
   [SerializeField] private MiniDragonController miniBoss;
   [SerializeField] private DragonBossController finalBoss;
   bool finalBossIsDead = false;
+  [SerializeField] private AudioEvent combatMusic = null;
+  [SerializeField] private AudioEvent explorationMusic = null;
 
   private int keys = 0;
   private bool lastWaveToWin = false;
@@ -21,6 +23,7 @@ public class GameplayController : MonoBehaviour
     playerSpawn.Init(gameplayUI.GetPlayerUI, OnPause, OnPlayerDeath, AddKeys, gameplayUI.OnJoinPlayers);
 
     enemyManager.OnWaveStart += () => { gameplayUI.ToggleWave(true); };
+    enemyManager.OnWaveStart += () => { if (combatMusic != null) GameManager.Instance.AudioManager.PlayAudio(combatMusic); };
     enemyManager.OnWavesStart += gameplayUI.OnUpdateWave;
     enemyManager.OnWavesStart += CheckLastWave;
     enemyManager.OnWavesEnd += () => { gameplayUI.ToggleWave(false); };
@@ -94,6 +97,7 @@ public class GameplayController : MonoBehaviour
       Debug.Log("Deshabilitando al jefe final al iniciar el nivel.");
       finalBoss.gameObject.SetActive(false);
     }
+    if (explorationMusic != null) GameManager.Instance.AudioManager.PlayAudio(explorationMusic);
   }
 
   private void OnResume()
