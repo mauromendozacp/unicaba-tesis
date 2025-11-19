@@ -6559,6 +6559,10 @@ PrefabInstance:
       value: DragonMiniBossPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 7585627028001961656, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 801a3c923a9d3ae4d8cadc17893e88e2, type: 2}
+    - target: {fileID: 7585627028001961656, guid: b5af3a72da3bb3b498836ca09e70ce42, type: 3}
       propertyPath: initialDestination
       value: 
       objectReference: {fileID: 2064180752}
