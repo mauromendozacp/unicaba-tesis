@@ -22,8 +22,6 @@ public class DragonBabyRangedDeathState : IEnemyState
     enemy.SetAttackCollider(false);
 
     enemy.Animator.TriggerDeath();
-    // Opcional: animar o rotar para simular una caída
-    // enemy.transform.rotation = Quaternion.Euler(90, enemy.transform.rotation.y, enemy.transform.rotation.z);
 
     enemy.StartCoroutine(DieCoroutine());
   }

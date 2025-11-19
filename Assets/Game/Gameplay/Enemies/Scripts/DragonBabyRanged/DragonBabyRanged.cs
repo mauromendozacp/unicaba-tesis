@@ -4,21 +4,22 @@ using System.Collections;
 
 public class DragonBabyRanged : EnemySoldier
 {
-  [Header("COMPONENTES")]
+  [Header("COMPONENTES Y REFERENCIAS")]
   [SerializeField] DragonBabyRangedAnimator _animator;
   public DragonBabyRangedAnimator Animator => _animator;
-
-  [Header("== CONFIGURACIÓN DE RANGO ==")]
   [SerializeField] Transform firePoint;
+  [SerializeField] public AudioEvent fireballSound = null; // TODO: Asignar sonido en el prefab de la bola de fuego
+
+  [Header("CONFIGURACIÓN DE RANGO")]
   [SerializeField] float fireBallSpeedNeutral = 12f;
   [SerializeField] float optimalAttackDistance = 10f;
-  [SerializeField] float attackRangeMargin = 2f;
+  //[SerializeField] float attackRangeMargin = 2f;
   [SerializeField] float fireballDamage = 15f;
 
 
   // Propiedades públicas para la IA
-  public float OptimalAttackDistance => optimalAttackDistance;
-  public float AttackRangeMargin => attackRangeMargin;
+  //public float OptimalAttackDistance => optimalAttackDistance;
+  //public float AttackRangeMargin => attackRangeMargin;
   public override float AttackRange => optimalAttackDistance;
 
   // Velocidades
@@ -29,7 +30,6 @@ public class DragonBabyRanged : EnemySoldier
   private float lastAttackTime;
   public float LastAttackTime => lastAttackTime;
 
-  [SerializeField] public AudioEvent fireballSound = null;
 
   void OnEnable()
   {
@@ -44,6 +44,15 @@ public class DragonBabyRanged : EnemySoldier
   protected override void Awake()
   {
     base.Awake();
+    if (_animator == null)
+    {
+      _animator = GetComponent<DragonBabyRangedAnimator>();
+    }
+    if (firePoint == null)
+    {
+      Debug.LogWarning("Fire Point no asignado en " + gameObject.name);
+      firePoint = transform;
+    }
   }
 
   protected override void Start()
@@ -54,10 +63,9 @@ public class DragonBabyRanged : EnemySoldier
   }
 
 
-  // --- LÓGICA DE ATAQUE ---
   public void ShootFireBall()
   {
-    if (FireballPoolManager.Instance == null || firePoint == null || CurrentTarget == null) return;
+    if (FireballPoolManager.Instance == null || CurrentTarget == null) return;
     lastAttackTime = Time.time;
     Vector3 direction = (CurrentTarget.position - firePoint.position).normalized;
     FireSingleBall(firePoint.position, direction);
@@ -71,7 +79,6 @@ public class DragonBabyRanged : EnemySoldier
     fireball.Launch(position, direction, CurrentFireBallSpeed);
   }
 
-  // --- LÓGICA DE DAÑO Y MATERIALES ---
   public override void TakeDamage(float damage)
   {
     if (!IsAlive) return;
@@ -98,12 +105,10 @@ public class DragonBabyRanged : EnemySoldier
 
   public override void Kill()
   {
-    /* CORREGIR */
     StopAllCoroutines();
     DisableMovementAndCollisions();
     ToggleSelfCollider(false);
 
     ChangeState(new DragonBabyRangedDeathState(this));
-    //ToggleDamageMaterial(false);
   }
 }

@@ -13,8 +13,6 @@ public class DragonBabyRangedChaseState : IEnemyState
 
   public void Enter()
   {
-    // Establecer la distancia de parada del NavMeshAgent a la distancia óptima de ataque
-    //enemy.Agent.stoppingDistance = enemy.OptimalAttackDistance;
     enemy.Animator.ToggleRun(true);
   }
 
@@ -28,13 +26,11 @@ public class DragonBabyRangedChaseState : IEnemyState
 
     float distanceToTarget = enemy.DistanceToTarget();
 
-    // 1. Si está dentro del rango óptimo, cambia a AttackState
-    if (distanceToTarget <= enemy.OptimalAttackDistance)
+    if (distanceToTarget <= enemy.AttackRange && canAttack())
     {
       enemy.StopMovement();
       enemy.ChangeState(new DragonBabyRangedAttackState(enemy));
     }
-    // 2. Si está fuera de rango, persigue
     else
     {
       enemy.MoveTo(enemy.CurrentTarget.position);
@@ -42,11 +38,14 @@ public class DragonBabyRangedChaseState : IEnemyState
     }
   }
 
+  bool canAttack()
+  {
+    return Time.time >= enemy.LastAttackTime + enemy.AttackCooldown;
+  }
+
   public void Exit()
   {
     enemy.StopMovement();
     enemy.Animator.ToggleRun(false);
-    // Reestablecer la distancia de parada para el movimiento general
-    //enemy.Agent.stoppingDistance = 0.1f;
   }
 }

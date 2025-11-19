@@ -52,4 +52,14 @@ public class DragonBabyRangedAnimator : MonoBehaviour
   {
     anim?.SetTrigger(animDeath);
   }
+
+  public bool HasAttackAnimationPassedPercentage(float percentage)
+  {
+    if (anim == null)
+    {
+      return false;
+    }
+    AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+    return stateInfo.IsName(animAttack) && stateInfo.normalizedTime >= percentage;
+  }
 }

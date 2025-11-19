@@ -8,7 +8,7 @@ public class DragonBabyRangedRetreatState : IEnemyState
   public EnemyState State { get; private set; }
   private const float retreatDistance = 6f;
   private const float retreatDuration = 3f;
-  private const float maxRetreatAngle = 45f;
+  private const float maxRetreatAngle = 90f;
 
   public DragonBabyRangedRetreatState(DragonBabyRanged enemy)
   {
