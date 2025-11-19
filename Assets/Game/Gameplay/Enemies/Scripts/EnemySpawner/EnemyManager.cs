@@ -32,6 +32,7 @@ public class EnemyManager : MonoBehaviour
 
   [Header("Controller to drop items")]
   [SerializeField] ItemController itemController;
+  [SerializeField] PlayerSpawn playerSpawn;
 
   private Dictionary<string, GameObject> enemyPrefabDict;
   private Dictionary<string, IObjectPool<GameObject>> enemyPoolDict;
@@ -43,6 +44,7 @@ public class EnemyManager : MonoBehaviour
   private List<int> dropIndices;
 
   public static EnemyManager Instance;
+  int numPlayers = 1;
 
   private void Awake()
   {
@@ -167,9 +169,15 @@ public class EnemyManager : MonoBehaviour
     Wave currentWave = waves[currentWaveIndex];
     enemiesToSpawnInCurrentWave = 0;
 
+
+    if (playerSpawn != null)
+    {
+      numPlayers = playerSpawn.PlayerInputs.Count;
+    }
+
     foreach (var waveContent in currentWave.enemiesInWave)
     {
-      enemiesToSpawnInCurrentWave += waveContent.count;
+      enemiesToSpawnInCurrentWave = enemiesToSpawnInCurrentWave + waveContent.count * numPlayers;
     }
 
     enemiesAlive = enemiesToSpawnInCurrentWave;
@@ -224,7 +232,7 @@ public class EnemyManager : MonoBehaviour
       if (enemyPoolDict.ContainsKey(enemyPrefabName))
       {
         var specificEnemyPool = enemyPoolDict[enemyPrefabName];
-        for (int i = 0; i < enemySpawn.count; i++)
+        for (int i = 0; i < enemySpawn.count * numPlayers; i++)
         {
           GameObject enemyToSpawn = specificEnemyPool.Get();
           if (enemyToSpawn != null)
