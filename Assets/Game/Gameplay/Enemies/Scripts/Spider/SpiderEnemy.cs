@@ -6,6 +6,8 @@ public class SpiderEnemy : EnemySoldier
   SpiderAnimationController animator;
   public SpiderAnimationController Animator => animator;
   [SerializeField] Collider armatureCollider;
+  private float originalChaseRadius;
+  private float originalMoveSpeed;
 
 
   void OnEnable()
@@ -17,19 +19,14 @@ public class SpiderEnemy : EnemySoldier
     EnableMovementAndCollisions();
   }
 
-  protected override void Awake()
-  {
-    //animator = GetComponent<SpiderAnimationController>();
-    base.Awake();
-    //ChangeState(new SpiderIdleState(this));
-  }
-
   protected override void Start()
   {
     base.Start();
     animator = GetComponent<SpiderAnimationController>();
     //ChangeState(new SpiderIdleState(this));
     SetAttackCollider(false);
+    originalChaseRadius = ChaseRadius;
+    originalMoveSpeed = moveSpeed;
   }
 
   void OnTriggerEnter(Collider other)
@@ -51,6 +48,16 @@ public class SpiderEnemy : EnemySoldier
   public override void TakeDamage(float damage)
   {
     if (!IsAlive) return;
+
+    if (currentState.State == EnemyState.Idle && IsTerritorial)
+    {
+      Debug.Log("¡SpiderEnemy ha entrado en FURIA!");
+      float newMoveSpeed = originalMoveSpeed * 1.35f;
+      SetSpeed(newMoveSpeed);
+      isTerritorial = false;
+      SetChaseRadius(originalChaseRadius * 3f);
+    }
+
     base.TakeDamage(damage);
     StartCoroutine(DamageMaterial());
     if (!IsAlive)

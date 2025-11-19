@@ -5,6 +5,8 @@ public class SkeletonEnemy : EnemySoldier
 {
   SkeletonAnimationController animator;
   public SkeletonAnimationController Animator => animator;
+  private float originalChaseRadius;
+  private float originalMoveSpeed;
 
   void OnEnable()
   {
@@ -20,11 +22,24 @@ public class SkeletonEnemy : EnemySoldier
     base.Start();
     animator = GetComponent<SkeletonAnimationController>();
     SetAttackCollider(false);
+
+    originalChaseRadius = ChaseRadius;
+    originalMoveSpeed = moveSpeed;
   }
 
   public override void TakeDamage(float damage)
   {
     if (!IsAlive) return;
+
+    if (currentState.State == EnemyState.Idle && IsTerritorial)
+    {
+      Debug.Log("¡SkeletonEnemy ha entrado en FURIA!");
+      float newMoveSpeed = originalMoveSpeed * 1.35f;
+      SetSpeed(newMoveSpeed);
+      isTerritorial = false;
+      SetChaseRadius(originalChaseRadius * 3f);
+    }
+
     base.TakeDamage(damage);
     StartCoroutine(DamageMaterial());
     if (!IsAlive)

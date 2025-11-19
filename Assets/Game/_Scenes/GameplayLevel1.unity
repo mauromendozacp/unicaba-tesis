@@ -3770,9 +3770,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemWorldMachineGun
       objectReference: {fileID: 0}
+    - target: {fileID: 2472259641863196545, guid: b95125e9378bee94098523ad4be2936b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6921528877645505890, guid: b95125e9378bee94098523ad4be2936b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.2
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 6921528877645505890, guid: b95125e9378bee94098523ad4be2936b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3780,7 +3784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921528877645505890, guid: b95125e9378bee94098523ad4be2936b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 6921528877645505890, guid: b95125e9378bee94098523ad4be2936b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6340,7 +6344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4367877364148979757, guid: 3fae832f14f91d747ae3d332a77e479f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9
+      value: 7.73
       objectReference: {fileID: 0}
     - target: {fileID: 4367877364148979757, guid: 3fae832f14f91d747ae3d332a77e479f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6348,7 +6352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4367877364148979757, guid: 3fae832f14f91d747ae3d332a77e479f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.3
+      value: -21.45
       objectReference: {fileID: 0}
     - target: {fileID: 4367877364148979757, guid: 3fae832f14f91d747ae3d332a77e479f, type: 3}
       propertyPath: m_LocalRotation.w
