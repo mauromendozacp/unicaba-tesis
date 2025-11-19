@@ -504,6 +504,14 @@ PrefabInstance:
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: chaseRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: isTerritorial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: optimalAttackDistance
       value: 12
       objectReference: {fileID: 0}
@@ -2902,13 +2910,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: chaseRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: isTerritorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_Name
       value: DragonBabyRanged (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5556586124494573039, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7222,13 +7238,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: chaseRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: isTerritorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_Name
       value: DragonBabyRanged (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5556586124494573039, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7601,13 +7625,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: chaseRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506538722110459445, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
+      propertyPath: isTerritorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_Name
       value: DragonBabyRanged
       objectReference: {fileID: 0}
     - target: {fileID: 5282604501115754001, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5556586124494573039, guid: 59760acd1a9839a47bc166115d3f80f6, type: 3}
       propertyPath: m_LocalPosition.x

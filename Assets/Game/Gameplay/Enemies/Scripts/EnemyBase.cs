@@ -316,4 +316,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
       agent.speed = speed;
     }
   }
+
+  public void SetChaseRadius(float newRadius)
+  {
+    chaseRadius = newRadius;
+  }
 }

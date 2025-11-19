@@ -30,6 +30,9 @@ public class DragonBabyRanged : EnemySoldier
   private float lastAttackTime;
   public float LastAttackTime => lastAttackTime;
 
+  private float originalChaseRadius;
+  private float originalMoveSpeed;
+
 
   void OnEnable()
   {
@@ -60,6 +63,8 @@ public class DragonBabyRanged : EnemySoldier
     base.Start();
     //ChangeState(new DragonBabyRangedIdleState(this));
     CurrentFireBallSpeed = fireBallSpeedNeutral;
+    originalChaseRadius = ChaseRadius;
+    originalMoveSpeed = moveSpeed;
   }
 
 
@@ -82,6 +87,16 @@ public class DragonBabyRanged : EnemySoldier
   public override void TakeDamage(float damage)
   {
     if (!IsAlive) return;
+
+    if (currentState is DragonBabyRangedIdleState && IsTerritorial)
+    {
+      Debug.Log("¡DragonBabyRanged ha entrado en FURIA!");
+      float newSpeed = originalMoveSpeed * 1.35f;
+      SetSpeed(newSpeed);
+      CurrentFireBallSpeed = fireBallSpeedNeutral * 1.35f;
+      isTerritorial = false;
+      SetChaseRadius(originalChaseRadius * 3f);
+    }
     base.TakeDamage(damage);
     StartCoroutine(DamageMaterial());
     if (!IsAlive)
