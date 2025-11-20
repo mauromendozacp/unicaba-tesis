@@ -117,7 +117,7 @@ MonoBehaviour:
   - {fileID: 4224456495350100011, guid: 54abbe6249bf9f9499e5400ab8482aa1, type: 3}
   - {fileID: 956276367903947142, guid: dad1f04f3fbd4c443b75154bf96bfb2b, type: 3}
   intactWoodPercentage: 20
-  fragmentCount: 100
+  fragmentCount: 30
   explosionMargin: 0.2
   baseExplosionForce: 20
   upwardModifier: 1.2
@@ -130,6 +130,7 @@ MonoBehaviour:
   raycastDistance: 10
   airDrag: 0.5
   gravityScale: 1
+  fragmentLifetime: 4
 --- !u!54 &2944700165305302187
 Rigidbody:
   m_ObjectHideFlags: 0
