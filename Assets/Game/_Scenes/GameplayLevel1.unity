@@ -4559,6 +4559,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 670297970275740865, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: fragmentCount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 670297970275740865, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: fragmentLifetime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 670297970275740865, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: intactWoodPercentage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1813862759915905680, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: m_Enabled
       value: 1

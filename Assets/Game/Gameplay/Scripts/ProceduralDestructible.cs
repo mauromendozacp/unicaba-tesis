@@ -45,7 +45,7 @@ public class ProceduralDestructible : MonoBehaviour
     public float gravityScale = 1f;
 
     [Tooltip("Tiempo de vida de los fragmentos generados antes de desaparecer.")]
-    public float fragmentLifetime = 10f; // 👈 NUEVA PROPIEDAD PARA EL TIEMPO DE VIDA
+    public float fragmentLifetime = 2f; 
 
     private bool isBroken = false;
     private int groundLayerMask;
@@ -66,7 +66,6 @@ public class ProceduralDestructible : MonoBehaviour
             return;
         }
 
-        // Calcular límites del objeto original
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
         if (renderers.Length == 0) return;
 
@@ -110,14 +109,14 @@ public class ProceduralDestructible : MonoBehaviour
             GameObject frag = Instantiate(prefab, spawnPos, rot);
             frag.SetActive(true);
 
-            // 💥 AUTODESTRUCCIÓN: Destruye el fragmento después del tiempo de vida configurado.
+            // AUTODESTRUCCIÓN: Destruye el fragmento después del tiempo de vida configurado.
             Destroy(frag, fragmentLifetime); 
 
-            // 🔹 Tamaño inicial aleatorio
+            // Tamaño inicial aleatorio
             float randomScaleFactor = Random.Range(minFragmentScale, maxFragmentScale);
             frag.transform.localScale = prefab.transform.localScale * randomScaleFactor;
 
-            // 🔹 Al caer, vuelve a su tamaño original
+            // Al caer, vuelve a su tamaño original
             frag.AddComponent<ReturnToOriginalScale>().targetScale = prefab.transform.localScale;
 
             // Físicas
@@ -139,7 +138,7 @@ public class ProceduralDestructible : MonoBehaviour
                 meshCol.convex = true;
             }
 
-            // 🔸 Fuerza errática — direcciones aleatorias y desbalanceadas
+            // Fuerza errática — direcciones aleatorias y desbalanceadas
             Vector3 randomOffsetDir = (Random.insideUnitSphere + new Vector3(
                 Random.Range(-0.3f, 0.3f),
                 Random.Range(0f, 0.6f),
