@@ -302,7 +302,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.3
+  orthographic size: 90.6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -326,8 +326,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306577260}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20052418, y: 0.19598284, z: -0.040970664, w: 0.9590111}
-  m_LocalPosition: {x: -221.1, y: 7.8, z: 46.7}
+  m_LocalRotation: {x: 0.3150672, y: 0.34747764, z: -0.12522677, w: 0.8742483}
+  m_LocalPosition: {x: 117, y: 96.3, z: -70.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -429,6 +429,10 @@ PrefabInstance:
     - target: {fileID: 6327693253633349748, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Name
       value: Nivel 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327693253633349748, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -610,6 +614,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nivel 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6327693253633349748, guid: 4126ece5f63dc4b409bba45d58d4e0fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -666,6 +674,10 @@ PrefabInstance:
     - target: {fileID: 6340733630065996894, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
       propertyPath: m_Name
       value: Nivel 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340733630065996894, guid: 80376f119c9ebb343b9e682f1fc57d0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
