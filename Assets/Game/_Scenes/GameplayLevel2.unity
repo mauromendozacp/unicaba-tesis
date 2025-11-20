@@ -1262,7 +1262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056837550948548490, guid: 966f649bbdc35be45b56bffde0cb45a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.78
+      value: 15.99
       objectReference: {fileID: 0}
     - target: {fileID: 4056837550948548490, guid: 966f649bbdc35be45b56bffde0cb45a8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1270,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056837550948548490, guid: 966f649bbdc35be45b56bffde0cb45a8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -64.49
+      value: -64.9
       objectReference: {fileID: 0}
     - target: {fileID: 4056837550948548490, guid: 966f649bbdc35be45b56bffde0cb45a8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7745,6 +7745,26 @@ PrefabInstance:
     - target: {fileID: 6544657652904085026, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613455643767976105, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Size.x
+      value: 1.429332
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613455643767976105, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Size.z
+      value: 2.0000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613455643767976105, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Center.x
+      value: 0.20069933
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613455643767976105, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Center.y
+      value: 0.124379605
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613455643767976105, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
+      propertyPath: m_Center.z
+      value: -1.0063018
       objectReference: {fileID: 0}
     - target: {fileID: 7883711221839704832, guid: f0324a394da293144bc79310c5b49ed5, type: 3}
       propertyPath: m_Enabled

@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.1
+      value: -29.85
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalPosition.y
@@ -38,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.7
+      value: 21.72
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.2726351
+      value: 0.006076007
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalRotation.x
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9621175
+      value: -0.9999816
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalRotation.z
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -148.358
+      value: -179.304
       objectReference: {fileID: 0}
     - target: {fileID: 3431542376211660400, guid: 5df2dd3fe13ed7543bf518ded89f5ece, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -153,7 +153,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
